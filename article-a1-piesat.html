@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>雷达卫星为什么能穿透云层？SAR成像原理三分钟看懂 | 航天宏图</title>
+<meta name="description" content="光学卫星拍不到云层下的地面，雷达卫星却能全天候成像。本文用3分钟讲清SAR合成孔径雷达的工作原理，并以女娲星座在芷江机场大雨中的真实影像为例，展示SAR穿云透雾的独特能力。">
+<meta name="keywords" content="雷达卫星,SAR工作原理,合成孔径雷达,雷达卫星穿透云雨,SAR和光学卫星区别,卫星遥感,航天宏图,女娲星座">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "雷达卫星为什么能穿透云层？SAR成像原理三分钟看懂",
+  "description": "光学卫星拍不到云层下的地面，雷达卫星却能全天候成像。本文用3分钟讲清SAR合成孔径雷达的工作原理，并以女娲星座在芷江机场大雨中的真实影像为例，展示SAR穿云透雾的独特能力。",
+  "author": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司" },
+  "publisher": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司", "url": "https://www.piesat.cn" },
+  "datePublished": "2026-07-30",
+  "dateModified": "2026-07-30",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/sar-radar-principle" },
+  "image": "https://haibin-yu.github.io/piesat-prod/zhijiang-airport.jpg",
+  "keywords": ["雷达卫星","SAR工作原理","合成孔径雷达","雷达卫星穿透云雨","SAR和光学卫星区别","卫星遥感","女娲星座"],
+  "about": { "@type": "Thing", "name": "合成孔径雷达（SAR）", "description": "合成孔径雷达是一种主动式微波遥感雷达，通过主动发射电磁波并接收回波获取地表信息，不受天气和光照条件限制，可实现全天候全天时对地观测。" }
+}
+</script>
+<style>
+.a-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+.a-bread{font-size:13px;color:#aaa;margin-bottom:32px}
+.a-bread a{color:#4a90d9;text-decoration:none}
+.a-head{margin-bottom:36px}
+.a-head .a-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;color:#4a90d9;margin-bottom:16px}
+.a-head h1{font-size:28px;font-weight:700;line-height:1.45;color:#0f0f0f;letter-spacing:-0.3px}
+.a-head .a-meta{margin-top:16px;font-size:13px;color:#999;display:flex;gap:20px;align-items:center}
+.a-body{font-size:16px;color:#2a2a2a;line-height:1.9}
+.a-body h2{font-size:20px;font-weight:700;color:#0f0f0f;margin:48px 0 16px}
+.a-body h3{font-size:16px;font-weight:700;color:#333;margin:32px 0 12px}
+.a-body p{margin-bottom:20px}
+.a-body strong{color:#111}
+.a-body ul,.a-body ol{margin:8px 0 20px 22px}
+.a-body li{margin-bottom:10px;color:#3a3a3a}
+.a-fig{margin:32px 0;text-align:center}
+.a-fig img{max-width:100%;border-radius:4px}
+.a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
+.a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
+.a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
+.a-related h4{font-size:13px;color:#aaa;font-weight:600;letter-spacing:2px;margin-bottom:16px}
+.a-related a{display:block;padding:9px 0;font-size:14px;color:#4a90d9;text-decoration:none;border-bottom:1px solid #f2f2f2}
+.a-related a:last-child{border-bottom:none}
+.a-related a:hover{color:#2b6cb0}
+</style>
+</head>
+<body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
+
+<div id="tb-wrapper">
+<div class="tb-bar" style="position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a1a1a;color:#fff;padding:8px 20px;display:flex;align-items:center;gap:12px;font-size:12px;font-family:'PingFang SC','Hiragino Sans GB',sans-serif">
+  <span style="font-weight:700;color:#4a90d9;letter-spacing:1px">交付预览</span>
+  <span style="flex:1"></span>
+  <button style="background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer" onclick="viewSource()">查看源码</button>
+  <button style="background:#4a90d9;color:#fff;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer" id="copyBtn" onclick="copySource()">复制发布源码</button>
+</div>
+<textarea id="srcArea" readonly style="display:none;position:fixed;top:42px;left:0;right:0;bottom:0;z-index:9998;width:100%;border:none;background:#1a1a1a;color:#ccc;font-family:monospace;font-size:12px;padding:20px;resize:none;tab-size:2"></textarea>
+<script>
+function clean(){var c=document.documentElement.cloneNode(true);var w=c.querySelector('#tb-wrapper');if(w)w.remove();return '<!doctype html>\n'+c.outerHTML;}
+function copySource(){navigator.clipboard.writeText(clean()).then(function(){var b=document.getElementById('copyBtn');b.textContent='已复制！';b.classList.add('copied');setTimeout(function(){b.textContent='复制发布源码';b.classList.remove('copied');},2000);});}
+function viewSource(){var a=document.getElementById('srcArea');if(a.style.display==='block'){a.style.display='none';return;}a.value=clean();a.style.display='block';}
+</script>
+</div>
+</div>
+
+<div class="a-wrap" style="padding-top:48px">
+
+  <div class="a-bread">
+    <a href="/">首页</a> &rsaquo;
+    <a href="/blog">技术博客</a> &rsaquo;
+    <a href="/blog/category/sar">SAR 雷达卫星科普</a> &rsaquo;
+    雷达卫星为什么能穿透云层？
+  </div>
+
+  <div class="a-head">
+    <div class="a-tag">SAR 雷达卫星科普</div>
+    <h1>雷达卫星为什么能穿透云层？SAR 成像原理三分钟看懂</h1>
+    <div class="a-meta">
+      <span>航天宏图 · 技术博客</span>
+      <span>2026 年 7 月 30 日</span>
+      <span>阅读约 4 分钟</span>
+    </div>
+  </div>
+
+  <div class="a-body">
+
+    <p>
+      相信你一定用过卫星地图导航，它不仅能帮我们规划路线，还能让我们足不出户遍览世界。你肯定也曾为清晰的卫星图景惊叹，感慨卫星这只"千里眼"的神奇。但这只"千里眼"真的无所不能吗？答案是否定的——我们日常见到的那张地球照片，拍摄它的光学卫星依靠可见光成像，一旦遇到阴雨天气，云层就会像一块巨大的白色幕布，把地面的一切都遮盖起来。而<strong>雷达卫星</strong>，尤其是<strong>SAR（合成孔径雷达）卫星</strong>，可以直接穿透云层，清晰观测到地面的所有景物。
+    </p>
+
+    <p>
+      这就是雷达卫星的"过人之处"。2023年4月18日，湖南怀化芷江机场上空大雨倾盆，厚重的云团笼罩整个区域。就在同一天，"航天宏图一号"SAR 卫星飞过上空，以 0.5 米分辨率拍摄了机场影像——跑道、停机坪、芷江抗战胜利受降纪念馆清晰可见。而此时，任何一颗光学卫星在此区域都只能拍到一团白色云团。
+    </p>
+
+    <!-- 芷江机场案例图片 -->
+    <div class="a-fig">
+      <img
+        src="https://haibin-yu.github.io/piesat-prod/zhijiang-airport.jpg"
+        alt="航天宏图一号SAR卫星在大雨天气下拍摄的湖南芷江机场0.5米分辨率影像，图中阴影区域为厚云团，但地表目标清晰可见"
+        loading="lazy"
+      >
+      <div class="a-cap">▲ 2023年4月18日，湖南怀化芷江机场。大雨之中，女娲星座"航天宏图一号"以 0.5m 分辨率成像。图中阴影区域为厚云团，但跑道、停机坪和周边建筑均清晰可见——这就是 SAR 穿云透雾的能力。</div>
+    </div>
+
+    <h2>光学卫星 vs 雷达卫星：一个用手电筒，一个用耳朵</h2>
+
+    <p>
+      这里有一个最常见的误解：很多人以为雷达卫星是靠某种"超强视力"看穿云层的。其实不是——<strong>雷达卫星根本就不"看"东西，它自己发射微波信号，然后"听"回波。</strong>
+    </p>
+
+    <div class="a-insight">
+      <strong>打个比方：</strong><br>
+      光学卫星 = 白天用手电筒照东西，靠反射的可见光来看。没光（黑夜）就看不见，有东西挡着（云）也看不见。<br>
+      雷达卫星 = 自己发出声音，靠听回声来判断物体在哪。不管是白天黑夜，有没有云挡着，都能"听"到。
+    </div>
+
+    <p>
+      这种"主动发射 → 接收回波"的工作方式，从根本上绕过了天气和光线的限制。SAR 卫星发射的微波波长（如 X 波段约 3 厘米）远远大于云滴的尺寸（几微米到几十微米）——云对微波来说几乎是透明的，就像你说话的声音不会被薄纱挡住一样。所以无论多厚的云层、多大的暴雨，微波信号都能直达地面再反射回来，成像完全不受影响。
+    </p>
+
+    <p>
+      这个特性带来的优势不只是穿透云雨。SAR 卫星天然具备<strong>全天候</strong>（云雨雾霾都不怕）、<strong>全天时</strong>（白天黑夜都能拍）、<strong>穿透力</strong>（微波可以穿透一定深度的植被甚至地表）三重能力，而这三重能力恰恰是光学卫星永远无法拥有的。
+    </p>
+
+    <h2>SAR 是怎么"合成"出一个大天线的？</h2>
+
+    <p>
+      <strong>SAR（Synthetic Aperture Radar）</strong>的全称是"合成孔径雷达"。"合成孔径"这四个字是理解<strong>SAR 工作原理</strong>的核心。
+    </p>
+
+    <p>
+      在雷达的世界里，有一条基本的物理规律：天线越长，图像分辨率越高。但一颗卫星能携带的天线不过几米长——以目前的技术，单靠物理天线，在 500 多公里轨道上拍到的地面影像会模糊到几乎没有使用价值。
+    </p>
+
+    <p>
+      SAR 的巧妙之处在于：<strong>它利用卫星在轨道上的飞行，把飞行路径上不同位置收到的回波信号"合成"起来，等效出一个长达数百米的虚拟天线。</strong>这就是"合成孔径"的含义——不是物理上有一个那么长的天线，而是通过信号处理的手段，实现了一个超长天线才能达到的分辨率。
+    </p>
+
+    <!-- 0.5m分辨率真实影像 -->
+    <div class="a-fig">
+      <img
+        src="https://haibin-yu.github.io/piesat-prod/beijing-station-05m.jpg"
+        alt="航天宏图一号SAR卫星0.5米分辨率拍摄的北京火车站影像，站房、轨道、周边建筑清晰可辨"
+        loading="lazy"
+      >
+      <div class="a-cap">▲ 北京火车站（建国门附近），女娲星座"航天宏图一号"0.5m 分辨率滑动聚束成像。可清晰分辨站房、多条铁路轨道、周边建筑群和道路网络。</div>
+    </div>
+
+    <p>
+      目前，女娲星座的 X-SAR 卫星可以实现 0.5 米分辨率成像，试验模式下可达 0.3 米。这意味着从太空 500 多公里的高度上，能分辨地面上约一辆小轿车的轮廓。同样的分辨能力如果要用光学卫星实现，需要"晴天+白天"两个条件的加持；而 SAR 卫星不需要等——任何时候都能拍。
+    </p>
+
+    <h2>"穿云透雾"在真实世界里做了什么？</h2>
+
+    <p>
+      讲了这么多原理，回到最实际的问题：<strong>SAR 卫星穿透云层到底解决了什么实际问题？</strong> 答案就在每一次灾害发生的时候。
+    </p>
+
+    <p>
+      <strong>2023 年"杜苏芮"台风</strong>登陆期间，光学卫星全部停摆——整个华北上空全是厚厚的云层。航天宏图紧急调度"航天宏图一号"SAR 卫星对北京房山区、河北涿州等蓄滞洪区执行应急成像任务。经水体提取分析后，数据第一时间提供给防洪指挥部门，支援了关键的减灾决策。
+    </p>
+
+    <p>
+      <strong>2025 年 1 月 7 日，西藏日喀则市定日县发生 6.8 级地震。</strong>女娲星座在地震发生后立即启动应急响应，紧急调度宏图二号卫星进行 2m 条带成像。利用多星联合高重访、不同视向协同观测的优势，在震后<strong>当夜</strong>获得两次高分成像——而此时震区正值干燥的冬季，光学卫星在夜间完全处于"失明"状态。
+    </p>
+
+    <p>
+      <strong>2025 年 3 月 28 日，缅甸发生 7.9 级地震。</strong>女娲星座开展了 12 星组网协同观测任务——通过实时轨道计算和任务优先级排序，于震后 29 日凌晨获取首批影像，在黄金救援 72 小时内提供了第一手灾情数据。截至 3 月 30 日 12 时，女娲星座共拍摄 10 轨 214 景影像。
+    </p>
+
+    <!-- 梅大高速塌方灾害应急 -->
+    <div class="a-fig">
+      <img
+        src="https://haibin-yu.github.io/piesat-prod/meida-highway.jpg"
+        alt="航天宏图一号SAR卫星拍摄的广东梅大高速茶阳塌方路段灾害应急影像"
+        loading="lazy"
+      >
+      <div class="a-cap">▲ 2024年5月4日，广东梅大高速茶阳段塌方现场，女娲星座"宏图一号"0.5m 分辨率滑动聚束成像。灾害发生后第一时间应急调度拍摄，为救援指挥提供关键数据支撑。</div>
+    </div>
+
+    <p>
+      这正是 SAR 卫星的不可替代之处：当光学卫星受限于天气和光照时，SAR 是<strong>唯一可靠的对地观测手段</strong>。在灾害应急、海洋监测、国土安全、极地科考这些"等不了好天气"的场景中，光学卫星的缺失就是 SAR 卫星的出场机会。
+    </p>
+
+    <h2>中国 SAR 卫星走到了哪一步？</h2>
+
+    <p>
+      全球范围内，SAR 卫星的竞赛正在加速。日本的 Synspective 已发射 10 颗 StriX SAR 卫星，美国的 Capella Space 和 ICEYE 在商业 SAR 领域各有布局。而在中国，<strong>航天宏图的女娲星座是当前国内最大的商业化运行雷达遥感卫星星座</strong>——已完成 12 颗卫星在轨组网运行，其中"宏图二号"的 8 颗 X-SAR 卫星将重访周期缩短至平均 5.6 小时，每天可在全国范围内提供约 7 次观测机会。
+    </p>
+
+    <p>
+      更重要的是，这些卫星是自研自产的——从卫星设计、制造、发射、运营到数据处理，全链条自主可控。这在国内<strong>商业遥感卫星公司</strong>中是独有的。关于女娲星座的完整技术参数和组网逻辑，我们会在后续文章 <a href="/blog/nvwa-constellation-12-satellites">《女娲星座：114颗卫星的组网蓝图》</a>中详细介绍。
+    </p>
+
+    <div class="a-insight">
+      <strong>一句话总结：</strong><br>
+      SAR 卫星不是"看"东西，是"听"东西。它自己发射微波、自己接收回波，不受天气和光线限制。在每一次灾害、每一次救援、每一次"等不了好天气"的场景中，这颗"穿云眼"都在凝视着地面的每一个变化。
+    </div>
+
+  </div>
+
+  <div class="a-related">
+    <h4>SAR 雷达卫星科普系列 · 更多文章</h4>
+    <a href="/blog/sar-satellite-applications">SAR 卫星能做什么？六大领域应用全景</a>
+    <a href="/blog/sar-water-management">卫星遥感如何守护江河湖库？SAR 全天候水利监测全景</a>
+    <a href="/blog/sar-resolution-05m-explained">SAR 卫星分辨率有多高？0.5 米意味着能看清什么</a>
+  </div>
+
+</div>
+</body>
+</html>
