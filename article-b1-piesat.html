@@ -104,6 +104,12 @@ async function copyArticleText(){
     if(!text)continue;
     if(tag==="h2"){var h=document.createElement("h2");h.textContent=text;wrapper.appendChild(h);}
     else if(tag==="p"){var p=document.createElement("p");p.textContent=text;wrapper.appendChild(p);}
+    else if(tag==="ul"||tag==="ol"){
+      var list=document.createElement(tag);
+      var items=el.querySelectorAll("li");
+      for(var j=0;j<items.length;j++){var li=document.createElement("li");li.innerHTML=items[j].innerHTML;list.appendChild(li);}
+      wrapper.appendChild(list);
+    }
     else if(el.classList.contains("a-fig")){
       var img=el.querySelector("img");
       var cap=el.querySelector(".a-cap");
