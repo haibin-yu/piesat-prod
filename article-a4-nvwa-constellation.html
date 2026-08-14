@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>为什么需要 114 颗卫星？女娲星座的组网之路 | 航天宏图</title>
+<meta name="description" content="从2025年缅甸地震中12颗卫星协同观测，到114颗卫星的通导遥一体化星座蓝图。本文以女娲星座的真实建设历程为主线，讲清一颗商业公司为什么要发射上百颗卫星，以及组网如何让重访周期从天级缩短到小时级。">
+<meta name="keywords" content="女娲星座,卫星星座组网,SAR卫星,航天宏图一号,宏图二号,重访周期,通导遥一体化,商业遥感卫星">
+<meta property="og:title" content="为什么需要 114 颗卫星？女娲星座的组网之路 | 航天宏图"/>
+<meta property="og:description" content="从12颗到114颗，一颗商业公司为什么要发射上百颗卫星？组网如何让重访周期从天级缩短到小时级？本文讲清女娲星座的组网逻辑。"/>
+<meta property="og:image" content="https://haibin-yu.github.io/piesat-prod/daxing-airport.jpg"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://haibin-yu.github.io/piesat-prod/article-a4-nvwa-constellation.html"/>
+<meta property="og:site_name" content="航天宏图 · 技术博客"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="为什么需要 114 颗卫星？女娲星座的组网之路 | 航天宏图"/>
+<meta name="twitter:description" content="从12颗到114颗，组网如何让重访周期从天级缩短到小时级？本文讲清女娲星座的组网逻辑。"/>
+<meta name="twitter:image" content="https://haibin-yu.github.io/piesat-prod/daxing-airport.jpg"/>
+<link rel="canonical" href="https://haibin-yu.github.io/piesat-prod/article-a4-nvwa-constellation.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "为什么需要 114 颗卫星？女娲星座的组网之路",
+  "description": "从2025年缅甸地震中12颗卫星协同观测，到114颗卫星的通导遥一体化星座蓝图。本文以女娲星座的真实建设历程为主线，讲清组网如何让重访周期从天级缩短到小时级。",
+  "author": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司" },
+  "publisher": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司", "url": "https://www.piesat.cn" },
+  "datePublished": "2026-08-14",
+  "dateModified": "2026-08-14",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/nvwa-constellation-12-satellites" },
+  "image": "https://haibin-yu.github.io/piesat-prod/daxing-airport.jpg",
+  "keywords": ["女娲星座","卫星星座组网","SAR卫星","重访周期","通导遥一体化","商业遥感卫星"],
+  "about": { "@type": "Thing", "name": "女娲星座", "description": "航天宏图建设的大型通导遥一体化商业卫星星座，规划114颗卫星，已发射12颗在轨组网运行，是国内最大的业务化运行雷达遥感卫星星座。" }
+}
+</script>
+<style>
+.a-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+.a-bread{font-size:13px;color:#aaa;margin-bottom:32px}
+.a-bread a{color:#4a90d9;text-decoration:none}
+.a-head{margin-bottom:36px}
+.a-head .a-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;color:#4a90d9;margin-bottom:16px}
+.a-head h1{font-size:28px;font-weight:700;line-height:1.45;color:#0f0f0f;letter-spacing:-0.3px}
+.a-head .a-meta{margin-top:16px;font-size:13px;color:#999;display:flex;gap:20px;align-items:center}
+.a-body{font-size:16px;color:#2a2a2a;line-height:1.9}
+.a-body h2{font-size:20px;font-weight:700;color:#0f0f0f;margin:48px 0 16px}
+.a-body p{margin-bottom:20px}
+.a-body strong{color:#111}
+.a-fig{margin:32px 0;text-align:center}
+.a-fig img{max-width:100%;border-radius:4px}
+.a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
+.a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
+.a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
+.a-related h4{font-size:13px;color:#aaa;font-weight:600;letter-spacing:2px;margin-bottom:16px}
+.a-related a{display:block;padding:9px 0;font-size:14px;color:#4a90d9;text-decoration:none;border-bottom:1px solid #f2f2f2}
+.a-related a:last-child{border-bottom:none}
+.a-related a:hover{color:#2b6cb0}
+
+.tb-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a1a1a;color:#fff;padding:8px 20px;display:flex;align-items:center;gap:12px;font-size:12px;font-family:"PingFang SC","Hiragino Sans GB",sans-serif}
+.tb-bar .tb-title{font-weight:700;color:#4a90d9;letter-spacing:1px;white-space:nowrap}
+.tb-bar .tb-btn{background:#4a90d9;color:#fff;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tb-bar .tb-btn.copied{background:#22c55e}
+.tb-bar .tb-btn-outline{background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
+body{padding-top:42px}
+@media(print){.tb-bar{display:none!important}body{padding-top:0}}
+@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}}
+</style>
+</head>
+<body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
+
+<div id="tb-wrapper">
+<div class="tb-bar">
+  <span class="tb-title">交付预览</span>
+  <span style="flex:1"></span>
+  <button class="tb-btn-outline" onclick="viewSource()">查看源码</button>
+  <button class="tb-btn" id="copyBtn" onclick="copySource()">复制发布源码</button>
+  <button class="tb-btn" style="background:#22c55e" id="copyTextBtn" onclick="copyArticleText()">复制文章内容</button>
+</div>
+<textarea id="srcArea" readonly style="display:none;position:fixed;top:42px;left:0;right:0;bottom:0;z-index:9998;width:100%;border:none;background:#1a1a1a;color:#ccc;font-family:monospace;font-size:12px;padding:20px;resize:none;tab-size:2"></textarea>
+<script>
+function clean(){var c=document.documentElement.cloneNode(true);var w=c.querySelector('#tb-wrapper');if(w)w.remove();return '<!doctype html>\n'+c.outerHTML;}
+function copySource(){navigator.clipboard.writeText(clean()).then(function(){var b=document.getElementById('copyBtn');b.textContent='已复制！';b.classList.add('copied');setTimeout(function(){b.textContent='复制发布源码';b.classList.remove('copied');},2000);});}
+function viewSource(){var a=document.getElementById('srcArea');if(a.style.display==='block'){a.style.display='none';return;}a.value=clean();a.style.display='block';}
+async function copyArticleText(){
+  var b=document.getElementById("copyTextBtn");
+  b.textContent="处理中...";
+  var wrapper=document.createElement("div");
+  var h1=document.querySelector(".a-head h1")||document.querySelector("h1");
+  if(h1){var titleH=document.createElement("h2");titleH.textContent=h1.textContent.trim();titleH.style.textAlign="center";wrapper.appendChild(titleH);}
+  var body=document.querySelector(".a-body");
+  if(!body)return;
+  var imgElements=[];
+  for(var i=0;i<body.children.length;i++){
+    var el=body.children[i];
+    var tag=el.tagName.toLowerCase();
+    var text=el.textContent.trim();
+    if(!text)continue;
+    if(tag==="h2"){var h=document.createElement("h2");h.textContent=text;wrapper.appendChild(h);}
+    else if(tag==="p"){var p=document.createElement("p");p.textContent=text;wrapper.appendChild(p);}
+    else if(el.classList.contains("a-fig")){
+      var img=el.querySelector("img");
+      var cap=el.querySelector(".a-cap");
+      if(img){var imgClone=document.createElement("img");imgClone.src=img.src;imgClone.alt=img.alt;imgClone.style.maxWidth="100%";imgClone.style.display="block";imgClone.style.margin="16px auto";wrapper.appendChild(imgClone);imgElements.push({el:imgClone,url:img.src});}
+      if(cap){var c=document.createElement("p");c.textContent=cap.textContent.trim();c.style.fontSize="12px";c.style.color="#888";c.style.fontStyle="italic";wrapper.appendChild(c);}
+    }else if(el.classList.contains("a-insight")){
+      var bq=document.createElement("blockquote");bq.textContent=text;wrapper.appendChild(bq);
+    }
+  }
+  var tasks=imgElements.map(function(item){return fetch(item.url).then(function(r){return r.blob()}).then(function(blob){return new Promise(function(resolve){var reader=new FileReader();reader.onloadend=function(){item.el.src=reader.result;resolve()};reader.onerror=resolve;reader.readAsDataURL(blob)})}).catch(function(){})});
+  await Promise.all(tasks);
+  var htmlContent="<html><body>"+wrapper.innerHTML+"</body></html>";
+  try{var htmlBlob=new Blob([htmlContent],{type:"text/html"});await navigator.clipboard.write([new ClipboardItem({"text/html":htmlBlob})]);b.textContent="已复制！";}
+  catch(e){navigator.clipboard.writeText(wrapper.textContent);b.textContent="已复制(仅文字)";}
+  setTimeout(function(){b.textContent="复制文章内容";},2000);
+}
+</script>
+</div>
+
+<div class="a-wrap" style="padding-top:48px">
+
+  <div class="a-bread">
+    <a href="/">首页</a> &rsaquo;
+    <a href="/blog">技术博客</a> &rsaquo;
+    <a href="/blog/category/sar">SAR 卫星科普</a> &rsaquo;
+    女娲星座的组网之路
+  </div>
+
+  <div class="a-head">
+    <div class="a-tag">SAR 卫星科普 · 星座组网</div>
+    <h1>为什么需要 114 颗卫星？女娲星座的组网之路</h1>
+    <div class="a-meta">
+      <span>航天宏图 · 技术博客</span>
+      <span>2026 年 8 月 14 日</span>
+      <span>阅读约 6 分钟</span>
+    </div>
+  </div>
+
+  <div class="a-body">
+
+    <p>
+      2025 年 3 月 28 日，缅甸发生 7.9 级地震。黄金救援 72 小时内，12 颗中国卫星被同时调度、协同执行观测任务——通过实时轨道计算和任务优先级排序，29 日凌晨就拿到了首批灾情影像，为救援决策抢出了关键窗口。
+    </p>
+
+    <p>
+      这 12 颗卫星，属于同一个星座——<strong>女娲星座</strong>。而在它的规划里，最终的数字是 <strong>114 颗</strong>。
+    </p>
+
+    <p>
+      从 12 颗到 114 颗，中间发生了什么？为什么一家商业公司要发射上百颗卫星？答案，藏在一个词里——<strong>组网</strong>。
+    </p>
+
+    <h2>一颗卫星，永远快不起来</h2>
+
+    <p>
+      先回答一个更根本的问题：一颗 SAR 卫星，难道不够用吗？
+    </p>
+
+    <p>
+      答案是：单颗卫星再强，也有一个绕不过去的物理天花板——<strong>重访周期</strong>。卫星在固定的轨道上飞行，每经过同一片区域上空一次，才有一次拍摄机会。单颗卫星的重访周期往往以"天"甚至"十几天"计。灾害应急、动态监测这类"等不了"的场景，等一颗卫星慢悠悠转回来，机会可能已经错过了。
+    </p>
+
+    <p>
+      就像一个人再勤快，一天也只能在一个地方待有限的时间。要实现对地面的"随时在岗"，办法不是把一颗卫星造得更大，而是——<strong>发射很多颗卫星，让它们在轨道上"接力"。</strong>这颗刚飞过去，那颗已经转过来了；这颗拍白天，那颗拍黑夜；这颗看中国，那颗看世界。
+    </p>
+
+    <p>
+      这就是"组网"的含义：用数量换时间，用协同换覆盖。女娲星座的 114 颗卫星，正是围绕这一逻辑一步步建起来的。
+    </p>
+
+    <h2>第一步：宏图一号，让"1+3"飞起来</h2>
+
+    <p>
+      2023 年 3 月 30 日，女娲星座的首发星——<strong>航天宏图一号</strong>成功发射。它严格来说不是"一颗"卫星，而是 <strong>"1 主 3 辅"四颗卫星组成的编队</strong>：四颗星在同一轨道面共面飞行，采用"车轮式"构型，主星既发射又接收雷达信号，三颗辅星只负责接收。
+    </p>
+
+    <p>
+      这个设计的巧妙之处在于：四颗星同时观测同一片区域，通过<strong>多星干涉</strong>，第一次在商业领域实现了高精度的全球地形测绘——精度优于 1:5 万比例尺。过去需要大量地面测量才能得到的数字表面模型（DSM），现在卫星编队从太空一次过境就能完成。
+    </p>
+
+    <div class="a-fig">
+      <img
+        src="https://haibin-yu.github.io/piesat-prod/daxing-airport.jpg"
+        alt="航天宏图一号SAR卫星北京大兴国际机场0.5米分辨率影像"
+        loading="lazy"
+      >
+      <div class="a-cap">▲ 2023年4月15日，北京大兴国际机场，女娲星座"航天宏图一号"0.5m 滑动聚束成像。跑道、航站楼、滑行道的纹理清晰可辨——这是女娲星座首发星交付的第一批高分辨率影像之一。</div>
+    </div>
+
+    <p>
+      宏图一号在 528 公里的太阳同步轨道上飞行，搭载 X 波段相控阵雷达，最高可实现 0.5 米分辨率成像。它的意义不在于"一颗卫星能拍多清楚"，而在于<strong>验证了一条路</strong>：多星编队、干涉测量，这条路在中国商业航天领域走得通。
+    </p>
+
+    <h2>第二步：宏图二号，8 颗星拉开组网大幕</h2>
+
+    <p>
+      如果说宏图一号是"探路"，那么宏图二号就是"铺路"。
+    </p>
+
+    <p>
+      2024 年 11 月 9 日和 12 月 17 日，<strong>宏图二号 8 颗 X-SAR 卫星</strong>分两次以"一箭四星"方式发射升空。这 8 颗星采用等相位编队，四星同轨、二面共形——它们不再是一颗颗孤立的卫星，而是一个<strong>真正的星座</strong>。
+    </p>
+
+    <p>
+      组网带来的变化是立竿见影的。最直观的一个数字：<strong>重访周期从天级缩短到了小时级。</strong>宏图一号 + 宏图二号 12 颗星联合使用后，全球平均重访时间缩短到 5.6 小时，全国平均缩短到 5.3 小时——平均每天能对同一区域完成 7 到 9 次观测。这在过去单星时代是不可想象的。
+    </p>
+
+    <div class="a-fig">
+      <img
+        src="https://haibin-yu.github.io/piesat-prod/changxingdao-multisat.jpg"
+        alt="航天宏图女娲星座大连长兴岛码头多星试验模式影像"
+        loading="lazy"
+      >
+      <div class="a-cap">▲ 2024年1月23日，大连长兴岛码头，女娲星座多星试验模式成像。多星协同观测让同一区域获得更密集、更多角度的覆盖——这正是"组网"带来的能力跃迁。</div>
+    </div>
+
+    <p>
+      更重要的是，组网彻底改变了应急响应的速度。过去，灾害发生后调度卫星、等待过境、下传数据，整个流程以"天"为单位；如今，宏图二号具备星上实时数据处理、自主在轨任务规划能力，<strong>应急时效性由天级响应缩短到 20 分钟以内</strong>。同时，0.3 米（试验模式）的分辨率也刷新了我国商业 SAR 卫星的最高纪录。
+    </p>
+
+    <p>
+      宏图一号 4 颗 + 宏图二号 8 颗，12 颗星在轨组网——<strong>这使女娲星座成为国内最大的业务化运行雷达遥感卫星星座。</strong>而 12 颗，只是整个蓝图的零头。
+    </p>
+
+    <h2>从 12 到 114：一张"天网"的终局</h2>
+
+    <p>
+      为什么最终是 114 颗？因为女娲星座要承担的不只是"拍照"这一件事，而是<strong>高分遥感、实时观测、导航增强、物联网</strong>四大能力。
+    </p>
+
+    <p>
+      这 114 颗卫星将分布在多个轨道层次上，各司其职：<strong>超低轨</strong>卫星贴着大气层边缘飞行，用于应急机动和快速重访；<strong>低轨</strong>是主力，X-SAR、C-SAR、光学卫星都在这里；<strong>低高轨</strong>负责光学遥感加物联网；<strong>中轨</strong>则部署通导遥一体化卫星，把遥感、通信、导航融合在一起。卫星之间再通过<strong>星间激光通信链路</strong>连成一张网，构成空间遥感信息的传输骨干。
+    </p>
+
+    <div class="a-fig">
+      <img
+        src="https://haibin-yu.github.io/piesat-prod/ain-airport.jpg"
+        alt="航天宏图女娲星座阿联酋艾因国际机场2米分辨率影像"
+        loading="lazy"
+      >
+      <div class="a-cap">▲ 2025年5月28日，阿联酋艾因国际机场，女娲星座 2m 条带成像。从中国到中东、从陆地到海洋，星座的观测能力已经延伸到全球——这正是 114 颗卫星要实现的"全球不间断覆盖"。</div>
+    </div>
+
+    <p>
+      建设分两期推进：一期 54 颗，二期 60 颗。截至 2026 年底，将实现已发 12 颗、预发 16 颗、累计 28 颗在轨。这是一个"滚雪球"式的过程——每增加一批卫星，星座的覆盖密度和重访能力就上一个台阶。
+    </p>
+
+    <h2>组网之后，能力发生了质变</h2>
+
+    <p>
+      组网不是简单的数字叠加，而是三个层面的质变。
+    </p>
+
+    <p>
+      <strong>第一，从"看得见"到"看得及时"。</strong>重访周期从天级缩短到小时级，意味着任何一片区域的变化，都能在几小时内被重新观测一次。对于洪涝演进、火点扩散、海上目标移动这类动态过程，这是决定性的能力。
+    </p>
+
+    <p>
+      <strong>第二，从"事后"到"事前"。</strong>多星重轨干涉让毫米级的形变监测成为常态。地面沉降、矿区塌陷、山体滑坡，这些缓慢累积的危险，能够在酿成灾害之前被持续追踪——这也是我们在上一篇文章（<a href="/blog/insar-principle">InSAR 毫米级形变监测</a>）里讲到的核心技术。
+    </p>
+
+    <div class="a-fig">
+      <img
+        src="https://haibin-yu.github.io/piesat-prod/hualien-earthquake-insar.jpg"
+        alt="航天宏图女娲星座台湾花莲地震形变差分干涉监测结果"
+        loading="lazy"
+      >
+      <div class="a-cap">▲ 2024年4月台湾花莲地震前后，女娲星座重轨观测的差分干涉结果。通过对比震前震后两期影像，成功提取出同震形变场，形变分布与断层走向高度吻合——这是多星组网支撑的毫米级形变监测能力。</div>
+    </div>
+
+    <p>
+      <strong>第三，从"单一数据"到"通导遥一体化"。</strong>未来的女娲星座，遥感卫星、通信卫星、导航卫星在同一张网里协同工作。观测到的信息可以借助星间链路分钟级回传，直接推送到需要它的人手里——这才是"星座"最终的形态：不是一群卫星，而是一个会思考、会传递的太空基础设施。
+    </p>
+
+    <div class="a-insight">
+      <strong>一句话总结：</strong><br>
+      组网的本质，是用数量换时间、用协同换覆盖。从宏图一号的"1+3"编队，到宏图二号的 8 星组网，再到 114 颗的通导遥一体化蓝图——女娲星座走过的每一步，都在回答同一个问题：如何让地球上的每一个变化，都被及时看见。
+    </div>
+
+    <p>
+      在之前的文章中，我们讲了 SAR 卫星如何<a href="/blog/sar-radar-principle">穿透云层看清水库大坝和灾区的真实情况</a>，也展示了 SAR 在<a href="/blog/sar-satellite-applications">六大领域的全链条应用</a>。而女娲星座的组网之路，正是支撑这一切能力的底座——因为只有足够多的卫星在轨道上接力，那些"等不了好天气、等不了下一次过境"的时刻，才有卫星能在那里。
+    </p>
+
+  </div>
+
+  <div class="a-related">
+    <h4>SAR 卫星科普系列 · 更多文章</h4>
+    <a href="/blog/sar-radar-principle">SAR 成像原理三分钟看懂：雷达卫星为什么能穿透云层？</a>
+    <a href="/blog/sar-satellite-applications">SAR 卫星能做什么？六大领域应用全景</a>
+    <a href="/blog/insar-principle">地表怎么"悄悄地"在动？InSAR 毫米级形变监测揭秘</a>
+  </div>
+
+</div>
+</div>
+</body>
+</html>
