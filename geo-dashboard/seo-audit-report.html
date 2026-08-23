@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>航天宏图官网技术博客 · SEO 排查报告</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1f2328;
+    --ink-2: #4b5563;
+    --ink-3: #6b7280;
+    --line: #eceff3;
+    --line-2: #e3e7ec;
+    --accent: #3b5bdb;
+    --accent-soft: #eef2ff;
+    --p0: #c0392b;
+    --p0-bg: #fdf0ef;
+    --p1: #d97706;
+    --p1-bg: #fdf6ec;
+    --p2: #b58900;
+    --p2-bg: #fcf8ec;
+    --ok: #2f9e44;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 56px 28px 88px; }
+
+  header { border-bottom: 1px solid var(--line); padding-bottom: 28px; margin-bottom: 40px; }
+  .kicker { font-size: 13px; letter-spacing: .12em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+  h1 { font-size: 26px; font-weight: 700; margin: 0 0 12px; letter-spacing: .01em; }
+  .meta { font-size: 14px; color: var(--ink-3); }
+  .meta span + span::before { content: " · "; }
+
+  h2 { font-size: 19px; font-weight: 650; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+
+  .lead {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 20px 22px;
+    border-radius: 0 8px 8px 0;
+    font-size: 15px;
+    color: var(--ink);
+    margin: 8px 0 0;
+  }
+  .lead b { color: var(--accent); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 8px 0 8px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-weight: 600; color: var(--ink-2); font-size: 13px; background: #fafbfc; white-space: nowrap; }
+  td.ok { color: var(--ok); font-weight: 500; }
+  td.bad { color: var(--p0); font-weight: 500; }
+  tr:last-child td { border-bottom: none; }
+
+  .problem {
+    border: 1px solid var(--line-2);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin: 18px 0;
+  }
+  .problem-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .badge {
+    font-size: 12px; font-weight: 700; letter-spacing: .04em;
+    padding: 3px 10px; border-radius: 20px; white-space: nowrap;
+  }
+  .badge.p0 { background: var(--p0-bg); color: var(--p0); }
+  .badge.p1 { background: var(--p1-bg); color: var(--p1); }
+  .badge.p2 { background: var(--p2-bg); color: var(--p2); }
+  .problem h3 { font-size: 16px; margin: 0; font-weight: 650; }
+  .problem .label { display: block; font-size: 12px; color: var(--ink-3); margin: 14px 0 4px; letter-spacing: .03em; }
+  .problem p { margin: 4px 0 0; font-size: 14px; color: var(--ink-2); }
+  .problem p b { color: var(--ink); }
+  pre {
+    background: #f7f8fa; border: 1px solid var(--line); border-radius: 8px;
+    padding: 12px 16px; font-size: 13px; line-height: 1.6; overflow-x: auto;
+    font-family: "SF Mono", "Menlo", "Consolas", monospace; color: #333;
+  }
+
+  .note { font-size: 13px; color: var(--ink-3); border-left: 3px solid var(--line-2); padding-left: 14px; margin: 10px 0; }
+  ol.fix { margin: 8px 0 0; padding-left: 20px; font-size: 14px; color: var(--ink-2); }
+  ol.fix li { margin: 8px 0; }
+  ol.fix li b { color: var(--ink); }
+
+  .footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">SEO Audit Report</div>
+    <h1>航天宏图官网技术博客 · SEO 排查报告</h1>
+    <div class="meta">
+      <span>排查日期：2026-08-23</span>
+      <span>范围：博客列表页 / 单篇文章页（A1） / robots.txt / sitemap.xml</span>
+      <span>方式：抓取线上页面原始 HTML 逐项核对</span>
+    </div>
+  </header>
+
+  <h2>一、结论</h2>
+  <p class="lead">单篇文章页的 SEO 元素（title / description / keywords / JSON-LD / H1）基本完整保留，但站点级技术配置存在 <b>5 个问题，其中 3 个致命</b>。这是导致「官网博客在百度搜不到、只有百家号 / 头条号排在前列」的技术根因——不是内容不行，是搜索引擎「找不到、抓不全、信不过」官网。</p>
+
+  <h2>二、排查明细</h2>
+  <table>
+    <thead>
+      <tr><th>检查项</th><th>单篇 A1（2581.html）</th><th>博客列表页（blog/index.html）</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>title</td><td class="ok">✅ 完整（标题＋品牌＋定位）</td><td class="bad">❌ 仅「技术博客」</td></tr>
+      <tr><td>meta description</td><td class="ok">✅ 有</td><td class="bad">❌ 无</td></tr>
+      <tr><td>meta keywords</td><td class="ok">✅ 有</td><td class="bad">❌ 无</td></tr>
+      <tr><td>canonical</td><td class="bad">❌ 无</td><td class="bad">❌ 无</td></tr>
+      <tr><td>JSON-LD 结构化数据</td><td class="bad">✅ 有（但 URL 错误，见问题 3）</td><td class="bad">❌ 无</td></tr>
+      <tr><td>H1</td><td class="ok">✅ 正确</td><td>—</td></tr>
+      <tr><td>图片</td><td class="ok">✅ 已上传 /uploads/</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <h2>三、5 个问题（按优先级）</h2>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge p0">P0 · 致命</span><h3>sitemap.xml 未收录博客文章</h3></div>
+    <span class="label">现象</span>
+    <p><b>https://www.piesat.cn/sitemap.xml</b> 共 1058 个 URL，<b>没有一条是 blog / bloginfo 条目</b>。</p>
+    <span class="label">影响</span>
+    <p>搜索引擎无法通过 sitemap 发现博客文章，只能靠爬虫偶然爬到；而官网博客路径深、权重低，爬虫很难摸到，导致文章长期不被收录。</p>
+    <span class="label">修复</span>
+    <p>把 6 篇博客 URL 加进 sitemap.xml（或单独生成博客 sitemap，再在 sitemap.xml 里引用）。</p>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge p0">P0 · 致命</span><h3>robots.txt 屏蔽了所有文章图片</h3></div>
+    <span class="label">现象</span>
+    <p>robots.txt 含以下规则，而文章图片全部位于 <b>/uploads/</b> 目录：</p>
+    <pre>Disallow: /uploads/
+Disallow: *.jpg$
+Disallow: *.png$
+Disallow: *.gif$</pre>
+    <span class="label">影响</span>
+    <p>文章配图完全无法被搜索引擎抓取，图片 SEO 全废；AI 引擎也抓不到图片信息。</p>
+    <span class="label">修复</span>
+    <p>放开 /uploads/ 下的图片抓取（去掉 Disallow: /uploads/ 及图片扩展名规则），或将博客图片迁移到未被屏蔽的目录。</p>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge p1">P1 · 重要</span><h3>canonical 缺失 + 结构化数据 URL 错误</h3></div>
+    <span class="label">现象</span>
+    <ol class="fix">
+      <li>单篇文章页<b>没有</b> &lt;link rel="canonical"&gt;；</li>
+      <li>JSON-LD 中 <b>mainEntityOfPage.@id</b> 写的是 <b>https://www.piesat.cn/blog/sar-radar-principle</b>（不存在的路径），而文章真实 URL 是 <b>https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html</b>。</li>
+    </ol>
+    <span class="label">影响</span>
+    <p>搜索引擎收到一个错误 / 缺失的规范地址信号，无法正确识别页面的权威 URL。</p>
+    <span class="label">修复</span>
+    <p>单篇加 canonical 指向真实 URL；JSON-LD 的 mainEntityOfPage.@id 与 image（当前为相对路径 /uploads/...）改为绝对 URL。</p>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge p1">P1 · 重要</span><h3>datePublished 日期错误</h3></div>
+    <span class="label">现象</span>
+    <p>JSON-LD 的 <b>datePublished / dateModified</b> 为 <b>2026-07-15</b>，与文章实际发布（2026-08）不符。</p>
+    <span class="label">影响</span>
+    <p>时效性信号错乱。</p>
+    <span class="label">修复</span>
+    <p>改为真实发布日期。</p>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge p2">P2 · 建议</span><h3>博客列表页 SEO 缺失</h3></div>
+    <span class="label">现象</span>
+    <p>&lt;title&gt; 仅「技术博客」，无 description、keywords、canonical、JSON-LD。</p>
+    <span class="label">影响</span>
+    <p>博客列表页是博客的入口页，SEO 缺失影响整站权重传递与收录。</p>
+    <span class="label">修复</span>
+    <p>title 改为「技术博客 - 航天宏图信息技术股份有限公司」等含品牌词；补 description 与结构化数据（Blog / ItemList）。</p>
+  </div>
+
+  <h2>四、6 篇已上线文章 URL 对照</h2>
+  <table>
+    <thead><tr><th>编号</th><th>文章标题</th><th>线上 URL</th></tr></thead>
+    <tbody>
+      <tr><td>A1</td><td>雷达卫星为什么能穿透云层？SAR成像原理三分钟看懂</td><td>/website/cn/pages/blog/bloginfo/2581.html</td></tr>
+      <tr><td>A2</td><td>SAR卫星能做什么？六大领域应用全景</td><td>/website/cn/pages/blog/bloginfo/2631.html</td></tr>
+      <tr><td>B1</td><td>卫星遥感如何守护江河湖库？SAR全天候水利监测全景</td><td>/website/cn/pages/blog/bloginfo/2641.html</td></tr>
+      <tr><td>A3</td><td>地表怎么"悄悄地"在动？InSAR毫米级形变监测揭秘</td><td>/website/cn/pages/blog/bloginfo/2671.html</td></tr>
+      <tr><td>A4</td><td>为什么需要114颗卫星？女娲星座的组网之路</td><td>/website/cn/pages/blog/bloginfo/2687.html</td></tr>
+      <tr><td>B2</td><td>卫星遥感如何守护蓝色国土？SAR全天候海洋监测全景</td><td>/website/cn/pages/blog/bloginfo/2688.html</td></tr>
+    </tbody>
+  </table>
+  <p class="note">B3（矿山形变）、B4（地质灾害）尚未正式发布，暂无线上 URL。</p>
+
+  <h2>五、修复优先级</h2>
+  <table>
+    <thead><tr><th>优先级</th><th>问题</th><th>修复动作</th><th>建议时限</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge p0">P0</span></td><td>sitemap 缺博客</td><td>博客 URL 加入 sitemap</td><td>立即</td></tr>
+      <tr><td><span class="badge p0">P0</span></td><td>robots 屏蔽图片</td><td>放开 /uploads/ 图片抓取</td><td>立即</td></tr>
+      <tr><td><span class="badge p1">P1</span></td><td>canonical 缺失 + URL 错</td><td>加 canonical、改 JSON-LD @id</td><td>1 周内</td></tr>
+      <tr><td><span class="badge p1">P1</span></td><td>datePublished 错</td><td>改真实日期</td><td>1 周内</td></tr>
+      <tr><td><span class="badge p2">P2</span></td><td>列表页 SEO 弱</td><td>补 title / description / 结构化数据</td><td>2 周内</td></tr>
+    </tbody>
+  </table>
+
+  <h2>六、背景说明（为什么官网排不过百家号 / 头条号）</h2>
+  <ol class="fix">
+    <li><b>平台权重</b>：百家号（baijiahao.baidu.com）是百度自家平台，天然享受最高权重倾斜；头条号同理。独立域名要超它，本质上是在对抗平台自己的生态。</li>
+    <li><b>技术配置缺口</b>：本报告列出的 5 个问题，让官网博客「该被收录的没进 sitemap、该被抓的图片被 robots 挡住、该明确的规范地址是错的」。</li>
+    <li><b>时间积累</b>：文章 8 月刚上线，域名权重、外链、被引用量需要时间沉淀。</li>
+  </ol>
+  <p>修复上述 P0/P1 问题后，官网博客才有进入百度首页（前 10）的技术基础；目标应定为「官网进首页、与百家号并存」，而非「盖过百家号排第一」。</p>
+
+  <div class="footer">航天宏图 GEO 监测项目 · 交付文件 · 2026-08-23</div>
+</div>
+</body>
+</html>
