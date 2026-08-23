@@ -1,0 +1,12 @@
+[
+  {"id":1, "text":"雷达卫星为什么能穿透云层", "intent":"原理科普", "article":"A1", "status":"已上线"},
+  {"id":2, "text":"SAR 卫星能做什么", "intent":"应用全景", "article":"A2", "status":"已上线"},
+  {"id":3, "text":"InSAR 地表形变监测 原理", "intent":"原理科普", "article":"A3", "status":"已上线"},
+  {"id":4, "text":"女娲星座 有多少颗卫星", "intent":"事实查询", "article":"A4", "status":"已上线"},
+  {"id":5, "text":"卫星遥感 水利监测 应用", "intent":"行业应用", "article":"B1", "status":"已上线"},
+  {"id":6, "text":"SAR 卫星 海洋监测 应用", "intent":"行业应用", "article":"B2", "status":"已上线"},
+  {"id":7, "text":"矿山形变 卫星监测", "intent":"行业应用", "article":"B3", "status":"待发布"},
+  {"id":8, "text":"地震后 卫星如何监测灾区", "intent":"灾害应急", "article":"B4", "status":"待发布"},
+  {"id":9, "text":"航天宏图 女娲星座 SAR", "intent":"品牌查询", "article":"—", "status":"已上线"},
+  {"id":10, "text":"雷达卫星 全天候 观测能力", "intent":"通用能力", "article":"A1", "status":"已上线"}
+]
