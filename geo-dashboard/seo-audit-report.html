@@ -99,6 +99,7 @@
     <h1>航天宏图官网技术博客 · SEO 排查报告</h1>
     <div class="meta">
       <span>排查日期：2026-08-23</span>
+      <span>补充排查：2026-08-31（B5 上线 + 百度收录实测）</span>
       <span>范围：博客列表页 / 单篇文章页（A1） / robots.txt / sitemap.xml</span>
       <span>方式：抓取线上页面原始 HTML 逐项核对</span>
       <span>流量数据：百度站长平台第一方数据（2026-08 追加）</span>
@@ -133,7 +134,9 @@
     <span class="label">影响</span>
     <p>搜索引擎无法通过 sitemap 发现博客文章，只能靠爬虫偶然爬到；而官网博客路径深、权重低，爬虫很难摸到，导致文章长期不被收录。</p>
     <span class="label">修复</span>
-    <p>把 6 篇博客 URL 加进 sitemap.xml（或单独生成博客 sitemap，再在 sitemap.xml 里引用）——长效自动化（让新文章自动进 sitemap + 自动推送百度）见第八章。</p>
+    <p>把 7 篇博客 URL 加进 sitemap.xml（或单独生成博客 sitemap，再在 sitemap.xml 里引用）——长效自动化（让新文章自动进 sitemap + 自动推送百度）见第八章。</p>
+    <span class="label">实测佐证（2026-08-31）</span>
+    <p>sitemap.xml 共 1058 个 URL，百度已收录 1052 个（收录率 99%）；而博客目录 <b>bloginfo</b> 仅 2 条被收录（A4 女娲星座组网 / B2 海洋监测），其余 5 篇全部未收录——正是「进 sitemap 的几乎全收、不进 sitemap 的几乎全漏」的直接后果。</p>
   </div>
 
   <div class="problem">
@@ -183,19 +186,20 @@ Disallow: *.gif$</pre>
     <p>title 改为「技术博客 - 航天宏图信息技术股份有限公司」等含品牌词；补 description 与结构化数据（Blog / ItemList）。</p>
   </div>
 
-  <h2>四、6 篇已上线文章 URL 对照</h2>
+  <h2>四、7 篇已上线文章 URL 对照（含百度收录状态）</h2>
   <table>
-    <thead><tr><th>编号</th><th>文章标题</th><th>线上 URL</th></tr></thead>
+    <thead><tr><th>编号</th><th>文章标题</th><th>线上 URL</th><th>百度收录</th></tr></thead>
     <tbody>
-      <tr><td>A1</td><td>雷达卫星为什么能穿透云层？SAR成像原理三分钟看懂</td><td>/website/cn/pages/blog/bloginfo/2581.html</td></tr>
-      <tr><td>A2</td><td>SAR卫星能做什么？六大领域应用全景</td><td>/website/cn/pages/blog/bloginfo/2631.html</td></tr>
-      <tr><td>B1</td><td>卫星遥感如何守护江河湖库？SAR全天候水利监测全景</td><td>/website/cn/pages/blog/bloginfo/2641.html</td></tr>
-      <tr><td>A3</td><td>地表怎么"悄悄地"在动？InSAR毫米级形变监测揭秘</td><td>/website/cn/pages/blog/bloginfo/2671.html</td></tr>
-      <tr><td>A4</td><td>为什么需要114颗卫星？女娲星座的组网之路</td><td>/website/cn/pages/blog/bloginfo/2687.html</td></tr>
-      <tr><td>B2</td><td>卫星遥感如何守护蓝色国土？SAR全天候海洋监测全景</td><td>/website/cn/pages/blog/bloginfo/2688.html</td></tr>
+      <tr><td>A1</td><td>雷达卫星为什么能穿透云层？SAR成像原理三分钟看懂</td><td>/website/cn/pages/blog/bloginfo/2581.html</td><td class="bad">❌ 未收录</td></tr>
+      <tr><td>A2</td><td>SAR卫星能做什么？六大领域应用全景</td><td>/website/cn/pages/blog/bloginfo/2631.html</td><td class="bad">❌ 未收录</td></tr>
+      <tr><td>B1</td><td>卫星遥感如何守护江河湖库？SAR全天候水利监测全景</td><td>/website/cn/pages/blog/bloginfo/2641.html</td><td class="bad">❌ 未收录</td></tr>
+      <tr><td>A3</td><td>地表怎么"悄悄地"在动？InSAR毫米级形变监测揭秘</td><td>/website/cn/pages/blog/bloginfo/2671.html</td><td class="bad">❌ 未收录</td></tr>
+      <tr><td>A4</td><td>为什么需要114颗卫星？女娲星座的组网之路</td><td>/website/cn/pages/blog/bloginfo/2687.html</td><td class="ok">✅ 已收录</td></tr>
+      <tr><td>B2</td><td>卫星遥感如何守护蓝色国土？SAR全天候海洋监测全景</td><td>/website/cn/pages/blog/bloginfo/2688.html</td><td class="ok">✅ 已收录</td></tr>
+      <tr><td>B5</td><td>西藏吉隆泥石流冲断口岸当晚：女娲星座四次成像，锁定堰塞湖</td><td>/website/cn/pages/blog/bloginfo/2691.html</td><td class="bad">❌ 未收录</td></tr>
     </tbody>
   </table>
-  <p class="note">B3（矿山形变）、B4（地质灾害）尚未正式发布，暂无线上 URL。</p>
+  <p class="note">B3（矿山形变）、B4（地质灾害）尚未正式发布，暂无线上 URL。收录状态数据来源：百度站长平台 site 实测（2026-08-31）。</p>
 
   <h2>五、修复优先级</h2>
   <table>
@@ -268,7 +272,7 @@ Disallow: *.gif$</pre>
   <h3 style="font-size:15px;font-weight:650;margin:24px 0 10px;">8.5 验证方法</h3>
   <p>发布一篇测试文章后，打开 <code>https://www.piesat.cn/sitemap.xml</code> 搜索新文章 URL：能搜到即自动更新成功；搜不到则仍为手动模式，需回头调整。</p>
 
-  <div class="footer">航天宏图 GEO 监测项目 · 交付文件 · 2026-08-28</div>
+  <div class="footer">航天宏图 GEO 监测项目 · 交付文件 · 2026-08-31</div>
 </div>
 </body>
 </html>
