@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>航天宏图 8 月 SEO / GEO 报告</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1f2328;
+    --ink-2: #4b5563;
+    --ink-3: #6b7280;
+    --line: #eceff3;
+    --line-2: #e3e7ec;
+    --accent: #3b5bdb;
+    --accent-soft: #eef2ff;
+    --p0: #c0392b;
+    --p0-bg: #fdf0ef;
+    --p1: #d97706;
+    --p1-bg: #fdf6ec;
+    --p2: #b58900;
+    --p2-bg: #fcf8ec;
+    --ok: #2f9e44;
+    --ok-bg: #eef8f0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 56px 28px 88px; }
+
+  header { border-bottom: 1px solid var(--line); padding-bottom: 28px; margin-bottom: 40px; }
+  .kicker { font-size: 13px; letter-spacing: .12em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+  h1 { font-size: 26px; font-weight: 700; margin: 0 0 12px; letter-spacing: .01em; }
+  .meta { font-size: 14px; color: var(--ink-3); }
+  .meta span + span::before { content: " · "; }
+
+  h2 { font-size: 19px; font-weight: 650; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  h3 { font-size: 15px; font-weight: 650; margin: 26px 0 10px; }
+
+  .lead {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 20px 22px;
+    border-radius: 0 8px 8px 0;
+    font-size: 15px;
+    color: var(--ink);
+    margin: 8px 0 0;
+  }
+  .lead b { color: var(--accent); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 8px 0 8px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-weight: 600; color: var(--ink-2); font-size: 13px; background: #fafbfc; white-space: nowrap; }
+  td.ok { color: var(--ok); font-weight: 500; }
+  td.bad { color: var(--p0); font-weight: 500; }
+  tr:last-child td { border-bottom: none; }
+
+  .problem {
+    border: 1px solid var(--line-2);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin: 18px 0;
+  }
+  .problem-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .badge {
+    font-size: 12px; font-weight: 700; letter-spacing: .04em;
+    padding: 3px 10px; border-radius: 20px; white-space: nowrap;
+  }
+  .badge.p0 { background: var(--p0-bg); color: var(--p0); }
+  .badge.p1 { background: var(--p1-bg); color: var(--p1); }
+  .badge.p2 { background: var(--p2-bg); color: var(--p2); }
+  .badge.ok { background: var(--ok-bg); color: var(--ok); }
+  .problem h3 { font-size: 16px; margin: 0; font-weight: 650; }
+  .problem .label { display: block; font-size: 12px; color: var(--ink-3); margin: 14px 0 4px; letter-spacing: .03em; }
+  .problem p { margin: 4px 0 0; font-size: 14px; color: var(--ink-2); }
+  .problem p b { color: var(--ink); }
+  pre {
+    background: #f7f8fa; border: 1px solid var(--line); border-radius: 8px;
+    padding: 12px 16px; font-size: 13px; line-height: 1.6; overflow-x: auto;
+    font-family: "SF Mono", "Menlo", "Consolas", monospace; color: #333;
+  }
+
+  .note { font-size: 13px; color: var(--ink-3); border-left: 3px solid var(--line-2); padding-left: 14px; margin: 10px 0; }
+  ol.fix { margin: 8px 0 0; padding-left: 20px; font-size: 14px; color: var(--ink-2); }
+  ol.fix li { margin: 8px 0; }
+  ol.fix li b { color: var(--ink); }
+
+  .stats { display: flex; gap: 16px; margin: 16px 0 4px; }
+  .stat {
+    flex: 1; border: 1px solid var(--line-2); border-radius: 10px;
+    padding: 16px 18px; text-align: center;
+  }
+  .stat .num { font-size: 26px; font-weight: 700; color: var(--accent); line-height: 1.2; }
+  .stat .lbl { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+
+  .footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">SEO / GEO Monthly Report</div>
+    <h1>航天宏图 8 月 SEO / GEO 报告</h1>
+    <div class="meta">
+      <span>报告周期：2026 年 8 月</span>
+      <span>监测对象：piesat.cn 技术博客</span>
+      <span>数据来源：WebSearch 自动扫描 / 百度站长平台 / AI 引擎抽样</span>
+      <span>交付日期：2026-08-31</span>
+    </div>
+  </header>
+
+  <!-- ================= 模块一 ================= -->
+  <h2>模块一：8 月 SEO / GEO 成果</h2>
+  <p class="lead">8 月完成「内容上线 → 监测体系建立 → 产品词跑通」的完整闭环：<b>7 篇技术博客上线</b>、<b>GEO 监测仪表盘建成</b>、<b>探测词表扩充至 30 条</b>，官网在 <b>4 条产品词</b>上进入搜索前列，引用命中率从 <b>0% 提升到 25%</b>。</p>
+
+  <div class="stats">
+    <div class="stat"><div class="num">7</div><div class="lbl">技术博客上线</div></div>
+    <div class="stat"><div class="num">30</div><div class="lbl">探测词表规模</div></div>
+    <div class="stat"><div class="num">4</div><div class="lbl">产品词进入前列</div></div>
+    <div class="stat"><div class="num">25%</div><div class="lbl">引用命中率（0% → 25%）</div></div>
+  </div>
+
+  <h3>1.1 内容建设：7 篇技术博客上线</h3>
+  <p style="font-size:14px;color:var(--ink-2);margin:0 0 8px">覆盖 SAR 原理科普、行业应用、品牌事实三类内容：</p>
+  <table>
+    <thead><tr><th>编号</th><th>文章</th><th>内容方向</th><th>线上状态</th></tr></thead>
+    <tbody>
+      <tr><td>A1</td><td>雷达卫星为什么能穿透云层？SAR 成像原理</td><td>原理科普</td><td class="ok">已上线</td></tr>
+      <tr><td>A2</td><td>SAR 卫星能做什么？六大领域应用全景</td><td>应用全景</td><td class="ok">已上线</td></tr>
+      <tr><td>A3</td><td>地表怎么"悄悄地"在动？InSAR 形变监测</td><td>原理科普</td><td class="ok">已上线</td></tr>
+      <tr><td>A4</td><td>为什么需要 114 颗卫星？女娲星座组网之路</td><td>品牌事实</td><td class="ok">已上线</td></tr>
+      <tr><td>B1</td><td>卫星遥感如何守护江河湖库？SAR 水利监测</td><td>行业应用</td><td class="ok">已上线</td></tr>
+      <tr><td>B2</td><td>卫星遥感如何守护蓝色国土？SAR 海洋监测</td><td>行业应用</td><td class="ok">已上线</td></tr>
+      <tr><td>B5</td><td>吉隆口岸泥石流应急监测</td><td>灾害应急</td><td class="ok">已上线</td></tr>
+    </tbody>
+  </table>
+
+  <h3>1.2 监测体系：GEO 仪表盘 + 三层监测建成</h3>
+  <ol class="fix">
+    <li><b>GEO 监测仪表盘上线</b>：建成「WebSearch 自动扫描 + 百度第一方数据 + AI 引擎人工抽样」三层监测，可视化呈现引用命中率、竞品密度、逐条 Query 状态。</li>
+    <li><b>探测词表扩充至 30 条</b>：从首期 10 条扩到 30 条，新增 20 条来自百度第一方数据暴露的真实搜索词（商业意向词、产品词、品牌信任词）。</li>
+    <li><b>接入百度站长平台第一方数据</b>：打通 PC 端 31 词 + 移动端 152 词的真实展现 / 点击 / 点击率 / 排名回流，形成「收录之后转化表现」的流量数据层。</li>
+  </ol>
+
+  <h3>1.3 搜索可见性：产品词已跑通，命中率 0% → 25%</h3>
+  <p style="font-size:14px;color:var(--ink-2);margin:0 0 8px">8 月完成 2 次扫描（8-23 基线 + 8-31 补充）：</p>
+  <table>
+    <thead><tr><th>指标</th><th>8-23 基线</th><th>8-31 补充</th></tr></thead>
+    <tbody>
+      <tr><td>已扫描 Query</td><td>10 条</td><td>16 条</td></tr>
+      <tr><td>官网被引用</td><td class="bad">0 条</td><td class="ok">4 条</td></tr>
+      <tr><td>引用命中率</td><td>0%</td><td class="ok">25%</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:14px;color:var(--ink-2);margin:12px 0 8px">4 条命中的产品词（官网出现在搜索结果前列）：</p>
+  <table>
+    <thead><tr><th>Query</th><th>官网排名</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>pie-engine 遥感</td><td class="ok">#1</td><td>engine.piesat.cn 居首</td></tr>
+      <tr><td>pie 遥感软件</td><td class="ok">#2</td><td>PIE-Map 产品页</td></tr>
+      <tr><td>航天宏图 水文信息共享平台</td><td class="ok">#3</td><td>智慧水利方案页</td></tr>
+      <tr><td>差分干涉卫星影像处理软件</td><td class="ok">#4</td><td>PIE-SAR 产品页</td></tr>
+    </tbody>
+  </table>
+
+  <h3>1.4 技术部署与排查</h3>
+  <ol class="fix">
+    <li><b>官网 SEO 部署（7 月中旬）</b>：官网完成整体 SEO 部署，站点级与页面级 SEO 基础配置同步落地，为后续技术博客上线与收录奠定基础。</li>
+    <li><b>官网博客 SEO 排查（8 月）</b>：对官网博客列表页、单篇文章页、robots.txt、sitemap.xml 逐项核对，定位 5 个技术问题（其中 3 个致命），详见模块二。</li>
+  </ol>
+
+  <!-- ================= 模块二 ================= -->
+  <h2>模块二：8 月监测到的问题</h2>
+
+  <h3>2.1 技术配置问题（5 个，含 3 个致命）</h3>
+  <table>
+    <thead><tr><th>优先级</th><th>问题</th><th>影响</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge p0">P0 · 致命</span></td><td>sitemap.xml 未收录博客文章</td><td>搜索引擎发现不了博客，收录受阻</td></tr>
+      <tr><td><span class="badge p0">P0 · 致命</span></td><td>robots.txt 屏蔽全部文章图片</td><td>图片 SEO 全废，AI 引擎抓不到图</td></tr>
+      <tr><td><span class="badge p1">P1 · 重要</span></td><td>canonical 缺失 + JSON-LD URL 错误</td><td>权威地址信号错误</td></tr>
+      <tr><td><span class="badge p1">P1 · 重要</span></td><td>datePublished 日期错误</td><td>时效性信号错乱</td></tr>
+      <tr><td><span class="badge p2">P2 · 建议</span></td><td>博客列表页 SEO 缺失</td><td>入口页无 title / description / 结构化数据</td></tr>
+    </tbody>
+  </table>
+  <p class="note"><b>实测佐证（2026-08-31）</b>：官网 sitemap.xml 共 1058 个 URL，百度已收录 1052 个（收录率 99%）；而博客目录 <code>bloginfo</code> 仅 2 条被收录（A4 女娲星座组网 / B2 海洋监测）。「进 sitemap 的几乎全收、不进 sitemap 的几乎全漏」——正是 sitemap 未收录博客文章的直接后果。</p>
+
+  <h3>2.2 流量转化问题（百度第一方数据揭示的 3 个转化层问题）</h3>
+  <table>
+    <thead><tr><th>问题</th><th>数据</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td>品牌词点击率低</td><td>「航天宏图」PC 排名第 7，点击率仅 <b>4.44%</b>（展现 45 / 点击 2）</td><td>排名不差，但标题 / 描述不吸引，或被百科、股票站截胡</td></tr>
+      <tr><td>移动端点击近乎归零</td><td>移动端 152 词，展现 326 / 点击仅 <b>9</b>；品牌词移动端展现 89 / 点击 0</td><td>移动端排名靠后或落地页体验差</td></tr>
+      <tr><td>商业意向词排名 40 开外</td><td>「智慧应急监测系统 推荐/供应商/厂家」PC 排名 <b>34–43</b></td><td>用户在找供应商，官网排不进前几页，无商业转化</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.3 搜索排名问题（品牌词 / 事实词未立起来）</h3>
+  <div class="problem">
+    <div class="problem-head"><span class="badge p1">现象</span><h3>产品词「已跑通」，品牌词 / 事实词被第三方截胡</h3></div>
+    <p>「<b>女娲星座卫星</b>」搜索结果被百度百科、央广网、北京日报、今日头条、河南政府网、中新网占据，官网博客 A4 未进前列；「<b>航天宏图上卫星</b>」被上证报、东方财富、同花顺、九方智投、百家号等股票 / 新闻站占据，官网未出现。首期 10 条通用探测词（SAR 原理、水利 / 海洋监测等）全部零引用。</p>
+    <span class="label">根因（四层叠加）</span>
+    <ol class="fix">
+      <li><b>词性不同</b>：产品词是「独占词」无对手，品牌词 / 事实词是「公共词」高竞争；</li>
+      <li><b>平台权重</b>：百科 / 媒体 / 股票站权重远高于官网；</li>
+      <li><b>技术短板</b>：P0 问题让博客文章搜不到、不被信任；</li>
+      <li><b>意图错配</b>：搜「女娲星座」的人想看「最新动态」，官网给的是科普文章，且标题不直接命中该词。</li>
+    </ol>
+  </div>
+
+  <h3>2.4 垃圾流量噪声（非安全问题）</h3>
+  <p class="note">移动端出现「恒星集团线路导航.6.s.tjh7ns8h9.top」等 <b>.top</b> 垃圾域名词，属垃圾导航站 / 爬虫刷词流量被百度错误归因。已逐页抓取源码验证：<b>无黑链、无垃圾页面</b>，监测时过滤即可。</p>
+
+  <!-- ================= 模块三 ================= -->
+  <h2>模块三：针对问题的解决方案</h2>
+
+  <h3>3.1 技术问题修复（对应 2.1）</h3>
+  <table>
+    <thead><tr><th>优先级</th><th>修复动作</th><th>时限</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge p0">P0</span></td><td>博客 URL 加入 sitemap.xml（或单独生成博客 sitemap）</td><td>立即</td></tr>
+      <tr><td><span class="badge p0">P0</span></td><td>放开 robots.txt 对 /uploads/ 图片的屏蔽</td><td>立即</td></tr>
+      <tr><td><span class="badge p1">P1</span></td><td>单篇加 canonical 指向真实 URL；改 JSON-LD @id 与 image 为绝对 URL</td><td>1 周内</td></tr>
+      <tr><td><span class="badge p1">P1</span></td><td>datePublished 改为真实发布日期</td><td>1 周内</td></tr>
+      <tr><td><span class="badge p2">P2</span></td><td>列表页补 title / description / 结构化数据</td><td>2 周内</td></tr>
+    </tbody>
+  </table>
+
+  <h3>3.2 收录自动化（治本，避免每篇手工提交）</h3>
+  <p style="font-size:14px;color:var(--ink-2);margin:0 0 8px">改 sitemap 在<b>官网侧</b>（建站方），提交地址在<b>百度站长侧</b>——两步两地方。让建站方把「博客」模块纳入 sitemap 自动生成，并配置「发文自动调用百度主动推送 API」。</p>
+  <pre>给建站方的一句话需求：
+博客文章要接入 sitemap 自动生成，并且发文时自动调用百度主动推送 API（token 我在百度站长后台提供），实现新文章发布后无需人工提交。</pre>
+
+  <h3>3.3 转化优化（对应 2.2）</h3>
+  <ol class="fix">
+    <li><b>品牌词点击率</b>：优化品牌相关页面 title + description，强化「卫星遥感 / SAR / 女娲星座」差异化标签，与百科、股票站拉开点击吸引。</li>
+    <li><b>移动端归零</b>：排查移动端排名分布 + 移动端页面加载 / 排版体验，把移动端作为主要流量入口重点优化。</li>
+    <li><b>商业意向词</b>：针对性产出「智慧应急监测」专题内容（方案页 / 案例页 / 选型指南），承接「找供应商」的搜索意图。</li>
+  </ol>
+
+  <h3>3.4 内容补位（对应 2.3）</h3>
+  <ol class="fix">
+    <li><b>事实词</b>：「女娲星座」「上卫星」需产出直接命中词面的内容（星座规模 / 发射动态 / 在轨数据），对齐「看动态」的搜索意图，而非纯科普。</li>
+    <li><b>产品词守护</b>：对已跑通的 pie-engine / pie 遥感软件 / 差分干涉软件，做竞品对比 / 教程类内容加固排名。</li>
+  </ol>
+
+  <!-- ================= 模块四 ================= -->
+  <h2>模块四：9 月 SEO / GEO 规划建议</h2>
+
+  <h3>4.1 优先级排序（按投入产出比）</h3>
+  <table>
+    <thead><tr><th>优先级</th><th>事项</th><th>预期效果</th></tr></thead>
+    <tbody>
+      <tr><td>①</td><td>修 P0：sitemap 收录博客 + robots 放开图片</td><td>博客文章可被收录，是一切排名的基础</td></tr>
+      <tr><td>②</td><td>收录自动化：sitemap 自动生成 + 发文自动推送</td><td>新文章发布即被发现，告别手工提交</td></tr>
+      <tr><td>③</td><td>品牌词 / 事实词专题内容</td><td>让「女娲星座」「航天宏图」官网内容进搜索前列</td></tr>
+      <tr><td>④</td><td>商业意向词专题（智慧应急监测）</td><td>承接「找供应商」流量，打通商业转化</td></tr>
+      <tr><td>⑤</td><td>品牌词 title / description + 移动端体验优化</td><td>提升点击率，把「展现」变成「点击」</td></tr>
+    </tbody>
+  </table>
+
+  <h3>4.2 内容排期建议</h3>
+  <ol class="fix">
+    <li><b>上旬</b>：品牌词 / 事实词专题（女娲星座组网进展、在轨数据、发射动态），标题直接命中搜索词。</li>
+    <li><b>中旬</b>：商业意向词专题（智慧应急监测方案页 / 案例页 / 选型指南）。</li>
+    <li><b>下旬</b>：产品词加固（PIE 系列竞品对比 / 教程），守护已跑通词的排名。</li>
+    <li><b>全程</b>：每篇发布后走「sitemap 自动 + API 推送」自动收录。</li>
+  </ol>
+
+  <h3>4.3 监测节奏</h3>
+  <ol class="fix">
+    <li><b>每周</b>：WebSearch 自动扫描探测词表，更新引用命中率与竞品密度。</li>
+    <li><b>每月</b>：回填百度站长平台第一方数据（展现 / 点击 / 排名），跟踪品牌词与商业词的排名变化。</li>
+    <li><b>持续</b>：AI 引擎引用监测（豆包 / DeepSeek / Kimi）——三引擎现已开放引用 API，可逐步从人工抽样升级为 API 自动探测 + 人工抽检兜底。</li>
+  </ol>
+
+  <h3>4.4 9 月目标</h3>
+  <ol class="fix">
+    <li>官网博客文章<b>全部被百度收录</b>（修完 P0 后的直接验证）。</li>
+    <li>品牌词「航天宏图」进百度首页（前 10）且点击率明显提升。</li>
+    <li>事实词「女娲星座」官网内容进前 10。</li>
+    <li>商业意向词「智慧应急监测」进前 20，出现商业转化机会。</li>
+    <li>引用命中率从 25% 稳步提升至 <b>40%+</b>。</li>
+  </ol>
+
+  <p class="note" style="margin-top:28px">报告附注：本报告为 8 月 SEO / GEO 工作总览，具体技术排查细节见《官网 SEO 排查报告》（含 5 个技术问题逐项分析与修复步骤）。</p>
+
+  <div class="footer">航天宏图 GEO 监测项目 · 交付文件 · 2026-08-31</div>
+</div>
+</body>
+</html>
