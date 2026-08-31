@@ -101,11 +101,12 @@
       <span>排查日期：2026-08-23</span>
       <span>范围：博客列表页 / 单篇文章页（A1） / robots.txt / sitemap.xml</span>
       <span>方式：抓取线上页面原始 HTML 逐项核对</span>
+      <span>流量数据：百度站长平台第一方数据（2026-08 追加）</span>
     </div>
   </header>
 
   <h2>一、结论</h2>
-  <p class="lead">单篇文章页的 SEO 元素（title / description / keywords / JSON-LD / H1）基本完整保留，但站点级技术配置存在 <b>5 个问题，其中 3 个致命</b>。这是导致「官网博客在百度搜不到、只有百家号 / 头条号排在前列」的技术根因——不是内容不行，是搜索引擎「找不到、抓不全、信不过」官网。</p>
+  <p class="lead">单篇文章页的 SEO 元素（title / description / keywords / JSON-LD / H1）基本完整保留，但站点级技术配置存在 <b>5 个问题，其中 3 个致命</b>。这是导致「官网博客在百度搜不到、只有百家号 / 头条号排在前列」的技术根因——不是内容不行，是搜索引擎「找不到、抓不全、信不过」官网。此外，8 月百度站长平台第一方流量数据进一步揭示了 <b>3 个转化层问题</b>（品牌词点击率低、移动端点击近乎归零、商业意向词排名 40 开外），详见第七章。</p>
 
   <h2>二、排查明细</h2>
   <table>
@@ -132,7 +133,7 @@
     <span class="label">影响</span>
     <p>搜索引擎无法通过 sitemap 发现博客文章，只能靠爬虫偶然爬到；而官网博客路径深、权重低，爬虫很难摸到，导致文章长期不被收录。</p>
     <span class="label">修复</span>
-    <p>把 6 篇博客 URL 加进 sitemap.xml（或单独生成博客 sitemap，再在 sitemap.xml 里引用）。</p>
+    <p>把 6 篇博客 URL 加进 sitemap.xml（或单独生成博客 sitemap，再在 sitemap.xml 里引用）——长效自动化（让新文章自动进 sitemap + 自动推送百度）见第八章。</p>
   </div>
 
   <div class="problem">
@@ -216,7 +217,58 @@ Disallow: *.gif$</pre>
   </ol>
   <p>修复上述 P0/P1 问题后，官网博客才有进入百度首页（前 10）的技术基础；目标应定为「官网进首页、与百家号并存」，而非「盖过百家号排第一」。</p>
 
-  <div class="footer">航天宏图 GEO 监测项目 · 交付文件 · 2026-08-23</div>
+  <h2>七、流量数据层发现（百度站长平台第一方数据 · 2026-08）</h2>
+  <p class="lead">数据来源为百度站长平台导出的第一方搜索数据（PC 端 31 词 + 移动端 152 词）。与前五章「技术配置排查」不同，这是用户在百度<b>真实搜索、官网被真实展现 / 点击</b>的回流数据（非人工抽样），反映的是「收录之后的转化表现」。</p>
+
+  <div class="problem">
+    <div class="problem-head"><h3>7.1 品牌词：排名不差，但点击率极低</h3></div>
+    <p>「航天宏图」PC 端排名第 7，点击率仅 <b>4.44%</b>（展现 45 次、点击 2 次）。排名本身不算差，问题在标题 / 描述不够吸引人，或搜索结果被百科、股票站占据，用户看到了却点别人。建议优化品牌相关页面的 title + description，强化「卫星遥感 / SAR / 女娲星座」差异化标签。</p>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><h3>7.2 移动端：152 词点击几乎归零</h3></div>
+    <p>移动端 152 词，总展现 326 次、总点击仅 <b>9 次</b>；品牌词「航天宏图」在移动端首页展现 89 次、点击 <b>0</b>。移动端是百度主要流量入口，但转化率是灾难级的——要么排名太靠后（移动端前 10 才有点击），要么落地页移动端体验差。建议重点排查移动端排名分布 + 移动端页面加载与排版体验。</p>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><h3>7.3 商业意向词：有真实需求，但排名 40 开外</h3></div>
+    <p>「智慧应急监测系统 推荐 / 供应商 / 厂家 / 哪家好 / 龙头」一组词，PC 端排名 <b>34–43</b>。这是公司核心业务（应急监测），用户在明确「找供应商」，但官网排名 40 开外，基本没有商业转化机会，是最该优先抢的词群。建议针对性产出「智慧应急监测」专题内容（方案页 / 案例页 / 选型指南），承接找供应商的搜索意图。</p>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><h3>7.4 产品词：已跑通，需守护</h3></div>
+    <p>「差分干涉卫星影像处理软件」点击率 33%、「pie 遥感软件」「pie-engine」点击率 100%。这些词用户搜到了想要的，是「已跑通」的词，排名不能掉。可围绕它们做竞品对比 / 教程类内容加固。</p>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><h3>7.5 垃圾流量噪声（非安全问题）</h3></div>
+    <p>移动端出现「恒星集团线路导航.6.s.tjh7ns8h9.top」等 <b>.top</b> 垃圾域名词，属垃圾导航站 / 爬虫刷词流量，被百度错误归因到官网。已逐页抓取官网源码验证：<b>无黑链、无垃圾页面</b>，是垃圾流量噪声；监测时需过滤，无需处理。</p>
+  </div>
+
+  <h2>八、收录自动化（让新文章自动进 sitemap + 自动推送百度）</h2>
+
+  <h3 style="font-size:15px;font-weight:650;margin:24px 0 10px;">8.1 两处操作，两个地方</h3>
+  <table>
+    <thead><tr><th>步骤</th><th>做什么</th><th>操作位置</th><th>负责人</th></tr></thead>
+    <tbody>
+      <tr><td>① 改 sitemap</td><td>把博客 URL 纳入 sitemap</td><td>官网服务器 / 官网后台</td><td>官网建站方</td></tr>
+      <tr><td>② 提交地址</td><td>把 sitemap 地址报给百度</td><td>百度站长平台</td><td>站长账号</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-size:15px;font-weight:650;margin:24px 0 10px;">8.2 sitemap 自动生成（一次性配置）</h3>
+  <p>官网博客路径 <code>/website/cn/pages/blog/bloginfo/XXX.html</code> 说明文章由 CMS 发布，sitemap 大概率由 CMS 自动生成。让建站方在后台把「博客」模块纳入 sitemap 生成规则后，<b>以后发新文章会自动带进 sitemap，无需逐篇操作</b>。若 sitemap 是手动维护的静态文件，则每发一篇都要手工加一条，应让建站方改成自动生成。</p>
+
+  <h3 style="font-size:15px;font-weight:650;margin:24px 0 10px;">8.3 发文自动推送百度（API 主动推送）</h3>
+  <p>在 CMS 里配置：每发一篇新文章，自动调用百度主动推送 API（<code>data.zz.baidu.com/urls</code>，token 在百度站长后台获取），新 URL 秒级推给百度。与 sitemap 形成双保险：sitemap 兜底全站、API 推送实时单篇。</p>
+
+  <h3 style="font-size:15px;font-weight:650;margin:24px 0 10px;">8.4 给建站方的一句话需求</h3>
+  <pre>博客文章要接入 sitemap 自动生成，并且发文时自动调用百度主动推送 API（token 我在百度站长后台提供），实现新文章发布后无需人工提交。</pre>
+
+  <h3 style="font-size:15px;font-weight:650;margin:24px 0 10px;">8.5 验证方法</h3>
+  <p>发布一篇测试文章后，打开 <code>https://www.piesat.cn/sitemap.xml</code> 搜索新文章 URL：能搜到即自动更新成功；搜不到则仍为手动模式，需回头调整。</p>
+
+  <div class="footer">航天宏图 GEO 监测项目 · 交付文件 · 2026-08-28</div>
 </div>
 </body>
 </html>
