@@ -126,7 +126,7 @@ tbody tr:last-child td{border-bottom:none}
       <span>目标：<span id="targetSite" style="color:#4a90d9">—</span></span>
     </div>
     <div class="note">
-      口径说明：本仪表盘监测「航天宏图技术博客文章在搜索/AI 引擎中的可见性」。<strong>引用命中率</strong>来自 WebSearch 自动化探测（每周扫描，结果出现 piesat.cn 即算引用）；<strong>AI 引擎真实引用</strong>当前为人工抽样——豆包 / DeepSeek / Kimi 现已开放引用 API（豆包搜索 / DeepSeek V4-Flash / Kimi $web_search），可升级为 API 自动探测（见《豆包搜索API接入要点》）。B3、B4 两篇文章尚未正式发布，对应 query 标记为「待发布」。<strong>探测词表已扩充至 30 条</strong>（新增 20 条来自百度第一方数据暴露的真实搜索词），下方「百度搜索 · 第一方数据」层直接展示 8 月真实流量回流。
+      口径说明：本仪表盘监测「航天宏图技术博客文章在搜索/AI 引擎中的可见性」。<strong>引用命中率</strong>来自 WebSearch 自动化探测（每周扫描，结果出现 piesat.cn 即算引用）；<strong>AI 引擎真实引用</strong>中豆包已升级为 API 自动探测（2026-09-01 起，豆包搜索 web_search，30 词/轮），DeepSeek / Kimi 待接入（DeepSeek V4-Flash / Kimi $web_search 均已开放引用 API，见《豆包搜索API接入要点》）。B3、B4 两篇文章尚未正式发布，对应 query 标记为「待发布」。<strong>探测词表已扩充至 30 条</strong>（新增 20 条来自百度第一方数据暴露的真实搜索词），下方「百度搜索 · 第一方数据」层直接展示 8 月真实流量回流。
     </div>
   </div>
 
@@ -229,10 +229,10 @@ tbody tr:last-child td{border-bottom:none}
     </div>
   </div>
 
-  <!-- AI 引擎真实引用（人工抽样） -->
+  <!-- AI 引擎真实引用（豆包 API 自动探测） -->
   <div class="table-box">
-    <div class="chart-title" style="margin-bottom:8px">AI 引擎真实引用 · 人工抽样</div>
-    <div style="font-size:12px;color:#aaa;margin-bottom:16px">豆包 / DeepSeek / Kimi 现已开放引用 API（豆包搜索 / DeepSeek V4-Flash / Kimi $web_search），此层当前为人工抽样、可升级为 API 自动探测。判定口径：<strong style="color:#888">官网 piesat.cn 被引用才算「已引用」</strong>，名次 = 它在引用源列表里的序号；头条号等第三方账号被引用不计入官网命中，但可在小结里备注。</div>
+    <div class="chart-title" style="margin-bottom:8px">AI 引擎真实引用 · 豆包 API 自动探测</div>
+    <div style="font-size:12px;color:#aaa;margin-bottom:16px">豆包已通过搜索 API（web_search）自动探测，DeepSeek / Kimi 待接入。判定口径：<strong style="color:#888">官网 piesat.cn 被引用才算「已引用」</strong>，名次 = 它在结果列表里的序号；头条号等第三方账号被引用不计入官网命中，但可在小结里备注。</div>
     <div id="aiEngineBody"></div>
 
     <!-- 抽样填写器：页面勾选 → 生成 JSON → 复制回填 -->
@@ -259,7 +259,7 @@ tbody tr:last-child td{border-bottom:none}
 
   <!-- 底部 -->
   <div class="footer">
-    <span>口径：WebSearch 自动化探测（每周）＋ AI 引擎人工抽样</span>
+    <span>口径：WebSearch 自动化探测（每周）＋ AI 引擎 API 自动探测（豆包已接入）</span>
     <span>航天宏图 GEO 监测 · 素雅风格</span>
   </div>
 
@@ -561,7 +561,8 @@ function renderAiEngine(aiScans, queryList, queryMap) {
   const rows = qs.map(q => {
     const qDef = queryMap[q.id];
     const cells = AI_ENGINES.map(e => {
-      const eng = (q.engines && q.engines[e.key]) || { found: false, rank: null };
+      const eng = q.engines && q.engines[e.key];
+      if (!eng) return '<td style="color:#ccc">未抽样</td>';
       if (eng.found) return '<td><span class="dot found"></span>已引用 #' + (eng.rank != null ? eng.rank : '—') + '</td>';
       return '<td><span class="dot miss"></span>未引用</td>';
     }).join('');
