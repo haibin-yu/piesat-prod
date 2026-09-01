@@ -133,8 +133,15 @@
     <p><b>https://www.piesat.cn/sitemap.xml</b> 共 1058 个 URL，<b>没有一条是 blog / bloginfo 条目</b>。</p>
     <span class="label">影响</span>
     <p>搜索引擎无法通过 sitemap 发现博客文章，只能靠爬虫偶然爬到；而官网博客路径深、权重低，爬虫很难摸到，导致文章长期不被收录。</p>
-    <span class="label">修复</span>
-    <p>把 7 篇博客 URL 加进 sitemap.xml（或单独生成博客 sitemap，再在 sitemap.xml 里引用）——长效自动化（让新文章自动进 sitemap + 自动推送百度）见第八章。</p>
+    <span class="label">修复（可执行方案）——追加 7 条 &lt;url&gt; 到 sitemap.xml 的 &lt;urlset&gt;</span>
+    <pre>&lt;url&gt;&lt;loc&gt;https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html&lt;/loc&gt;&lt;/url&gt;
+&lt;url&gt;&lt;loc&gt;https://www.piesat.cn/website/cn/pages/blog/bloginfo/2631.html&lt;/loc&gt;&lt;/url&gt;
+&lt;url&gt;&lt;loc&gt;https://www.piesat.cn/website/cn/pages/blog/bloginfo/2641.html&lt;/loc&gt;&lt;/url&gt;
+&lt;url&gt;&lt;loc&gt;https://www.piesat.cn/website/cn/pages/blog/bloginfo/2671.html&lt;/loc&gt;&lt;/url&gt;
+&lt;url&gt;&lt;loc&gt;https://www.piesat.cn/website/cn/pages/blog/bloginfo/2687.html&lt;/loc&gt;&lt;/url&gt;
+&lt;url&gt;&lt;loc&gt;https://www.piesat.cn/website/cn/pages/blog/bloginfo/2688.html&lt;/loc&gt;&lt;/url&gt;
+&lt;url&gt;&lt;loc&gt;https://www.piesat.cn/website/cn/pages/blog/bloginfo/2691.html&lt;/loc&gt;&lt;/url&gt;</pre>
+    <p class="note">可在每条 &lt;url&gt; 内补 &lt;lastmod&gt;YYYY-MM-DD&lt;/lastmod&gt; 为各篇真实发布日期；长效自动化（自动生成 + 自动推送百度）见第八章。</p>
     <span class="label">实测佐证（2026-08-31）</span>
     <p>sitemap.xml 共 1058 个 URL，百度已收录 1052 个（收录率 99%）；而博客目录 <b>bloginfo</b> 仅 2 条被收录（A4 女娲星座组网 / B2 海洋监测），其余 5 篇全部未收录——正是「进 sitemap 的几乎全收、不进 sitemap 的几乎全漏」的直接后果。</p>
   </div>
@@ -142,38 +149,68 @@
   <div class="problem">
     <div class="problem-head"><span class="badge p0">P0 · 致命</span><h3>robots.txt 屏蔽了所有文章图片</h3></div>
     <span class="label">现象</span>
-    <p>robots.txt 含以下规则，而文章图片全部位于 <b>/uploads/</b> 目录：</p>
-    <pre>Disallow: /uploads/
-Disallow: *.jpg$
-Disallow: *.png$
-Disallow: *.gif$</pre>
+    <p>robots.txt 含 <b>Disallow: /uploads/</b> 及 <b>*.jpg$ / *.png$ / *.gif$</b> 规则，而文章图片全部位于 <b>/uploads/</b> 目录，图片全部无法被抓取。</p>
     <span class="label">影响</span>
     <p>文章配图完全无法被搜索引擎抓取，图片 SEO 全废；AI 引擎也抓不到图片信息。</p>
-    <span class="label">修复</span>
-    <p>放开 /uploads/ 下的图片抓取（去掉 Disallow: /uploads/ 及图片扩展名规则），或将博客图片迁移到未被屏蔽的目录。</p>
+    <span class="label">修复（可执行方案）——改前 → 改后</span>
+    <p>改前（当前 robots.txt 全量）：</p>
+    <pre>User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+Disallow: /uploads/
+Disallow: *.pdf$
+Disallow: *.jpg$
+Disallow: *.png$
+Disallow: *.gif$
+
+Sitemap: https://www.piesat.cn/sitemap.xml</pre>
+    <p>改后（删除 /uploads/ 与三条图片扩展名规则）：</p>
+    <pre>User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+Disallow: *.pdf$
+
+Sitemap: https://www.piesat.cn/sitemap.xml</pre>
+    <p class="note">只删 /uploads/、*.jpg$、*.png$、*.gif$ 四条；/admin/、/api/（后台/接口）与 *.pdf$ 保留即可。</p>
   </div>
 
   <div class="problem">
     <div class="problem-head"><span class="badge p1">P1 · 重要</span><h3>canonical 缺失 + 结构化数据 URL 错误</h3></div>
-    <span class="label">现象</span>
+    <span class="label">现象（以 A1 / 2581.html 实测为例）</span>
     <ol class="fix">
       <li>单篇文章页<b>没有</b> &lt;link rel="canonical"&gt;；</li>
-      <li>JSON-LD 中 <b>mainEntityOfPage.@id</b> 写的是 <b>https://www.piesat.cn/blog/sar-radar-principle</b>（不存在的路径），而文章真实 URL 是 <b>https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html</b>。</li>
+      <li>JSON-LD 中 <b>mainEntityOfPage.@id</b> 写的是 <b>https://www.piesat.cn/blog/sar-radar-principle</b>（不存在的路径），文章真实 URL 是 <b>https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html</b>；</li>
+      <li>JSON-LD 中 <b>image</b> 为相对路径 /uploads/1/image/public/202608/...jpg。</li>
     </ol>
     <span class="label">影响</span>
-    <p>搜索引擎收到一个错误 / 缺失的规范地址信号，无法正确识别页面的权威 URL。</p>
-    <span class="label">修复</span>
-    <p>单篇加 canonical 指向真实 URL；JSON-LD 的 mainEntityOfPage.@id 与 image（当前为相对路径 /uploads/...）改为绝对 URL。</p>
+    <p>搜索引擎收到一个错误 / 缺失的规范地址信号，无法正确识别页面的权威 URL；图片信号不完整。</p>
+    <span class="label">修复（可执行方案，以 A1 为例）</span>
+    <p>① 在 &lt;head&gt; 加 canonical：</p>
+    <pre>&lt;link rel="canonical" href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html" /&gt;</pre>
+    <p>② JSON-LD 两处改为真实 / 绝对 URL：</p>
+    <pre>"mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html" },
+"image": "https://www.piesat.cn/uploads/1/image/public/202608/20260810154831_gr1xeyjd57.jpg"</pre>
+    <p class="note">canonical 与 mainEntityOfPage.@id 统一指向真实 URL .../bloginfo/2581.html；image 由相对路径补全为绝对 URL（加 https://www.piesat.cn 前缀）。其余 6 篇同理，替换为各自的 bloginfo/XXXX.html 与图片路径。</p>
   </div>
 
   <div class="problem">
     <div class="problem-head"><span class="badge p1">P1 · 重要</span><h3>datePublished 日期错误</h3></div>
     <span class="label">现象</span>
-    <p>JSON-LD 的 <b>datePublished / dateModified</b> 为 <b>2026-07-15</b>，与文章实际发布（2026-08）不符。</p>
+    <p>JSON-LD 的 <b>datePublished / dateModified</b> 被写死为 <b>2026-07-15</b>，与文章实际发布（2026-08）不符。</p>
     <span class="label">影响</span>
-    <p>时效性信号错乱。</p>
-    <span class="label">修复</span>
-    <p>改为真实发布日期。</p>
+    <p>时效性信号错乱，影响搜索引擎对内容新鲜度的判断。</p>
+    <span class="label">修复（可执行方案）</span>
+    <ol class="fix">
+      <li>格式：ISO 8601 <b>YYYY-MM-DD</b>；<b>datePublished</b> = 该篇真实发布日，<b>dateModified</b> = 最近一次修改日。</li>
+      <li>修正示例（A1，真实发布约 2026-08-10，由图片时间戳 <b>20260810</b> 佐证）：</li>
+    </ol>
+    <pre>"datePublished": "2026-08-10",
+"dateModified": "2026-08-10"</pre>
+    <p class="note">登录 CMS 后台导出每篇文章的真实发布时间，逐篇替换 JSON-LD 里写死的 2026-07-15（7 篇大致分布在 08-10 至 08-28）。</p>
   </div>
 
   <div class="problem">
