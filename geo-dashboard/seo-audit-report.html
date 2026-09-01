@@ -206,11 +206,11 @@ Sitemap: https://www.piesat.cn/sitemap.xml</pre>
     <span class="label">修复（可执行方案）</span>
     <ol class="fix">
       <li>格式：ISO 8601 <b>YYYY-MM-DD</b>；<b>datePublished</b> = 该篇真实发布日，<b>dateModified</b> = 最近一次修改日。</li>
-      <li>修正示例（A1，真实发布约 2026-08-10，由图片时间戳 <b>20260810</b> 佐证）：</li>
+      <li>修正示例（A1，真实发布日期 2026-08-05，经确认）：</li>
     </ol>
-    <pre>"datePublished": "2026-08-10",
+    <pre>"datePublished": "2026-08-05",
 "dateModified": "2026-08-10"</pre>
-    <p class="note">登录 CMS 后台导出每篇文章的真实发布时间，逐篇替换 JSON-LD 里写死的 2026-07-15（7 篇大致分布在 08-10 至 08-28）。</p>
+    <p class="note">datePublished 用真实发布日期 08-05；dateModified 用最近一次修改日——A1 图片后经修改、于 08-10 重新部署到官网，故填 08-10。注意：不能用图片文件名时间戳反推发布日期，图片可能后改 / 重传，须以 CMS 后台实际发布时间为准。登录 CMS 后台导出每篇真实发布时间，逐篇替换写死的 2026-07-15（7 篇大致分布在 08-05 至 08-28）。</p>
   </div>
 
   <div class="problem">
