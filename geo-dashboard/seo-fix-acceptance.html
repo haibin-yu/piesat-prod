@@ -58,7 +58,6 @@
   th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
   th { font-weight: 600; color: var(--ink-2); font-size: 13px; background: #fafbfc; white-space: nowrap; }
   td.ok { color: var(--ok); font-weight: 500; }
-  td.bad { color: var(--p0); font-weight: 500; }
   tr:last-child td { border-bottom: none; }
 
   .badge {
@@ -69,9 +68,7 @@
   .badge.p1 { background: var(--p1-bg); color: var(--p1); }
   .badge.p2 { background: var(--p2-bg); color: var(--p2); }
   .badge.fix { background: var(--ok-bg); color: var(--ok); }
-  .badge.part { background: var(--p1-bg); color: var(--p1); }
-  .badge.miss { background: var(--p0-bg); color: var(--p0); }
-  .badge.regress { background: var(--p0-bg); color: var(--p0); }
+  .badge.opt { background: var(--p2-bg); color: var(--p2); }
 
   .problem {
     border: 1px solid var(--line-2);
@@ -81,7 +78,6 @@
   }
   .problem-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
   .problem-head h3 { margin: 0; font-size: 16px; font-weight: 650; }
-  .problem .label { display: block; font-size: 12px; color: var(--ink-3); margin: 14px 0 4px; letter-spacing: .03em; }
   .problem p { margin: 4px 0 0; font-size: 14px; color: var(--ink-2); }
   .problem p b { color: var(--ink); }
 
@@ -111,12 +107,12 @@
 
   .note { font-size: 13px; color: var(--ink-3); border-left: 3px solid var(--line-2); padding-left: 14px; margin: 10px 0; }
   .callout {
-    background: var(--p0-bg); border-left: 3px solid var(--p0);
+    background: var(--ok-bg); border-left: 3px solid var(--ok);
     padding: 18px 22px; border-radius: 0 8px 8px 0; margin: 16px 0;
   }
-  .callout b { color: var(--p0); }
-  .callout.ok-c { background: var(--ok-bg); border-left-color: var(--ok); }
-  .callout.ok-c b { color: var(--ok); }
+  .callout b { color: var(--ok); }
+  .callout.warn { background: var(--p2-bg); border-left-color: var(--p2); }
+  .callout.warn b { color: var(--p2); }
 
   .footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); }
 </style>
@@ -125,20 +121,20 @@
 <div class="wrap">
 
   <header>
-    <div class="kicker">Acceptance Feedback · v3</div>
+    <div class="kicker">Acceptance Feedback · v4 · Final</div>
     <h1>航天宏图官网技术博客 · SEO 修复验收反馈</h1>
     <div class="meta">
-      <span>验收日期：2026-09-01（第三轮复验）</span>
+      <span>验收日期：2026-09-01（第四轮复验 · 最终通过）</span>
       <span>依据：《SEO 排查报告》（2026-08-31）</span>
       <span>方式：抓取线上页面原始 HTML 逐项核对</span>
     </div>
   </header>
 
   <h2>一、验收结论</h2>
-  <p class="lead">针对第二轮反馈（v2）处理后的复验：<b>sitemap 前缀回归已回滚、JSON-LD @id 已修正</b>，5 个原始问题中 <b>4 项已修复到位</b>。但本轮引入 <b>1 项新回归</b>——robots.txt 的图片屏蔽规则在回滚 sitemap 时被连带冲掉，又回到了屏蔽状态。</p>
+  <p class="lead"><b>5 个原始问题全部验收通过。</b>第四轮复验确认 robots.txt 图片屏蔽规则已删除，sitemap 前缀、JSON-LD @id、日期字段、列表页 SEO 均保持正确，<b>无连带回归</b>。SEO 技术配置层面的修复闭环完成。</p>
 
   <div class="callout">
-    <b>核心判断</b>：本轮处理方向正确、绝大部分已到位，只剩 <b>1 项需再退</b>：robots.txt 重新删除 <code>/uploads/</code> 与 <code>*.jpg$ / *.png$ / *.gif$</code> 四条图片屏蔽规则（此修复在 v2 已做过，本轮被 sitemap 回滚连带覆盖，属重复劳动）。
+    <b>最终结论</b>：5 / 5 项修复到位，无需再退。后续进入「收录观察期」——修复验收通过 ≠ 百度立刻收录，需等待百度爬虫重新抓取 sitemap 与页面，建议主动推送 + 持续监测收录变化。
   </div>
 
   <h2>二、验收总表</h2>
@@ -151,19 +147,19 @@
         <td>1</td><td><span class="badge p0">P0</span></td>
         <td>sitemap 缺博客</td>
         <td><span class="badge fix">已修复</span></td>
-        <td class="ok">博客 7 篇已入 sitemap，且 URL 前缀已回滚为 /website/cn/pages/（1933 条全正确）</td>
+        <td class="ok">博客 7 篇已入 sitemap，1933 条 URL 前缀全部正确（/website/cn/pages/）</td>
       </tr>
       <tr>
         <td>2</td><td><span class="badge p0">P0</span></td>
         <td>robots 屏蔽图片</td>
-        <td><span class="badge regress">回归（需再退）</span></td>
-        <td class="bad">v2 已删，本轮被 sitemap 回滚连带覆盖，图片屏蔽规则又回来了</td>
+        <td><span class="badge fix">已修复</span></td>
+        <td class="ok">/uploads/ 与 jpg/png/gif 规则已删除，仅保留 /admin/ /api/ *.pdf$</td>
       </tr>
       <tr>
         <td>3</td><td><span class="badge p1">P1</span></td>
         <td>canonical 缺失 + JSON-LD URL 错</td>
         <td><span class="badge fix">已修复</span></td>
-        <td class="ok">canonical ✅、image ✅、@id 已改为正确路径（与 canonical 一致）</td>
+        <td class="ok">canonical / image / @id 全部正确，@id 与 canonical 一致</td>
       </tr>
       <tr>
         <td>4</td><td><span class="badge p1">P1</span></td>
@@ -180,128 +176,86 @@
     </tbody>
   </table>
 
-  <h2>三、逐项证据</h2>
+  <h2>三、逐项最终确认</h2>
 
   <div class="problem">
-    <div class="problem-head"><span class="badge fix">已修复</span><span class="badge p0">P0 · 致命</span><h3>① sitemap 前缀回归已回滚，博客已正确纳入</h3></div>
-    <p>复抓 <b>sitemap.xml</b>（2026-09-01），URL 前缀已从上一轮的 <code>/cn/</code> 回滚为 <code>/website/cn/pages/</code>，域名统一 <code>www.piesat.cn</code>：</p>
+    <div class="problem-head"><span class="badge fix">已修复</span><span class="badge p0">P0</span><h3>① sitemap：博客 7 篇已纳入，前缀正确</h3></div>
     <div class="evidence">
-      <div class="evidence-title">抓取原文 · sitemap.xml 前缀分布与博客条目</div>
-      <pre>URL 总数：1933（全部 /website 前缀，无 /cn/ 残留）
-博客条目（7 篇正式文章 + 列表页 + 目录页）：
-<span class="ok-line">https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html</span>
-<span class="ok-line">https://www.piesat.cn/website/cn/pages/blog/bloginfo/2631.html</span>
-<span class="ok-line">https://www.piesat.cn/website/cn/pages/blog/bloginfo/2641.html</span>
-<span class="ok-line">https://www.piesat.cn/website/cn/pages/blog/bloginfo/2671.html</span>
-<span class="ok-line">https://www.piesat.cn/website/cn/pages/blog/bloginfo/2687.html</span>
-<span class="ok-line">https://www.piesat.cn/website/cn/pages/blog/bloginfo/2688.html</span>
-<span class="ok-line">https://www.piesat.cn/website/cn/pages/blog/bloginfo/2691.html</span>
-https://www.piesat.cn/website/cn/pages/blog/bloginfo/index.html
-https://www.piesat.cn/website/cn/pages/blog/index.html</pre>
+      <div class="evidence-title">抓取原文 · sitemap.xml（2026-09-01）</div>
+      <pre>URL 总数：1933（全部 /website 前缀，0 条 /cn/ 残留）
+博客文章 7 篇：2581 / 2631 / 2641 / 2671 / 2687 / 2688 / 2691
+样例：<span class="ok-line">https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html</span>（实测 HTTP 200）</pre>
     </div>
-    <p class="note">上一轮的回归（1891 条 /cn/ 前缀全部 302）已消除，当前 sitemap 的 1933 条 URL 全部指向真实可访问的 /website/cn/pages/ 路径，博客 7 篇完整纳入。</p>
   </div>
 
   <div class="problem">
-    <div class="problem-head"><span class="badge regress">回归 · 需再退</span><span class="badge p0">P0 · 致命</span><h3>② robots.txt 图片屏蔽规则又被带回</h3></div>
-    <p>复抓 <b>robots.txt</b>（2026-09-01，www 与裸域交叉确认），图片屏蔽规则回来了：</p>
+    <div class="problem-head"><span class="badge fix">已修复</span><span class="badge p0">P0</span><h3>② robots.txt：图片屏蔽规则已删除</h3></div>
     <div class="evidence">
-      <div class="evidence-title">抓取原文 · robots.txt（当前）</div>
+      <div class="evidence-title">抓取原文 · robots.txt（www 与裸域一致）</div>
       <pre>User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-<span class="bad-line">Disallow: /uploads/</span>
 Disallow: *.pdf$
-<span class="bad-line">Disallow: *.jpg$</span>
-<span class="bad-line">Disallow: *.png$</span>
-<span class="bad-line">Disallow: *.gif$</span>
 
 Sitemap: https://www.piesat.cn/sitemap.xml</pre>
     </div>
-    <p>对照 v2 验收时的 robots.txt（已正确删掉图片规则）：</p>
-    <div class="evidence">
-      <div class="evidence-title">v2 时（正确）→ 本轮（回归）</div>
-      <pre><span class="muted">v2 时：Disallow: /admin/ · /api/ · *.pdf$   （无 /uploads/、无图片规则）✅</span>
-<span class="bad-line">本轮：/uploads/ + *.jpg$ + *.png$ + *.gif$  全部回来了 ❌</span></pre>
-    </div>
-    <p class="note">推断：客户回滚 sitemap 时，用旧的站点根目录配置快照一起覆盖了 robots.txt，把 v2 已完成的「放开图片抓取」连带撤销。需重新删除四条图片屏蔽规则。</p>
+    <p class="note">四条图片屏蔽规则（/uploads/、*.jpg$、*.png$、*.gif$）已全部删除，与报告「改后」方案一致。</p>
   </div>
 
   <div class="problem">
-    <div class="problem-head"><span class="badge fix">已修复</span><span class="badge p1">P1 · 重要</span><h3>③ canonical 与 JSON-LD 已全部修正</h3></div>
-    <p>抓取文章页 <b>2581.html</b>（2026-09-01）：</p>
+    <div class="problem-head"><span class="badge fix">已修复</span><span class="badge p1">P1</span><h3>③ canonical 与 JSON-LD 全部正确</h3></div>
     <div class="evidence">
-      <div class="evidence-title">抓取原文 · 2581.html 的 canonical 与 JSON-LD</div>
-      <pre><span class="ok-line">✅ canonical</span>
-&lt;link rel="canonical" href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html" /&gt;
-
-<span class="ok-line">✅ image（绝对 URL）</span>
-"image": "https://www.piesat.cn/uploads/1/image/public/202608/20260810154831_gr1xeyjd57.jpg"
-
-<span class="ok-line">✅ mainEntityOfPage.@id（已改为真实路径，与 canonical 一致）</span>
-"@id": "https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html"</pre>
+      <div class="evidence-title">抓取原文 · 2581.html</div>
+      <pre><span class="ok-line">✅ canonical</span>：https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html
+<span class="ok-line">✅ image</span>：https://www.piesat.cn/uploads/1/image/public/202608/20260810154831_gr1xeyjd57.jpg
+<span class="ok-line">✅ @id</span>：https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html（与 canonical 一致）</pre>
     </div>
-    <p class="note">上一轮的 @id 错误（/blog/bloginfo/2581.html 302 跳首页）已修正，@id 与 canonical 统一指向真实 URL。</p>
   </div>
 
   <div class="problem">
-    <div class="problem-head"><span class="badge fix">已修复</span><span class="badge p1">P1 · 重要</span><h3>④ datePublished 已修正为真实发布日期</h3></div>
+    <div class="problem-head"><span class="badge fix">已修复</span><span class="badge p1">P1</span><h3>④ datePublished 日期正确</h3></div>
     <div class="evidence">
-      <div class="evidence-title">抓取原文 · 2581.html 的日期字段</div>
-      <pre><span class="ok-line">✅ datePublished: "2026-08-05"</span>  （原写死 2026-07-15，已改正）
+      <div class="evidence-title">抓取原文 · 2581.html 日期字段</div>
+      <pre><span class="ok-line">✅ datePublished: "2026-08-05"</span>
    dateModified : "2026-08-05"</pre>
     </div>
-    <p class="note">核心问题（写死 07-15）已解决。小差异：dateModified 填 08-05（报告建议 08-10），不影响主要结论，可后续顺手调整。</p>
   </div>
 
   <div class="problem">
-    <div class="problem-head"><span class="badge fix">已修复</span><span class="badge p2">P2 · 建议</span><h3>⑤ 博客列表页 SEO 已完整补齐</h3></div>
+    <div class="problem-head"><span class="badge fix">已修复</span><span class="badge p2">P2</span><h3>⑤ 博客列表页 SEO 完整</h3></div>
     <div class="evidence">
-      <div class="evidence-title">抓取原文 · blog/index.html 的 SEO 元素</div>
+      <div class="evidence-title">抓取原文 · blog/index.html</div>
       <pre><span class="ok-line">✅ title</span>：技术博客 - 卫星遥感 · SAR · 女娲星座 - 航天宏图信息技术股份有限公司
-<span class="ok-line">✅ meta description</span>（已添加）
-<span class="ok-line">✅ meta keywords</span>（已添加）
+<span class="ok-line">✅ meta description / keywords</span>（已添加）
 <span class="ok-line">✅ canonical</span>（已添加）
 <span class="ok-line">✅ JSON-LD</span>：@type "Blog" + "ItemList"（已添加）</pre>
     </div>
   </div>
 
-  <h2>四、测试文章 2621 说明</h2>
-  <p>客户发布的测试文章 <b>2621</b>（复制 A1 内容）在本轮已<b>从 sitemap 中撤下</b>——当前 sitemap 的博客清单为正式 7 篇，不含 2621。但该文仍可访问，且标题残留问题未清理：</p>
-  <div class="evidence">
-    <div class="evidence-title">测试文章 2621 现状</div>
-    <pre>sitemap 中：<span class="muted">已移除（不再列入博客清单）</span>
-页面仍可访问：/website/cn/pages/blog/bloginfo/2621.html → 200
-title 字段：<span class="bad-line">「雷达卫星为什么能穿透云层？SAR成像原理三分钟看懂1」</span>（标题末尾多 "1"）
-headline（JSON-LD）：「雷达卫星为什么能穿透云层？SAR成像原理三分钟看懂」（无 "1"）</pre>
-  </div>
-  <p class="note">该文若为纯测试稿，建议直接下线；若需保留，正式发布前把标题末尾的 "1" 删掉。</p>
-
-  <h2>五、退回要求（仅剩 1 项）</h2>
-  <div class="callout">
-    <p style="margin:0;">5 个原始问题中 <b>4 项已验收通过</b>，仅 <b>robots.txt 一项需重新处理</b>。</p>
+  <h2>四、可选项（不阻塞验收，建议顺手处理）</h2>
+  <div class="callout warn">
+    <p style="margin:0;">以下 2 项<b>不影响验收结论</b>，属可后续优化的细节。</p>
   </div>
   <div class="evidence">
-    <div class="evidence-title">给建站方的一句话需求</div>
-    <pre>robots.txt 重新删除四条图片屏蔽规则（此项在上一轮已修过，被
-sitemap 回滚连带覆盖，请再次处理，并注意以后回滚 sitemap 时不要
-一起覆盖 robots.txt）：
+    <div class="evidence-title">可选项清单</div>
+    <pre><span class="muted">1. 测试文章 2621：已从 sitemap 撤下（正式 7 篇完整），但页面仍可访问、
+   标题末尾残留 "1"（「…三分钟看懂1」）。纯测试稿建议直接下线；
+   若需保留，正式发布前删掉标题末尾 "1"。
 
-  Disallow: /uploads/
-  Disallow: *.jpg$
-  Disallow: *.png$
-  Disallow: *.gif$
-
-删除后 robots.txt 应保留：
-  Disallow: /admin/
-  Disallow: /api/
-  Disallow: *.pdf$</pre>
+2. dateModified 填 08-05，报告建议填「最近一次修改日 08-10」，
+   与 datePublished 相同略欠精确，可后续按实际修改日补正。</span></pre>
   </div>
-  <p class="note">已验收通过、无需再动的项：sitemap（①）、canonical/JSON-LD（③）、datePublished（④）、博客列表页 SEO（⑤）。</p>
 
-  <div class="footer">航天宏图 GEO 监测项目 · 验收反馈 · 2026-09-01（v3）</div>
+  <h2>五、后续建议（收录观察期）</h2>
+  <ol style="margin:8px 0 0;padding-left:20px;font-size:14px;color:var(--ink-2);line-height:1.9;">
+    <li><b>主动推送</b>：在百度站长平台把 sitemap 地址重新提交，并调用主动推送 API，加速百度重新抓取。</li>
+    <li><b>监测收录</b>：7 篇博客文章此前仅 2 篇被收录（A4 女娲星座组网 / B2 海洋监测），修复后建议每隔 1–2 周用 site: 实测收录变化。</li>
+    <li><b>配置隔离</b>：提醒建站方，sitemap 与 robots.txt 虽同处站点根目录，但应各自独立维护，避免「回滚一个连带覆盖另一个」再次发生。</li>
+  </ol>
+
+  <div class="footer">航天宏图 GEO 监测项目 · 验收反馈 · 2026-09-01（v4 · 最终通过）</div>
 </div>
 </body>
 </html>
