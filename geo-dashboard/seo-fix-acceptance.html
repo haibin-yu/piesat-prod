@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>航天宏图官网技术博客 · SEO 修复验收反馈</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1f2328;
+    --ink-2: #4b5563;
+    --ink-3: #6b7280;
+    --line: #eceff3;
+    --line-2: #e3e7ec;
+    --accent: #3b5bdb;
+    --accent-soft: #eef2ff;
+    --p0: #c0392b;
+    --p0-bg: #fdf0ef;
+    --p1: #d97706;
+    --p1-bg: #fdf6ec;
+    --p2: #b58900;
+    --p2-bg: #fcf8ec;
+    --ok: #2f9e44;
+    --ok-bg: #e6f7ec;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 56px 28px 88px; }
+
+  header { border-bottom: 1px solid var(--line); padding-bottom: 28px; margin-bottom: 40px; }
+  .kicker { font-size: 13px; letter-spacing: .12em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+  h1 { font-size: 26px; font-weight: 700; margin: 0 0 12px; letter-spacing: .01em; }
+  .meta { font-size: 14px; color: var(--ink-3); }
+  .meta span + span::before { content: " · "; }
+
+  h2 { font-size: 19px; font-weight: 650; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  h3 { font-size: 15px; font-weight: 650; margin: 24px 0 10px; }
+
+  .lead {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 20px 22px;
+    border-radius: 0 8px 8px 0;
+    font-size: 15px;
+    color: var(--ink);
+    margin: 8px 0 0;
+  }
+  .lead b { color: var(--accent); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 8px 0; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-weight: 600; color: var(--ink-2); font-size: 13px; background: #fafbfc; white-space: nowrap; }
+  td.ok { color: var(--ok); font-weight: 500; }
+  td.bad { color: var(--p0); font-weight: 500; }
+  tr:last-child td { border-bottom: none; }
+
+  .badge {
+    font-size: 12px; font-weight: 700; letter-spacing: .04em;
+    padding: 3px 10px; border-radius: 20px; white-space: nowrap;
+  }
+  .badge.p0 { background: var(--p0-bg); color: var(--p0); }
+  .badge.p1 { background: var(--p1-bg); color: var(--p1); }
+  .badge.p2 { background: var(--p2-bg); color: var(--p2); }
+  .badge.fix { background: var(--ok-bg); color: var(--ok); }
+  .badge.part { background: var(--p1-bg); color: var(--p1); }
+  .badge.miss { background: var(--p0-bg); color: var(--p0); }
+
+  .problem {
+    border: 1px solid var(--line-2);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin: 18px 0;
+  }
+  .problem-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .problem-head h3 { margin: 0; font-size: 16px; font-weight: 650; }
+  .problem .label { display: block; font-size: 12px; color: var(--ink-3); margin: 14px 0 4px; letter-spacing: .03em; }
+  .problem p { margin: 4px 0 0; font-size: 14px; color: var(--ink-2); }
+  .problem p b { color: var(--ink); }
+
+  .evidence {
+    border: 1px solid var(--line-2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 14px 0;
+  }
+  .evidence-title {
+    background: #fafbfc;
+    padding: 8px 16px;
+    font-size: 12px;
+    color: var(--ink-3);
+    letter-spacing: .03em;
+    border-bottom: 1px solid var(--line);
+  }
+  .evidence pre {
+    margin: 0; border: none; border-radius: 0;
+    background: #f7f8fa; padding: 14px 18px;
+    font-size: 13px; line-height: 1.7; overflow-x: auto;
+    font-family: "SF Mono", "Menlo", "Consolas", monospace; color: #333;
+  }
+  .bad-line { color: var(--p0); font-weight: 700; }
+  .ok-line { color: var(--ok); font-weight: 700; }
+  .muted { color: var(--ink-3); }
+
+  .note { font-size: 13px; color: var(--ink-3); border-left: 3px solid var(--line-2); padding-left: 14px; margin: 10px 0; }
+  .callout {
+    background: var(--p0-bg); border-left: 3px solid var(--p0);
+    padding: 18px 22px; border-radius: 0 8px 8px 0; margin: 16px 0;
+  }
+  .callout b { color: var(--p0); }
+
+  .footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">Acceptance Feedback</div>
+    <h1>航天宏图官网技术博客 · SEO 修复验收反馈</h1>
+    <div class="meta">
+      <span>验收日期：2026-09-01</span>
+      <span>依据：《SEO 排查报告》（2026-08-31）</span>
+      <span>方式：抓取线上页面原始 HTML 逐项核对</span>
+    </div>
+  </header>
+
+  <h2>一、验收结论</h2>
+  <p class="lead">对《SEO 排查报告》列出的 <b>5 项修复任务</b>逐项验收，结果：<b>2 项已完成、1 项部分完成、2 项 P0 致命项未修复</b>。已完成的部分集中在 CMS 模板层（文章页 / 列表页）；而决定百度收录的两个站点级配置文件（sitemap.xml / robots.txt）<b>一字未动</b>。</p>
+
+  <div class="callout">
+    <b>核心判断</b>：本次修复只改了「页面内 SEO」（面子），没动「站点收录配置」（根子）。而 sitemap 未收录博客、robots 屏蔽图片，正是报告里「博客在百度搜不到」的<b>技术根因</b>——这两个不修，文章页 / 列表页改得再好，博客依然搜不到。
+  </div>
+
+  <h2>二、验收总表</h2>
+  <table>
+    <thead>
+      <tr><th>#</th><th>优先级</th><th>问题</th><th>验收状态</th><th>一句话结论</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td><td><span class="badge p0">P0</span></td>
+        <td>sitemap 缺博客</td>
+        <td><span class="badge miss">未修复</span></td>
+        <td class="bad">sitemap.xml 仍 1058 个 URL，0 个博客条目，连 "blog" 字样都没有</td>
+      </tr>
+      <tr>
+        <td>2</td><td><span class="badge p0">P0</span></td>
+        <td>robots 屏蔽图片</td>
+        <td><span class="badge miss">未修复</span></td>
+        <td class="bad">robots.txt 原文一字未动，/uploads/ 与 jpg/png/gif 规则全在</td>
+      </tr>
+      <tr>
+        <td>3</td><td><span class="badge p1">P1</span></td>
+        <td>canonical 缺失 + JSON-LD URL 错</td>
+        <td><span class="badge part">部分修复</span></td>
+        <td class="bad">canonical ✅、image ✅；但 @id 仍指向无效路径（302 跳回首页）</td>
+      </tr>
+      <tr>
+        <td>4</td><td><span class="badge p1">P1</span></td>
+        <td>datePublished 日期错误</td>
+        <td><span class="badge fix">已修复</span></td>
+        <td class="ok">2026-07-15 → 2026-08-05</td>
+      </tr>
+      <tr>
+        <td>5</td><td><span class="badge p2">P2</span></td>
+        <td>博客列表页 SEO 缺失</td>
+        <td><span class="badge fix">已修复</span></td>
+        <td class="ok">title / description / keywords / canonical / JSON-LD 全部到位</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>三、逐项证据</h2>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge miss">未修复</span><span class="badge p0">P0 · 致命</span><h3>① sitemap.xml 仍未收录博客文章</h3></div>
+    <p>抓取 <b>https://www.piesat.cn/sitemap.xml</b>（2026-09-01）结果：</p>
+    <div class="evidence">
+      <div class="evidence-title">抓取统计 · sitemap.xml</div>
+      <pre>&lt;url&gt; 总数：<span class="bad-line">1058</span>（与 8-31 排查时完全一致，未新增任何条目）
+含 "blog" 的 &lt;loc&gt; 数：<span class="bad-line">0</span>
+含 "bloginfo" 的文章条目：<span class="bad-line">0</span>
+
+—— 抽样 &lt;loc&gt;（首 5 条，全是产品页）——
+https://piesat.cn/website/cn/pages/product/software/pie-basic.html
+https://piesat.cn/website/cn/pages/product/software/pie-ortho.html
+https://piesat.cn/website/cn/pages/product/software/pie-sar.html
+https://piesat.cn/website/cn/pages/product/software/pie-hyp.html
+https://piesat.cn/website/cn/pages/product/software/pie-uav.html
+
+—— 抽样 &lt;loc&gt;（末 3 条，全是新闻动态）——
+https://piesat.cn/website/cn/pages/news/productDynamics/1155.html
+https://piesat.cn/website/cn/pages/news/productDynamics/1156.html
+https://piesat.cn/website/cn/pages/news/productDynamics/1157.html</pre>
+    </div>
+    <p class="note">报告的修复要求是「把 7 条博客 &lt;url&gt; 追加进 sitemap」。当前 sitemap 内没有任何 blog / bloginfo 条目，说明该任务完全未执行。</p>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge miss">未修复</span><span class="badge p0">P0 · 致命</span><h3>② robots.txt 仍屏蔽所有文章图片</h3></div>
+    <p>抓取 <b>https://www.piesat.cn/robots.txt</b>（2026-09-01，www 与裸域结果一致）全文如下，与报告「改前」完全一致：</p>
+    <div class="evidence">
+      <div class="evidence-title">抓取原文 · robots.txt</div>
+      <pre>User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+<span class="bad-line">Disallow: /uploads/</span>
+Disallow: *.pdf$
+<span class="bad-line">Disallow: *.jpg$</span>
+<span class="bad-line">Disallow: *.png$</span>
+<span class="bad-line">Disallow: *.gif$</span>
+
+Sitemap: https://www.piesat.cn/sitemap.xml</pre>
+    </div>
+    <p class="note">报告的修复要求是「删除 <code>/uploads/</code> 与 <code>*.jpg$ / *.png$ / *.gif$</code> 四条」——这四条（上图标红）仍在原文中，未做任何删除。</p>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge part">部分修复</span><span class="badge p1">P1 · 重要</span><h3>③ canonical 已加、image 已绝对化，但 @id 仍是无效路径</h3></div>
+    <p>抓取文章页 <b>2581.html</b>（2026-09-01）的 head 与 JSON-LD：</p>
+    <div class="evidence">
+      <div class="evidence-title">抓取原文 · 2581.html 的 canonical 与 JSON-LD</div>
+      <pre><span class="ok-line">✅ canonical（已正确添加）</span>
+&lt;link rel="canonical" href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html" /&gt;
+
+<span class="ok-line">✅ image（已补全为绝对 URL）</span>
+"image": "https://www.piesat.cn/uploads/1/image/public/202608/20260810154831_gr1xeyjd57.jpg"
+
+<span class="bad-line">❌ mainEntityOfPage.@id（仍是错误路径）</span>
+"mainEntityOfPage": { "@type": "WebPage",
+  "@id": "https://www.piesat.cn/blog/bloginfo/2581.html" }</pre>
+    </div>
+    <p>关键：<code>@id</code> 从「<code>/blog/sar-radar-principle</code>」改成了「<code>/blog/bloginfo/2581.html</code>」，只把文章 slug 换成了数字 ID，<b>路径结构 <code>/blog/</code> 仍是错的</b>。实测：</p>
+    <div class="evidence">
+      <div class="evidence-title">实测 · @id 指向的路径是否可达</div>
+      <pre>正确路径（真实 URL）：
+  /website/cn/pages/blog/bloginfo/2581.html  →  HTTP 200 ✅
+
+@id 当前指向的路径：
+  /blog/bloginfo/2581.html  →  HTTP 302 →  https://www.piesat.cn/  <span class="bad-line">（跳回首页）</span></pre>
+    </div>
+    <p class="note">该 @id 路径 302 跳回官网首页，并非真实文章页，说明规范地址信号仍未指向正确 URL。报告要求 @id 与 canonical 统一为 <code>https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html</code>。</p>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge fix">已修复</span><span class="badge p1">P1 · 重要</span><h3>④ datePublished 已修正为真实发布日期</h3></div>
+    <p>抓取 2581.html 的 JSON-LD：</p>
+    <div class="evidence">
+      <div class="evidence-title">抓取原文 · 2581.html 的日期字段</div>
+      <pre><span class="ok-line">✅ datePublished: "2026-08-05"</span>  （原写死为 2026-07-15，已改正）
+   dateModified : "2026-08-05"</pre>
+    </div>
+    <p class="note">核心问题（写死 07-15）已解决。仅剩一个小差异：报告建议 dateModified 填「最近一次修改日 08-10」，当前填 08-05 与 datePublished 相同，精确度待确认，但不影响主要结论。</p>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge fix">已修复</span><span class="badge p2">P2 · 建议</span><h3>⑤ 博客列表页 SEO 已完整补齐</h3></div>
+    <p>抓取列表页 <b>blog/index.html</b>（2026-09-01）：</p>
+    <div class="evidence">
+      <div class="evidence-title">抓取原文 · blog/index.html 的 SEO 元素</div>
+      <pre><span class="ok-line">✅ title</span>：技术博客 - 卫星遥感 · SAR · 女娲星座 - 航天宏图信息技术股份有限公司
+<span class="ok-line">✅ meta description</span>（已添加）
+<span class="ok-line">✅ meta keywords</span>（已添加）
+<span class="ok-line">✅ canonical</span>（已添加）
+<span class="ok-line">✅ JSON-LD</span>：@type "Blog" + "ItemList"（已添加）</pre>
+    </div>
+    <p class="note">列表页的五项 SEO 元素（title / description / keywords / canonical / JSON-LD）全部到位，与报告修复方案一致。</p>
+  </div>
+
+  <h2>四、退回要求（请建站方继续修复）</h2>
+  <div class="callout">
+    <p style="margin:0;">需要退回给建站方 2 项 P0 + 1 项 P1 残留，就一句话：</p>
+  </div>
+  <div class="evidence">
+    <div class="evidence-title">给建站方的一句话需求</div>
+    <pre>1. sitemap.xml：把 7 篇博客文章 URL（bloginfo/2581~2691.html）纳入 sitemap，
+   或让 CMS 把「博客」模块加入 sitemap 自动生成规则。
+
+2. robots.txt：删除 Disallow: /uploads/ 和 *.jpg$ / *.png$ / *.gif$ 四条规则。
+
+3. 文章页 JSON-LD：mainEntityOfPage.@id 改为真实路径
+   https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html
+   （其余 6 篇同理），与 canonical 保持一致。</pre>
+  </div>
+  <p class="note">第 1、2 项是站点级配置文件，不归 CMS 后台管，需建站方直接改服务器文件；这是当前博客「在百度搜不到」的直接原因，建议立即处理。第 3 项为 1 周内收尾。</p>
+
+  <div class="footer">航天宏图 GEO 监测项目 · 验收反馈 · 2026-09-01</div>
+</div>
+</body>
+</html>
