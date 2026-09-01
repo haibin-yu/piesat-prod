@@ -182,8 +182,43 @@ Disallow: *.gif$</pre>
     <p>&lt;title&gt; 仅「技术博客」，无 description、keywords、canonical、JSON-LD。</p>
     <span class="label">影响</span>
     <p>博客列表页是博客的入口页，SEO 缺失影响整站权重传递与收录。</p>
-    <span class="label">修复</span>
-    <p>title 改为「技术博客 - 航天宏图信息技术股份有限公司」等含品牌词；补 description 与结构化数据（Blog / ItemList）。</p>
+    <span class="label">修复（可执行方案，直接落地到列表页 /website/cn/pages/blog/index.html）</span>
+    <span class="label">① title（含品牌 + 核心关键词，≤ 32 字）</span>
+    <pre>&lt;title&gt;技术博客 - 卫星遥感 · SAR · 女娲星座 - 航天宏图信息技术股份有限公司&lt;/title&gt;</pre>
+    <span class="label">② meta description（70–120 字，含关键词 + 价值主张）</span>
+    <pre>&lt;meta name="description" content="航天宏图技术博客，专注卫星遥感与 SAR 技术科普。合成孔径雷达成像原理、InSAR 形变监测、水利/海洋/应急监测行业应用，以及女娲星座组网最新进展，用通俗文章讲透卫星遥感。官方原创，持续更新。" /&gt;</pre>
+    <span class="label">③ meta keywords（3–6 个，辅助信号）</span>
+    <pre>&lt;meta name="keywords" content="航天宏图, 卫星遥感, SAR, 女娲星座, InSAR, 技术博客" /&gt;</pre>
+    <span class="label">④ canonical（指向列表页规范地址）</span>
+    <pre>&lt;link rel="canonical" href="https://www.piesat.cn/website/cn/pages/blog/index.html" /&gt;</pre>
+    <span class="label">⑤ JSON-LD 结构化数据（Blog + ItemList，文章按「最新在前」排列）</span>
+    <pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "航天宏图技术博客",
+  "description": "卫星遥感与 SAR 技术科普",
+  "url": "https://www.piesat.cn/website/cn/pages/blog/index.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "航天宏图信息技术股份有限公司",
+    "url": "https://www.piesat.cn/"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "url": "https://www.piesat.cn/website/cn/pages/blog/bloginfo/2691.html", "name": "西藏吉隆泥石流冲断口岸当晚：女娲星座四次成像，锁定堰塞湖" },
+      { "@type": "ListItem", "position": 2, "url": "https://www.piesat.cn/website/cn/pages/blog/bloginfo/2688.html", "name": "卫星遥感如何守护蓝色国土？SAR全天候海洋监测全景" },
+      { "@type": "ListItem", "position": 3, "url": "https://www.piesat.cn/website/cn/pages/blog/bloginfo/2687.html", "name": "为什么需要114颗卫星？女娲星座的组网之路" },
+      { "@type": "ListItem", "position": 4, "url": "https://www.piesat.cn/website/cn/pages/blog/bloginfo/2671.html", "name": "地表怎么“悄悄地”在动？InSAR毫米级形变监测揭秘" },
+      { "@type": "ListItem", "position": 5, "url": "https://www.piesat.cn/website/cn/pages/blog/bloginfo/2641.html", "name": "卫星遥感如何守护江河湖库？SAR全天候水利监测全景" },
+      { "@type": "ListItem", "position": 6, "url": "https://www.piesat.cn/website/cn/pages/blog/bloginfo/2631.html", "name": "SAR卫星能做什么？六大领域应用全景" },
+      { "@type": "ListItem", "position": 7, "url": "https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html", "name": "雷达卫星为什么能穿透云层？SAR成像原理三分钟看懂" }
+    ]
+  }
+}
+&lt;/script&gt;</pre>
+    <p class="note">JSON-LD 的 itemListElement 应由 CMS 动态生成——每发一篇新文章自动插入首位，无需手工维护。title / description / keywords 中的「卫星遥感 / SAR / 女娲星座」对应本博客三类内容方向（原理科普 / 行业应用 / 品牌事实），是搜索用户最可能搜的词。</p>
   </div>
 
   <h2>四、7 篇已上线文章 URL 对照（含百度收录状态）</h2>
