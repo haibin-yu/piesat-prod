@@ -71,6 +71,7 @@
   .badge.fix { background: var(--ok-bg); color: var(--ok); }
   .badge.part { background: var(--p1-bg); color: var(--p1); }
   .badge.miss { background: var(--p0-bg); color: var(--p0); }
+  .badge.regress { background: var(--p0-bg); color: var(--p0); }
 
   .problem {
     border: 1px solid var(--line-2);
@@ -78,7 +79,7 @@
     padding: 22px 24px;
     margin: 18px 0;
   }
-  .problem-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .problem-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
   .problem-head h3 { margin: 0; font-size: 16px; font-weight: 650; }
   .problem .label { display: block; font-size: 12px; color: var(--ink-3); margin: 14px 0 4px; letter-spacing: .03em; }
   .problem p { margin: 4px 0 0; font-size: 14px; color: var(--ink-2); }
@@ -114,6 +115,8 @@
     padding: 18px 22px; border-radius: 0 8px 8px 0; margin: 16px 0;
   }
   .callout b { color: var(--p0); }
+  .callout.ok-c { background: var(--ok-bg); border-left-color: var(--ok); }
+  .callout.ok-c b { color: var(--ok); }
 
   .footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); }
 </style>
@@ -122,20 +125,20 @@
 <div class="wrap">
 
   <header>
-    <div class="kicker">Acceptance Feedback</div>
+    <div class="kicker">Acceptance Feedback · v2</div>
     <h1>航天宏图官网技术博客 · SEO 修复验收反馈</h1>
     <div class="meta">
       <span>验收日期：2026-09-01</span>
       <span>依据：《SEO 排查报告》（2026-08-31）</span>
-      <span>方式：抓取线上页面原始 HTML 逐项核对</span>
+      <span>方式：抓取线上页面原始 HTML 逐项核对（含缓存复核）</span>
     </div>
   </header>
 
   <h2>一、验收结论</h2>
-  <p class="lead">对《SEO 排查报告》列出的 <b>5 项修复任务</b>逐项验收，结果：<b>2 项已完成、1 项部分完成、2 项 P0 致命项未修复</b>。已完成的部分集中在 CMS 模板层（文章页 / 列表页）；而决定百度收录的两个站点级配置文件（sitemap.xml / robots.txt）<b>一字未动</b>。</p>
+  <p class="lead">对《SEO 排查报告》列出的 <b>5 项修复任务</b>复验收，结果：<b>3 项已修复、1 项部分修复、1 项引入新回归</b>。客户本次修复有实质进展（robots 放开图片、sitemap 纳入博客、文章页 / 列表页 SEO 补齐），但 sitemap 在纳入博客的同时，<b>把整站 URL 前缀从 /website/cn/pages/ 改成了未生效的 /cn/</b>，导致 1891 条 URL 全部 302 跳首页——这是比 8-31 更严重的回归。</p>
 
   <div class="callout">
-    <b>核心判断</b>：本次修复只改了「页面内 SEO」（面子），没动「站点收录配置」（根子）。而 sitemap 未收录博客、robots 屏蔽图片，正是报告里「博客在百度搜不到」的<b>技术根因</b>——这两个不修，文章页 / 列表页改得再好，博客依然搜不到。
+    <b>核心判断</b>：robots 与页面内 SEO 已修到位；但 sitemap 的整站 URL 前缀被改错（疑似多语言改版未完成，新路径 /cn/ 路由未上线），当前 sitemap 里 1891 条 URL 全部 302 跳首页，等于整站 sitemap 暂时报废。这是当前最需退回处理的问题，优先级高于其余所有项。
   </div>
 
   <h2>二、验收总表</h2>
@@ -147,14 +150,14 @@
       <tr>
         <td>1</td><td><span class="badge p0">P0</span></td>
         <td>sitemap 缺博客</td>
-        <td><span class="badge miss">未修复</span></td>
-        <td class="bad">sitemap.xml 仍 1058 个 URL，0 个博客条目，连 "blog" 字样都没有</td>
+        <td><span class="badge regress">已纳入 · 有回归</span></td>
+        <td class="bad">博客 8 篇已进 sitemap，但整站 URL 前缀改错（/cn/ 全部 302 跳首页）</td>
       </tr>
       <tr>
         <td>2</td><td><span class="badge p0">P0</span></td>
         <td>robots 屏蔽图片</td>
-        <td><span class="badge miss">未修复</span></td>
-        <td class="bad">robots.txt 原文一字未动，/uploads/ 与 jpg/png/gif 规则全在</td>
+        <td><span class="badge fix">已修复</span></td>
+        <td class="ok">/uploads/ 与 jpg/png/gif 规则已删除</td>
       </tr>
       <tr>
         <td>3</td><td><span class="badge p1">P1</span></td>
@@ -180,48 +183,62 @@
   <h2>三、逐项证据</h2>
 
   <div class="problem">
-    <div class="problem-head"><span class="badge miss">未修复</span><span class="badge p0">P0 · 致命</span><h3>① sitemap.xml 仍未收录博客文章</h3></div>
-    <p>抓取 <b>https://www.piesat.cn/sitemap.xml</b>（2026-09-01）结果：</p>
+    <div class="problem-head"><span class="badge regress">已纳入 · 有回归</span><span class="badge p0">P0 · 致命</span><h3>① sitemap 已纳入博客，但整站 URL 前缀被改错</h3></div>
+    <p>复抓 <b>https://www.piesat.cn/sitemap.xml</b>（2026-09-01，禁缓存），URL 总数从 8-31 的 1058 涨到 <b>1894</b>，博客文章已纳入（8 篇 + 列表页 + 目录页）：</p>
     <div class="evidence">
-      <div class="evidence-title">抓取统计 · sitemap.xml</div>
-      <pre>&lt;url&gt; 总数：<span class="bad-line">1058</span>（与 8-31 排查时完全一致，未新增任何条目）
-含 "blog" 的 &lt;loc&gt; 数：<span class="bad-line">0</span>
-含 "bloginfo" 的文章条目：<span class="bad-line">0</span>
-
-—— 抽样 &lt;loc&gt;（首 5 条，全是产品页）——
-https://piesat.cn/website/cn/pages/product/software/pie-basic.html
-https://piesat.cn/website/cn/pages/product/software/pie-ortho.html
-https://piesat.cn/website/cn/pages/product/software/pie-sar.html
-https://piesat.cn/website/cn/pages/product/software/pie-hyp.html
-https://piesat.cn/website/cn/pages/product/software/pie-uav.html
-
-—— 抽样 &lt;loc&gt;（末 3 条，全是新闻动态）——
-https://piesat.cn/website/cn/pages/news/productDynamics/1155.html
-https://piesat.cn/website/cn/pages/news/productDynamics/1156.html
-https://piesat.cn/website/cn/pages/news/productDynamics/1157.html</pre>
+      <div class="evidence-title">抓取原文 · sitemap.xml 中的博客条目</div>
+      <pre>https://piesat.cn/cn/blog/
+https://piesat.cn/cn/blog/bloginfo/
+<span class="bad-line">https://piesat.cn/cn/blog/bloginfo/2581.html</span>
+<span class="bad-line">https://piesat.cn/cn/blog/bloginfo/2621.html   ← 客户测试文章</span>
+<span class="bad-line">https://piesat.cn/cn/blog/bloginfo/2631.html</span>
+<span class="bad-line">https://piesat.cn/cn/blog/bloginfo/2641.html</span>
+<span class="bad-line">https://piesat.cn/cn/blog/bloginfo/2671.html</span>
+<span class="bad-line">https://piesat.cn/cn/blog/bloginfo/2687.html</span>
+<span class="bad-line">https://piesat.cn/cn/blog/bloginfo/2688.html</span>
+<span class="bad-line">https://piesat.cn/cn/blog/bloginfo/2691.html</span></pre>
     </div>
-    <p class="note">报告的修复要求是「把 7 条博客 &lt;url&gt; 追加进 sitemap」。当前 sitemap 内没有任何 blog / bloginfo 条目，说明该任务完全未执行。</p>
+    <p>博客确实进了 sitemap（这点已修复）。<b>但注意 URL 前缀</b>：从原来的 <code>/website/cn/pages/</code> 变成了 <code>/cn/</code>，而 <code>/cn/</code> 路由未上线——实测：</p>
+    <div class="evidence">
+      <div class="evidence-title">实测 · sitemap 里的 /cn/ 路径全部 302 跳首页</div>
+      <pre><span class="bad-line">/cn                          → 302 → https://www.piesat.cn/</span>
+<span class="bad-line">/cn/blog                     → 302 → https://www.piesat.cn/</span>
+<span class="bad-line">/cn/blog/bloginfo            → 302 → https://www.piesat.cn/</span>
+<span class="bad-line">/cn/blog/bloginfo/2581.html  → 302 → https://www.piesat.cn/</span>
+
+真实仍在服务的旧路径（HTTP 200）：
+/website/cn/pages/product/software/pie-sar.html  → 200
+/website/cn/pages/blog/index.html                → 200
+/website/cn/pages/blog/bloginfo/2581.html        → 200</pre>
+    </div>
+    <div class="evidence">
+      <div class="evidence-title">佐证 · 整站改版观察</div>
+      <pre>sitemap 1894 条 URL 的前缀分布：
+  /cn      1891 条   （全部 302 失效）
+  /en-us   1 条
+  /ksa     1 条
+
+→ 官网正在做多语言改版（中/英/阿），sitemap 已按新结构生成，
+  但 /cn/ 的路由规则尚未上线，导致 1891 条 URL 全部 302。</pre>
+    </div>
+    <p class="note">8-31 时 sitemap 的 1058 条 URL 用的是 <code>/website/cn/pages/</code>（能正常 200），只是缺博客；现在博客加进来了，却把整站前缀一起换成了未生效的 <code>/cn/</code>，等于整站 sitemap 暂时报废。这是<b>本次修复引入的回归</b>，比「缺博客」更严重。</p>
   </div>
 
   <div class="problem">
-    <div class="problem-head"><span class="badge miss">未修复</span><span class="badge p0">P0 · 致命</span><h3>② robots.txt 仍屏蔽所有文章图片</h3></div>
-    <p>抓取 <b>https://www.piesat.cn/robots.txt</b>（2026-09-01，www 与裸域结果一致）全文如下，与报告「改前」完全一致：</p>
+    <div class="problem-head"><span class="badge fix">已修复</span><span class="badge p0">P0 · 致命</span><h3>② robots.txt 已放开图片抓取</h3></div>
+    <p>复抓 <b>https://www.piesat.cn/robots.txt</b>（2026-09-01），图片屏蔽规则已删除：</p>
     <div class="evidence">
-      <div class="evidence-title">抓取原文 · robots.txt</div>
+      <div class="evidence-title">抓取原文 · robots.txt（当前）</div>
       <pre>User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-<span class="bad-line">Disallow: /uploads/</span>
 Disallow: *.pdf$
-<span class="bad-line">Disallow: *.jpg$</span>
-<span class="bad-line">Disallow: *.png$</span>
-<span class="bad-line">Disallow: *.gif$</span>
 
 Sitemap: https://www.piesat.cn/sitemap.xml</pre>
     </div>
-    <p class="note">报告的修复要求是「删除 <code>/uploads/</code> 与 <code>*.jpg$ / *.png$ / *.gif$</code> 四条」——这四条（上图标红）仍在原文中，未做任何删除。</p>
+    <p class="note"><code>/uploads/</code> 与 <code>*.jpg$ / *.png$ / *.gif$</code> 四条已删除，仅保留 <code>/admin/</code>、<code>/api/</code>、<code>*.pdf$</code>——与报告「改后」方案完全一致。</p>
   </div>
 
   <div class="problem">
@@ -248,23 +265,21 @@ Sitemap: https://www.piesat.cn/sitemap.xml</pre>
 @id 当前指向的路径：
   /blog/bloginfo/2581.html  →  HTTP 302 →  https://www.piesat.cn/  <span class="bad-line">（跳回首页）</span></pre>
     </div>
-    <p class="note">该 @id 路径 302 跳回官网首页，并非真实文章页，说明规范地址信号仍未指向正确 URL。报告要求 @id 与 canonical 统一为 <code>https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html</code>。</p>
+    <p class="note">该 @id 路径 302 跳回官网首页，并非真实文章页，规范地址信号仍未指向正确 URL。报告要求 @id 与 canonical 统一为 <code>https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html</code>。</p>
   </div>
 
   <div class="problem">
     <div class="problem-head"><span class="badge fix">已修复</span><span class="badge p1">P1 · 重要</span><h3>④ datePublished 已修正为真实发布日期</h3></div>
-    <p>抓取 2581.html 的 JSON-LD：</p>
     <div class="evidence">
       <div class="evidence-title">抓取原文 · 2581.html 的日期字段</div>
       <pre><span class="ok-line">✅ datePublished: "2026-08-05"</span>  （原写死为 2026-07-15，已改正）
    dateModified : "2026-08-05"</pre>
     </div>
-    <p class="note">核心问题（写死 07-15）已解决。仅剩一个小差异：报告建议 dateModified 填「最近一次修改日 08-10」，当前填 08-05 与 datePublished 相同，精确度待确认，但不影响主要结论。</p>
+    <p class="note">核心问题（写死 07-15）已解决。仅剩小差异：报告建议 dateModified 填「最近一次修改日 08-10」，当前填 08-05 与 datePublished 相同，精确度待确认，不影响主要结论。</p>
   </div>
 
   <div class="problem">
     <div class="problem-head"><span class="badge fix">已修复</span><span class="badge p2">P2 · 建议</span><h3>⑤ 博客列表页 SEO 已完整补齐</h3></div>
-    <p>抓取列表页 <b>blog/index.html</b>（2026-09-01）：</p>
     <div class="evidence">
       <div class="evidence-title">抓取原文 · blog/index.html 的 SEO 元素</div>
       <pre><span class="ok-line">✅ title</span>：技术博客 - 卫星遥感 · SAR · 女娲星座 - 航天宏图信息技术股份有限公司
@@ -273,27 +288,43 @@ Sitemap: https://www.piesat.cn/sitemap.xml</pre>
 <span class="ok-line">✅ canonical</span>（已添加）
 <span class="ok-line">✅ JSON-LD</span>：@type "Blog" + "ItemList"（已添加）</pre>
     </div>
-    <p class="note">列表页的五项 SEO 元素（title / description / keywords / canonical / JSON-LD）全部到位，与报告修复方案一致。</p>
+    <p class="note">列表页五项 SEO 元素全部到位，与报告修复方案一致。</p>
   </div>
 
-  <h2>四、退回要求（请建站方继续修复）</h2>
+  <h2>四、测试文章 2621 说明</h2>
+  <p>客户按报告 8.5 方法（发一篇测试文章 → 到 sitemap 里搜）验证 sitemap 自动生成，<b>操作正确，且确实「搜到了」新文章</b>。但需注意：</p>
+  <div class="evidence">
+    <div class="evidence-title">测试文章 2621 实测</div>
+    <pre>sitemap 中该文 URL：
+  /cn/blog/bloginfo/2621.html  →  302 跳首页 ❌
+
+该文真实可访问路径：
+  /website/cn/pages/blog/bloginfo/2621.html  →  200 ✅
+  标题：「雷达卫星为什么能穿透云层？SAR成像原理三分钟看懂1」
+       （复制 A1 内容，标题末尾多一个 "1"，疑似测试稿未删净）</pre>
+  </div>
+  <p class="note">「在 sitemap 里搜到 URL」≠「URL 有效」——2621 在 sitemap 里的 URL（/cn/ 前缀）一访问就 302 跳首页，搜索引擎照样收录不到。测试文章本身没问题，但它的 URL 和整站一样受 /cn/ 前缀回归影响。</p>
+
+  <h2>五、退回要求（请建站方继续修复）</h2>
   <div class="callout">
-    <p style="margin:0;">需要退回给建站方 2 项 P0 + 1 项 P1 残留，就一句话：</p>
+    <p style="margin:0;">优先级排序：<b>第 1 项（sitemap 前缀回归）最紧急</b>，其余为收尾。</p>
   </div>
   <div class="evidence">
     <div class="evidence-title">给建站方的一句话需求</div>
-    <pre>1. sitemap.xml：把 7 篇博客文章 URL（bloginfo/2581~2691.html）纳入 sitemap，
-   或让 CMS 把「博客」模块加入 sitemap 自动生成规则。
+    <pre>1. 【最紧急】sitemap 的整站 URL 前缀改错：现在全是 /cn/ 前缀且 302 跳首页。
+   要么把多语言改版跑完（/cn/ 能正常返回 200），要么先把 sitemap
+   回滚到 /website/cn/pages/ 旧路径。否则整站 sitemap 都是无效链接，
+   百度收录会断崖式下降。
 
-2. robots.txt：删除 Disallow: /uploads/ 和 *.jpg$ / *.png$ / *.gif$ 四条规则。
-
-3. 文章页 JSON-LD：mainEntityOfPage.@id 改为真实路径
+2. 文章页 JSON-LD：mainEntityOfPage.@id 改为真实路径
    https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html
-   （其余 6 篇同理），与 canonical 保持一致。</pre>
-  </div>
-  <p class="note">第 1、2 项是站点级配置文件，不归 CMS 后台管，需建站方直接改服务器文件；这是当前博客「在百度搜不到」的直接原因，建议立即处理。第 3 项为 1 周内收尾。</p>
+   （其余各篇同理），与 canonical 保持一致。
 
-  <div class="footer">航天宏图 GEO 监测项目 · 验收反馈 · 2026-09-01</div>
+3. （可选）测试文章 2621 标题末尾多了个 "1"，正式发布前删掉。</pre>
+  </div>
+  <p class="note">已修到位、无需再动的项：robots.txt（②）、datePublished（④）、博客列表页 SEO（⑤）。</p>
+
+  <div class="footer">航天宏图 GEO 监测项目 · 验收反馈 · 2026-09-01（v2）</div>
 </div>
 </body>
 </html>
