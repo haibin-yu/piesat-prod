@@ -322,7 +322,7 @@
     {
       "date": "2026-09-01",
       "source": "doubao-api",
-      "summary": "豆包·搜索（搜索API）命中 3/30、方舟DeepSeek 命中 2/30、DeepSeek官方 命中 4/30（最高），Kimi 待接入。三引擎仅「pie-engine 遥感」均命中，命中全为产品/解决方案页，技术博客文章在三引擎中均未被引用。",
+      "summary": "豆包·搜索 命中 3/30、豆包·模型 3/30、方舟DeepSeek 2/30、DeepSeek官方 4/30（最高），Kimi 待接入。命中全为官网产品/官网页，技术博客文章四引擎均未引用。",
       "queries": [
         {
           "id": 1,
@@ -331,11 +331,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -348,11 +352,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -365,11 +373,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -382,11 +394,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -399,11 +415,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -416,11 +436,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -433,11 +457,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -450,11 +478,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -467,11 +499,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -484,11 +520,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -501,11 +541,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -518,11 +562,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -535,11 +583,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -552,11 +604,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -569,11 +625,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -586,14 +646,18 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
-              "found": false,
-              "rank": null
-            },
             "deepseek": {
               "found": true,
               "rank": 2,
               "url": "https://piesat.cn/website/cn/pages/product/software/pie-sar.html"
+            },
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
+              "found": false,
+              "rank": null
             }
           }
         },
@@ -607,14 +671,19 @@
               "authority": "正常权威",
               "url": "https://engine.piesat.cn/download-home"
             },
-            "doubao_model": {
-              "found": false,
-              "rank": null
-            },
             "deepseek": {
               "found": true,
               "rank": 1,
               "url": "https://piesat.cn/website/cn/pages/product/software/pie-basic.html"
+            },
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
+              "found": true,
+              "rank": 1,
+              "url": "https://engine.piesat.cn/download-home"
             }
           }
         },
@@ -628,16 +697,21 @@
               "authority": "正常权威",
               "url": "https://engine.piesat.cn/remote-sensing-processing"
             },
-            "doubao_model": {
+            "deepseek": {
+              "found": true,
+              "rank": 1,
+              "url": "https://www.piesat.cn/website/cn/pages/solution/uav/"
+            },
+            "ark_deepseek": {
               "found": true,
               "rank": 2,
               "source": "PIE-Engine",
               "url": "https://engine.piesat.cn/engine-studio/docs/"
             },
-            "deepseek": {
+            "doubao_model": {
               "found": true,
               "rank": 1,
-              "url": "https://www.piesat.cn/website/cn/pages/solution/uav/"
+              "url": "https://engine.piesat.cn/remote-sensing-processing"
             }
           }
         },
@@ -648,11 +722,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -665,11 +743,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -682,11 +764,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -699,11 +785,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -716,11 +806,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -736,11 +830,15 @@
               "authority": "正常权威",
               "url": "https://www.piesat.cn/website/cn/pages/about/profile.html"
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -753,11 +851,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -770,13 +872,17 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "ark_deepseek": {
               "found": true,
               "rank": 4,
               "source": "航天宏图",
               "url": "https://www.piesat.cn/website/cn/pages/solution/industry/forestry.html"
             },
-            "deepseek": {
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -789,14 +895,18 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
-              "found": false,
-              "rank": null
-            },
             "deepseek": {
               "found": true,
               "rank": 1,
               "url": "https://www.piesat.cn/website/cn/pages/solution/industry/water.html"
+            },
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
+              "found": false,
+              "rank": null
             }
           }
         },
@@ -807,11 +917,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -824,11 +938,15 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
+            "deepseek": {
               "found": false,
               "rank": null
             },
-            "deepseek": {
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
               "found": false,
               "rank": null
             }
@@ -841,13 +959,18 @@
               "found": false,
               "rank": null
             },
-            "doubao_model": {
-              "found": false,
-              "rank": null
-            },
             "deepseek": {
               "found": false,
               "rank": null
+            },
+            "ark_deepseek": {
+              "found": false,
+              "rank": null
+            },
+            "doubao_model": {
+              "found": true,
+              "rank": 2,
+              "url": "https://www.piesat.cn/node/"
             }
           }
         }
