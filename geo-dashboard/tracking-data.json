@@ -322,7 +322,7 @@
     {
       "date": "2026-09-01",
       "source": "doubao-api",
-      "summary": "豆包搜索 API 自动探测 30 词：命中 3/30（10%）。命中：pie 遥感软件 #1、pie-engine 遥感 #1、航天宏图上卫星 #3，均为产品子域页(engine.piesat.cn)/官网首页；技术博客文章（原理科普/行业应用类）未进豆包搜索库。DeepSeek/Kimi 待接入。",
+      "summary": "豆包已接入两层：①搜索层——搜索 API 自动探测 30 词，命中 3/30（10%），均为产品子域页(engine.piesat.cn)/官网首页，技术博客文章未进库；②模型层——方舟 Responses API 抽检 1 词「pie-engine 遥感」，官网引用第 1 条，与搜索层一致。DeepSeek/Kimi 待接入。",
       "queries": [
         {
           "id": 1,
@@ -488,6 +488,12 @@
               "rank": 1,
               "source": "PIE-Engine",
               "authority": "正常权威",
+              "url": "https://engine.piesat.cn/remote-sensing-processing"
+            },
+            "doubao_model": {
+              "found": true,
+              "rank": 1,
+              "source": "PIE-Engine",
               "url": "https://engine.piesat.cn/remote-sensing-processing"
             }
           }
