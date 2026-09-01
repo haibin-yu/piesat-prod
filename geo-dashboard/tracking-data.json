@@ -318,7 +318,294 @@
       ]
     }
   ],
-  "aiScans": [],
+  "aiScans": [
+    {
+      "date": "2026-09-01",
+      "source": "doubao-api",
+      "summary": "豆包搜索 API 自动探测 30 词：命中 3/30（10%）。命中：pie 遥感软件 #1、pie-engine 遥感 #1、航天宏图上卫星 #3，均为产品子域页(engine.piesat.cn)/官网首页；技术博客文章（原理科普/行业应用类）未进豆包搜索库。DeepSeek/Kimi 待接入。",
+      "queries": [
+        {
+          "id": 1,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 2,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 3,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 4,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 5,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 6,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 7,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 8,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 9,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 10,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 11,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 12,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 13,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 14,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 15,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 16,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 17,
+          "engines": {
+            "doubao": {
+              "found": true,
+              "rank": 1,
+              "source": "PIE-Engine",
+              "authority": "正常权威",
+              "url": "https://engine.piesat.cn/download-home"
+            }
+          }
+        },
+        {
+          "id": 18,
+          "engines": {
+            "doubao": {
+              "found": true,
+              "rank": 1,
+              "source": "PIE-Engine",
+              "authority": "正常权威",
+              "url": "https://engine.piesat.cn/remote-sensing-processing"
+            }
+          }
+        },
+        {
+          "id": 19,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 20,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 21,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 22,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 23,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 24,
+          "engines": {
+            "doubao": {
+              "found": true,
+              "rank": 3,
+              "source": "航天宏图",
+              "authority": "正常权威",
+              "url": "https://www.piesat.cn/website/cn/pages/about/profile.html"
+            }
+          }
+        },
+        {
+          "id": 25,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 26,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 27,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 28,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 29,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        },
+        {
+          "id": 30,
+          "engines": {
+            "doubao": {
+              "found": false,
+              "rank": null
+            }
+          }
+        }
+      ]
+    }
+  ],
   "baiduSearchConsole": {
     "source": "baidu-search-console",
     "note": "百度站长平台第一方搜索数据（用户在百度真实搜索、官网被展现/点击的真实回流）。ctr 为百分比数值，rank 为百度平均排名（仅 PC 端有）。",
