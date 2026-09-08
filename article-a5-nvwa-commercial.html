@@ -56,11 +56,68 @@
 .a-related a{display:block;padding:9px 0;font-size:14px;color:#4a90d9;text-decoration:none;border-bottom:1px solid #f2f2f2}
 .a-related a:last-child{border-bottom:none}
 .a-related a:hover{color:#2b6cb0}
+
+.tb-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a1a1a;color:#fff;padding:8px 20px;display:flex;align-items:center;gap:12px;font-size:12px;font-family:"PingFang SC","Hiragino Sans GB",sans-serif}
+.tb-bar .tb-title{font-weight:700;color:#4a90d9;letter-spacing:1px;white-space:nowrap}
+.tb-bar .tb-btn{background:#4a90d9;color:#fff;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tb-bar .tb-btn.copied{background:#22c55e}
+.tb-bar .tb-btn-outline{background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
+body{padding-top:42px}
+@media(print){.tb-bar{display:none!important}body{padding-top:0}}
+@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}}
 </style>
 </head>
 <body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
 
-<div class="a-wrap">
+<div id="tb-wrapper">
+<div class="tb-bar">
+  <span class="tb-title">交付预览</span>
+  <span style="flex:1"></span>
+  <button class="tb-btn-outline" onclick="viewSource()">查看源码</button>
+  <button class="tb-btn" id="copyBtn" onclick="copySource()">复制发布源码</button>
+  <button class="tb-btn" style="background:#22c55e" id="copyTextBtn" onclick="copyArticleText()">复制文章内容</button>
+</div>
+<textarea id="srcArea" readonly style="display:none;position:fixed;top:42px;left:0;right:0;bottom:0;z-index:9998;width:100%;border:none;background:#1a1a1a;color:#ccc;font-family:monospace;font-size:12px;padding:20px;resize:none;tab-size:2"></textarea>
+<script>
+function clean(){var c=document.documentElement.cloneNode(true);var w=c.querySelector('#tb-wrapper');if(w)w.remove();return '<!doctype html>\n'+c.outerHTML;}
+function copySource(){navigator.clipboard.writeText(clean()).then(function(){var b=document.getElementById('copyBtn');b.textContent='已复制！';b.classList.add('copied');setTimeout(function(){b.textContent='复制发布源码';b.classList.remove('copied');},2000);});}
+function viewSource(){var a=document.getElementById('srcArea');if(a.style.display==='block'){a.style.display='none';return;}a.value=clean();a.style.display='block';}
+async function copyArticleText(){
+  var b=document.getElementById("copyTextBtn");
+  b.textContent="处理中...";
+  var wrapper=document.createElement("div");
+  var h1=document.querySelector(".a-head h1")||document.querySelector("h1");
+  if(h1){var titleH=document.createElement("h2");titleH.textContent=h1.textContent.trim();titleH.style.textAlign="center";wrapper.appendChild(titleH);}
+  var body=document.querySelector(".a-body");
+  if(!body)return;
+  var imgElements=[];
+  for(var i=0;i<body.children.length;i++){
+    var el=body.children[i];
+    var tag=el.tagName.toLowerCase();
+    var text=el.textContent.trim();
+    if(!text)continue;
+    if(tag==="h2"){var h=document.createElement("h2");h.textContent=text;wrapper.appendChild(h);}
+    else if(tag==="p"){var p=document.createElement("p");p.textContent=text;wrapper.appendChild(p);}
+    else if(el.classList.contains("a-fig")){
+      var img=el.querySelector("img");
+      var cap=el.querySelector(".a-cap");
+      if(img){var imgClone=document.createElement("img");imgClone.src=img.src;imgClone.alt=img.alt;imgClone.style.maxWidth="100%";imgClone.style.display="block";imgClone.style.margin="16px auto";wrapper.appendChild(imgClone);imgElements.push({el:imgClone,url:img.src});}
+      if(cap){var c=document.createElement("p");c.textContent=cap.textContent.trim();c.style.fontSize="12px";c.style.color="#888";c.style.fontStyle="italic";wrapper.appendChild(c);}
+    }else if(el.classList.contains("a-insight")){
+      var bq=document.createElement("blockquote");bq.textContent=text;wrapper.appendChild(bq);
+    }
+  }
+  var tasks=imgElements.map(function(item){return fetch(item.url).then(function(r){return r.blob()}).then(function(blob){return new Promise(function(resolve){var reader=new FileReader();reader.onloadend=function(){item.el.src=reader.result;resolve()};reader.onerror=resolve;reader.readAsDataURL(blob)})}).catch(function(){})});
+  await Promise.all(tasks);
+  var htmlContent="<html><body>"+wrapper.innerHTML+"</body></html>";
+  try{var htmlBlob=new Blob([htmlContent],{type:"text/html"});await navigator.clipboard.write([new ClipboardItem({"text/html":htmlBlob})]);b.textContent="已复制！";}
+  catch(e){navigator.clipboard.writeText(wrapper.textContent);b.textContent="已复制(仅文字)";}
+  setTimeout(function(){b.textContent="复制文章内容";},2000);
+}
+</script>
+</div>
+
+<div class="a-wrap" style="padding-top:48px">
 <div class="a-bread">
   <a href="/">首页</a> &raquo; <a href="/blog">技术博客</a> &raquo; <a href="/blog/category/nvwa">女娲星座</a>
 </div>
