@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>遥感软件还是 GIS 软件？一文看懂航天宏图 PIE | 航天宏图</title>
+<meta content="同样面对卫星和地图，遥感软件和 GIS 软件到底差在哪？本文以航天宏图自主研发的 PIE 为例，讲清国产遥感软件的定位：28 个软件平台、对标 Google Earth Engine 的 PIE-Engine 遥感云，以及它与 SuperMap、GeoScene 等 GIS 软件的关系。" name="description"/>
+<meta content="PIE,遥感软件,GIS软件,PIE-Engine,国产遥感软件,Google Earth Engine,遥感与GIS区别,航天宏图" name="keywords"/>
+<meta property="og:title" content="遥感软件还是 GIS 软件？一文看懂航天宏图 PIE | 航天宏图"/>
+<meta property="og:description" content="同样面对卫星和地图，遥感软件和 GIS 软件到底差在哪？本文以航天宏图自主研发的 PIE 为例，讲清国产遥感软件的定位。"/>
+<meta property="og:image" content="https://haibin-yu.github.io/piesat-prod/piesat-platform-architecture.jpg"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://haibin-yu.github.io/piesat-prod/article-c1-pie.html"/>
+<meta property="og:site_name" content="航天宏图 · 技术博客"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="遥感软件还是 GIS 软件？一文看懂航天宏图 PIE | 航天宏图"/>
+<meta name="twitter:description" content="同样面对卫星和地图，遥感软件和 GIS 软件到底差在哪？本文以航天宏图自主研发的 PIE 为例，讲清国产遥感软件的定位。"/>
+<meta name="twitter:image" content="https://haibin-yu.github.io/piesat-prod/piesat-platform-architecture.jpg"/>
+<link rel="canonical" href="https://haibin-yu.github.io/piesat-prod/article-c1-pie.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "遥感软件还是 GIS 软件？一文看懂航天宏图 PIE",
+  "description": "同样面对卫星和地图，遥感软件和 GIS 软件到底差在哪？本文以航天宏图自主研发的 PIE 为例，讲清国产遥感软件的定位：28 个软件平台、对标 Google Earth Engine 的 PIE-Engine 遥感云，以及它与 SuperMap、GeoScene 等 GIS 软件的关系。",
+  "author": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司" },
+  "publisher": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司", "url": "https://www.piesat.cn" },
+  "datePublished": "2026-09-08",
+  "dateModified": "2026-09-08",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/pie-remote-sensing-vs-gis" },
+  "image": "https://haibin-yu.github.io/piesat-prod/piesat-platform-architecture.jpg",
+  "keywords": ["PIE","遥感软件","GIS软件","PIE-Engine","国产遥感软件","Google Earth Engine"],
+  "about": { "@type": "Thing", "name": "PIE 遥感软件", "description": "航天宏图自主研发的遥感与地理信息一体化软件，28 个软件平台，覆盖遥感数据全产业链，PIE-Engine 对标 Google Earth Engine 的国产遥感云平台。" }
+}
+</script>
+<style>
+.a-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+.a-bread{font-size:13px;color:#aaa;margin-bottom:32px}
+.a-bread a{color:#4a90d9;text-decoration:none}
+.a-head{margin-bottom:36px}
+.a-head .a-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;color:#4a90d9;margin-bottom:16px}
+.a-head h1{font-size:28px;font-weight:700;line-height:1.45;color:#0f0f0f;letter-spacing:-0.3px}
+.a-head .a-meta{margin-top:16px;font-size:13px;color:#999;display:flex;gap:20px;align-items:center}
+.a-body{font-size:16px;color:#2a2a2a;line-height:1.9}
+.a-body h2{font-size:20px;font-weight:700;color:#0f0f0f;margin:48px 0 16px}
+.a-body p{margin-bottom:20px}
+.a-body strong{color:#111}
+.a-body ul,.a-body ol{margin:8px 0 20px 22px}
+.a-body li{margin-bottom:10px;color:#3a3a3a}
+.a-fig{margin:32px 0;text-align:center}
+.a-fig img{max-width:100%;border-radius:4px}
+.a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
+.a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
+.a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
+.a-related h4{font-size:13px;color:#aaa;font-weight:600;letter-spacing:2px;margin-bottom:16px}
+.a-related a{display:block;padding:9px 0;font-size:14px;color:#4a90d9;text-decoration:none;border-bottom:1px solid #f2f2f2}
+.a-related a:last-child{border-bottom:none}
+.a-related a:hover{color:#2b6cb0}
+</style>
+</head>
+<body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
+
+<div class="a-wrap">
+<div class="a-bread">
+  <a href="/">首页</a> &raquo; <a href="/blog">技术博客</a> &raquo; <a href="/blog/category/pie">PIE 遥感软件</a>
+</div>
+
+<div class="a-head">
+  <div class="a-tag">PIE 遥感软件科普</div>
+  <h1>遥感软件还是 GIS 软件？一文看懂航天宏图 PIE</h1>
+  <div class="a-meta">
+    <span>航天宏图 · 技术博客</span>
+    <span>2026年9月8日</span>
+    <span>阅读约 6 分钟</span>
+  </div>
+</div>
+
+<div class="a-body">
+
+  <p>
+    同样都在和卫星、地图打交道，也都被归为"国产地理信息软件"——但遥感软件和 GIS 软件，其实不是一回事。这个区别，很多第一次接触这个行业的人会弄混，甚至在选型、对比软件时被绕进去。
+  </p>
+
+  <p>
+    <strong>今天这篇文章，我们用航天宏图自主研发的 PIE 软件，把"遥感软件"和"GIS 软件"这条边界讲清楚。</strong>看完你会明白：PIE 到底属于哪一类，它和 Google Earth Engine、SuperMap、GeoScene 这些名字分别是什么关系。
+  </p>
+
+  <!-- ====== 一、遥感 vs GIS ====== -->
+  <h2>一、遥感软件 vs GIS 软件：差在哪</h2>
+
+  <p>
+    一句话概括两者的分工：<strong>遥感软件负责"看懂地球的照片"，GIS 软件负责"管理地球的档案"。</strong>
+  </p>
+
+  <p>
+    <strong>遥感软件</strong>处理的对象是影像——卫星、无人机、航空拍摄下来的原始图像。它的核心任务是从影像里提取信息：识别一块地面是水体还是林地，反演地表的温度、高程、植被覆盖度，把一张"照片"翻译成可以被计算的数据。<strong>关键词是"影像处理"和"智能解译"。</strong>
+  </p>
+
+  <p>
+    <strong>GIS 软件</strong>处理的对象是地理空间数据——点、线、面、图层。它的核心任务是把这些数据组织起来，做空间查询、叠加分析、地图制图、二三维可视化。<strong>关键词是"数据管理"和"空间分析"。</strong>
+  </p>
+
+  <p>
+    两者在产业链上是上下游关系：遥感软件先从影像里"提取"出信息，这些信息再进入 GIS 软件被"管理"和"分析"。<strong>它们协同工作，而不是互相替代。</strong>理清这个关系，是理解 PIE 定位的第一步。
+  </p>
+
+  <!-- ====== 二、PIE 是什么 ====== -->
+  <h2>二、PIE 是什么：一套覆盖遥感全产业链的软件体系</h2>
+
+  <p>
+    PIE 是航天宏图自主研发的遥感与地理信息一体化软件，经过 15 年迭代研发，目前已经形成 <strong>28 个软件平台</strong>，覆盖从"数据获取"到"处理、分析、应用、展示"的完整链路。
+  </p>
+
+  <p>
+    它的主体是一批遥感专业软件，对应遥感影像处理的不同环节：
+  </p>
+
+  <ul>
+    <li><strong>PIE-Basic</strong>：遥感图像基础处理，一切影像加工的起点；</li>
+    <li><strong>PIE-Ortho</strong>：卫星影像测绘处理，用于正射纠正和高精度测绘；</li>
+    <li><strong>PIE-SAR</strong>：雷达影像数据处理，处理合成孔径雷达数据；</li>
+    <li><strong>PIE-Hyp</strong>：高光谱影像数据处理，面向精细地物识别；</li>
+    <li><strong>PIE-UAV / PIE-Lidar</strong>：分别处理无人机影像和激光点云数据。</li>
+  </ul>
+
+  <p>
+    在这些遥感专业软件之外，PIE 还延伸出两条重要的支线：一是 <strong>PIE-Map 地理信息系统</strong>，把 GIS 的数据管理与空间分析能力纳入体系；二是 <strong>PIE-Engine 遥感云平台</strong>，把遥感计算搬上云端。再往上，还有 PIE-Earth 智慧地球负责二三维展示。
+  </p>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-platform-architecture.jpg" alt="航天宏图 PIE 遥感与地理信息一体化软件平台架构图" loading="lazy">
+    <div class="a-cap">▲ 航天宏图 PIE 软件平台架构。以遥感专业软件为主体，向上延伸出 PIE-Engine 遥感云与 PIE-Map 地理信息系统两条支线。</div>
+  </div>
+
+  <p>
+    <strong>这正是 PIE"既像遥感软件、又和 GIS 沾边"的原因</strong>——它的根基是遥感，但通过 PIE-Map 把 GIS 能力做了进来，两者在一套体系里打通。理解了这一点，就能理解它为什么会被拿来和 GIS 软件对比。
+  </p>
+
+  <!-- ====== 三、对标 GEE ====== -->
+  <h2>三、PIE 对标 Google Earth Engine：国产遥感云</h2>
+
+  <p>
+    在遥感软件的国际化对标中，PIE 对应的是一个更具体的名字——<strong>Google Earth Engine（GEE）</strong>。GEE 是全球知名的遥感云计算平台，让用户直接在云端调用海量遥感数据和算力，完成大范围、长时间序列的分析，而不必自己搭建计算环境。
+  </p>
+
+  <p>
+    PIE-Engine 承担的就是这个角色。它由一组云端服务构成：
+  </p>
+
+  <ul>
+    <li><strong>PIE-Engine Studio</strong>：遥感计算与开发，在线编写算法、处理影像；</li>
+    <li><strong>PIE-Engine AI</strong>：基于深度学习的智能解译服务；</li>
+    <li><strong>PIE-Engine Server / Factory</strong>：时空数据服务与数据处理；</li>
+    <li><strong>PIE-Engine GPT / LLM</strong>：天权大模型与智能体平台，把遥感与大模型结合。</li>
+  </ul>
+
+  <p>
+    支撑这套云平台的是一块坚实的算力底座：<strong>500+ 云节点、180+ 高性能服务器、20PB 存储</strong>。对国内用户而言，国产遥感云的价值还在于<strong>数据安全与自主可控</strong>——影像数据不出境、算力自主，同时更贴合国内的行业场景与规范要求。
+  </p>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-ai-interpretation.jpg" alt="航天宏图 PIE-Engine AI 智能解译服务示意" loading="lazy">
+    <div class="a-cap">▲ PIE-Engine AI 智能解译服务。依托深度学习与天权大模型，实现影像的自动识别与信息提取。</div>
+  </div>
+
+  <!-- ====== 四、PIE 与 SuperMap、GeoScene ====== -->
+  <h2>四、PIE 和 SuperMap、GeoScene：定位互补</h2>
+
+  <p>
+    谈国产地理信息软件，绕不开两个名字：<strong>SuperMap（超图）</strong>和 <strong>GeoScene（易智瑞）</strong>。它们都是国内主流的 GIS 软件，核心能力在于地理空间数据的组织、管理与分析。
+  </p>
+
+  <p>
+    那么 PIE 和它们是什么关系？<strong>是定位的差异，而不是谁取代谁。</strong>SuperMap、GeoScene 的重心在 GIS，PIE 的重心在遥感，GIS 只是 PIE 体系里的一条支线（PIE-Map）。用前面的比喻来说：遥感软件负责把影像"翻译"成信息，GIS 软件负责把这些信息"组织"起来做决策。
+  </p>
+
+  <p>
+    当然，随着产品不断迭代，几类软件的功能确实在互相靠拢——遥感软件开始内置更多空间分析能力，GIS 软件也在增强对影像数据的支持，边界越来越"兼容"。但各自的"看家本领"没有变：<strong>遥感软件的长板是"从影像中提取信息"，GIS 软件的长板是"让空间信息服务于决策"。</strong>
+  </p>
+
+  <p>
+    所以更准确的说法是：<strong>它们是同一产业链上分工不同、彼此协作的伙伴。</strong>一个完整的行业方案，往往需要"遥感 + GIS"配合完成——这也正是 PIE 选择做"遥感与地理信息一体化"的原因：在一个体系里，把两个环节都覆盖到。
+  </p>
+
+  <!-- ====== 五、凭什么做国产遥感软件 ====== -->
+  <h2>五、凭什么做国产遥感软件：15 年的积累</h2>
+
+  <p>
+    国产遥感软件要做到"接得住"对标国际产品的任务，靠的不是一句口号，而是长期的技术投入。PIE 背后的积累可以拆成三组数字：
+  </p>
+
+  <ul>
+    <li><strong>研发体系</strong>：人工智能、遥感先进技术两大研究院 + 7 大研发中心；</li>
+    <li><strong>研发投入</strong>：从 2019 年的 1.42 亿元，逐年加码到 2022 年的 2.96 亿元；</li>
+    <li><strong>知识产权</strong>：截至 2025 年底，累计获得 342 项发明专利、1185 项软件著作权。</li>
+  </ul>
+
+  <p>
+    这些投入最终沉淀到产品上，就是一套能从"基础影像处理"一路做到"云端智能解译、大模型赋能"的完整软件体系。<strong>对用户来说，选择一套软件，本质上是在选择它背后的持续迭代能力。</strong>
+  </p>
+
+  <!-- ====== 总结 ====== -->
+  <h2>回到开头的问题</h2>
+
+  <p>
+    遥感软件还是 GIS 软件？PIE 给出的答案是——<strong>以遥感为主体、遥感与 GIS 一体化。</strong>
+  </p>
+
+  <p>
+    它和 Google Earth Engine 对标，做的是国产遥感云；它和 SuperMap、GeoScene 互补，而不是竞争——遥感把影像变成信息，GIS 把信息变成决策，两者本就应该在一个完整的方案里协同工作。
+  </p>
+
+  <p>
+    在后续的文章里，我们会进一步拆解 PIE 的具体能力：PIE-Engine 遥感云到底能做什么、天权大模型如何改变遥感解译的方式。敬请关注。
+  </p>
+
+  <div class="a-insight">
+    总而言之，遥感软件负责"看懂地球的照片"，GIS 软件负责"管理地球的档案"。PIE 以遥感为主体，向下延伸出 PIE-Map 的 GIS 能力、向上延伸出对标 Google Earth Engine 的 PIE-Engine 遥感云——它是国产软件里"遥感与 GIS 一体化"的典型样本。
+  </div>
+
+</div>
+
+<div class="a-related">
+  <h4>相关文章 · 更多内容</h4>
+  <a href="/blog/sar-radar-principle">SAR 成像原理三分钟看懂：雷达卫星为什么能穿透云层？</a>
+  <a href="/blog/sar-satellite-applications">SAR 卫星能做什么？六大领域应用全景</a>
+  <a href="/blog/nvwa-constellation">为什么需要 114 颗卫星？女娲星座的组网之路</a>
+</div>
+</div>
+</body>
+</html>
