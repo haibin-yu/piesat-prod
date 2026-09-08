@@ -120,6 +120,8 @@ async function copyArticleText(){
       if(cap){var c=document.createElement("p");c.textContent=cap.textContent.trim();c.style.fontSize="12px";c.style.color="#888";c.style.fontStyle="italic";wrapper.appendChild(c);}
     }else if(el.classList.contains("a-insight")){
       var bq=document.createElement("blockquote");bq.textContent=text;wrapper.appendChild(bq);
+    }else if(tag==="ul"||tag==="ol"){
+      wrapper.appendChild(el.cloneNode(true));
     }
   }
   var tasks=imgElements.map(function(item){return fetch(item.url).then(function(r){return r.blob()}).then(function(blob){return new Promise(function(resolve){var reader=new FileReader();reader.onloadend=function(){item.el.src=reader.result;resolve()};reader.onerror=resolve;reader.readAsDataURL(blob)})}).catch(function(){})});
