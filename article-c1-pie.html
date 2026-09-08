@@ -57,6 +57,21 @@
 .a-related a:last-child{border-bottom:none}
 .a-related a:hover{color:#2b6cb0}
 
+.flow{display:flex;align-items:stretch;justify-content:center;gap:8px;margin:0 0 4px}
+.flow-card{flex:1;max-width:300px;border:1px solid #e6e6e6;border-radius:10px;padding:20px 16px 18px;text-align:center;background:#fafafa}
+.flow-card.remote{background:#f4f8fd;border-color:#dbe6f2}
+.flow-head{font-size:12px;letter-spacing:2px;color:#4a90d9;font-weight:600}
+.flow-head-sub{font-size:13px;color:#666;margin-top:4px}
+.flow-inner{display:flex;align-items:center;justify-content:center;gap:10px;margin:18px 0 14px}
+.flow-node{flex:0 0 auto}
+.flow-node b{display:block;font-size:17px;font-weight:700;color:#0f0f0f;line-height:1.3}
+.flow-node span{display:block;font-size:12px;color:#999;margin-top:4px;line-height:1.55}
+.flow-arr{font-size:22px;color:#c3c3c3;font-weight:300;flex:0 0 auto;line-height:1}
+.flow-mid{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:12px;color:#999;padding:0 4px;line-height:1.4}
+.flow-mid .flow-arr{font-size:24px}
+.flow-foot{font-size:12px;color:#999;line-height:1.6}
+@media(max-width:640px){.flow{flex-direction:column}.flow-card{max-width:100%}.flow-mid{flex-direction:row;padding:4px 0}.flow-mid .flow-arr{transform:rotate(90deg)}}
+
 .tb-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a1a1a;color:#fff;padding:8px 20px;display:flex;align-items:center;gap:12px;font-size:12px;font-family:"PingFang SC","Hiragino Sans GB",sans-serif}
 .tb-bar .tb-title{font-weight:700;color:#4a90d9;letter-spacing:1px;white-space:nowrap}
 .tb-bar .tb-btn{background:#4a90d9;color:#fff;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
@@ -160,6 +175,33 @@ async function copyArticleText(){
   <p>
     两者在产业链上是上下游关系：遥感软件先从影像里"提取"出信息，这些信息再进入 GIS 软件被"管理"和"分析"。<strong>它们协同工作，而不是互相替代。</strong>理清这个关系，是理解 PIE 定位的第一步。
   </p>
+
+  <div class="a-fig">
+    <div class="flow">
+      <div class="flow-card remote">
+        <div class="flow-head">遥感软件</div>
+        <div class="flow-head-sub">看懂地球的照片</div>
+        <div class="flow-inner">
+          <div class="flow-node"><b>影像</b><span>卫星 · 无人机<br>航空影像</span></div>
+          <div class="flow-arr">→</div>
+          <div class="flow-node"><b>信息</b><span>水体 · 林地<br>温度 · 高程</span></div>
+        </div>
+        <div class="flow-foot">影像处理 · 智能解译</div>
+      </div>
+      <div class="flow-mid"><span class="flow-arr">→</span><span>信息<br>流入</span></div>
+      <div class="flow-card">
+        <div class="flow-head">GIS 软件</div>
+        <div class="flow-head-sub">管理地球的档案</div>
+        <div class="flow-inner">
+          <div class="flow-node"><b>信息</b><span>点 · 线 · 面<br>矢量图层</span></div>
+          <div class="flow-arr">→</div>
+          <div class="flow-node"><b>决策</b><span>查询 · 分析<br>制图</span></div>
+        </div>
+        <div class="flow-foot">数据管理 · 空间分析</div>
+      </div>
+    </div>
+    <div class="a-cap">▲ 遥感软件与 GIS 软件的分工：遥感先把影像“翻译”成信息，GIS 再把信息“组织”成决策，两者是上下游关系。</div>
+  </div>
 
   <!-- ====== 二、PIE 是什么 ====== -->
   <h2>二、PIE 是什么：一套覆盖遥感全产业链的软件体系</h2>
