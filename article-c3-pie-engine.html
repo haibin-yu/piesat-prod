@@ -3,34 +3,34 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>PIE-Engine 是什么？对标谷歌地球引擎的中国遥感云 | 航天宏图</title>
-<meta content="做遥感的人几乎都用过 Google Earth Engine，但它在国内访问受限、数据在境外。本文讲清航天宏图 PIE-Engine 遥感云平台是什么：一云十服务、对标 GEE 的 Studio 在线计算、天权大模型，以及为什么国产遥感云重要。" name="description"/>
-<meta content="PIE-Engine,遥感云平台,Google Earth Engine,国产遥感云,遥感云计算,PIE-Engine Studio,天权大模型,航天宏图" name="keywords"/>
-<meta property="og:title" content="PIE-Engine 是什么？对标谷歌地球引擎的中国遥感云 | 航天宏图"/>
-<meta property="og:description" content="做遥感的人几乎都用过 Google Earth Engine，但它在国内访问受限、数据在境外。本文讲清航天宏图 PIE-Engine 遥感云平台是什么。"/>
+<title>遥感软件为什么要上云？航天宏图 PIE-Engine 的云上之路 | 航天宏图</title>
+<meta content="过去做遥感要装几十个 G 的软件、配高性能工作站；现在浏览器里就能完成。本文讲清航天宏图 PIE-Engine 遥感云平台如何把遥感软件搬上云：一云十服务、在线处理与计算、AI 解译，以及它给遥感从业者带来的变化。" name="description"/>
+<meta content="遥感软件,PIE-Engine,遥感云平台,软件上云,在线遥感处理,遥感云计算,航天宏图" name="keywords"/>
+<meta property="og:title" content="遥感软件为什么要上云？航天宏图 PIE-Engine 的云上之路 | 航天宏图"/>
+<meta property="og:description" content="过去做遥感要装几十个 G 的软件、配高性能工作站；现在浏览器里就能完成。本文讲清航天宏图 PIE-Engine 遥感云平台如何把遥感软件搬上云。"/>
 <meta property="og:image" content="https://haibin-yu.github.io/piesat-prod/piesat-engine-architecture.png"/>
 <meta property="og:type" content="article"/>
 <meta property="og:url" content="https://haibin-yu.github.io/piesat-prod/article-c3-pie-engine.html"/>
 <meta property="og:site_name" content="航天宏图 · 技术博客"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="PIE-Engine 是什么？对标谷歌地球引擎的中国遥感云 | 航天宏图"/>
-<meta name="twitter:description" content="做遥感的人几乎都用过 Google Earth Engine，但它在国内访问受限、数据在境外。本文讲清航天宏图 PIE-Engine 遥感云平台是什么。"/>
+<meta name="twitter:title" content="遥感软件为什么要上云？航天宏图 PIE-Engine 的云上之路 | 航天宏图"/>
+<meta name="twitter:description" content="过去做遥感要装几十个 G 的软件、配高性能工作站；现在浏览器里就能完成。本文讲清航天宏图 PIE-Engine 遥感云平台如何把遥感软件搬上云。"/>
 <meta name="twitter:image" content="https://haibin-yu.github.io/piesat-prod/piesat-engine-architecture.png"/>
 <link rel="canonical" href="https://haibin-yu.github.io/piesat-prod/article-c3-pie-engine.html"/>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "PIE-Engine 是什么？对标谷歌地球引擎的中国遥感云",
-  "description": "做遥感的人几乎都用过 Google Earth Engine，但它在国内访问受限、数据在境外。本文讲清航天宏图 PIE-Engine 遥感云平台是什么：一云十服务、对标 GEE 的 Studio 在线计算、天权大模型，以及为什么国产遥感云重要。",
+  "headline": "遥感软件为什么要上云？航天宏图 PIE-Engine 的云上之路",
+  "description": "过去做遥感要装几十个 G 的软件、配高性能工作站；现在浏览器里就能完成。本文讲清航天宏图 PIE-Engine 遥感云平台如何把遥感软件搬上云：一云十服务、在线处理与计算、AI 解译，以及它给遥感从业者带来的变化。",
   "author": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司" },
   "publisher": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司", "url": "https://www.piesat.cn" },
   "datePublished": "2026-09-13",
   "dateModified": "2026-09-13",
-  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/pie-engine-cloud-platform" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/pie-engine-cloud" },
   "image": "https://haibin-yu.github.io/piesat-prod/piesat-engine-architecture.png",
-  "keywords": ["PIE-Engine","遥感云平台","Google Earth Engine","国产遥感云","遥感云计算","PIE-Engine Studio","天权大模型"],
-  "about": { "@type": "Thing", "name": "PIE-Engine 遥感云平台", "description": "航天宏图自主研发的遥感云平台，一云十服务，对标 Google Earth Engine，提供数据、算力、算法与 AI 大模型一体化的云端遥感服务，适配国产软硬件环境。" }
+  "keywords": ["遥感软件","PIE-Engine","遥感云平台","软件上云","在线遥感处理","遥感云计算"],
+  "about": { "@type": "Thing", "name": "PIE-Engine 遥感云平台", "description": "航天宏图自主研发的遥感云平台，一云十服务，把数据、算力、算法变成云端服务，让遥感从业者用浏览器即可完成影像处理、计算与智能解译。" }
 }
 </script>
 <style>
@@ -126,148 +126,111 @@ async function copyArticleText(){
 
 <div class="a-head">
   <div class="a-tag">PIE-Engine 遥感云</div>
-  <h1>PIE-Engine 是什么？对标谷歌地球引擎的中国遥感云</h1>
+  <h1>遥感软件为什么要上云？航天宏图 PIE-Engine 的云上之路</h1>
   <div class="a-meta">
     <span>航天宏图 · 技术博客</span>
     <span>2026年9月13日</span>
-    <span>阅读约 8 分钟</span>
+    <span>阅读约 7 分钟</span>
   </div>
 </div>
 
 <div class="a-body">
 
   <p>
-    做遥感的人，几乎都绕不开 Google Earth Engine（GEE）。在浏览器里写几行代码，就能调用谷歌云上的 PB 级卫星影像做植被分析、水体提取、变化检测——不用自己下载影像、不用配算力，几分钟跑完过去要几天的工作。
+    十几年前，做遥感要装一套几十个 G 的专业软件，配一台高性能工作站，处理一幅影像往往要等上数小时。今天，很多工作只需要一个浏览器——打开网页、上传数据、点击几下鼠标，影像就处理好了。
   </p>
 
   <p>
-    但 GEE 有两个绕不开的问题：<strong>数据在境外、访问不稳定</strong>。对国内的政企、科研单位来说，影像数据出海涉及合规，涉密和信创场景更是完全用不了。
+    为什么会这样？答案不在技术本身，而在过去做遥感绕不开的几个难题——软件重、算力贵、门槛高。<strong>航天宏图的 PIE-Engine，正是把这几个难题一一破解的国产遥感云平台。</strong>
   </p>
 
-  <p>
-    于是问题来了：中国有没有自己的“遥感云”？有——<strong>航天宏图的 PIE-Engine，就是其中一个答案。</strong>
-  </p>
-
-  <h2>一、GEE 为什么重要，又为什么“不够用”</h2>
+  <h2>一、过去的痛点：软件重、算力贵、门槛高</h2>
 
   <p>
-    Google Earth Engine 之所以成为遥感界的“标配工具”，在于它把三样东西打包成了在线服务：<strong>海量影像数据、云端算力、在线编程环境</strong>。用户不关心数据存在哪、算力够不够，只需要写代码，剩下的交给谷歌。
-  </p>
-
-  <p>
-    它把遥感分析的门槛，从“专业软件 + 高性能工作站”，降到了“一台能上网的电脑”。这是它最重要的贡献。
-  </p>
-
-  <p>
-    但对中国用户来说，GEE 有两个明显的短板：
+    过去做遥感，绕不开三个难题：
   </p>
 
   <ul>
-    <li><strong>数据与算力都在境外</strong>：网络访问不稳定，关键任务不敢依赖；</li>
-    <li><strong>影像数据涉及跨境流动</strong>：政企、涉密、信创场景无法使用。</li>
+    <li><strong>软件重</strong>：专业软件动辄几十个 G，安装、升级、授权都较为繁琐；</li>
+    <li><strong>算力贵</strong>：影像处理对 CPU、GPU 算力要求高，一台性能尚可的工作站动辄数万元；</li>
+    <li><strong>门槛高</strong>：处理流程复杂，新手需要较长时间学习才能掌握。</li>
   </ul>
 
   <p>
-    所以，一个“数据在国内、算力可控、适配国产软硬件”的遥感云平台，就成了刚需。这正是 PIE-Engine 的定位。
+    更致命的是，这些门槛是“重复付费”的——每个单位、每个人都得自行配置一整套软件和硬件，数据还分散在各自的本地硬盘里，更换设备或单位后便难以延续。
   </p>
 
-  <h2>二、PIE-Engine 是什么：不是一款软件，是一朵“遥感云”</h2>
+  <h2>二、什么是“软件上云”：从买软件，到用服务</h2>
 
   <p>
-    一句话：<strong>PIE-Engine 是航天宏图的遥感云平台，把数据、算力、算法、AI 全部搬上云端</strong>，让用户在浏览器里就能完成从数据获取到智能解译的全流程。
+    “上云”的本质，是把“买软件”变成“用服务”。就像从买光盘装办公软件，变成直接用在线文档：不用管软件装在哪、版本对不对，打开浏览器就能工作。
   </p>
 
   <p>
-    它不是一个单独的工具，而是一套“云上服务”，官方把它归纳为<strong>“一云十服务”</strong>——以 PIE-Engine 遥感云平台为载体，承载 10 个服务组件。按功能，它们大致可以分成几层：
+    对遥感来说，“上云”意味着三样东西变成了服务：
   </p>
 
   <ul>
-    <li><strong>底座层</strong>：NativeSphere 云底座（混合云操作系统）；</li>
-    <li><strong>数据层</strong>：Server 时空数据服务；</li>
-    <li><strong>生产层</strong>：Factory 数据处理服务；</li>
-    <li><strong>计算层</strong>：Studio 遥感计算服务；</li>
-    <li><strong>智能层</strong>：AI 智能解译、GPT 天权大模型、LLM 智能体、Knowledge 知识图谱、Blockchain 区块链；</li>
-    <li><strong>中台层</strong>：BPaaS 通用技术服务中台。</li>
+    <li><strong>数据变成服务</strong>：不用自己下载、存储海量影像，云端直接调用；</li>
+    <li><strong>算力变成服务</strong>：不用自己买工作站，云端弹性调用、按需付费；</li>
+    <li><strong>算法变成服务</strong>：不用自己搭环境、调模型，一键即可调用。</li>
+  </ul>
+
+  <h2>三、PIE-Engine：把遥感软件搬上云端</h2>
+
+  <p>
+    PIE-Engine 是航天宏图的遥感云平台，它把原来装在电脑里的 PIE 软件能力，全部搬到了云端，官方把它归纳为<strong>“一云十服务”</strong>——一朵云，承载 10 个服务组件。
+  </p>
+
+  <p>
+    这十个服务，覆盖了原来桌面软件的工作：
+  </p>
+
+  <ul>
+    <li><strong>数据处理</strong>：Factory 数据处理服务；</li>
+    <li><strong>遥感计算</strong>：Studio 遥感计算服务；</li>
+    <li><strong>智能解译</strong>：AI 智能解译服务、GPT 天权大模型；</li>
+    <li><strong>数据管理</strong>：Server 时空数据服务；</li>
+    <li><strong>云底座</strong>：NativeSphere 云底座，管住底下的算力与运维。</li>
   </ul>
 
   <div class="a-fig">
     <img src="https://haibin-yu.github.io/piesat-prod/piesat-engine-architecture.png" alt="航天宏图 PIE-Engine 遥感云平台架构" loading="lazy">
-    <div class="a-cap">▲ 航天宏图 PIE-Engine 遥感云平台架构。以 NativeSphere 云底座为地基，向上承接时空数据（Server）、影像生产（Factory）、遥感计算（Studio）、智能解译（AI / 天权 GPT）等服务，构成“数据—算力—算法—智能”的云端完整链路。</div>
+    <div class="a-cap">▲ 航天宏图 PIE-Engine 遥感云平台架构。把原来装在电脑里的数据、处理、计算、解译能力，全部搬上云端，浏览器即入口。</div>
   </div>
 
-  <h2>三、从下往上看：这朵云是怎么运转的</h2>
+  <h2>四、云端到底能干什么</h2>
 
   <p>
-    把这十服务拆开看，才能真正理解“云平台”和“单个软件”的区别。
-  </p>
-
-  <p>
-    <strong>NativeSphere 云底座</strong>，是这朵云的“地基”。它基于 Kubernetes 容器化云原生技术，把私有云、公有云、混合云整合成一套算力网络，解决云平台部署、算力调度、运行监控、升级运维这些“底层麻烦”，相当于一个面向地球科学领域的混合云操作系统。
-  </p>
-
-  <p>
-    <strong>Server 时空数据服务</strong>，是“仓库”。它负责影像、矢量、三维模型等时空数据的一体化管理——存储、检索、在线浏览、发布，把散落在各处的数据统一起来。
-  </p>
-
-  <p>
-    <strong>Factory 数据处理服务</strong>，是“生产车间”。它把遥感影像生产流水线搬上了云：支持 36 类主流卫星数据、287 个功能算法、257 条生产线，从原始影像到正射、融合、真彩色、DOM/DEM 等标准化产品，全自动批量生产，并支持可视化流程编排。
-  </p>
-
-  <p>
-    <strong>Studio 遥感计算服务</strong>，是“开发环境”，也是<strong>对标 GEE 的核心</strong>。它集海量地理空间数据、交互式编程、实时分布式计算、数据可视化为一体，用户在线写代码、在线跑分析、在线出结果。官方对它的定位正是：对标 Google Earth Engine，弥补国内云计算平台长期空白。
-  </p>
-
-  <p>
-    从底座到数据、到生产、到计算——这样一层层搭起来，PIE-Engine 才具备了“用浏览器代替工作站”的能力。
-  </p>
-
-  <h2>四、不止于计算：AI 和大模型是“上层建筑”</h2>
-
-  <p>
-    在数据、生产、计算之上，PIE-Engine 还叠加了智能能力，这是它相比早期遥感云的延伸：
+    具体到每天的工作，PIE-Engine 能替遥感从业者省掉三件事：
   </p>
 
   <ul>
-    <li><strong>AI 智能解译服务</strong>：内置 40 多个深度学习模型，35 类以上地物解译，单类精度达 90% 以上；</li>
-    <li><strong>天权大模型（GPT）</strong>：10 亿以上参数，支持地物提取、变化检测、道路提取、三维重建等在线实时解译；</li>
-    <li><strong>LLM 智能体、Knowledge 知识图谱、Blockchain 区块链</strong>：进一步提供智能问答、知识服务与可信数据能力。</li>
+    <li><strong>处理影像不用装软件</strong>：Factory 支持 36 类主流卫星、287 个功能算法、257 条生产线，浏览器里拖拽编排就能批量生产；</li>
+    <li><strong>做分析不用配环境</strong>：Studio 对标 Google Earth Engine，在线写代码、在线跑分析；</li>
+    <li><strong>解译无需逐个标注</strong>：AI 内置 40 多个深度学习模型，叠加天权大模型，自动识别地物、检测变化。</li>
   </ul>
 
-  <p>
-    关于 AI 解译和天权大模型，我们在另一篇《AI 如何“看懂”卫星影像？航天宏图 PIE-Engine 的智能解译》里专门展开过，这里不赘述。要点是：<strong>PIE-Engine 不只是把计算搬上云，还把“智能”也搬上了云。</strong>
-  </p>
-
-  <h2>五、为什么“国产”这两个字很关键</h2>
+  <h2>五、上云带来的三个变化</h2>
 
   <p>
-    对标 GEE 的国产云平台，价值落在三件事上：
+    对遥感从业者来说，上云不只是“方便一点”，而是三个实质变化：
   </p>
 
   <ul>
-    <li><strong>信创适配</strong>：已适配飞腾、海光、鲲鹏、龙芯等国产 CPU，麒麟操作系统，摩尔线程、海光 DCU、华为昇腾等国产 GPU/NPU，以及人大金仓、瀚高、PolarDB、华为高斯等国产数据库；</li>
-    <li><strong>数据安全</strong>：影像数据不出境、算力自主，配合国产密码算法，贴合政企与涉密场景；</li>
-    <li><strong>自主知识产权</strong>：累计发明专利 43 项、软件著作权 75 项，经中国测绘学会组织的院士专家鉴定，整体达到国际先进水平。</li>
+    <li><strong>门槛降低</strong>：新手也能快速掌握，遥感能力从专业团队普及到更多人；</li>
+    <li><strong>协作变易</strong>：数据在云端，多人共享、跨单位协作不再依赖硬盘拷贝；</li>
+    <li><strong>自主可控</strong>：数据在国内、算力可控、适配国产软硬件，政企和涉密场景也能用。</li>
   </ul>
 
-  <p>
-    换句话说，PIE-Engine 补的不只是一个“功能”，而是“数据、算力、软硬件全链路可控”这件事。
-  </p>
-
-  <h2>六、谁在用：从部委到高校</h2>
+  <h2>六、谁已经在用了</h2>
 
   <p>
-    PIE-Engine 不是停留在概念里的平台，它已经落地到真实业务：
+    25 万+ 在线注册用户的背后，是一批具有代表性的部门和机构：农业农村部大数据发展中心、水利部信息中心、自然资源部四川基础地理信息中心等国家部委；10 多个省、20 多个市级高分中心；以及大批高校科研院所。
   </p>
-
-  <ul>
-    <li><strong>国家部委</strong>：农业农村部大数据发展中心、水利部信息中心、自然资源部四川基础地理信息中心（建成无人值守数据处理系统，支持 20 多种卫星、处理影像 5 万+ 景）；</li>
-    <li><strong>省市高分中心</strong>：10 多个省、20 多个市级高分或卫星应用中心；</li>
-    <li><strong>高校科研</strong>：遥感、地理信息、无人机实训室与课程建设；</li>
-    <li><strong>规模</strong>：25 万+ 在线注册用户，PIE 累计分发 5 万+ 套、服务用户 1000+。</li>
-  </ul>
 
   <div class="a-insight">
-    总而言之，Google Earth Engine 定义了“遥感云”这件事，让全世界第一次意识到：遥感分析可以不用下载影像、不用买工作站。PIE-Engine 做的事，是把这件事在中国重新做了一遍，并且做得更贴合国产场景——数据在国内、算力可控、适配信创软硬件，再叠加 AI 大模型。对于需要“自己的遥感云”的政企和科研单位来说，这是一条绕得开 GEE 的路。
+    总而言之，软件上云不是简单地把软件搬到服务器上，而是把“数据、算力、算法”都变成随时可调用的服务。PIE-Engine 做的事，是把遥感这条门槛高高的路，铺成了一条浏览器里就能走的云上高速。
   </div>
 
 </div>
