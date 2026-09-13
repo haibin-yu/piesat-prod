@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>PIE-Engine 是什么？对标谷歌地球引擎的中国遥感云 | 航天宏图</title>
+<meta content="做遥感的人几乎都用过 Google Earth Engine，但它在国内访问受限、数据在境外。本文讲清航天宏图 PIE-Engine 遥感云平台是什么：一云十服务、对标 GEE 的 Studio 在线计算、天权大模型，以及为什么国产遥感云重要。" name="description"/>
+<meta content="PIE-Engine,遥感云平台,Google Earth Engine,国产遥感云,遥感云计算,PIE-Engine Studio,天权大模型,航天宏图" name="keywords"/>
+<meta property="og:title" content="PIE-Engine 是什么？对标谷歌地球引擎的中国遥感云 | 航天宏图"/>
+<meta property="og:description" content="做遥感的人几乎都用过 Google Earth Engine，但它在国内访问受限、数据在境外。本文讲清航天宏图 PIE-Engine 遥感云平台是什么。"/>
+<meta property="og:image" content="https://haibin-yu.github.io/piesat-prod/piesat-engine-architecture.png"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://haibin-yu.github.io/piesat-prod/article-c3-pie-engine.html"/>
+<meta property="og:site_name" content="航天宏图 · 技术博客"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="PIE-Engine 是什么？对标谷歌地球引擎的中国遥感云 | 航天宏图"/>
+<meta name="twitter:description" content="做遥感的人几乎都用过 Google Earth Engine，但它在国内访问受限、数据在境外。本文讲清航天宏图 PIE-Engine 遥感云平台是什么。"/>
+<meta name="twitter:image" content="https://haibin-yu.github.io/piesat-prod/piesat-engine-architecture.png"/>
+<link rel="canonical" href="https://haibin-yu.github.io/piesat-prod/article-c3-pie-engine.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "PIE-Engine 是什么？对标谷歌地球引擎的中国遥感云",
+  "description": "做遥感的人几乎都用过 Google Earth Engine，但它在国内访问受限、数据在境外。本文讲清航天宏图 PIE-Engine 遥感云平台是什么：一云十服务、对标 GEE 的 Studio 在线计算、天权大模型，以及为什么国产遥感云重要。",
+  "author": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司" },
+  "publisher": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司", "url": "https://www.piesat.cn" },
+  "datePublished": "2026-09-13",
+  "dateModified": "2026-09-13",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/pie-engine-cloud-platform" },
+  "image": "https://haibin-yu.github.io/piesat-prod/piesat-engine-architecture.png",
+  "keywords": ["PIE-Engine","遥感云平台","Google Earth Engine","国产遥感云","遥感云计算","PIE-Engine Studio","天权大模型"],
+  "about": { "@type": "Thing", "name": "PIE-Engine 遥感云平台", "description": "航天宏图自主研发的遥感云平台，一云十服务，对标 Google Earth Engine，提供数据、算力、算法与 AI 大模型一体化的云端遥感服务，适配国产软硬件环境。" }
+}
+</script>
+<style>
+.a-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+.a-bread{font-size:13px;color:#aaa;margin-bottom:32px}
+.a-bread a{color:#4a90d9;text-decoration:none}
+.a-head{margin-bottom:36px}
+.a-head .a-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;color:#4a90d9;margin-bottom:16px}
+.a-head h1{font-size:28px;font-weight:700;line-height:1.45;color:#0f0f0f;letter-spacing:-0.3px}
+.a-head .a-meta{margin-top:16px;font-size:13px;color:#999;display:flex;gap:20px;align-items:center}
+.a-body{font-size:16px;color:#2a2a2a;line-height:1.9}
+.a-body h2{font-size:20px;font-weight:700;color:#0f0f0f;margin:48px 0 16px}
+.a-body p{margin-bottom:20px}
+.a-body strong{color:#111}
+.a-body ul,.a-body ol{margin:8px 0 20px 22px}
+.a-body li{margin-bottom:10px;color:#3a3a3a}
+.a-fig{margin:32px 0;text-align:center}
+.a-fig img{max-width:100%;border-radius:4px}
+.a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
+.a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
+.a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
+.a-related h4{font-size:13px;color:#aaa;font-weight:600;letter-spacing:2px;margin-bottom:16px}
+.a-related a{display:block;padding:9px 0;font-size:14px;color:#4a90d9;text-decoration:none;border-bottom:1px solid #f2f2f2}
+.a-related a:last-child{border-bottom:none}
+.a-related a:hover{color:#2b6cb0}
+
+.tb-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a1a1a;color:#fff;padding:8px 20px;display:flex;align-items:center;gap:12px;font-size:12px;font-family:"PingFang SC","Hiragino Sans GB",sans-serif}
+.tb-bar .tb-title{font-weight:700;color:#4a90d9;letter-spacing:1px;white-space:nowrap}
+.tb-bar .tb-btn{background:#4a90d9;color:#fff;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tb-bar .tb-btn.copied{background:#22c55e}
+.tb-bar .tb-btn-outline{background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
+body{padding-top:42px}
+@media(print){.tb-bar{display:none!important}body{padding-top:0}}
+@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}}
+</style>
+</head>
+<body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
+
+<div id="tb-wrapper">
+<div class="tb-bar">
+  <span class="tb-title">交付预览</span>
+  <span style="flex:1"></span>
+  <button class="tb-btn-outline" onclick="viewSource()">查看源码</button>
+  <button class="tb-btn" id="copyBtn" onclick="copySource()">复制发布源码</button>
+  <button class="tb-btn" style="background:#22c55e" id="copyTextBtn" onclick="copyArticleText()">复制文章内容</button>
+</div>
+<textarea id="srcArea" readonly style="display:none;position:fixed;top:42px;left:0;right:0;bottom:0;z-index:9998;width:100%;border:none;background:#1a1a1a;color:#ccc;font-family:monospace;font-size:12px;padding:20px;resize:none;tab-size:2"></textarea>
+<script>
+function clean(){var c=document.documentElement.cloneNode(true);var w=c.querySelector('#tb-wrapper');if(w)w.remove();return '<!doctype html>\n'+c.outerHTML;}
+function copySource(){navigator.clipboard.writeText(clean()).then(function(){var b=document.getElementById('copyBtn');b.textContent='已复制！';b.classList.add('copied');setTimeout(function(){b.textContent='复制发布源码';b.classList.remove('copied');},2000);});}
+function viewSource(){var a=document.getElementById('srcArea');if(a.style.display==='block'){a.style.display='none';return;}a.value=clean();a.style.display='block';}
+async function copyArticleText(){
+  var b=document.getElementById("copyTextBtn");
+  b.textContent="处理中...";
+  var wrapper=document.createElement("div");
+  var h1=document.querySelector(".a-head h1")||document.querySelector("h1");
+  if(h1){var titleH=document.createElement("h2");titleH.textContent=h1.textContent.trim();titleH.style.textAlign="center";wrapper.appendChild(titleH);}
+  var body=document.querySelector(".a-body");
+  if(!body)return;
+  var imgElements=[];
+  for(var i=0;i<body.children.length;i++){
+    var el=body.children[i];
+    var tag=el.tagName.toLowerCase();
+    var text=el.textContent.trim();
+    if(!text)continue;
+    if(tag==="h2"){var h=document.createElement("h2");h.textContent=text;wrapper.appendChild(h);}
+    else if(tag==="p"){var p=document.createElement("p");p.textContent=text;wrapper.appendChild(p);}
+    else if(el.classList.contains("a-fig")){
+      var img=el.querySelector("img");
+      var cap=el.querySelector(".a-cap");
+      if(img){var imgClone=document.createElement("img");imgClone.src=img.src;imgClone.alt=img.alt;imgClone.style.maxWidth="100%";imgClone.style.display="block";imgClone.style.margin="16px auto";wrapper.appendChild(imgClone);imgElements.push({el:imgClone,url:img.src});}
+      if(cap){var c=document.createElement("p");c.textContent=cap.textContent.trim();c.style.fontSize="12px";c.style.color="#888";c.style.fontStyle="italic";wrapper.appendChild(c);}
+    }else if(el.classList.contains("a-insight")){
+      var bq=document.createElement("blockquote");bq.textContent=text;wrapper.appendChild(bq);
+    }else if(tag==="ul"||tag==="ol"){
+      wrapper.appendChild(el.cloneNode(true));
+    }
+  }
+  var tasks=imgElements.map(function(item){return fetch(item.url).then(function(r){return r.blob()}).then(function(blob){return new Promise(function(resolve){var reader=new FileReader();reader.onloadend=function(){item.el.src=reader.result;resolve()};reader.onerror=resolve;reader.readAsDataURL(blob)})}).catch(function(){})});
+  await Promise.all(tasks);
+  var htmlContent="<html><body>"+wrapper.innerHTML+"</body></html>";
+  try{var htmlBlob=new Blob([htmlContent],{type:"text/html"});await navigator.clipboard.write([new ClipboardItem({"text/html":htmlBlob})]);b.textContent="已复制！";}
+  catch(e){navigator.clipboard.writeText(wrapper.textContent);b.textContent="已复制(仅文字)";}
+  setTimeout(function(){b.textContent="复制文章内容";},2000);
+}
+</script>
+</div>
+
+<div class="a-wrap" style="padding-top:48px">
+<div class="a-bread">
+  <a href="/">首页</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">技术博客</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">PIE-Engine 遥感云</a>
+</div>
+
+<div class="a-head">
+  <div class="a-tag">PIE-Engine 遥感云</div>
+  <h1>PIE-Engine 是什么？对标谷歌地球引擎的中国遥感云</h1>
+  <div class="a-meta">
+    <span>航天宏图 · 技术博客</span>
+    <span>2026年9月13日</span>
+    <span>阅读约 8 分钟</span>
+  </div>
+</div>
+
+<div class="a-body">
+
+  <p>
+    做遥感的人，几乎都绕不开 Google Earth Engine（GEE）。在浏览器里写几行代码，就能调用谷歌云上的 PB 级卫星影像做植被分析、水体提取、变化检测——不用自己下载影像、不用配算力，几分钟跑完过去要几天的工作。
+  </p>
+
+  <p>
+    但 GEE 有两个绕不开的问题：<strong>数据在境外、访问不稳定</strong>。对国内的政企、科研单位来说，影像数据出海涉及合规，涉密和信创场景更是完全用不了。
+  </p>
+
+  <p>
+    于是问题来了：中国有没有自己的“遥感云”？有——<strong>航天宏图的 PIE-Engine，就是其中一个答案。</strong>
+  </p>
+
+  <h2>一、GEE 为什么重要，又为什么“不够用”</h2>
+
+  <p>
+    Google Earth Engine 之所以成为遥感界的“标配工具”，在于它把三样东西打包成了在线服务：<strong>海量影像数据、云端算力、在线编程环境</strong>。用户不关心数据存在哪、算力够不够，只需要写代码，剩下的交给谷歌。
+  </p>
+
+  <p>
+    它把遥感分析的门槛，从“专业软件 + 高性能工作站”，降到了“一台能上网的电脑”。这是它最重要的贡献。
+  </p>
+
+  <p>
+    但对中国用户来说，GEE 有两个明显的短板：
+  </p>
+
+  <ul>
+    <li><strong>数据与算力都在境外</strong>：网络访问不稳定，关键任务不敢依赖；</li>
+    <li><strong>影像数据涉及跨境流动</strong>：政企、涉密、信创场景无法使用。</li>
+  </ul>
+
+  <p>
+    所以，一个“数据在国内、算力可控、适配国产软硬件”的遥感云平台，就成了刚需。这正是 PIE-Engine 的定位。
+  </p>
+
+  <h2>二、PIE-Engine 是什么：不是一款软件，是一朵“遥感云”</h2>
+
+  <p>
+    一句话：<strong>PIE-Engine 是航天宏图的遥感云平台，把数据、算力、算法、AI 全部搬上云端</strong>，让用户在浏览器里就能完成从数据获取到智能解译的全流程。
+  </p>
+
+  <p>
+    它不是一个单独的工具，而是一套“云上服务”，官方把它归纳为<strong>“一云十服务”</strong>——以 PIE-Engine 遥感云平台为载体，承载 10 个服务组件。按功能，它们大致可以分成几层：
+  </p>
+
+  <ul>
+    <li><strong>底座层</strong>：NativeSphere 云底座（混合云操作系统）；</li>
+    <li><strong>数据层</strong>：Server 时空数据服务；</li>
+    <li><strong>生产层</strong>：Factory 数据处理服务；</li>
+    <li><strong>计算层</strong>：Studio 遥感计算服务；</li>
+    <li><strong>智能层</strong>：AI 智能解译、GPT 天权大模型、LLM 智能体、Knowledge 知识图谱、Blockchain 区块链；</li>
+    <li><strong>中台层</strong>：BPaaS 通用技术服务中台。</li>
+  </ul>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-engine-architecture.png" alt="航天宏图 PIE-Engine 遥感云平台架构" loading="lazy">
+    <div class="a-cap">▲ 航天宏图 PIE-Engine 遥感云平台架构。以 NativeSphere 云底座为地基，向上承接时空数据（Server）、影像生产（Factory）、遥感计算（Studio）、智能解译（AI / 天权 GPT）等服务，构成“数据—算力—算法—智能”的云端完整链路。</div>
+  </div>
+
+  <h2>三、从下往上看：这朵云是怎么运转的</h2>
+
+  <p>
+    把这十服务拆开看，才能真正理解“云平台”和“单个软件”的区别。
+  </p>
+
+  <p>
+    <strong>NativeSphere 云底座</strong>，是这朵云的“地基”。它基于 Kubernetes 容器化云原生技术，把私有云、公有云、混合云整合成一套算力网络，解决云平台部署、算力调度、运行监控、升级运维这些“底层麻烦”，相当于一个面向地球科学领域的混合云操作系统。
+  </p>
+
+  <p>
+    <strong>Server 时空数据服务</strong>，是“仓库”。它负责影像、矢量、三维模型等时空数据的一体化管理——存储、检索、在线浏览、发布，把散落在各处的数据统一起来。
+  </p>
+
+  <p>
+    <strong>Factory 数据处理服务</strong>，是“生产车间”。它把遥感影像生产流水线搬上了云：支持 36 类主流卫星数据、287 个功能算法、257 条生产线，从原始影像到正射、融合、真彩色、DOM/DEM 等标准化产品，全自动批量生产，并支持可视化流程编排。
+  </p>
+
+  <p>
+    <strong>Studio 遥感计算服务</strong>，是“开发环境”，也是<strong>对标 GEE 的核心</strong>。它集海量地理空间数据、交互式编程、实时分布式计算、数据可视化为一体，用户在线写代码、在线跑分析、在线出结果。官方对它的定位正是：对标 Google Earth Engine，弥补国内云计算平台长期空白。
+  </p>
+
+  <p>
+    从底座到数据、到生产、到计算——这样一层层搭起来，PIE-Engine 才具备了“用浏览器代替工作站”的能力。
+  </p>
+
+  <h2>四、不止于计算：AI 和大模型是“上层建筑”</h2>
+
+  <p>
+    在数据、生产、计算之上，PIE-Engine 还叠加了智能能力，这是它相比早期遥感云的延伸：
+  </p>
+
+  <ul>
+    <li><strong>AI 智能解译服务</strong>：内置 40 多个深度学习模型，35 类以上地物解译，单类精度达 90% 以上；</li>
+    <li><strong>天权大模型（GPT）</strong>：10 亿以上参数，支持地物提取、变化检测、道路提取、三维重建等在线实时解译；</li>
+    <li><strong>LLM 智能体、Knowledge 知识图谱、Blockchain 区块链</strong>：进一步提供智能问答、知识服务与可信数据能力。</li>
+  </ul>
+
+  <p>
+    关于 AI 解译和天权大模型，我们在另一篇《AI 如何“看懂”卫星影像？航天宏图 PIE-Engine 的智能解译》里专门展开过，这里不赘述。要点是：<strong>PIE-Engine 不只是把计算搬上云，还把“智能”也搬上了云。</strong>
+  </p>
+
+  <h2>五、为什么“国产”这两个字很关键</h2>
+
+  <p>
+    对标 GEE 的国产云平台，价值落在三件事上：
+  </p>
+
+  <ul>
+    <li><strong>信创适配</strong>：已适配飞腾、海光、鲲鹏、龙芯等国产 CPU，麒麟操作系统，摩尔线程、海光 DCU、华为昇腾等国产 GPU/NPU，以及人大金仓、瀚高、PolarDB、华为高斯等国产数据库；</li>
+    <li><strong>数据安全</strong>：影像数据不出境、算力自主，配合国产密码算法，贴合政企与涉密场景；</li>
+    <li><strong>自主知识产权</strong>：累计发明专利 43 项、软件著作权 75 项，经中国测绘学会组织的院士专家鉴定，整体达到国际先进水平。</li>
+  </ul>
+
+  <p>
+    换句话说，PIE-Engine 补的不只是一个“功能”，而是“数据、算力、软硬件全链路可控”这件事。
+  </p>
+
+  <h2>六、谁在用：从部委到高校</h2>
+
+  <p>
+    PIE-Engine 不是停留在概念里的平台，它已经落地到真实业务：
+  </p>
+
+  <ul>
+    <li><strong>国家部委</strong>：农业农村部大数据发展中心、水利部信息中心、自然资源部四川基础地理信息中心（建成无人值守数据处理系统，支持 20 多种卫星、处理影像 5 万+ 景）；</li>
+    <li><strong>省市高分中心</strong>：10 多个省、20 多个市级高分或卫星应用中心；</li>
+    <li><strong>高校科研</strong>：遥感、地理信息、无人机实训室与课程建设；</li>
+    <li><strong>规模</strong>：25 万+ 在线注册用户，PIE 累计分发 5 万+ 套、服务用户 1000+。</li>
+  </ul>
+
+  <div class="a-insight">
+    总而言之，Google Earth Engine 定义了“遥感云”这件事，让全世界第一次意识到：遥感分析可以不用下载影像、不用买工作站。PIE-Engine 做的事，是把这件事在中国重新做了一遍，并且做得更贴合国产场景——数据在国内、算力可控、适配信创软硬件，再叠加 AI 大模型。对于需要“自己的遥感云”的政企和科研单位来说，这是一条绕得开 GEE 的路。
+  </div>
+
+</div>
+
+<div class="a-related">
+  <h4>相关阅读</h4>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2724.html">遥感软件还是 GIS 软件？一文看懂航天宏图 PIE</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2687.html">为什么需要 114 颗卫星？女娲星座的组网之路</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2631.html">SAR 卫星能做什么？六大领域应用全景</a>
+</div>
+
+</div>
+</body>
+</html>
