@@ -157,6 +157,10 @@ async function copyArticleText(){
   </ul>
 
   <p>
+    这三个难题，本质上是同一件事的两面。遥感处理的底层逻辑，是“用专业软件加足量算力，把原始影像变成可用信息”，而过去几十年，这件事只能靠“把软件和算力买回家”来完成——于是每个单位、每个人，都得各自配齐一整套软件和硬件。
+  </p>
+
+  <p>
     更致命的是，这些门槛是“重复付费”的——每个单位、每个人都得自行配置一整套软件和硬件，数据还分散在各自的本地硬盘里，更换设备或单位后便难以延续。
   </p>
 
@@ -164,6 +168,10 @@ async function copyArticleText(){
 
   <p>
     “上云”的本质，是把“买软件”变成“用服务”。就像从买光盘装办公软件，变成直接用在线文档：不用管软件装在哪、版本对不对，打开浏览器就能工作。
+  </p>
+
+  <p>
+    这件事之所以到今天才普遍，是因为三个条件先后成熟：一是云计算基础设施足够便宜、稳定，能承载大规模影像处理；二是卫星越造越多、影像数据爆炸式增长，本地存不下、也传不动；三是 AI 技术兴起，让“自动识别地物”从实验室走进了生产。
   </p>
 
   <p>
@@ -182,22 +190,33 @@ async function copyArticleText(){
     PIE-Engine 是航天宏图的遥感云平台，它把原来装在电脑里的 PIE 软件能力，全部搬到了云端，官方把它归纳为<strong>“一云十服务”</strong>——一朵云，承载 10 个服务组件。
   </p>
 
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-engine-architecture.png" alt="航天宏图 PIE-Engine 遥感云平台架构" loading="lazy">
+    <div class="a-cap">▲ 航天宏图 PIE-Engine 遥感云平台架构。把原来装在电脑里的数据、处理、计算、解译能力，全部搬上云端，浏览器即入口。</div>
+  </div>
+
   <p>
     这十个服务，覆盖了原来桌面软件的工作：
   </p>
 
   <ul>
-    <li><strong>数据处理</strong>：Factory 数据处理服务；</li>
-    <li><strong>遥感计算</strong>：Studio 遥感计算服务；</li>
-    <li><strong>智能解译</strong>：AI 智能解译服务、GPT 天权大模型；</li>
-    <li><strong>数据管理</strong>：Server 时空数据服务；</li>
-    <li><strong>云底座</strong>：NativeSphere 云底座，管住底下的算力与运维。</li>
+    <li><strong>云底座</strong>：NativeSphere 混合云底座，管住底下的算力、存储与运维；</li>
+    <li><strong>数据</strong>：Server 时空数据服务，负责海量影像的接入、管理与共享；</li>
+    <li><strong>处理</strong>：Factory 数据处理服务，支持 36 类主流卫星、287 个功能算法、257 条生产线；</li>
+    <li><strong>计算</strong>：Studio 遥感计算服务，对标 Google Earth Engine，在线写代码、在线跑分析；</li>
+    <li><strong>智能</strong>：AI 智能解译服务、GPT 天权大模型、LLM 智能体；</li>
+    <li><strong>知识与可信</strong>：Knowledge 知识图谱服务、Blockchain 区块链服务；</li>
+    <li><strong>中台</strong>：BPaaS 通用技术服务中台，把能力开放给行业二次开发。</li>
   </ul>
 
   <div class="a-fig">
-    <img src="https://haibin-yu.github.io/piesat-prod/piesat-engine-architecture.png" alt="航天宏图 PIE-Engine 遥感云平台架构" loading="lazy">
-    <div class="a-cap">▲ 航天宏图 PIE-Engine 遥感云平台架构。把原来装在电脑里的数据、处理、计算、解译能力，全部搬上云端，浏览器即入口。</div>
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-workflow-architecture.jpg" alt="PIE-Engine 一云十服务业务流程关系" loading="lazy">
+    <div class="a-cap">▲ PIE-Engine「一云十服务」的业务流程关系。从数据接入、处理、计算到智能解译，十个服务像流水线一样串成一条完整的遥感生产链路。</div>
   </div>
+
+  <p>
+    这十个服务不是彼此孤立，而是像流水线一样串在一起：数据在 Server 里管，处理在 Factory 里跑，分析在 Studio 里做，解译交给 AI 与天权，最后通过 BPaaS 中台开放给具体的行业应用。
+  </p>
 
   <h2>四、云端到底能干什么</h2>
 
@@ -205,11 +224,27 @@ async function copyArticleText(){
     具体到每天的工作，PIE-Engine 能替遥感从业者省掉三件事：
   </p>
 
-  <ul>
-    <li><strong>处理影像不用装软件</strong>：Factory 支持 36 类主流卫星、287 个功能算法、257 条生产线，浏览器里拖拽编排就能批量生产；</li>
-    <li><strong>做分析不用配环境</strong>：Studio 对标 Google Earth Engine，在线写代码、在线跑分析；</li>
-    <li><strong>解译无需逐个标注</strong>：AI 内置 40 多个深度学习模型，叠加天权大模型，自动识别地物、检测变化。</li>
-  </ul>
+  <p>
+    <strong>处理影像不用装软件</strong>：Factory 支持 36 类主流卫星、287 个功能算法、257 条生产线，浏览器里拖拽编排就能批量生产；一条流程编排好，可以反复调用、自动产出标准产品。
+  </p>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-engine-factory.png" alt="PIE-Engine Factory 数据处理服务界面" loading="lazy">
+    <div class="a-cap">▲ PIE-Engine Factory 数据处理服务。支持 36 类主流卫星、287 个功能算法、257 条生产线，拖拽编排即可批量生产影像产品。</div>
+  </div>
+
+  <p>
+    <strong>做分析不用配环境</strong>：Studio 对标 Google Earth Engine，内置海量数据与算法，在线写代码、在线跑分析，不再为装 Python、配 GPU 环境发愁。
+  </p>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-engine-studio.png" alt="PIE-Engine Studio 遥感计算服务界面" loading="lazy">
+    <div class="a-cap">▲ PIE-Engine Studio 遥感计算服务。左侧选数据、右侧写代码，在浏览器里在线完成遥感分析，对标 Google Earth Engine。</div>
+  </div>
+
+  <p>
+    <strong>解译无需逐个标注</strong>：AI 内置 40 多个深度学习模型，叠加天权大模型，自动识别地物、检测变化，把过去“人工逐个标注”的活交给机器。
+  </p>
 
   <h2>五、上云带来的三个变化</h2>
 
@@ -227,6 +262,14 @@ async function copyArticleText(){
 
   <p>
     25 万+ 在线注册用户的背后，是一批具有代表性的部门和机构：农业农村部大数据发展中心、水利部信息中心、自然资源部四川基础地理信息中心等国家部委；10 多个省、20 多个市级高分中心；以及大批高校科研院所。
+  </p>
+
+  <p>
+    这些机构把 PIE-Engine 用在了实实在在的业务里。以自然资源部四川基础地理信息中心为例，借助云端处理能力，建成了一套业务化、无人值守的数据处理系统——影像进、产品出，流程自动运行。省市级高分中心则把卫星数据的接收、处理、分发搬到云上，多个单位共享一套能力，不必各自重复建设。
+  </p>
+
+  <p>
+    高校科研院所是另一类典型用户：把 PIE-Engine 当作教学与科研的公共平台，学生打开浏览器就能上手，不必再为装软件、配环境耗费时间，把精力放回算法和课题本身。
   </p>
 
   <div class="a-insight">
