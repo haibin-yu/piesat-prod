@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>遥感软件上云了：一文看懂航天宏图 PIE-Engine 遥感云平台 | 航天宏图</title>
+<meta content="过去做遥感要装几十个 G 的软件、配高性能工作站；现在浏览器里就能完成。本文讲清航天宏图 PIE-Engine 遥感云平台如何把遥感软件搬上云：一云十服务、在线处理与计算、AI 解译，以及它给遥感从业者带来的变化。" name="description"/>
+<meta content="遥感软件,PIE-Engine,遥感云平台,软件上云,在线遥感处理,遥感云计算,航天宏图" name="keywords"/>
+<meta property="og:title" content="遥感软件上云了：一文看懂航天宏图 PIE-Engine 遥感云平台 | 航天宏图"/>
+<meta property="og:description" content="过去做遥感要装几十个 G 的软件、配高性能工作站；现在浏览器里就能完成。本文讲清航天宏图 PIE-Engine 遥感云平台如何把遥感软件搬上云。"/>
+<meta property="og:image" content="https://haibin-yu.github.io/piesat-prod/piesat-engine-architecture.png"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://haibin-yu.github.io/piesat-prod/article-c3-pie-engine-cloud.html"/>
+<meta property="og:site_name" content="航天宏图 · 技术博客"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="遥感软件上云了：一文看懂航天宏图 PIE-Engine 遥感云平台 | 航天宏图"/>
+<meta name="twitter:description" content="过去做遥感要装几十个 G 的软件、配高性能工作站；现在浏览器里就能完成。本文讲清航天宏图 PIE-Engine 遥感云平台如何把遥感软件搬上云。"/>
+<meta name="twitter:image" content="https://haibin-yu.github.io/piesat-prod/piesat-engine-architecture.png"/>
+<link rel="canonical" href="https://haibin-yu.github.io/piesat-prod/article-c3-pie-engine-cloud.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "遥感软件上云了：一文看懂航天宏图 PIE-Engine 遥感云平台",
+  "description": "过去做遥感要装几十个 G 的软件、配高性能工作站；现在浏览器里就能完成。本文讲清航天宏图 PIE-Engine 遥感云平台如何把遥感软件搬上云：一云十服务、在线处理与计算、AI 解译，以及它给遥感从业者带来的变化。",
+  "author": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司" },
+  "publisher": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司", "url": "https://www.piesat.cn" },
+  "datePublished": "2026-09-13",
+  "dateModified": "2026-09-13",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/pie-engine-cloud" },
+  "image": "https://haibin-yu.github.io/piesat-prod/piesat-engine-architecture.png",
+  "keywords": ["遥感软件","PIE-Engine","遥感云平台","软件上云","在线遥感处理","遥感云计算"],
+  "about": { "@type": "Thing", "name": "PIE-Engine 遥感云平台", "description": "航天宏图自主研发的遥感云平台，一云十服务，把数据、算力、算法变成云端服务，让遥感从业者用浏览器即可完成影像处理、计算与智能解译。" }
+}
+</script>
+<style>
+.a-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+.a-bread{font-size:13px;color:#aaa;margin-bottom:32px}
+.a-bread a{color:#4a90d9;text-decoration:none}
+.a-head{margin-bottom:36px}
+.a-head .a-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;color:#4a90d9;margin-bottom:16px}
+.a-head h1{font-size:28px;font-weight:700;line-height:1.45;color:#0f0f0f;letter-spacing:-0.3px}
+.a-head .a-meta{margin-top:16px;font-size:13px;color:#999;display:flex;gap:20px;align-items:center}
+.a-body{font-size:16px;color:#2a2a2a;line-height:1.9}
+.a-body h2{font-size:20px;font-weight:700;color:#0f0f0f;margin:48px 0 16px}
+.a-body p{margin-bottom:20px}
+.a-body strong{color:#111}
+.a-body ul,.a-body ol{margin:8px 0 20px 22px}
+.a-body li{margin-bottom:10px;color:#3a3a3a}
+.a-fig{margin:32px 0;text-align:center}
+.a-fig img{max-width:100%;border-radius:4px}
+.a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
+.a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
+.a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
+.a-related h4{font-size:13px;color:#aaa;font-weight:600;letter-spacing:2px;margin-bottom:16px}
+.a-related a{display:block;padding:9px 0;font-size:14px;color:#4a90d9;text-decoration:none;border-bottom:1px solid #f2f2f2}
+.a-related a:last-child{border-bottom:none}
+.a-related a:hover{color:#2b6cb0}
+
+.tb-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a1a1a;color:#fff;padding:8px 20px;display:flex;align-items:center;gap:12px;font-size:12px;font-family:"PingFang SC","Hiragino Sans GB",sans-serif}
+.tb-bar .tb-title{font-weight:700;color:#4a90d9;letter-spacing:1px;white-space:nowrap}
+.tb-bar .tb-btn{background:#4a90d9;color:#fff;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tb-bar .tb-btn.copied{background:#22c55e}
+.tb-bar .tb-btn-outline{background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
+body{padding-top:42px}
+@media(print){.tb-bar{display:none!important}body{padding-top:0}}
+@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}}
+</style>
+</head>
+<body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
+
+<div id="tb-wrapper">
+<div class="tb-bar">
+  <span class="tb-title">交付预览</span>
+  <span style="flex:1"></span>
+  <button class="tb-btn-outline" onclick="viewSource()">查看源码</button>
+  <button class="tb-btn" id="copyBtn" onclick="copySource()">复制发布源码</button>
+  <button class="tb-btn" style="background:#22c55e" id="copyTextBtn" onclick="copyArticleText()">复制文章内容</button>
+</div>
+<textarea id="srcArea" readonly style="display:none;position:fixed;top:42px;left:0;right:0;bottom:0;z-index:9998;width:100%;border:none;background:#1a1a1a;color:#ccc;font-family:monospace;font-size:12px;padding:20px;resize:none;tab-size:2"></textarea>
+<script>
+function clean(){var c=document.documentElement.cloneNode(true);var w=c.querySelector('#tb-wrapper');if(w)w.remove();return '<!doctype html>\n'+c.outerHTML;}
+function copySource(){navigator.clipboard.writeText(clean()).then(function(){var b=document.getElementById('copyBtn');b.textContent='已复制！';b.classList.add('copied');setTimeout(function(){b.textContent='复制发布源码';b.classList.remove('copied');},2000);});}
+function viewSource(){var a=document.getElementById('srcArea');if(a.style.display==='block'){a.style.display='none';return;}a.value=clean();a.style.display='block';}
+async function copyArticleText(){
+  var b=document.getElementById("copyTextBtn");
+  b.textContent="处理中...";
+  var wrapper=document.createElement("div");
+  var h1=document.querySelector(".a-head h1")||document.querySelector("h1");
+  if(h1){var titleH=document.createElement("h2");titleH.textContent=h1.textContent.trim();titleH.style.textAlign="center";wrapper.appendChild(titleH);}
+  var body=document.querySelector(".a-body");
+  if(!body)return;
+  var imgElements=[];
+  for(var i=0;i<body.children.length;i++){
+    var el=body.children[i];
+    var tag=el.tagName.toLowerCase();
+    var text=el.textContent.trim();
+    if(!text)continue;
+    if(tag==="h2"){var h=document.createElement("h2");h.textContent=text;wrapper.appendChild(h);}
+    else if(tag==="p"){var p=document.createElement("p");p.textContent=text;wrapper.appendChild(p);}
+    else if(el.classList.contains("a-fig")){
+      var img=el.querySelector("img");
+      var cap=el.querySelector(".a-cap");
+      if(img){var imgClone=document.createElement("img");imgClone.src=img.src;imgClone.alt=img.alt;imgClone.style.maxWidth="100%";imgClone.style.display="block";imgClone.style.margin="16px auto";wrapper.appendChild(imgClone);imgElements.push({el:imgClone,url:img.src});}
+      if(cap){var c=document.createElement("p");c.textContent=cap.textContent.trim();c.style.fontSize="12px";c.style.color="#888";c.style.fontStyle="italic";wrapper.appendChild(c);}
+    }else if(el.classList.contains("a-insight")){
+      var bq=document.createElement("blockquote");bq.textContent=text;wrapper.appendChild(bq);
+    }else if(tag==="ul"||tag==="ol"){
+      wrapper.appendChild(el.cloneNode(true));
+    }
+  }
+  var tasks=imgElements.map(function(item){return fetch(item.url).then(function(r){return r.blob()}).then(function(blob){return new Promise(function(resolve){var reader=new FileReader();reader.onloadend=function(){item.el.src=reader.result;resolve()};reader.onerror=resolve;reader.readAsDataURL(blob)})}).catch(function(){})});
+  await Promise.all(tasks);
+  var htmlContent="<html><body>"+wrapper.innerHTML+"</body></html>";
+  try{var htmlBlob=new Blob([htmlContent],{type:"text/html"});await navigator.clipboard.write([new ClipboardItem({"text/html":htmlBlob})]);b.textContent="已复制！";}
+  catch(e){navigator.clipboard.writeText(wrapper.textContent);b.textContent="已复制(仅文字)";}
+  setTimeout(function(){b.textContent="复制文章内容";},2000);
+}
+</script>
+</div>
+
+<div class="a-wrap" style="padding-top:48px">
+<div class="a-bread">
+  <a href="/">首页</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">技术博客</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">PIE-Engine 遥感云</a>
+</div>
+
+<div class="a-head">
+  <div class="a-tag">PIE-Engine 遥感云</div>
+  <h1>遥感软件上云了：一文看懂航天宏图 PIE-Engine 遥感云平台</h1>
+  <div class="a-meta">
+    <span>航天宏图 · 技术博客</span>
+    <span>2026年9月13日</span>
+    <span>阅读约 7 分钟</span>
+  </div>
+</div>
+
+<div class="a-body">
+
+  <p>
+    十几年前，做遥感要装一套几十个 G 的专业软件，配一台高性能工作站，处理一幅影像要等上大半天。今天，很多工作只需要一个浏览器——打开网页、上传数据、点几下鼠标，影像就处理好了。
+  </p>
+
+  <p>
+    这个变化背后，是遥感软件正在“上云”。<strong>航天宏图的 PIE-Engine，就是把“上云”这件事，做成了国产遥感云平台。</strong>
+  </p>
+
+  <h2>一、过去的痛点：软件重、算力贵、门槛高</h2>
+
+  <p>
+    过去做遥感，绕不开三座山：
+  </p>
+
+  <ul>
+    <li><strong>软件重</strong>：专业软件动辄几十个 G，安装、升级、授权都麻烦；</li>
+    <li><strong>算力贵</strong>：影像处理吃 CPU、GPU，一台像样的工作站要好几万；</li>
+    <li><strong>门槛高</strong>：处理流程复杂，新手要学很久才能上手。</li>
+  </ul>
+
+  <p>
+    更要命的是，这些门槛是“重复付费”的——每个单位、每个人都得自己备一套软件和硬件，数据还散落在各自的硬盘里，换台电脑、换个单位就断了。
+  </p>
+
+  <h2>二、什么是“软件上云”：从买软件，到用服务</h2>
+
+  <p>
+    “上云”的本质，是把“买软件”变成“用服务”。就像从买光盘装办公软件，变成直接用在线文档：不用管软件装在哪、版本对不对，打开浏览器就能干活。
+  </p>
+
+  <p>
+    对遥感来说，“上云”意味着三样东西变成了服务：
+  </p>
+
+  <ul>
+    <li><strong>数据变成服务</strong>：不用自己下载、存储海量影像，云端直接调用；</li>
+    <li><strong>算力变成服务</strong>：不用自己买工作站，云端弹性调用、按需付费；</li>
+    <li><strong>算法变成服务</strong>：不用自己搭环境、调模型，点一下就能用。</li>
+  </ul>
+
+  <h2>三、PIE-Engine：把遥感软件搬上了云</h2>
+
+  <p>
+    PIE-Engine 是航天宏图的遥感云平台，它把原来装在电脑里的 PIE 软件能力，全部搬到了云上，官方把它归纳为<strong>“一云十服务”</strong>——一朵云，承载 10 个服务组件。
+  </p>
+
+  <p>
+    这十个服务，覆盖了原来桌面软件干的活：
+  </p>
+
+  <ul>
+    <li><strong>数据处理</strong>：Factory 数据处理服务；</li>
+    <li><strong>遥感计算</strong>：Studio 遥感计算服务；</li>
+    <li><strong>智能解译</strong>：AI 智能解译服务、GPT 天权大模型；</li>
+    <li><strong>数据管理</strong>：Server 时空数据服务；</li>
+    <li><strong>云底座</strong>：NativeSphere 云底座，管住底下的算力与运维。</li>
+  </ul>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-engine-architecture.png" alt="航天宏图 PIE-Engine 遥感云平台架构" loading="lazy">
+    <div class="a-cap">▲ 航天宏图 PIE-Engine 遥感云平台架构。把原来装在电脑里的数据、处理、计算、解译能力，统统搬上云端，浏览器即入口。</div>
+  </div>
+
+  <h2>四、云上到底能干什么</h2>
+
+  <p>
+    具体到每天的工作，PIE-Engine 能替遥感从业者省掉这些事：
+  </p>
+
+  <ul>
+    <li><strong>处理影像不用装软件</strong>：Factory 支持 36 类主流卫星、287 个功能算法、257 条生产线，浏览器里拖拽编排就能批量生产；</li>
+    <li><strong>做分析不用配环境</strong>：Studio 对标 Google Earth Engine，在线写代码、在线跑分析；</li>
+    <li><strong>解译不用一个个标</strong>：AI 内置 40 多个深度学习模型，叠加天权大模型，自动识别地物、检测变化。</li>
+  </ul>
+
+  <h2>五、上云带来的三个变化</h2>
+
+  <p>
+    对遥感从业者来说，上云不只是“方便一点”，而是三个实质变化：
+  </p>
+
+  <ul>
+    <li><strong>门槛降低</strong>：新手也能快速上手，遥感能力从专业团队普及到更多人；</li>
+    <li><strong>协作变易</strong>：数据在云上，多人共享、跨单位协作不再靠拷贝硬盘；</li>
+    <li><strong>自主可控</strong>：数据在国内、算力可控、适配国产软硬件，政企和涉密场景也能用。</li>
+  </ul>
+
+  <h2>六、谁已经用上了</h2>
+
+  <p>
+    25 万+ 在线注册用户的背后，是真实的落地：农业农村部大数据发展中心、水利部信息中心、自然资源部四川基础地理信息中心等国家部委；10 多个省、20 多个市级高分中心；以及大批高校科研院所。
+  </p>
+
+  <div class="a-insight">
+    总而言之，软件上云不是简单地把软件搬到服务器上，而是把“数据、算力、算法”都变成随时可调用的服务。PIE-Engine 做的事，是把遥感这条门槛高高的路，铺成了一条浏览器里就能走的云上高速。
+  </div>
+
+</div>
+
+<div class="a-related">
+  <h4>相关阅读</h4>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2724.html">遥感软件还是 GIS 软件？一文看懂航天宏图 PIE</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2687.html">为什么需要 114 颗卫星？女娲星座的组网之路</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2631.html">SAR 卫星能做什么？六大领域应用全景</a>
+</div>
+
+</div>
+</body>
+</html>
