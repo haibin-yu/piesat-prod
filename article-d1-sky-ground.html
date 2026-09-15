@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>应急管理如何一张网看清灾害？天空地一体化应急感知全景 | 航天宏图</title>
+<meta content="灾害现场通信中断、道路损毁、云层遮挡，怎么第一时间看清？本文讲航天宏图"天空地一体化"应急感知体系：卫星、航空、地面三层如何协同成一张网，实现灾前预警、灾中调度、灾后评估。" name="description"/>
+<meta content="天空地一体化,应急管理,卫星遥感,无人机,灾害监测,应急感知,监测预警,航天宏图" name="keywords"/>
+<meta property="og:title" content="应急管理如何一张网看清灾害？天空地一体化应急感知全景 | 航天宏图"/>
+<meta property="og:description" content="灾害现场通信中断、道路损毁、云层遮挡，怎么第一时间看清？本文讲航天宏图"天空地一体化"应急感知体系如何把卫星、航空、地面三层协同成一张网。"/>
+<meta property="og:image" content="https://haibin-yu.github.io/piesat-prod/piesat-d1-skyground.png"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://haibin-yu.github.io/piesat-prod/article-d1-sky-ground.html"/>
+<meta property="og:site_name" content="航天宏图 · 技术博客"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="应急管理如何一张网看清灾害？天空地一体化应急感知全景 | 航天宏图"/>
+<meta name="twitter:description" content="灾害现场通信中断、道路损毁、云层遮挡，怎么第一时间看清？本文讲航天宏图"天空地一体化"应急感知体系如何把卫星、航空、地面三层协同成一张网。"/>
+<meta name="twitter:image" content="https://haibin-yu.github.io/piesat-prod/piesat-d1-skyground.png"/>
+<link rel="canonical" href="https://haibin-yu.github.io/piesat-prod/article-d1-sky-ground.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "应急管理如何一张网看清灾害？天空地一体化应急感知全景",
+  "description": "灾害现场通信中断、道路损毁、云层遮挡，怎么第一时间看清？本文讲航天宏图"天空地一体化"应急感知体系：卫星、航空、地面三层如何协同成一张网，实现灾前预警、灾中调度、灾后评估。",
+  "author": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司" },
+  "publisher": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司", "url": "https://www.piesat.cn" },
+  "datePublished": "2026-09-15",
+  "dateModified": "2026-09-15",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/sky-ground-integrated" },
+  "image": "https://haibin-yu.github.io/piesat-prod/piesat-d1-skyground.png",
+  "keywords": ["天空地一体化","应急管理","卫星遥感","无人机","灾害监测","应急感知","监测预警"],
+  "about": { "@type": "Thing", "name": "天空地一体化应急感知", "description": "航天宏图面向应急管理的感知体系，把卫星、航空、地面三层感知协同成一张网，支撑灾前监测预警、灾中指挥调度、灾后总结评估。" }
+}
+</script>
+<style>
+.a-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+.a-bread{font-size:13px;color:#aaa;margin-bottom:32px}
+.a-bread a{color:#4a90d9;text-decoration:none}
+.a-head{margin-bottom:36px}
+.a-head .a-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;color:#4a90d9;margin-bottom:16px}
+.a-head h1{font-size:28px;font-weight:700;line-height:1.45;color:#0f0f0f;letter-spacing:-0.3px}
+.a-head .a-meta{margin-top:16px;font-size:13px;color:#999;display:flex;gap:20px;align-items:center}
+.a-body{font-size:16px;color:#2a2a2a;line-height:1.9}
+.a-body h2{font-size:20px;font-weight:700;color:#0f0f0f;margin:48px 0 16px}
+.a-body p{margin-bottom:20px}
+.a-body strong{color:#111}
+.a-body ul,.a-body ol{margin:8px 0 20px 22px}
+.a-body li{margin-bottom:10px;color:#3a3a3a}
+.a-fig{margin:32px 0;text-align:center}
+.a-fig img{max-width:100%;border-radius:4px}
+.a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
+.a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
+.a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
+.a-related h4{font-size:13px;color:#aaa;font-weight:600;letter-spacing:2px;margin-bottom:16px}
+.a-related a{display:block;padding:9px 0;font-size:14px;color:#4a90d9;text-decoration:none;border-bottom:1px solid #f2f2f2}
+.a-related a:last-child{border-bottom:none}
+.a-related a:hover{color:#2b6cb0}
+
+.tb-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a1a1a;color:#fff;padding:8px 20px;display:flex;align-items:center;gap:12px;font-size:12px;font-family:"PingFang SC","Hiragino Sans GB",sans-serif}
+.tb-bar .tb-title{font-weight:700;color:#4a90d9;letter-spacing:1px;white-space:nowrap}
+.tb-bar .tb-btn{background:#4a90d9;color:#fff;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tb-bar .tb-btn.copied{background:#22c55e}
+.tb-bar .tb-btn-outline{background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
+body{padding-top:42px}
+@media(print){.tb-bar{display:none!important}body{padding-top:0}}
+@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}}
+</style>
+</head>
+<body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
+
+<div id="tb-wrapper">
+<div class="tb-bar">
+  <span class="tb-title">交付预览</span>
+  <span style="flex:1"></span>
+  <button class="tb-btn-outline" onclick="viewSource()">查看源码</button>
+  <button class="tb-btn" id="copyBtn" onclick="copySource()">复制发布源码</button>
+  <button class="tb-btn" style="background:#22c55e" id="copyTextBtn" onclick="copyArticleText()">复制文章内容</button>
+</div>
+<textarea id="srcArea" readonly style="display:none;position:fixed;top:42px;left:0;right:0;bottom:0;z-index:9998;width:100%;border:none;background:#1a1a1a;color:#ccc;font-family:monospace;font-size:12px;padding:20px;resize:none;tab-size:2"></textarea>
+<script>
+function clean(){var c=document.documentElement.cloneNode(true);var w=c.querySelector('#tb-wrapper');if(w)w.remove();return '<!doctype html>\n'+c.outerHTML;}
+function copySource(){navigator.clipboard.writeText(clean()).then(function(){var b=document.getElementById('copyBtn');b.textContent='已复制！';b.classList.add('copied');setTimeout(function(){b.textContent='复制发布源码';b.classList.remove('copied');},2000);});}
+function viewSource(){var a=document.getElementById('srcArea');if(a.style.display==='block'){a.style.display='none';return;}a.value=clean();a.style.display='block';}
+async function copyArticleText(){
+  var b=document.getElementById("copyTextBtn");
+  b.textContent="处理中...";
+  var wrapper=document.createElement("div");
+  var h1=document.querySelector(".a-head h1")||document.querySelector("h1");
+  if(h1){var titleH=document.createElement("h2");titleH.textContent=h1.textContent.trim();titleH.style.textAlign="center";wrapper.appendChild(titleH);}
+  var body=document.querySelector(".a-body");
+  if(!body)return;
+  var imgElements=[];
+  for(var i=0;i<body.children.length;i++){
+    var el=body.children[i];
+    var tag=el.tagName.toLowerCase();
+    var text=el.textContent.trim();
+    if(!text)continue;
+    if(tag==="h2"){var h=document.createElement("h2");h.textContent=text;wrapper.appendChild(h);}
+    else if(tag==="p"){var p=document.createElement("p");p.textContent=text;wrapper.appendChild(p);}
+    else if(el.classList.contains("a-fig")){
+      var img=el.querySelector("img");
+      var cap=el.querySelector(".a-cap");
+      if(img){var imgClone=document.createElement("img");imgClone.src=img.src;imgClone.alt=img.alt;imgClone.style.maxWidth="100%";imgClone.style.display="block";imgClone.style.margin="16px auto";wrapper.appendChild(imgClone);imgElements.push({el:imgClone,url:img.src});}
+      if(cap){var c=document.createElement("p");c.textContent=cap.textContent.trim();c.style.fontSize="12px";c.style.color="#888";c.style.fontStyle="italic";wrapper.appendChild(c);}
+    }else if(el.classList.contains("a-insight")){
+      var bq=document.createElement("blockquote");bq.textContent=text;wrapper.appendChild(bq);
+    }else if(tag==="ul"||tag==="ol"){
+      wrapper.appendChild(el.cloneNode(true));
+    }
+  }
+  var tasks=imgElements.map(function(item){return fetch(item.url).then(function(r){return r.blob()}).then(function(blob){return new Promise(function(resolve){var reader=new FileReader();reader.onloadend=function(){item.el.src=reader.result;resolve()};reader.onerror=resolve;reader.readAsDataURL(blob)})}).catch(function(){})});
+  await Promise.all(tasks);
+  var htmlContent="<html><body>"+wrapper.innerHTML+"</body></html>";
+  try{var htmlBlob=new Blob([htmlContent],{type:"text/html"});await navigator.clipboard.write([new ClipboardItem({"text/html":htmlBlob})]);b.textContent="已复制！";}
+  catch(e){navigator.clipboard.writeText(wrapper.textContent);b.textContent="已复制(仅文字)";}
+  setTimeout(function(){b.textContent="复制文章内容";},2000);
+}
+</script>
+</div>
+
+<div class="a-wrap" style="padding-top:48px">
+<div class="a-bread">
+  <a href="/">首页</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">技术博客</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">应急与公共安全</a>
+</div>
+
+<div class="a-head">
+  <div class="a-tag">应急与公共安全</div>
+  <h1>应急管理如何一张网看清灾害？天空地一体化应急感知全景</h1>
+  <div class="a-meta">
+    <span>航天宏图 · 技术博客</span>
+    <span>2026年9月15日</span>
+    <span>阅读约 7 分钟</span>
+  </div>
+</div>
+
+<div class="a-body">
+
+  <p>
+    灾害应急，最难的不是“救”，而是“看”。地震之后哪里塌了、洪涝漫到了哪、山火正往哪个方向蔓延——这些信息晚到一分钟，代价就可能完全不同。可灾害现场偏偏是最难看清的地方：通信中断、道路损毁、云层遮挡、黑夜降临，任何单一手段都力不从心。
+  </p>
+
+  <p>
+    要看清灾害，不能只靠一种“眼睛”。<strong>航天宏图在应急领域给出的答案是“天空地一体化”——把卫星、航空、地面三层感知组合成一张网，全天候、全时空地盯着灾害。</strong>本文就来讲清这张网是怎么织起来的。
+  </p>
+
+  <h2>一、灾害来了，第一件事是“看清”</h2>
+
+  <p>
+    应急管理的第一课，是“知己知彼”。要不要疏散、往哪调度、派多少力量，每一步决策都建立在“看清现场”这个前提之上。
+  </p>
+
+  <p>
+    但“看清”两个字，在灾害现场极难兑现。地震会摧毁通信基站和道路，洪涝会淹没地面的监测设施，山火在夜间和云层之下难以目视。这个时候，靠人眼、靠地面摄像头、靠单一一颗卫星，都会留下大片盲区。
+  </p>
+
+  <p>
+    所以应急感知的本质，是一个“补盲区”的问题：用尽可能多的感知手段，把灾害现场的每个角落都照到，让决策者心里有一张清晰、实时、完整的图。
+  </p>
+
+  <h2>二、为什么一套感知不够</h2>
+
+  <p>
+    应急里常用的三类感知手段，各有各的短板：
+  </p>
+
+  <ul>
+    <li><strong>卫星</strong>：站得高、看得远，一次能覆盖几百公里，但重访周期长——SAR 卫星几天才经过一次，光学卫星又受云雨遮挡，灾害发生时未必刚好在头顶；</li>
+    <li><strong>航空（无人机、直升机）</strong>：机动灵活、分辨率高，能飞到现场近距离查看，但续航短、覆盖小，一场大范围灾害靠几架无人机看不过来；</li>
+    <li><strong>地面（传感器、视频监控）</strong>：能持续、实时地盯住某个点，但点位固定、覆盖有限，管不住“点”之外的那一片面。</li>
+  </ul>
+
+  <p>
+    单一手段像一盏灯，只能照亮一个角落。而灾害往往是大范围、多灾种、跨昼夜的，需要的不是某一盏更亮的灯，而是把天、空、地三盏灯同时打开，拼成一整片亮。
+  </p>
+
+  <h2>三、什么是“天空地一体化”</h2>
+
+  <p>
+    “天空地一体化”，就是把天上、空中、地上三层感知能力整合成一个体系：
+  </p>
+
+  <ul>
+    <li><strong>天——卫星</strong>：通信、遥感、导航三大类卫星，负责大范围、周期性的宏观监测，是“全局的眼睛”；</li>
+    <li><strong>空——航空</strong>：无人机、直升机、浮空器等空中平台，负责机动、高分辨的近距离巡查，是“机动的眼睛”；</li>
+    <li><strong>地——地面</strong>：物联传感、视频监控、高点视频、现场指挥车、信息接报，负责持续、实时的定点盯防，是“值守的眼睛”。</li>
+  </ul>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-d1-skyground.png" alt="天空地一体化应急管理全景业务" loading="lazy">
+    <div class="a-cap">▲ 天空地一体化的应急管理全景业务：卫星、航空、地面三层感知，覆盖自然灾害与城市安全，串起事前、事中、事后的完整处置链路。</div>
+  </div>
+
+  <p>
+    三层各司其职：卫星发现“哪里可能出问题”，航空确认“现场到底什么样”，地面盯住“关键点有没有异动”。三双眼睛叠加，“看得见、看得清、盯得住”才能同时成立。
+  </p>
+
+  <h2>四、三层怎么协同成一个闭环</h2>
+
+  <p>
+    三层不是各自为战，而是按灾害处置的时间线，串成一个完整的闭环：
+  </p>
+
+  <ul>
+    <li><strong>事前——监测预警</strong>：卫星大范围扫描，加上地面传感器持续盯防，发现异常提前预警，把灾害“挡在发生之前”；</li>
+    <li><strong>事中——指挥调度</strong>：灾害发生后，无人机机动巡查、现场指挥车抵近、信息接报回流，把灾情实时回传应急指挥中心，支撑“往哪派、派多少”的决策；</li>
+    <li><strong>事后——总结评估</strong>：灾后影像对比、损失评估，复盘灾害全过程，为下一次应急积累数据。</li>
+  </ul>
+
+  <p>
+    这条“事前预警、事中调度、事后评估”的链路，正是应急管理部国家灾害综合风险监测预警系统“监测、预警、会商、评估”四个业务环节的落地形态。
+  </p>
+
+  <h2>五、航天宏图怎么落地</h2>
+
+  <p>
+    三层能力不是图纸上的设想，航天宏图已经把它们落在了具体的业务里。
+  </p>
+
+  <p>
+    <strong>“天”这一层</strong>：航天宏图自建的“女娲星座”SAR 卫星，加上支撑建设的应急管理部“天眼”卫星监测系统 2.0，能产出森林草原火灾、重大地质灾害、流域性洪涝、地震、台风、干旱、安全生产隐患七类灾害产品；针对森林草原火灾，还建设了基于 FY-4B 等静止气象卫星的遥感林火监测系统，与极轨卫星优势互补，实现火情的全天候监测。
+  </p>
+
+  <p>
+    <strong>“空”这一层</strong>：航天宏图布局了无人机系统，作为卫星与地面之间的机动补充，在卫星周期来不及、地面设备够不到的中间地带来回巡查。
+  </p>
+
+  <p>
+    <strong>“地”这一层</strong>：航天宏图建设了地震监测预警业务，覆盖“感知采集、融合处理、分析评估、共享服务”全流程，形成“全贯通、全流程、全自动、端到端”的地震监测体系。
+  </p>
+
+  <p>
+    三层能力最终汇聚到应急管理部等国家平台上，支撑起从国家到地方的灾害监测与指挥。
+  </p>
+
+  <h2>六、一张网的价值</h2>
+
+  <p>
+    天空地一体化的价值，不在于某一层有多强，而在于三层拼在一起“没有盲区”：
+  </p>
+
+  <ul>
+    <li><strong>对灾害监测</strong>：从“事后发现”变成“事前预警”，争取黄金处置时间；</li>
+    <li><strong>对应急指挥</strong>：从“各自为战”变成“一张图指挥”，信息实时汇聚、统一调度；</li>
+    <li><strong>对城市安全</strong>：从“单点防控”变成“全网覆盖”，生命线、危化品、城市内涝等风险都能纳入同一张网。</li>
+  </ul>
+
+  <p>
+    这张网，也正是后面要展开的城市生命线、风险普查、卫星监测、应急指挥智能体等具体场景的共同底座。
+  </p>
+
+  <div class="a-insight">
+    总而言之，应急管理的核心难题从来不是“没有手段”，而是“手段之间有没有连成一张网”。天空地一体化做的事，就是把天上的卫星、空中的平台、地面的传感器，拧成一条完整的信息链，让灾害在任何时间、任何地点发生，都有一双对的眼睛在看。
+  </div>
+
+</div>
+
+<div class="a-related">
+  <h4>相关阅读</h4>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2687.html">为什么需要 114 颗卫星？女娲星座的组网之路</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2721.html">黄金72小时里的“太空之眼”：SAR 如何在地震后第一时间看清灾区</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2691.html">西藏吉隆泥石流冲断口岸当晚：女娲星座四次成像，锁定堰塞湖</a>
+</div>
+
+</div>
+</body>
+</html>
