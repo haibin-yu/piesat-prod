@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>一张雷达影像，要过几道关才能用？航天宏图 PIE-SAR 处理全景 | 航天宏图</title>
+<meta content="雷达卫星能穿透云层、全天候成像，但 SAR 影像到手时还不是一张能用的图——信号处理、几何校正、干涉解缠、时序分析，每一步都是门槛。本文讲航天宏图 PIE-SAR 与 PIE-MTInSAR 怎么把这条复杂链条自动化。" name="description"/>
+<meta content="PIE-SAR,雷达影像处理,SAR软件,InSAR,时序InSAR,形变监测,PIE-MTInSAR,航天宏图" name="keywords"/>
+<meta property="og:title" content="一张雷达影像，要过几道关才能用？航天宏图 PIE-SAR 处理全景 | 航天宏图"/>
+<meta property="og:description" content="雷达卫星能穿透云层、全天候成像，但 SAR 影像到手时还不是一张能用的图。本文讲航天宏图 PIE-SAR 与 PIE-MTInSAR 怎么把 SAR 处理这条复杂链条自动化。"/>
+<meta property="og:image" content="https://haibin-yu.github.io/piesat-prod/piesat-sar-processing.png"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://haibin-yu.github.io/piesat-prod/article-c5-pie-sar.html"/>
+<meta property="og:site_name" content="航天宏图 · 技术博客"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="一张雷达影像，要过几道关才能用？航天宏图 PIE-SAR 处理全景 | 航天宏图"/>
+<meta name="twitter:description" content="雷达卫星能穿透云层、全天候成像，但 SAR 影像到手时还不是一张能用的图。本文讲航天宏图 PIE-SAR 与 PIE-MTInSAR 怎么把 SAR 处理这条复杂链条自动化。"/>
+<meta name="twitter:image" content="https://haibin-yu.github.io/piesat-prod/piesat-sar-processing.png"/>
+<link rel="canonical" href="https://haibin-yu.github.io/piesat-prod/article-c5-pie-sar.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "一张雷达影像，要过几道关才能用？航天宏图 PIE-SAR 处理全景",
+  "description": "雷达卫星能穿透云层、全天候成像，但 SAR 影像到手时还不是一张能用的图。本文讲航天宏图 PIE-SAR 与 PIE-MTInSAR 怎么把 SAR 处理这条复杂链条自动化。",
+  "author": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司" },
+  "publisher": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司", "url": "https://www.piesat.cn" },
+  "datePublished": "2026-09-16",
+  "dateModified": "2026-09-16",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/pie-sar-processing" },
+  "image": "https://haibin-yu.github.io/piesat-prod/piesat-sar-processing.png",
+  "keywords": ["PIE-SAR","雷达影像处理","SAR软件","InSAR","时序InSAR","形变监测","PIE-MTInSAR"],
+  "about": { "@type": "SoftwareApplication", "name": "PIE-SAR 雷达影像数据处理软件", "description": "航天宏图自研的星载 SAR 图像处理和分析软件，覆盖基础处理、区域网平差、InSAR 地形测绘、DInSAR 形变监测、极化 SAR 和行业应用，配套 PIE-MTInSAR 时序 InSAR 形变监测软件。" }
+}
+</script>
+<style>
+.a-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+.a-bread{font-size:13px;color:#aaa;margin-bottom:32px}
+.a-bread a{color:#4a90d9;text-decoration:none}
+.a-head{margin-bottom:36px}
+.a-head .a-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;color:#4a90d9;margin-bottom:16px}
+.a-head h1{font-size:28px;font-weight:700;line-height:1.45;color:#0f0f0f;letter-spacing:-0.3px}
+.a-head .a-meta{margin-top:16px;font-size:13px;color:#999;display:flex;gap:20px;align-items:center}
+.a-body{font-size:16px;color:#2a2a2a;line-height:1.9}
+.a-body h2{font-size:20px;font-weight:700;color:#0f0f0f;margin:48px 0 16px}
+.a-body p{margin-bottom:20px}
+.a-body strong{color:#111}
+.a-body ul,.a-body ol{margin:8px 0 20px 22px}
+.a-body li{margin-bottom:10px;color:#3a3a3a}
+.a-fig{margin:32px 0;text-align:center}
+.a-fig img{max-width:100%;border-radius:4px}
+.a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
+.a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
+.a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
+.a-related h4{font-size:13px;color:#aaa;font-weight:600;letter-spacing:2px;margin-bottom:16px}
+.a-related a{display:block;padding:9px 0;font-size:14px;color:#4a90d9;text-decoration:none;border-bottom:1px solid #f2f2f2}
+.a-related a:last-child{border-bottom:none}
+.a-related a:hover{color:#2b6cb0}
+
+.tb-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a1a1a;color:#fff;padding:8px 20px;display:flex;align-items:center;gap:12px;font-size:12px;font-family:"PingFang SC","Hiragino Sans GB",sans-serif}
+.tb-bar .tb-title{font-weight:700;color:#4a90d9;letter-spacing:1px;white-space:nowrap}
+.tb-bar .tb-btn{background:#4a90d9;color:#fff;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tb-bar .tb-btn.copied{background:#22c55e}
+.tb-bar .tb-btn-outline{background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
+body{padding-top:42px}
+@media(print){.tb-bar{display:none!important}body{padding-top:0}}
+@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}}
+</style>
+</head>
+<body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
+
+<div id="tb-wrapper">
+<div class="tb-bar">
+  <span class="tb-title">交付预览</span>
+  <span style="flex:1"></span>
+  <button class="tb-btn-outline" onclick="viewSource()">查看源码</button>
+  <button class="tb-btn" id="copyBtn" onclick="copySource()">复制发布源码</button>
+  <button class="tb-btn" style="background:#22c55e" id="copyTextBtn" onclick="copyArticleText()">复制文章内容</button>
+</div>
+<textarea id="srcArea" readonly style="display:none;position:fixed;top:42px;left:0;right:0;bottom:0;z-index:9998;width:100%;border:none;background:#1a1a1a;color:#ccc;font-family:monospace;font-size:12px;padding:20px;resize:none;tab-size:2"></textarea>
+<script>
+function clean(){var c=document.documentElement.cloneNode(true);var w=c.querySelector('#tb-wrapper');if(w)w.remove();return '<!doctype html>\n'+c.outerHTML;}
+function copySource(){navigator.clipboard.writeText(clean()).then(function(){var b=document.getElementById('copyBtn');b.textContent='已复制！';b.classList.add('copied');setTimeout(function(){b.textContent='复制发布源码';b.classList.remove('copied');},2000);});}
+function viewSource(){var a=document.getElementById('srcArea');if(a.style.display==='block'){a.style.display='none';return;}a.value=clean();a.style.display='block';}
+async function copyArticleText(){
+  var b=document.getElementById("copyTextBtn");
+  b.textContent="处理中...";
+  var wrapper=document.createElement("div");
+  var h1=document.querySelector(".a-head h1")||document.querySelector("h1");
+  if(h1){var titleH=document.createElement("h2");titleH.textContent=h1.textContent.trim();titleH.style.textAlign="center";wrapper.appendChild(titleH);}
+  var body=document.querySelector(".a-body");
+  if(!body)return;
+  var imgElements=[];
+  for(var i=0;i<body.children.length;i++){
+    var el=body.children[i];
+    var tag=el.tagName.toLowerCase();
+    var text=el.textContent.trim();
+    if(!text)continue;
+    if(tag==="h2"){var h=document.createElement("h2");h.textContent=text;wrapper.appendChild(h);}
+    else if(tag==="p"){var p=document.createElement("p");p.textContent=text;wrapper.appendChild(p);}
+    else if(el.classList.contains("a-fig")){
+      var img=el.querySelector("img");
+      var cap=el.querySelector(".a-cap");
+      if(img){var imgClone=document.createElement("img");imgClone.src=img.src;imgClone.alt=img.alt;imgClone.style.maxWidth="100%";imgClone.style.display="block";imgClone.style.margin="16px auto";wrapper.appendChild(imgClone);imgElements.push({el:imgClone,url:img.src});}
+      if(cap){var c=document.createElement("p");c.textContent=cap.textContent.trim();c.style.fontSize="12px";c.style.color="#888";c.style.fontStyle="italic";wrapper.appendChild(c);}
+    }else if(el.classList.contains("a-insight")){
+      var bq=document.createElement("blockquote");bq.textContent=text;wrapper.appendChild(bq);
+    }else if(tag==="ul"||tag==="ol"){
+      wrapper.appendChild(el.cloneNode(true));
+    }
+  }
+  var tasks=imgElements.map(function(item){return fetch(item.url).then(function(r){return r.blob()}).then(function(blob){return new Promise(function(resolve){var reader=new FileReader();reader.onloadend=function(){item.el.src=reader.result;resolve()};reader.onerror=resolve;reader.readAsDataURL(blob)})}).catch(function(){})});
+  await Promise.all(tasks);
+  var htmlContent="<html><body>"+wrapper.innerHTML+"</body></html>";
+  try{var htmlBlob=new Blob([htmlContent],{type:"text/html"});await navigator.clipboard.write([new ClipboardItem({"text/html":htmlBlob})]);b.textContent="已复制！";}
+  catch(e){navigator.clipboard.writeText(wrapper.textContent);b.textContent="已复制(仅文字)";}
+  setTimeout(function(){b.textContent="复制文章内容";},2000);
+}
+</script>
+</div>
+
+<div class="a-wrap" style="padding-top:48px">
+<div class="a-bread">
+  <a href="/">首页</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">技术博客</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">PIE 软件</a>
+</div>
+
+<div class="a-head">
+  <div class="a-tag">PIE 软件</div>
+  <h1>一张雷达影像，要过几道关才能用？航天宏图 PIE-SAR 处理全景</h1>
+  <div class="a-meta">
+    <span>航天宏图 · 技术博客</span>
+    <span>2026年9月16日</span>
+    <span>阅读约 7 分钟</span>
+  </div>
+</div>
+
+<div class="a-body">
+
+  <p>
+    雷达卫星是遥感里的“硬通货”——云遮不住、雨挡不住，白天黑夜都能成像，还能测出地表毫米级的形变。但这些能力有一个前提：<strong>SAR 影像到手之后，得先“会处理”。</strong>
+  </p>
+
+  <p>
+    因为 SAR 影像和光学照片是两回事。光学影像拍下来基本就是一张图，SAR 收到的却是雷达回波信号，要经过一连串解算，才能变成人眼看得懂、机器用得上的成果。这一步，恰恰是很多用户卡住的地方。本文就来讲，处理一张雷达影像到底要过几道关，以及航天宏图 PIE-SAR 是怎么把这道道关卡自动化的。
+  </p>
+
+  <h2>一、SAR 数据好，但“难伺候”</h2>
+
+  <p>
+    SAR 的优势已经说过很多次：穿透云雨、全天候成像、能干涉测形变。但换个角度看，这些优势的另一面，是“难伺候”：
+  </p>
+
+  <ul>
+    <li><strong>原始数据不是图</strong>：SAR 记录的是复数信号（幅度加相位），不像光学影像打开就是图像，要经过聚焦、多视、转成能看的灰度图；</li>
+    <li><strong>天然带斑点噪声</strong>：SAR 是相干成像，影像上布满了“盐和胡椒”一样的斑点噪声，不滤波就没法用；</li>
+    <li><strong>几何畸变</strong>：SAR 是斜着“照”的，影像里有叠掩、透视收缩、阴影，要做斜地距转换和几何校正才能摆正。</li>
+  </ul>
+
+  <p>
+    一句话：SAR 数据的“好用”，建立在“会处理”之上。处理不好，再好的数据也用不起来。
+  </p>
+
+  <h2>二、处理一张 SAR 影像，要过几道关</h2>
+
+  <p>
+    把一张 SAR 影像变成成果，通常要过四道关：
+  </p>
+
+  <ul>
+    <li><strong>从信号到影像</strong>：聚焦、多视处理、滤波去斑，把复数信号变成能看的灰度图；</li>
+    <li><strong>几何校正</strong>：斜距转地距、RPC 校正，把斜着照的影像“摆正”，消除叠掩和透视收缩；</li>
+    <li><strong>干涉处理</strong>：要做高程或形变，还要配准、生成干涉图、滤波、相位解缠、相高转换——这是 SAR 处理里最难的一环；</li>
+    <li><strong>时序分析</strong>：要测毫米级形变，得把几十上百景影像放在一起算，也就是时序 InSAR。</li>
+  </ul>
+
+  <p>
+    其中最难的是第三、四道关。干涉处理里的“相位解缠”之所以难，是因为干涉相位天然是 2π 一个周期、绕圈记录的，仪器测到的只是“绕圈后的余数”，要把它还原成真实相位，一步算错，高程和形变就全错；时序分析则要把几十上百景影像两两配准、联合解算，计算量和专业性都成倍上升。
+  </p>
+
+  <p>
+    四道关，每一道都是专业活。靠手工一步一步点，既不现实，也容易出错。
+  </p>
+
+  <h2>三、PIE-SAR：把这条链条自动化</h2>
+
+  <p>
+    PIE-SAR 是航天宏图自研的雷达影像数据处理软件，把上面这条链条做成了工程化的工具。
+  </p>
+
+  <ul>
+    <li><strong>数据导入</strong>：支持 GF-3、TH-02A/B、ALOS、TerraSAR-X、Radarsat-2、COSMO-SkyMed、Envisat、ERS 等主流星载 SAR 数据，并支持哨兵-1 数据校正，对国产卫星全面支持；</li>
+    <li><strong>基础处理</strong>：多视、滤波、地理编码、RPC 几何校正，一键完成；</li>
+    <li><strong>区域网平差</strong>：借助 SAR 影像模拟、幅度配准和轨道改正，复杂山区、没有地面控制点也能高精度定位；</li>
+    <li><strong>干涉 SAR</strong>：一键式 InSAR DSM 工作流，配准、干涉、滤波、解缠、相高转换全流程自动化；</li>
+    <li><strong>极化 SAR</strong>：极化分解、极化分类，挖掘 SAR 数据里更多的信息维度。</li>
+  </ul>
+
+  <p>
+    这些模块背后，是几个硬功夫。比如在复杂山区、没有地面控制点的情况下，PIE-SAR 借助外部 DEM 模拟 SAR 幅度影像，再通过幅度配准和轨道改正优化几何定位，解决“拿不到控制点”的难题；干涉处理里的最小统计费用流相位解缠算法，则让解缠结果更稳定，不容易在山区、城区这些困难区域出错。
+  </p>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-sar-processing.png" alt="PIE-SAR InSAR DSM 流程化处理界面" loading="lazy">
+    <div class="a-cap">▲ PIE-SAR 的 InSAR DSM 流程化处理界面：数据源、参数配置均为界面化操作，配准、干涉、解缠等专业步骤被封装成流程。</div>
+  </div>
+
+  <h2>四、PIE-MTInSAR：测出毫米级的“缓慢形变”</h2>
+
+  <p>
+    地表沉降、滑坡、矿区形变，往往很缓慢，一年才几毫米到几厘米。要测出这种“慢慢在动”的变化，靠单张影像不够，得用时序 InSAR。
+  </p>
+
+  <p>
+    PIE-MTInSAR 是配套的时序 InSAR 形变监测软件，内置 PS-InSAR、SBAS-InSAR、Stacking-InSAR 三种算法，支持 Sentinel-1、TerraSAR-X、COSMO-SkyMed 数据，实现毫米级的地表沉降监测。其中，针对哨兵 TOPS 模式的增强谱分集配准，能做到方位向千分之一的配准精度；永久散射体提取则能自动挑出地表上稳定可靠的监测点。
+  </p>
+
+  <p>
+    三种算法各有分工：PS-InSAR 用长时间序列里稳定不变的永久散射体点来测形变，适合城市建筑、裸岩这类稳定地物；SBAS-InSAR 通过小基线把影像分成若干子集联合解算，适合植被较多、相干性一般的区域；Stacking-InSAR 则把多幅差分干涉相位加权平均，用“平均”压住噪声，快速得到整体形变趋势。
+  </p>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-mtinsar-modules.png" alt="PIE-MTInSAR 时序 InSAR 形变监测软件功能模块" loading="lazy">
+    <div class="a-cap">▲ PIE-MTInSAR 时序 InSAR 形变监测软件的功能模块：工程管理、InSAR 处理、结果显示与时序形变监测。</div>
+  </div>
+
+  <h2>五、落到真实场景</h2>
+
+  <p>
+    这些能力不是停留在参数表里。PIE-SAR 的行业应用模块能直接做水体提取、海岸线提取、船只监测（海洋、水利），全极化土壤含水量反演（农业），建筑区提取、森林提取（国土、林业），以及变化检测（应急减灾）。
+  </p>
+
+  <p>
+    形变监测则落地在城市地面沉降、矿区、地质灾害隐患点——这正是此前讲过的地震灾区、吉隆泥石流那些场景背后，真正在用的工具。
+  </p>
+
+  <h2>六、一套软件带来的变化</h2>
+
+  <p>
+    PIE-SAR 做的事，本质是把 SAR 处理从“专家活”变成“工程化”：过去要资深遥感人员手工处理的链条，现在能流程化、一键化完成。对用户来说，门槛降下来的是“能不能把数据用起来”，而不仅仅是“能不能拿到数据”。
+  </p>
+
+  <p>
+    作为 PIE 桌面软件工具集里的雷达能力，PIE-SAR 和 PIE-MTInSAR 与光学处理、测绘生产、三维建模等其他工具配合，构成一套完整的国产遥感软件。
+  </p>
+
+  <div class="a-insight">
+    总而言之，雷达数据的价值，最终取决于“处理”这一步能不能走通。PIE-SAR 做的，就是把那条又长又专业的处理链条，压缩成一套普通人也能上手的软件——让 SAR 从“专家手里”，走到每一个真正需要的行业。
+  </div>
+
+</div>
+
+<div class="a-related">
+  <h4>相关阅读</h4>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html">雷达卫星为什么能穿透云层？SAR成像原理三分钟看懂</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2671.html">地表怎么“悄悄地”在动？InSAR 毫米级形变监测揭秘</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2721.html">黄金72小时里的“太空之眼”：SAR 如何在地震后第一时间看清灾区</a>
+</div>
+
+</div>
+</body>
+</html>
