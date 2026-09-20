@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>真实世界怎么“搬”进电脑？航天宏图 PIE-Smart 与 PIE-Lidar 实景三维全景 | 航天宏图</title>
+<meta content="实景三维把真实世界变成可量测、可浏览的三维数字模型，倾斜摄影和激光雷达是两条主流路线。本文解析航天宏图 PIE-Smart 全自动建模与 PIE-Lidar 激光点云处理，如何把现实“搬”进电脑。" name="description"/>
+<meta content="实景三维,倾斜摄影,激光雷达,点云,三维建模,PIE-Smart,PIE-Lidar,航天宏图" name="keywords"/>
+<meta property="og:title" content="真实世界怎么“搬”进电脑？航天宏图 PIE-Smart 与 PIE-Lidar 实景三维全景 | 航天宏图"/>
+<meta property="og:description" content="实景三维把真实世界变成可量测、可浏览的三维数字模型，倾斜摄影和激光雷达是两条主流路线。本文解析航天宏图 PIE-Smart 与 PIE-Lidar 如何把现实“搬”进电脑。"/>
+<meta property="og:image" content="https://haibin-yu.github.io/piesat-prod/piesat-smart-modules.png"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://haibin-yu.github.io/piesat-prod/article-c7-pie-smart-lidar.html"/>
+<meta property="og:site_name" content="航天宏图 · 技术博客"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="真实世界怎么“搬”进电脑？航天宏图 PIE-Smart 与 PIE-Lidar 实景三维全景 | 航天宏图"/>
+<meta name="twitter:description" content="实景三维把真实世界变成可量测、可浏览的三维数字模型，倾斜摄影和激光雷达是两条主流路线。"/>
+<meta name="twitter:image" content="https://haibin-yu.github.io/piesat-prod/piesat-smart-modules.png"/>
+<link rel="canonical" href="https://haibin-yu.github.io/piesat-prod/article-c7-pie-smart-lidar.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "真实世界怎么“搬”进电脑？航天宏图 PIE-Smart 与 PIE-Lidar 实景三维全景",
+  "description": "实景三维把真实世界变成可量测、可浏览的三维数字模型，倾斜摄影和激光雷达是两条主流路线。本文解析航天宏图 PIE-Smart 全自动建模与 PIE-Lidar 激光点云处理，如何把现实“搬”进电脑。",
+  "author": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司" },
+  "publisher": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司", "url": "https://www.piesat.cn" },
+  "datePublished": "2026-09-20",
+  "dateModified": "2026-09-20",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/pie-smart-lidar" },
+  "image": "https://haibin-yu.github.io/piesat-prod/piesat-smart-modules.png",
+  "keywords": ["实景三维","倾斜摄影","激光雷达","点云","三维建模","PIE-Smart","PIE-Lidar"],
+  "about": { "@type": "Thing", "name": "实景三维", "description": "利用倾斜摄影与激光雷达技术，将真实世界重建为可量测、可浏览、可分析的三维数字模型。" }
+}
+</script>
+<style>
+.a-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+.a-bread{font-size:13px;color:#aaa;margin-bottom:32px}
+.a-bread a{color:#4a90d9;text-decoration:none}
+.a-head{margin-bottom:36px}
+.a-head .a-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;color:#4a90d9;margin-bottom:16px}
+.a-head h1{font-size:28px;font-weight:700;line-height:1.45;color:#0f0f0f;letter-spacing:-0.3px}
+.a-head .a-meta{margin-top:16px;font-size:13px;color:#999;display:flex;gap:20px;align-items:center}
+.a-body{font-size:16px;color:#2a2a2a;line-height:1.9}
+.a-body h2{font-size:20px;font-weight:700;color:#0f0f0f;margin:48px 0 16px}
+.a-body p{margin-bottom:20px}
+.a-body strong{color:#111}
+.a-body ul,.a-body ol{margin:8px 0 20px 22px}
+.a-body li{margin-bottom:10px;color:#3a3a3a}
+.a-fig{margin:32px 0;text-align:center}
+.a-fig img{max-width:100%;border-radius:4px}
+.a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
+.a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
+.a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
+.a-related h4{font-size:13px;color:#aaa;font-weight:600;letter-spacing:2px;margin-bottom:16px}
+.a-related a{display:block;padding:9px 0;font-size:14px;color:#4a90d9;text-decoration:none;border-bottom:1px solid #f2f2f2}
+.a-related a:last-child{border-bottom:none}
+.a-related a:hover{color:#2b6cb0}
+
+.tb-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a1a1a;color:#fff;padding:8px 20px;display:flex;align-items:center;gap:12px;font-size:12px;font-family:"PingFang SC","Hiragino Sans GB",sans-serif}
+.tb-bar .tb-title{font-weight:700;color:#4a90d9;letter-spacing:1px;white-space:nowrap}
+.tb-bar .tb-btn{background:#4a90d9;color:#fff;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tb-bar .tb-btn.copied{background:#22c55e}
+.tb-bar .tb-btn-outline{background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
+body{padding-top:42px}
+@media(print){.tb-bar{display:none!important}body{padding-top:0}}
+@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}}
+</style>
+</head>
+<body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
+
+<div id="tb-wrapper">
+<div class="tb-bar">
+  <span class="tb-title">交付预览</span>
+  <span style="flex:1"></span>
+  <button class="tb-btn-outline" onclick="viewSource()">查看源码</button>
+  <button class="tb-btn" id="copyBtn" onclick="copySource()">复制发布源码</button>
+  <button class="tb-btn" style="background:#22c55e" id="copyTextBtn" onclick="copyArticleText()">复制文章内容</button>
+</div>
+<textarea id="srcArea" readonly style="display:none;position:fixed;top:42px;left:0;right:0;bottom:0;z-index:9998;width:100%;border:none;background:#1a1a1a;color:#ccc;font-family:monospace;font-size:12px;padding:20px;resize:none;tab-size:2"></textarea>
+<script>
+function clean(){var c=document.documentElement.cloneNode(true);var w=c.querySelector('#tb-wrapper');if(w)w.remove();return '<!doctype html>\n'+c.outerHTML;}
+function copySource(){navigator.clipboard.writeText(clean()).then(function(){var b=document.getElementById('copyBtn');b.textContent='已复制！';b.classList.add('copied');setTimeout(function(){b.textContent='复制发布源码';b.classList.remove('copied');},2000);});}
+function viewSource(){var a=document.getElementById('srcArea');if(a.style.display==='block'){a.style.display='none';return;}a.value=clean();a.style.display='block';}
+async function copyArticleText(){
+  var b=document.getElementById("copyTextBtn");
+  b.textContent="处理中...";
+  var wrapper=document.createElement("div");
+  var h1=document.querySelector(".a-head h1")||document.querySelector("h1");
+  if(h1){var titleH=document.createElement("h2");titleH.textContent=h1.textContent.trim();titleH.style.textAlign="center";wrapper.appendChild(titleH);}
+  var body=document.querySelector(".a-body");
+  if(!body)return;
+  var imgElements=[];
+  for(var i=0;i<body.children.length;i++){
+    var el=body.children[i];
+    var tag=el.tagName.toLowerCase();
+    var text=el.textContent.trim();
+    if(!text)continue;
+    if(tag==="h2"){var h=document.createElement("h2");h.textContent=text;wrapper.appendChild(h);}
+    else if(tag==="p"){var p=document.createElement("p");p.textContent=text;wrapper.appendChild(p);}
+    else if(el.classList.contains("a-fig")){
+      var img=el.querySelector("img");
+      var cap=el.querySelector(".a-cap");
+      if(img){var imgClone=document.createElement("img");imgClone.src=img.src;imgClone.alt=img.alt;imgClone.style.maxWidth="100%";imgClone.style.display="block";imgClone.style.margin="16px auto";wrapper.appendChild(imgClone);imgElements.push({el:imgClone,url:img.src});}
+      if(cap){var c=document.createElement("p");c.textContent=cap.textContent.trim();c.style.fontSize="12px";c.style.color="#888";c.style.fontStyle="italic";wrapper.appendChild(c);}
+    }else if(el.classList.contains("a-insight")){
+      var bq=document.createElement("blockquote");bq.textContent=text;wrapper.appendChild(bq);
+    }else if(tag==="ul"||tag==="ol"){
+      wrapper.appendChild(el.cloneNode(true));
+    }
+  }
+  var tasks=imgElements.map(function(item){return fetch(item.url).then(function(r){return r.blob()}).then(function(blob){return new Promise(function(resolve){var reader=new FileReader();reader.onloadend=function(){item.el.src=reader.result;resolve()};reader.onerror=resolve;reader.readAsDataURL(blob)})}).catch(function(){})});
+  await Promise.all(tasks);
+  var htmlContent="<html><body>"+wrapper.innerHTML+"</body></html>";
+  try{var htmlBlob=new Blob([htmlContent],{type:"text/html"});await navigator.clipboard.write([new ClipboardItem({"text/html":htmlBlob})]);b.textContent="已复制！";}
+  catch(e){navigator.clipboard.writeText(wrapper.textContent);b.textContent="已复制(仅文字)";}
+  setTimeout(function(){b.textContent="复制文章内容";},2000);
+}
+</script>
+</div>
+
+<div class="a-wrap" style="padding-top:48px">
+<div class="a-bread">
+  <a href="/">首页</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">技术博客</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">产品</a>
+</div>
+
+<div class="a-head">
+  <div class="a-tag">产品</div>
+  <h1>真实世界怎么“搬”进电脑？航天宏图 PIE-Smart 与 PIE-Lidar 实景三维全景</h1>
+  <div class="a-meta">
+    <span>航天宏图 · 技术博客</span>
+    <span>2026年9月20日</span>
+    <span>阅读约 8 分钟</span>
+  </div>
+</div>
+
+<div class="a-body">
+
+  <p>
+    地图是平的，但世界是立体的。一张卫星影像、一张地图，能把一条街、一片田画得清清楚楚，却回答不了这样的问题：那栋楼有多高？楼与楼之间是什么关系？从某个角度望过去是什么样子？
+  </p>
+
+  <p>
+    实景三维，就是要把真实世界“搬”进电脑——用倾斜摄影和激光雷达，把山川、建筑、道路、树木，变成可量测、可浏览、可分析的三维数字模型。航天宏图的两款桌面软件 PIE-Smart 和 PIE-Lidar，各守一条技术路线，把这件事做成了流水线。
+  </p>
+
+  <p>
+    实景三维这几年越来越受关注——数字孪生城市、实景三维中国，背后都离不开它。但把世界“搬”进电脑，比想象中复杂得多：怎么保证模型和现实一样准？怎么把海量照片、点云变成能用的成果？这正是两款软件要解决的问题。
+  </p>
+
+  <h2>一、为什么要“搬”进电脑</h2>
+
+  <p>
+    二维的影像和地图，看得到“平面上有什么”，却看不到“空间里有多高、有多深”。城市管理想知道一栋楼的高度和体量，应急指挥想知道灾区的立体地形，电力巡检想知道电线杆之间的净空距离，二维底图都答不上来。
+  </p>
+
+  <p>
+    实景三维补的正是这个缺。每一个建筑、每一棵树、每一根电线杆，在三维模型里都有精确的空间坐标，可以量高度、量距离、算面积、算体积，还能从任意角度浏览。它是数字孪生城市、自然资源立体监测、应急救援推演的底座。
+  </p>
+
+  <p>
+    传统的三维地图，往往是“贴了纹理的盒子”——建筑是一个个画出来的几何体，看起来像，却量不准、也看不出真实的样子。实景三维不一样，它直接从真实数据重建，每一处细节都来自实际拍摄或扫描，所见即真实。
+  </p>
+
+  <h2>二、两条路：拍照，还是测距</h2>
+
+  <p>
+    把现实变成三维模型，有两条主流路线。
+  </p>
+
+  <p>
+    一条是倾斜摄影。无人机或飞机搭载相机，从垂直和多个倾斜角度同时拍照，软件再靠多角度影像的交叉匹配，反算出每个地物的空间位置——原理接近人眼的立体视觉：左右眼看到的角度差，让人能判断远近。
+  </p>
+
+  <p>
+    另一条是激光雷达。激光扫描仪向地面发射激光、接收反射，直接测出每个点的精确三维坐标，形成海量的“点云”。点云本身就是三维的，不需要“反算”，天然带着精度。
+  </p>
+
+  <p>
+    打个比方：倾斜摄影像“给现实拍三维照”，纹理真实、所见即所得；激光雷达像“给现实做三维量测”，精度高，激光还能透过树叶打到地面。
+  </p>
+
+  <p>
+    两条路线各有擅长：倾斜摄影适合大范围、看重“像不像”的场景，比如整座城市的实景建模；激光雷达适合看重“准不准”的场景，比如电力线路的净空检测、地形的精确测量。所以它们常常出现在同一个工程里。
+  </p>
+
+  <h2>三、PIE-Smart：把照片变成模型</h2>
+
+  <p>
+    倾斜摄影的难点在于“算”——成千上万张照片，怎么自动匹配、怎么还原三维。
+  </p>
+
+  <p>
+    PIE-Smart 把这一整套做成了全自动：影像匹配、影像对齐、相机优化、密集匹配、纹理映射，一气呵成。它采用分布式空中三角测量，能支持 10 万张以上影像的平差解算，解算中误差达到亚像元精度；基于多视几何和密集匹配，生成超高密度点云，构建高精度的实景三维模型，纹理真实、局部特征清晰，克服了传统人工建模和贴图失真的问题。
+  </p>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-smart-modules.png" alt="PIE-Smart 全自动建模软件功能模块示意图" loading="lazy">
+    <div class="a-cap">▲ PIE-Smart 功能模块示意图</div>
+  </div>
+
+  <p>
+    对复杂场景，它还能做空地融合——把空中倾斜摄影和地面拍摄的影像融合到一起，生成高分辨率的无缝纹理，让“天上拍的”和“地上拍的”拼成同一个模型。
+  </p>
+
+  <p>
+    倾斜摄影还有个难题：相机从多个角度拍，姿态测量设备难免有误差，加上倾斜角度大、基高比波动，解算容易不稳定。PIE-Smart 的多视几何技术，利用相机多视之间强相关的约束，弱化了对姿态设备精度的要求，让各种条件下拍到的数据都能稳定处理。
+  </p>
+
+  <h2>四、PIE-Lidar：把点云变成成果</h2>
+
+  <p>
+    激光雷达拿到的是海量点云，但要变成能用的成果，还要分类、提取、建模。
+  </p>
+
+  <p>
+    PIE-Lidar 面向机载、车载、固定站、SLAM 等多种激光扫描数据，提供 20 多种点云自动分类算法，能把地面点、建筑物、水体、道路、等高线分门别类地提取出来；再往下，能生成 DEM、DOM、等高线等地形产品，能做电力线的杆塔配置、危险点检测、风偏模拟，还能自动提取建筑物并建模。
+  </p>
+
+  <p>
+    除了建模，PIE-Lidar 还有一整套工具：航飞质检能检查航高、航速、飞行姿态、重叠度，判断这一趟扫描数据合不合格；剖面分析、土方量计算、断面线提取，能直接算出挖填方量；点云精度评定、滤波精度评定，让成果精度有据可查。
+  </p>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-lidar-model.png" alt="PIE-Lidar 建筑物自动建模成果" loading="lazy">
+    <div class="a-cap">▲ PIE-Lidar 建筑物自动建模</div>
+  </div>
+
+  <p>
+    更重要的是，它完全自主可控，无需依赖 CAD 软件平台就能独立运行，点云的浏览、编辑、分类、建模都在一个软件里完成。
+  </p>
+
+  <h2>五、两条路合起来，才是完整的实景三维</h2>
+
+  <p>
+    倾斜摄影和激光雷达不是二选一，而是互补。
+  </p>
+
+  <p>
+    倾斜摄影生成的模型，纹理真实、视觉效果好，但遇到植被遮挡、玻璃幕墙等场景，精度会打折扣；激光雷达点云精度高、能穿透植被看到地面，却缺乏真实的色彩纹理。
+  </p>
+
+  <p>
+    所以很多实景三维工程，是两条路一起走：用激光雷达测准“骨架”，用倾斜摄影补上“皮肤”，再通过空地融合，把地面和空中的数据拼到一起，得到既真实又精确的三维模型。
+  </p>
+
+  <h2>六、落到真实场景</h2>
+
+  <p>
+    实景三维的成果，正在进入越来越多的领域：城市治理用它做精细化的三维管理，自然资源用它做立体监测，应急指挥用它做灾情推演，电力部门用它做线路巡检，农林水利也各有各的用法。
+  </p>
+
+  <p>
+    从“一张平面图”到“一个三维世界”，这一步的意义，是把地理信息从“看得见”推进到“量得准、管得了”。而这，正是 PIE-Smart 和 PIE-Lidar 在做的事。
+  </p>
+
+  <p>
+    落到具体的场景，比如城市里用实景三维做违建排查、立面整治、管线分析；山区的灾害应急用三维地形做滑坡、堰塞湖的立体研判；电力巡线用点云自动算电线与树木、地面的距离，提前发现隐患。二维时代做不到的这些事，在三维模型里都变得可行。
+  </p>
+
+  <div class="a-insight">
+    总而言之，实景三维不是把照片贴成一张立体画，而是把真实世界按“可量测”的标准重建进电脑。PIE-Smart 管“算得像”，PIE-Lidar 管“测得准”，两条路线合起来，世界才有了一比一还原进电脑的可能。
+  </div>
+
+</div>
+
+<div class="a-related">
+  <h4>相关阅读</h4>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2724.html">遥感软件还是 GIS 软件？一文看懂航天宏图 PIE</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2671.html">地表怎么“悄悄地”在动？InSAR 毫米级形变监测揭秘</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">卫星影像离一张能用的“底图”还差几步？航天宏图 PIE-Ortho 测绘生产全景</a>
+</div>
+
+</div>
+</body>
+</html>
