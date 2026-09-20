@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>卫星在天上就能“看懂”影像？解析女娲星座的星上智能处理 | 航天宏图</title>
+<meta content="2026年9月19日女娲星座一箭四星成功入轨，PIESAT-2 13~16 星搭载星上智能处理与星上任务规划载荷，实现影像在轨即时解译。本文解析星上智能处理是什么、为什么重要，以及 16 星组网带来的能力提升。" name="description"/>
+<meta content="女娲星座,星上智能处理,在轨解译,星上任务规划,卫星遥感,航天宏图,PIESAT-2" name="keywords"/>
+<meta property="og:title" content="卫星在天上就能“看懂”影像？解析女娲星座的星上智能处理 | 航天宏图"/>
+<meta property="og:description" content="女娲星座第四次发射，PIESAT-2 13~16 星搭载星上智能处理与星上任务规划载荷，实现影像在轨即时解译。本文解析星上智能处理是什么、为什么重要。"/>
+<meta property="og:image" content="https://haibin-yu.github.io/piesat-prod/piesat-a6-launch.jpg"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://haibin-yu.github.io/piesat-prod/article-a6-onboard-ai.html"/>
+<meta property="og:site_name" content="航天宏图 · 技术博客"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="卫星在天上就能“看懂”影像？解析女娲星座的星上智能处理 | 航天宏图"/>
+<meta name="twitter:description" content="女娲星座第四次发射，PIESAT-2 13~16 星搭载星上智能处理与星上任务规划载荷，实现影像在轨即时解译。"/>
+<meta name="twitter:image" content="https://haibin-yu.github.io/piesat-prod/piesat-a6-launch.jpg"/>
+<link rel="canonical" href="https://haibin-yu.github.io/piesat-prod/article-a6-onboard-ai.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "卫星在天上就能“看懂”影像？解析女娲星座的星上智能处理",
+  "description": "2026年9月19日女娲星座一箭四星成功入轨，PIESAT-2 13~16 星搭载星上智能处理与星上任务规划载荷，实现影像在轨即时解译。本文解析星上智能处理是什么、为什么重要，以及 16 星组网带来的能力提升。",
+  "author": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司" },
+  "publisher": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司", "url": "https://www.piesat.cn" },
+  "datePublished": "2026-09-20",
+  "dateModified": "2026-09-20",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/nuwa-onboard-ai" },
+  "image": "https://haibin-yu.github.io/piesat-prod/piesat-a6-launch.jpg",
+  "keywords": ["女娲星座","星上智能处理","在轨解译","星上任务规划","卫星遥感"],
+  "about": { "@type": "Thing", "name": "女娲星座", "description": "航天宏图建设的遥感卫星星座，本次发射后在轨雷达卫星达 16 颗，搭载星上智能处理与星上任务规划载荷，实现遥感数据在轨即时处理。" }
+}
+</script>
+<style>
+.a-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+.a-bread{font-size:13px;color:#aaa;margin-bottom:32px}
+.a-bread a{color:#4a90d9;text-decoration:none}
+.a-head{margin-bottom:36px}
+.a-head .a-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;color:#4a90d9;margin-bottom:16px}
+.a-head h1{font-size:28px;font-weight:700;line-height:1.45;color:#0f0f0f;letter-spacing:-0.3px}
+.a-head .a-meta{margin-top:16px;font-size:13px;color:#999;display:flex;gap:20px;align-items:center}
+.a-body{font-size:16px;color:#2a2a2a;line-height:1.9}
+.a-body h2{font-size:20px;font-weight:700;color:#0f0f0f;margin:48px 0 16px}
+.a-body p{margin-bottom:20px}
+.a-body strong{color:#111}
+.a-body ul,.a-body ol{margin:8px 0 20px 22px}
+.a-body li{margin-bottom:10px;color:#3a3a3a}
+.a-fig{margin:32px 0;text-align:center}
+.a-fig img{max-width:100%;border-radius:4px}
+.a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
+.a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
+.a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
+.a-related h4{font-size:13px;color:#aaa;font-weight:600;letter-spacing:2px;margin-bottom:16px}
+.a-related a{display:block;padding:9px 0;font-size:14px;color:#4a90d9;text-decoration:none;border-bottom:1px solid #f2f2f2}
+.a-related a:last-child{border-bottom:none}
+.a-related a:hover{color:#2b6cb0}
+
+.tb-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a1a1a;color:#fff;padding:8px 20px;display:flex;align-items:center;gap:12px;font-size:12px;font-family:"PingFang SC","Hiragino Sans GB",sans-serif}
+.tb-bar .tb-title{font-weight:700;color:#4a90d9;letter-spacing:1px;white-space:nowrap}
+.tb-bar .tb-btn{background:#4a90d9;color:#fff;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tb-bar .tb-btn.copied{background:#22c55e}
+.tb-bar .tb-btn-outline{background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
+body{padding-top:42px}
+@media(print){.tb-bar{display:none!important}body{padding-top:0}}
+@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}}
+</style>
+</head>
+<body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
+
+<div id="tb-wrapper">
+<div class="tb-bar">
+  <span class="tb-title">交付预览</span>
+  <span style="flex:1"></span>
+  <button class="tb-btn-outline" onclick="viewSource()">查看源码</button>
+  <button class="tb-btn" id="copyBtn" onclick="copySource()">复制发布源码</button>
+  <button class="tb-btn" style="background:#22c55e" id="copyTextBtn" onclick="copyArticleText()">复制文章内容</button>
+</div>
+<textarea id="srcArea" readonly style="display:none;position:fixed;top:42px;left:0;right:0;bottom:0;z-index:9998;width:100%;border:none;background:#1a1a1a;color:#ccc;font-family:monospace;font-size:12px;padding:20px;resize:none;tab-size:2"></textarea>
+<script>
+function clean(){var c=document.documentElement.cloneNode(true);var w=c.querySelector('#tb-wrapper');if(w)w.remove();return '<!doctype html>\n'+c.outerHTML;}
+function copySource(){navigator.clipboard.writeText(clean()).then(function(){var b=document.getElementById('copyBtn');b.textContent='已复制！';b.classList.add('copied');setTimeout(function(){b.textContent='复制发布源码';b.classList.remove('copied');},2000);});}
+function viewSource(){var a=document.getElementById('srcArea');if(a.style.display==='block'){a.style.display='none';return;}a.value=clean();a.style.display='block';}
+async function copyArticleText(){
+  var b=document.getElementById("copyTextBtn");
+  b.textContent="处理中...";
+  var wrapper=document.createElement("div");
+  var h1=document.querySelector(".a-head h1")||document.querySelector("h1");
+  if(h1){var titleH=document.createElement("h2");titleH.textContent=h1.textContent.trim();titleH.style.textAlign="center";wrapper.appendChild(titleH);}
+  var body=document.querySelector(".a-body");
+  if(!body)return;
+  var imgElements=[];
+  for(var i=0;i<body.children.length;i++){
+    var el=body.children[i];
+    var tag=el.tagName.toLowerCase();
+    var text=el.textContent.trim();
+    if(!text)continue;
+    if(tag==="h2"){var h=document.createElement("h2");h.textContent=text;wrapper.appendChild(h);}
+    else if(tag==="p"){var p=document.createElement("p");p.textContent=text;wrapper.appendChild(p);}
+    else if(el.classList.contains("a-fig")){
+      var img=el.querySelector("img");
+      var cap=el.querySelector(".a-cap");
+      if(img){var imgClone=document.createElement("img");imgClone.src=img.src;imgClone.alt=img.alt;imgClone.style.maxWidth="100%";imgClone.style.display="block";imgClone.style.margin="16px auto";wrapper.appendChild(imgClone);imgElements.push({el:imgClone,url:img.src});}
+      if(cap){var c=document.createElement("p");c.textContent=cap.textContent.trim();c.style.fontSize="12px";c.style.color="#888";c.style.fontStyle="italic";wrapper.appendChild(c);}
+    }else if(el.classList.contains("a-insight")){
+      var bq=document.createElement("blockquote");bq.textContent=text;wrapper.appendChild(bq);
+    }else if(tag==="ul"||tag==="ol"){
+      wrapper.appendChild(el.cloneNode(true));
+    }
+  }
+  var tasks=imgElements.map(function(item){return fetch(item.url).then(function(r){return r.blob()}).then(function(blob){return new Promise(function(resolve){var reader=new FileReader();reader.onloadend=function(){item.el.src=reader.result;resolve()};reader.onerror=resolve;reader.readAsDataURL(blob)})}).catch(function(){})});
+  await Promise.all(tasks);
+  var htmlContent="<html><body>"+wrapper.innerHTML+"</body></html>";
+  try{var htmlBlob=new Blob([htmlContent],{type:"text/html"});await navigator.clipboard.write([new ClipboardItem({"text/html":htmlBlob})]);b.textContent="已复制！";}
+  catch(e){navigator.clipboard.writeText(wrapper.textContent);b.textContent="已复制(仅文字)";}
+  setTimeout(function(){b.textContent="复制文章内容";},2000);
+}
+</script>
+</div>
+
+<div class="a-wrap" style="padding-top:48px">
+<div class="a-bread">
+  <a href="/">首页</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">技术博客</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">航天动态</a>
+</div>
+
+<div class="a-head">
+  <div class="a-tag">航天动态</div>
+  <h1>卫星在天上就能“看懂”影像？解析女娲星座的星上智能处理</h1>
+  <div class="a-meta">
+    <span>航天宏图 · 技术博客</span>
+    <span>2026年9月20日</span>
+    <span>阅读约 7 分钟</span>
+  </div>
+</div>
+
+<div class="a-body">
+
+  <p>
+    2026 年 9 月 19 日 18 时 50 分，长征二号丁运载火箭在太原卫星发射中心点火升空，女娲星座 PIESAT-2 13~16 四颗卫星顺利入轨。这是女娲星座的第四次发射，在轨卫星总数达到 16 颗。
+  </p>
+
+  <p>
+    这次发射最值得关注的，不是“又多发了四颗星”，而是这四颗星“长了脑子”——它们搭载了高分辨率 SAR 载荷，以及星上智能处理、星上任务规划等载荷，能在太空里就“看懂”自己拍到的影像，不必等数据全部传回地面再处理。
+  </p>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-a6-launch.jpg" alt="女娲星座 PIESAT-2 13~16 星一箭四星成功发射" loading="lazy">
+    <div class="a-cap">▲ 一箭四星成功发射（王亚鹏 摄）</div>
+  </div>
+
+  <h2>一、过去：卫星会“看”，但“看懂”要等地面</h2>
+
+  <p>
+    传统遥感的工作方式是“拍照—回传—处理”：卫星在天上把影像拍下来，先把原始数据传回地面站，再由地面系统做辐射校正、几何校正、目标解译，最后把成果交到用户手里。
+  </p>
+
+  <p>
+    这条链路有一个明显的瓶颈：数据回传慢、带宽有限。一颗遥感卫星一天能拍下海量数据，但要全部传回地面，受星地链路传输能力限制，很多数据“拍得下来、传不回来”。更要命的是时效——从拍到、传到、处理完，往往要几个小时甚至更久。对灾害应急这类场景来说，这个等待太漫长了。
+  </p>
+
+  <p>
+    以灾害应急为例，黄金救援窗口往往只有几十个小时。等卫星把灾区影像传回来、地面再解译出受灾范围，宝贵的窗口可能已经过去一大半。这是遥感行业长期存在的一个矛盾：数据的价值很高，但“用得上”的速度跟不上。
+  </p>
+
+  <h2>二、这次不一样：把“看懂”这一步搬上天</h2>
+
+  <p>
+    女娲星座这次发射的四颗星，搭载了高分辨率 SAR 载荷，以及星上智能处理、星上任务规划等载荷，打通了“从卫星在轨智能解译到地面应用输出”的全链路。
+  </p>
+
+  <p>
+    通俗地说，就是让卫星在天上“自己看、自己判”：影像拍下来之后，直接在卫星上完成目标识别、变化检测等解译工作，把“这是一片被淹的水体”“这里出现了新的建筑”这样的结论，而不是海量的原始像素，传回地面。
+  </p>
+
+  <p>
+    星上任务规划则让卫星更“主动”——它能根据任务需要自主安排观测，而不是被动地等地面下指令。
+  </p>
+
+  <p>
+    把处理搬到天上，说起来简单，做起来难。星上算力有限、功耗有严格约束，还要扛住太空的辐射环境。所以星上智能处理不是简单地把地面软件搬上去，而是要针对星上条件做专门的设计和优化，在有限的资源里完成关键的解译任务。
+  </p>
+
+  <h2>三、为什么要在天上处理？三个变化</h2>
+
+  <p>
+    在轨即时处理带来的变化，至少有三个。
+  </p>
+
+  <ul>
+    <li><strong>一是快</strong>：把解译从地面搬到天上，砍掉了“数据回传”这个最耗时的环节，从“拍到”到“拿到结论”的时间大幅缩短。灾害发生时，快就意味着早一点看清灾区、早一点调度救援；</li>
+    <li><strong>二是省</strong>：卫星只把“结论”传回来，而不是把全部原始数据传回来，星地回传压力大幅降低。同样的带宽下，星座能支撑的观测任务更多；</li>
+    <li><strong>三是智能</strong>：过去遥感提供的是“数据”，用户拿到影像还要自己找人、找工具去解译；现在遥感直接提供“情报”，把“看得见”变成“看得懂”。</li>
+  </ul>
+
+  <h2>四、16 星组网：智能处理的底座</h2>
+
+  <p>
+    星上智能处理再强，也要有星座规模撑着。这次一箭四星入轨后，女娲星座在轨卫星达到 16 颗，成为我国在轨雷达卫星规模最大的遥感星座。
+  </p>
+
+  <p>
+    此前，女娲星座已有 12 颗雷达卫星在轨稳定运行，这次一箭四星入轨后达到 16 颗。为什么执着于组网？因为单颗卫星的能力有上限——重访周期长、覆盖范围有限，只有把卫星连成网，才能对同一区域做到频繁重访。
+  </p>
+
+  <p>
+    组网带来的能力提升是实打实的：天级重访、季级全球覆盖、天级形变测量。也就是说，同一个地方几乎每天都能被重新观测一次，全球范围一个季度能覆盖一遍，地表毫米级的形变也能按天量出来。
+  </p>
+
+  <p>
+    大星座加上星上智能处理，是“乘法”关系——重访快了，卫星又能在天上直接把数据处理成结论，整个系统从“拍到”到“给出答案”的速度被进一步拉快。
+  </p>
+
+  <h2>五、落到场景：这些能力能干什么</h2>
+
+  <p>
+    有了“看得快、传得快、判得快”的能力，落地场景就宽了：国土测绘、防灾减灾、生态环保、农业调查、林草监测、海洋观测、城市治理、水利监管，都能用上。
+  </p>
+
+  <p>
+    尤其在防灾减灾上，星上智能处理的价值最直接——山洪、地震、洪涝发生后的第一时间，卫星在轨就把灾区影像解译出来，地面就能更快拿到“哪里受灾、范围多大”的答案。
+  </p>
+
+  <p>
+    在其他领域同样如此：农业上天级重访能更及时地监测作物长势、辅助估产；海洋上频繁重访能更准确地跟踪船只、监测海冰；城市治理上天级形变测量能及早发现城市沉降的隐患。
+  </p>
+
+  <h2>六、从“看得见”到“看得懂”</h2>
+
+  <p>
+    女娲星座的这次发射，标志着一个方向：遥感正在从“把数据拍下来、传回来”，走向“在天上就处理成结论”。
+  </p>
+
+  <p>
+    对行业来说，这背后是一个范式变化——遥感服务的交付物，从“一张影像”变成“一个答案”。而这一步，正是靠星上智能处理、星上任务规划这些“太空智能”能力撑起来的。
+  </p>
+
+  <div class="a-insight">
+    总而言之，女娲星座这次发射的意义，不只在“多了四颗星”，更在“星上智能”迈出了关键一步。当卫星能在天上就把影像“看懂”，遥感的价值就从“提供数据”升级为“提供答案”——离用户更近，离场景更近。
+  </div>
+
+</div>
+
+<div class="a-related">
+  <h4>相关阅读</h4>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2687.html">为什么需要 114 颗卫星？女娲星座的组网之路</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html">雷达卫星为什么能穿透云层？SAR成像原理三分钟看懂</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2671.html">地表怎么“悄悄地”在动？InSAR 毫米级形变监测揭秘</a>
+</div>
+
+</div>
+</body>
+</html>
