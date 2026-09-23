@@ -1,45 +1,278 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>图片尺寸测试 · 759.97 × 406.05</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>卫星影像离一张能用的“底图”还差几步？航天宏图 PIE-Ortho 测绘生产全景 | 航天宏图</title>
+<meta content="卫星影像不等于地图——从原始影像到能用于测绘的 DOM、DEM、DSM 底图，要经过几何纠正、匀色镶嵌、高程提取等工序。本文解析航天宏图 PIE-Ortho 如何把这些工序做成一条自动化生产链。" name="description"/>
+<meta content="卫星影像测绘,DOM,DEM,DSM,数字正射影像,数字高程模型,区域网平差,PIE-Ortho,航天宏图" name="keywords"/>
+<meta property="og:title" content="卫星影像离一张能用的“底图”还差几步？航天宏图 PIE-Ortho 测绘生产全景 | 航天宏图"/>
+<meta property="og:description" content="卫星影像不等于地图——从原始影像到能用于测绘的 DOM、DEM、DSM 底图，要经过几何纠正、匀色镶嵌、高程提取等工序。本文解析航天宏图 PIE-Ortho 如何把这些工序做成一条自动化生产链。"/>
+<meta property="og:image" content="https://haibin-yu.github.io/piesat-prod/piesat-ortho-modules.png"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://haibin-yu.github.io/piesat-prod/article-c6-pie-ortho.html"/>
+<meta property="og:site_name" content="航天宏图 · 技术博客"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="卫星影像离一张能用的“底图”还差几步？航天宏图 PIE-Ortho 测绘生产全景 | 航天宏图"/>
+<meta name="twitter:description" content="卫星影像不等于地图——从原始影像到能用于测绘的 DOM、DEM、DSM 底图，要经过几何纠正、匀色镶嵌、高程提取等工序。"/>
+<meta name="twitter:image" content="https://haibin-yu.github.io/piesat-prod/piesat-ortho-modules.png"/>
+<link rel="canonical" href="https://haibin-yu.github.io/piesat-prod/article-c6-pie-ortho.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "卫星影像离一张能用的“底图”还差几步？航天宏图 PIE-Ortho 测绘生产全景",
+  "description": "卫星影像不等于地图——从原始影像到能用于测绘的 DOM、DEM、DSM 底图，要经过几何纠正、匀色镶嵌、高程提取等工序。本文解析航天宏图 PIE-Ortho 如何把这些工序做成一条自动化生产链。",
+  "author": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司" },
+  "publisher": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司", "url": "https://www.piesat.cn" },
+  "datePublished": "2026-09-20",
+  "dateModified": "2026-09-20",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/pie-ortho-mapping" },
+  "image": "https://haibin-yu.github.io/piesat-prod/piesat-ortho-modules.png",
+  "keywords": ["卫星影像测绘","DOM","DEM","DSM","数字正射影像","数字高程模型","区域网平差","PIE-Ortho"],
+  "about": { "@type": "Thing", "name": "PIE-Ortho", "description": "航天宏图卫星影像测绘处理软件，可批量化完成数字正射影像（DOM）、数字高程模型（DEM）和数字地表模型（DSM）生产。" }
+}
+</script>
 <style>
-  * { box-sizing: border-box; }
-  body { font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: #fafafa; color: #333; margin: 0; padding: 48px 32px; }
-  .wrap { max-width: 1720px; margin: 0 auto; }
-  h1 { font-size: 22px; font-weight: 600; margin: 0 0 8px; }
-  .meta { color: #888; font-size: 14px; line-height: 1.8; margin: 0 0 36px; }
-  .meta b { color: #555; font-weight: 600; }
-  .grid { display: flex; gap: 40px; flex-wrap: wrap; align-items: flex-start; }
-  .card { flex: 0 0 auto; }
-  .label { font-size: 14px; color: #666; margin-bottom: 12px; }
-  .label .tag { display: inline-block; background: #eef0f3; color: #555; font-size: 12px; padding: 2px 8px; border-radius: 3px; margin-left: 8px; }
-  .img { width: 759.97px; height: 406.05px; display: block; background: #eee; }
-  .note { color: #999; font-size: 13px; margin-top: 12px; line-height: 1.7; }
+.a-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+.a-bread{font-size:13px;color:#aaa;margin-bottom:32px}
+.a-bread a{color:#4a90d9;text-decoration:none}
+.a-head{margin-bottom:36px}
+.a-head .a-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;color:#4a90d9;margin-bottom:16px}
+.a-head h1{font-size:28px;font-weight:700;line-height:1.45;color:#0f0f0f;letter-spacing:-0.3px}
+.a-head .a-meta{margin-top:16px;font-size:13px;color:#999;display:flex;gap:20px;align-items:center}
+.a-body{font-size:16px;color:#2a2a2a;line-height:1.9}
+.a-body h2{font-size:20px;font-weight:700;color:#0f0f0f;margin:48px 0 16px}
+.a-body p{margin-bottom:20px}
+.a-body strong{color:#111}
+.a-body ul,.a-body ol{margin:8px 0 20px 22px}
+.a-body li{margin-bottom:10px;color:#3a3a3a}
+.a-fig{margin:32px 0;text-align:center}
+.a-fig img{max-width:100%;border-radius:4px}
+.a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
+.a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
+.a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
+.a-related h4{font-size:13px;color:#aaa;font-weight:600;letter-spacing:2px;margin-bottom:16px}
+.a-related a{display:block;padding:9px 0;font-size:14px;color:#4a90d9;text-decoration:none;border-bottom:1px solid #f2f2f2}
+.a-related a:last-child{border-bottom:none}
+.a-related a:hover{color:#2b6cb0}
+
+.tb-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a1a1a;color:#fff;padding:8px 20px;display:flex;align-items:center;gap:12px;font-size:12px;font-family:"PingFang SC","Hiragino Sans GB",sans-serif}
+.tb-bar .tb-title{font-weight:700;color:#4a90d9;letter-spacing:1px;white-space:nowrap}
+.tb-bar .tb-btn{background:#4a90d9;color:#fff;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tb-bar .tb-btn.copied{background:#22c55e}
+.tb-bar .tb-btn-outline{background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
+body{padding-top:42px}
+@media(print){.tb-bar{display:none!important}body{padding-top:0}}
+@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}}
 </style>
 </head>
-<body>
-<div class="wrap">
-  <h1>图片尺寸测试 · 759.97 × 406.05</h1>
-  <p class="meta">
-    目标显示尺寸 <b>759.97 × 406.05 px</b>，宽高比 <b>1.87 : 1</b>（图片文件按整数像素取 <b>760 × 406</b>）。
-    下方两张图均以 CSS 精确尺寸 <b>759.97px × 406.05px</b> 渲染，供客户调优排版与清晰度。
+<body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
+
+<div id="tb-wrapper">
+<div class="tb-bar">
+  <span class="tb-title">交付预览</span>
+  <span style="flex:1"></span>
+  <button class="tb-btn-outline" onclick="viewSource()">查看源码</button>
+  <button class="tb-btn" id="copyBtn" onclick="copySource()">复制发布源码</button>
+  <button class="tb-btn" style="background:#22c55e" id="copyTextBtn" onclick="copyArticleText()">复制文章内容</button>
+</div>
+<textarea id="srcArea" readonly style="display:none;position:fixed;top:42px;left:0;right:0;bottom:0;z-index:9998;width:100%;border:none;background:#1a1a1a;color:#ccc;font-family:monospace;font-size:12px;padding:20px;resize:none;tab-size:2"></textarea>
+<script>
+function clean(){var c=document.documentElement.cloneNode(true);var w=c.querySelector('#tb-wrapper');if(w)w.remove();return '<!doctype html>\n'+c.outerHTML;}
+function copySource(){navigator.clipboard.writeText(clean()).then(function(){var b=document.getElementById('copyBtn');b.textContent='已复制！';b.classList.add('copied');setTimeout(function(){b.textContent='复制发布源码';b.classList.remove('copied');},2000);});}
+function viewSource(){var a=document.getElementById('srcArea');if(a.style.display==='block'){a.style.display='none';return;}a.value=clean();a.style.display='block';}
+async function copyArticleText(){
+  var b=document.getElementById("copyTextBtn");
+  b.textContent="处理中...";
+  var wrapper=document.createElement("div");
+  var h1=document.querySelector(".a-head h1")||document.querySelector("h1");
+  if(h1){var titleH=document.createElement("h2");titleH.textContent=h1.textContent.trim();titleH.style.textAlign="center";wrapper.appendChild(titleH);}
+  var body=document.querySelector(".a-body");
+  if(!body)return;
+  var imgElements=[];
+  for(var i=0;i<body.children.length;i++){
+    var el=body.children[i];
+    var tag=el.tagName.toLowerCase();
+    var text=el.textContent.trim();
+    if(!text)continue;
+    if(tag==="h2"){var h=document.createElement("h2");h.textContent=text;wrapper.appendChild(h);}
+    else if(tag==="p"){var p=document.createElement("p");p.textContent=text;wrapper.appendChild(p);}
+    else if(el.classList.contains("a-fig")){
+      var img=el.querySelector("img");
+      var cap=el.querySelector(".a-cap");
+      if(img){var imgClone=document.createElement("img");imgClone.src=img.src;imgClone.alt=img.alt;imgClone.style.maxWidth="100%";imgClone.style.display="block";imgClone.style.margin="16px auto";wrapper.appendChild(imgClone);imgElements.push({el:imgClone,url:img.src});}
+      if(cap){var c=document.createElement("p");c.textContent=cap.textContent.trim();c.style.fontSize="12px";c.style.color="#888";c.style.fontStyle="italic";wrapper.appendChild(c);}
+    }else if(el.classList.contains("a-insight")){
+      var bq=document.createElement("blockquote");bq.textContent=text;wrapper.appendChild(bq);
+    }else if(tag==="ul"||tag==="ol"){
+      wrapper.appendChild(el.cloneNode(true));
+    }
+  }
+  var tasks=imgElements.map(function(item){return fetch(item.url).then(function(r){return r.blob()}).then(function(blob){return new Promise(function(resolve){var reader=new FileReader();reader.onloadend=function(){item.el.src=reader.result;resolve()};reader.onerror=resolve;reader.readAsDataURL(blob)})}).catch(function(){})});
+  await Promise.all(tasks);
+  var htmlContent="<html><body>"+wrapper.innerHTML+"</body></html>";
+  try{var htmlBlob=new Blob([htmlContent],{type:"text/html"});await navigator.clipboard.write([new ClipboardItem({"text/html":htmlBlob})]);b.textContent="已复制！";}
+  catch(e){navigator.clipboard.writeText(wrapper.textContent);b.textContent="已复制(仅文字)";}
+  setTimeout(function(){b.textContent="复制文章内容";},2000);
+}
+</script>
+</div>
+
+<div class="a-wrap" style="padding-top:48px">
+<div class="a-bread">
+  <a href="/">首页</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">技术博客</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">产品</a>
+</div>
+
+<div class="a-head">
+  <div class="a-tag">产品</div>
+  <h1>卫星影像离一张能用的“底图”还差几步？航天宏图 PIE-Ortho 测绘生产全景</h1>
+  <div class="a-meta">
+    <span>航天宏图 · 技术博客</span>
+    <span>2026年9月20日</span>
+    <span>阅读约 8 分钟</span>
+  </div>
+</div>
+
+<div class="a-body">
+
+  <p>
+    卫星遥感如今已经相当普遍——高分辨率光学卫星每天都在往地面传回海量影像，覆盖的国土、城市、农田越来越多。但有一个事实容易被忽略：卫星在天上拍下来的影像，并不能直接拿来当“地图”用。
   </p>
 
-  <div class="grid">
-    <div class="card">
-      <div class="label">图一 · 占位图<span class="tag">尺寸线框</span></div>
-      <img class="img" src="https://haibin-yu.github.io/piesat-prod/test-placeholder-760x406.png" alt="占位图 759.97 × 406.05">
-      <p class="note">用于确认尺寸边界与比例：浅灰底、细边框、四角刻度，中心标注精确尺寸。</p>
-    </div>
+  <p>
+    上面画不了等高线，量不出准确的距离，套不上统一的坐标，也拼不成一张完整无缝的大图。要让一张卫星影像变成能真正用于测量、制图、工程的“底图”，中间还要补好几步。航天宏图的 PIE-Ortho 卫星影像测绘处理软件，做的正是这件事——把原始卫星影像，批量化加工成测绘领域最基础的三种成果：数字正射影像（DOM）、数字高程模型（DEM）和数字地表模型（DSM）。
+  </p>
 
-    <div class="card">
-      <div class="label">图二 · 真实文章图<span class="tag">C6 自动匀色后的真彩色 DOM</span></div>
-      <img class="img" src="https://haibin-yu.github.io/piesat-prod/test-sample-760x406.png" alt="真实文章图缩放至 759.97 × 406.05">
-      <p class="note">原图 1808 × 966（比例 1.87:1，与目标比例一致），缩放至 760 × 406，观察该尺寸下清晰度与裁剪效果。</p>
-    </div>
+  <h2>一、卫星影像，为什么不能直接当“底图”用</h2>
+
+  <p>
+    先看一个容易被忽略的事实：卫星影像不等于地图——准确地说，它连测绘的“底图”都还不是，离“地图”更远。
+  </p>
+
+  <p>
+    卫星在天上拍照，受飞行姿态、地形起伏、地球曲率等因素影响，拍出来的影像存在几何变形——同一栋楼可能是“歪”的，山区的影像会有明显的位移，同一个地物在不同景影像里的位置对不上。这样的影像，直接拿来量距离、算面积，误差会很大，达不到测绘的精度要求。
+  </p>
+
+  <p>
+    其次是色彩。一张成图底图往往由几十甚至几百景影像拼接而成，这些影像拍摄的时间、太阳角度、天气条件各不相同，颜色深浅不一。直接拼在一起，会出现一块块明显的“补丁”，看起来东一块西一块。
+  </p>
+
+  <p>
+    第三是“没有高度”。一张平面的影像，看不出地形的高低起伏，也分不清地表上到底有没有建筑、树木。而测绘生产需要的，恰恰是带高程信息的地形数据。
+  </p>
+
+  <p>
+    所以，卫星影像要变成能用的底图，必须经过几何纠正、精确配位、匀色镶嵌、高程提取等一系列处理。这就是 PIE-Ortho 干的活。
+  </p>
+
+  <h2>二、底图是什么：DOM、DEM、DSM 三样东西</h2>
+
+  <p>
+    在讲怎么加工之前，先把“底图”说清楚。测绘领域最基础的三样成果，各有各的用途。
+  </p>
+
+  <ul>
+    <li><strong>DOM（数字正射影像）</strong>，可以理解成一张“经过纠正的精确影像图”——经过几何纠正后，影像里的每一个像素都有了准确的坐标，画面是垂直向下看的效果，可以量距离、量面积，也能直接叠加道路、河流等矢量图层，是各种专题地图的底图基础；</li>
+    <li><strong>DEM（数字高程模型）</strong>，是“纯地形”的高度数据，只记录地面的高低起伏，不含建筑物和植被。做流域分析、坡度坡向计算、工程设计，用的都是 DEM；</li>
+    <li><strong>DSM（数字地表模型）</strong>，是“地表最上层”的高度，包含建筑、树木等地物。做三维展示、城市建模，需要的是 DSM。</li>
+  </ul>
+
+  <p>
+    简单说：DOM 是“看得见的样子”，DEM 是“脚下的地形”，DSM 是“地表所有的凸起”。这三样，构成了测绘底图的基本盘。
+  </p>
+
+  <h2>三、几步把影像变成底图</h2>
+
+  <p>
+    PIE-Ortho 把这条加工链，做成了软件里的标准工序，大致可以分成五步。
+  </p>
+
+  <ul>
+    <li><strong>第一步，区域网平差</strong>——给影像“定坐标”。把多景影像放到一个区域网里，自动匹配影像之间的连接点、控制点，统一解算每景影像的位置和姿态，让所有影像彼此对得上、套得上统一的坐标系；</li>
+    <li><strong>第二步，正射纠正</strong>——把“歪”的影像“扶正”。利用 DEM 消除地形起伏和影像倾斜带来的几何变形，让影像变成垂直向下看的样子，这才是能拿来测量的 DOM；</li>
+    <li><strong>第三步，匀色镶嵌</strong>——把几十几百景影像拼成一张无缝大图。让颜色自然过渡、没有补丁感，还要让镶嵌线避开房屋、道路等地物；</li>
+    <li><strong>第四步，DEM/DSM 提取</strong>——从立体像对里做密集匹配，自动提取地形高程和地表高度；</li>
+    <li><strong>第五步，质量检查</strong>——对 DOM、DEM、DSM 做精度检查和图面检查，不合格的纠正，合格的交货。</li>
+  </ul>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/c6-modules-760x406.png" alt="PIE-Ortho 卫星影像测绘处理软件功能模块示意图" style="width:759.97px;height:406.05px" loading="lazy">
+    <div class="a-cap">▲ PIE-Ortho 功能模块示意图</div>
   </div>
+
+  <p>
+    这五步，在 PIE-Ortho 里被封装成工具箱、工程管理、区域网平差、正射影像、DEM/DSM 获取、流程生产、质量评价、调度管理八个模块。更关键的是“流程生产”——可以把整条链配成一条“流水线”，数据进去、成果出来，实现批量化的自动化生产。
+  </p>
+
+  <h2>四、核心技术优势</h2>
+
+  <p>
+    同样是“把影像变成底图”，PIE-Ortho 有几项过硬的核心技术。
+  </p>
+
+  <p>
+    <strong>一是全流程内存内处理。</strong>传统遥感处理往往是“算一步、把中间结果写进磁盘、再读出来算下一步”，磁盘读写反复折腾，慢。PIE-Ortho 采用全流程内存内处理架构，中间结果在内存里流转、不落盘，配合 CPU/GPU 并行加速，整个处理过程实时可视化，还能一键式输出成果图。
+  </p>
+
+  <p>
+    <strong>二是异源、异时相、异分辨率联合平差。</strong>不同卫星拍的影像，成像几何模型不一样，很难放在一起精确定位。PIE-Ortho 能自动匹配这些异源影像的同名点，匹配精度达到亚像元级，把不同来源的影像统一到一个区域网里解算。
+  </p>
+
+  <p>
+    <strong>三是问题 DEM 实时编辑。</strong>高精度影像有时会因为 DEM 不吻合，出现局部的正射扭曲。PIE-Ortho 支持边编辑 DEM、边实时看到纠正后的影像，问题改没改好，一眼就知道。
+  </p>
+
+  <p>
+    <strong>四是自主的匀光匀色技术。</strong>基于自主研发的地理模板匀色和区域网平差匀色，先整体、后局部自动调色，配合人工精调工具，大区域影像的匀光匀色效率大幅提高。
+  </p>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/c6-color-760x406.png" alt="自动匀色后的真彩色 DOM" style="width:759.97px;height:406.05px" loading="lazy">
+    <div class="a-cap">▲ 自动匀色后的真彩色 DOM</div>
+  </div>
+
+  <p>
+    <strong>五是自适应样条模型和 RPC 小面元模型。</strong>当影像内部几何均匀度不均匀、不符合标准的 RPC 模型时，这两种模型能有效解决影像内部的几何畸变。
+  </p>
+
+  <h2>五、真实场景的应用</h2>
+
+  <p>
+    有了这些能力，PIE-Ortho 已经走进了国土、测绘、农业、林业、水利、环保等行业。
+  </p>
+
+  <p>
+    国土调查需要成片成片的 DOM 底图，把每块土地的边界画清楚；水利部门需要 DEM 做流域分析、算汇水面积；农业估产需要高精度影像看清作物长势；城市测量需要 DSM 支撑三维建模。这些场景，背后都离不开“把卫星影像变成底图”这一步。
+  </p>
+
+  <p>
+    软件支持集群分布式运算，能把海量数据分发到多台机器上并行处理，作业效率和项目周期都有了保证——数据规模再大，也能按需求伸缩处理。
+  </p>
+
+  <h2>六、从“手工活”到“流水线”</h2>
+
+  <p>
+    对测绘生产来说，PIE-Ortho 带来的是一种“从手工到流水线”的变化：把过去分散在多个工具、多个步骤里的工作，收进一条自动化的生产链；把过去依赖进口软件的处理能力，变成国产自主可控的选项；把“单机算不动的大数据”，交给集群分布式去跑。
+  </p>
+
+  <p>
+    当卫星影像能快速、批量地变成一张张“能用的底图”，下游的测绘、国土、水利、农业才有了可靠的数据底座。这，就是 PIE-Ortho 在这条产业链里的位置。
+  </p>
+
+  <div class="a-insight">
+    总而言之，卫星影像离一张“能用的底图”，差的不是几步空泛的流程，而是几何、色彩、高程三道实实在在的加工。PIE-Ortho 把这三道加工收进一条自动化的生产链，让“影像变底图”这件事，从手工活变成了流水线。
+  </div>
+
+</div>
+
+<div class="a-related">
+  <h4>相关阅读</h4>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2724.html">遥感软件还是 GIS 软件？一文看懂航天宏图 PIE</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2581.html">雷达卫星为什么能穿透云层？SAR成像原理三分钟看懂</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2671.html">地表怎么“悄悄地”在动？InSAR 毫米级形变监测揭秘</a>
+</div>
+
 </div>
 </body>
 </html>
