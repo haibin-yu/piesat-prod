@@ -202,7 +202,7 @@ async function copyArticleText(){
       <img src="https://haibin-yu.github.io/piesat-prod/piesat-smart-modules-1.png" alt="PIE-Smart 全自动建模软件功能模块示意图" loading="lazy">
       <img src="https://haibin-yu.github.io/piesat-prod/piesat-smart-modules-2.png" alt="PIE-Smart 全自动建模软件功能模块示意图" loading="lazy">
     </div>
-    <video src="https://haibin-yu.github.io/piesat-prod/piesat-smart-demo.mp4" poster="https://haibin-yu.github.io/piesat-prod/piesat-smart-demo-poster.jpg" autoplay loop muted playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" preload="auto"></video>
+    <video id="smart-demo" src="https://haibin-yu.github.io/piesat-prod/piesat-smart-demo.mp4" poster="https://haibin-yu.github.io/piesat-prod/piesat-smart-demo-poster.jpg" autoplay loop muted playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" preload="auto"></video>
     <div class="a-cap">▲ PIE-Smart 功能模块示意图</div>
   </div>
 
@@ -283,5 +283,26 @@ async function copyArticleText(){
 </div>
 
 </div>
+<script>
+(function(){
+  var ua = navigator.userAgent.toLowerCase();
+  var isWeChat = ua.indexOf('micromessenger') !== -1;
+  var isMobile = /android|iphone|ipad|ipod|windows phone/i.test(ua);
+  if (isWeChat && isMobile) {
+    var v = document.getElementById('smart-demo');
+    if (v) {
+      var img = document.createElement('img');
+      img.src = 'https://haibin-yu.github.io/piesat-prod/piesat-smart-demo-480.gif';
+      img.alt = 'PIE-Smart 全自动建模软件功能演示';
+      img.loading = 'lazy';
+      img.style.maxWidth = '100%';
+      img.style.borderRadius = '4px';
+      img.style.display = 'block';
+      img.style.margin = '8px auto 0';
+      v.parentNode.replaceChild(img, v);
+    }
+  }
+})();
+</script>
 </body>
 </html>
