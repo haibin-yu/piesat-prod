@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>一张地图，能装下多少种数据？航天宏图 PIE-Map 地理信息平台全景 | 航天宏图</title>
+<meta content="卫星影像、测绘成果、实景三维、气象海洋……这些来源各异的数据，要装进同一张地图才能被看见、被分析。本文解析航天宏图 PIE-Map 的多源承载、融合分析与国产化能力。" name="description"/>
+<meta content="地理信息系统,GIS,PIE-Map,多源数据,地图可视化,空间分析,专题图,国产化,航天宏图" name="keywords"/>
+<meta property="og:title" content="一张地图，能装下多少种数据？航天宏图 PIE-Map 地理信息平台全景 | 航天宏图"/>
+<meta property="og:description" content="卫星影像、测绘成果、实景三维、气象海洋……这些来源各异的数据，要装进同一张地图才能被看见、被分析。本文解析航天宏图 PIE-Map 的多源承载、融合分析与国产化能力。"/>
+<meta property="og:image" content="https://haibin-yu.github.io/piesat-prod/piesat-map-modules.png"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://haibin-yu.github.io/piesat-prod/article-c8-pie-map.html"/>
+<meta property="og:site_name" content="航天宏图 · 技术博客"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="一张地图，能装下多少种数据？航天宏图 PIE-Map 地理信息平台全景 | 航天宏图"/>
+<meta name="twitter:description" content="卫星影像、测绘成果、实景三维、气象海洋……这些来源各异的数据，要装进同一张地图才能被看见、被分析。"/>
+<meta name="twitter:image" content="https://haibin-yu.github.io/piesat-prod/piesat-map-modules.png"/>
+<link rel="canonical" href="https://haibin-yu.github.io/piesat-prod/article-c8-pie-map.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "一张地图，能装下多少种数据？航天宏图 PIE-Map 地理信息平台全景",
+  "description": "卫星影像、测绘成果、实景三维、气象海洋……这些来源各异的数据，要装进同一张地图才能被看见、被分析。本文解析航天宏图 PIE-Map 的多源承载、融合分析与国产化能力。",
+  "author": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司" },
+  "publisher": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司", "url": "https://www.piesat.cn" },
+  "datePublished": "2026-09-28",
+  "dateModified": "2026-09-28",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/pie-map-gis" },
+  "image": "https://haibin-yu.github.io/piesat-prod/piesat-map-modules.png",
+  "keywords": ["地理信息系统","GIS","PIE-Map","多源数据","地图可视化","空间分析","国产化"],
+  "about": { "@type": "Thing", "name": "PIE-Map", "description": "航天宏图自主研发的地理信息基础软件综合开发平台，具备多源数据承载、融合分析、三维渲染与多端协同能力。" }
+}
+</script>
+<style>
+.a-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+.a-bread{font-size:13px;color:#aaa;margin-bottom:32px}
+.a-bread a{color:#4a90d9;text-decoration:none}
+.a-head{margin-bottom:36px}
+.a-head .a-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;color:#4a90d9;margin-bottom:16px}
+.a-head h1{font-size:28px;font-weight:700;line-height:1.45;color:#0f0f0f;letter-spacing:-0.3px}
+.a-head .a-meta{margin-top:16px;font-size:13px;color:#999;display:flex;gap:20px;align-items:center}
+.a-body{font-size:16px;color:#2a2a2a;line-height:1.9}
+.a-body h2{font-size:20px;font-weight:700;color:#0f0f0f;margin:48px 0 16px}
+.a-body p{margin-bottom:20px}
+.a-body strong{color:#111}
+.a-body ul,.a-body ol{margin:8px 0 20px 22px}
+.a-body li{margin-bottom:10px;color:#3a3a3a}
+.a-fig{margin:32px 0;text-align:center}
+.a-fig img{max-width:100%;border-radius:4px}
+.a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
+.a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
+.a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
+.a-related h4{font-size:13px;color:#aaa;font-weight:600;letter-spacing:2px;margin-bottom:16px}
+.a-related a{display:block;padding:9px 0;font-size:14px;color:#4a90d9;text-decoration:none;border-bottom:1px solid #f2f2f2}
+.a-related a:last-child{border-bottom:none}
+.a-related a:hover{color:#2b6cb0}
+
+.tb-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a1a1a;color:#fff;padding:8px 20px;display:flex;align-items:center;gap:12px;font-size:12px;font-family:"PingFang SC","Hiragino Sans GB",sans-serif}
+.tb-bar .tb-title{font-weight:700;color:#4a90d9;letter-spacing:1px;white-space:nowrap}
+.tb-bar .tb-btn{background:#4a90d9;color:#fff;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tb-bar .tb-btn.copied{background:#22c55e}
+.tb-bar .tb-btn-outline{background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
+body{padding-top:42px}
+@media(print){.tb-bar{display:none!important}body{padding-top:0}}
+@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}}
+</style>
+</head>
+<body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
+
+<div id="tb-wrapper">
+<div class="tb-bar">
+  <span class="tb-title">交付预览</span>
+  <span style="flex:1"></span>
+  <button class="tb-btn-outline" onclick="viewSource()">查看源码</button>
+  <button class="tb-btn" id="copyBtn" onclick="copySource()">复制发布源码</button>
+  <button class="tb-btn" style="background:#22c55e" id="copyTextBtn" onclick="copyArticleText()">复制文章内容</button>
+</div>
+<textarea id="srcArea" readonly style="display:none;position:fixed;top:42px;left:0;right:0;bottom:0;z-index:9998;width:100%;border:none;background:#1a1a1a;color:#ccc;font-family:monospace;font-size:12px;padding:20px;resize:none;tab-size:2"></textarea>
+<script>
+function clean(){var c=document.documentElement.cloneNode(true);var w=c.querySelector('#tb-wrapper');if(w)w.remove();return '<!doctype html>\n'+c.outerHTML;}
+function copySource(){navigator.clipboard.writeText(clean()).then(function(){var b=document.getElementById('copyBtn');b.textContent='已复制！';b.classList.add('copied');setTimeout(function(){b.textContent='复制发布源码';b.classList.remove('copied');},2000);});}
+function viewSource(){var a=document.getElementById('srcArea');if(a.style.display==='block'){a.style.display='none';return;}a.value=clean();a.style.display='block';}
+async function copyArticleText(){
+  var b=document.getElementById("copyTextBtn");
+  b.textContent="处理中...";
+  var wrapper=document.createElement("div");
+  var h1=document.querySelector(".a-head h1")||document.querySelector("h1");
+  if(h1){var titleH=document.createElement("h2");titleH.textContent=h1.textContent.trim();titleH.style.textAlign="center";wrapper.appendChild(titleH);}
+  var body=document.querySelector(".a-body");
+  if(!body)return;
+  var imgElements=[];
+  for(var i=0;i<body.children.length;i++){
+    var el=body.children[i];
+    var tag=el.tagName.toLowerCase();
+    var text=el.textContent.trim();
+    if(!text)continue;
+    if(tag==="h2"){var h=document.createElement("h2");h.textContent=text;wrapper.appendChild(h);}
+    else if(tag==="p"){var p=document.createElement("p");p.textContent=text;wrapper.appendChild(p);}
+    else if(el.classList.contains("a-fig")){
+      var img=el.querySelector("img");
+      var cap=el.querySelector(".a-cap");
+      if(img){var imgClone=document.createElement("img");imgClone.src=img.src;imgClone.alt=img.alt;imgClone.style.maxWidth="100%";imgClone.style.display="block";imgClone.style.margin="16px auto";wrapper.appendChild(imgClone);imgElements.push({el:imgClone,url:img.src});}
+      if(cap){var c=document.createElement("p");c.textContent=cap.textContent.trim();c.style.fontSize="12px";c.style.color="#888";c.style.fontStyle="italic";wrapper.appendChild(c);}
+    }else if(el.classList.contains("a-insight")){
+      var bq=document.createElement("blockquote");bq.textContent=text;wrapper.appendChild(bq);
+    }else if(tag==="ul"||tag==="ol"){
+      wrapper.appendChild(el.cloneNode(true));
+    }
+  }
+  var tasks=imgElements.map(function(item){return fetch(item.url).then(function(r){return r.blob()}).then(function(blob){return new Promise(function(resolve){var reader=new FileReader();reader.onloadend=function(){item.el.src=reader.result;resolve()};reader.onerror=resolve;reader.readAsDataURL(blob)})}).catch(function(){})});
+  await Promise.all(tasks);
+  var htmlContent="<html><body>"+wrapper.innerHTML+"</body></html>";
+  try{var htmlBlob=new Blob([htmlContent],{type:"text/html"});await navigator.clipboard.write([new ClipboardItem({"text/html":htmlBlob})]);b.textContent="已复制！";}
+  catch(e){navigator.clipboard.writeText(wrapper.textContent);b.textContent="已复制(仅文字)";}
+  setTimeout(function(){b.textContent="复制文章内容";},2000);
+}
+</script>
+</div>
+
+<div class="a-wrap" style="padding-top:48px">
+<div class="a-bread">
+  <a href="/">首页</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">技术博客</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">产品</a>
+</div>
+
+<div class="a-head">
+  <div class="a-tag">产品</div>
+  <h1>一张地图，能装下多少种数据？航天宏图 PIE-Map 地理信息平台全景</h1>
+  <div class="a-meta">
+    <span>航天宏图 · 技术博客</span>
+    <span>2026年9月28日</span>
+    <span>阅读约 8 分钟</span>
+  </div>
+</div>
+
+<div class="a-body">
+
+  <p>
+    前面几篇，我们讲了一颗雷达影像要过几道关才能用，一张卫星影像要做成能用的“底图”要经过几步，真实世界要怎么“搬”进电脑。这些工作做完，都会指向同一个终点——把成果放进一张地图，让人看得见、查得到、分析得了。
+  </p>
+
+  <p>
+    这件事听起来简单，做起来并不容易。要装进这张地图的，远不止一张影像或一版底图：卫星影像、测绘成果、实景三维模型、气象预报、海洋洋流、城市建筑模型，格式五花八门、来源各不相同，却要叠在同一张图上看、放在一起分析。
+  </p>
+
+  <p>
+    一张地图，究竟能装下多少种数据？航天宏图的 PIE-Map，就是为这件事而做的一款地理信息基础软件平台。
+  </p>
+
+  <h2>一、数据处理完了，还得有一张图</h2>
+
+  <p>
+    遥感和测绘的成果，本质上是一堆数据：影像文件、点云、矢量图层、三维模型。数据不会自己开口说话，必须放进一个能可视化、能查询、能分析的环境里，才真正变成能用的成果。
+  </p>
+
+  <p>
+    过去，这些数据常常分散在不同的软件里——看影像用一个软件，编辑矢量用另一个，看三维又得换一个。数据之间割裂，跨数据的分析就费时费力。
+  </p>
+
+  <p>
+    地理信息系统（GIS）基础软件要解决的，正是这件事：把矢量、栅格、影像、三维、专题数据，统一装进一张图，让它们在同一张图里被看见、被查询、被分析。
+  </p>
+
+  <p>
+    为什么是“一张图”？因为空间数据都有一个共同的属性——位置。一条道路、一片农田、一场台风、一栋楼，都可以落到同一个坐标系统里，标注在地图的同一个点上。位置，是把这些五花八门的数据串起来的那根线。
+  </p>
+
+  <h2>二、PIE-Map 是什么</h2>
+
+  <p>
+    PIE-Map V7.0，是航天宏图自主研发的新一代地理信息基础软件综合开发平台。它全面拥抱大数据、人工智能、云计算，形成了跨平台、云+端一体化、新一代三维、遥感智能解译、大数据等能力，并兼容国产自主软硬件。
+  </p>
+
+  <p>
+    作为一款基础软件平台，它的内核自底向上全体系自主研发——系统内核层、数据源层、图形渲染引擎层、开发框架层，轻量高效；同时提供 PC 端、Web 端等多种开发平台，供二次开发使用。
+  </p>
+
+  <p>
+    在国产化上，PIE-Map 对国产空间数据库（如瀚高数据库）、国产终端设备（华为、长城、清华同方等），以及国产操作系统（统信 UOS、中标麒麟、银河麒麟）做了全面适配。
+  </p>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-map-modules.png" alt="PIE-Map 地理信息系统软件功能模块示意图" style="width:759.97px;max-width:100%;height:auto;aspect-ratio:759.97/406.05" loading="lazy">
+    <div class="a-cap">▲ PIE-Map 功能模块示意图</div>
+  </div>
+
+  <p>
+    在功能上，PIE-Map 把地图浏览、场景渲染、数据编辑、态势标绘、空间分析等能力，组织成开始、地图、场景、编辑、标绘、空间分析、工具箱、视图八个模块，一站式覆盖从打开数据到出图分析的完整流程。
+  </p>
+
+  <p>
+    其中，地图模块负责二三维地图的显示与浏览，场景模块负责三维场景的构建与漫游，编辑模块负责矢量对象的增删改，标绘模块支持在图上标注业务符号与态势要素。
+  </p>
+
+  <h2>三、一张图，能装下多少种数据</h2>
+
+  <p>
+    PIE-Map 最突出的能力，是多源信息的承载。常规的矢量数据（shp、WKT）、栅格数据、影像数据（image、瓦片）自不必说；倾斜摄影模型、高程数据、城市模型、BIM 数据，也能直接加载进来。
+  </p>
+
+  <p>
+    在此基础上，它还有两类自研的高效数据格式：GSF 空间数据存储格式，以及 VDS 矢量数据流格式，让海量数据的管理和流转更高效。
+  </p>
+
+  <p>
+    更特别的是，PIE-Map 还能接入气象、海洋等专题数据——实况、预报、灾害预警、台风路径、卫星云图、雷达产品、海洋三角格网和预报数据。这意味着，一张地图里可以同时看到地理、大气、海洋多种环境信息。
+  </p>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-map-multisource.png" alt="PIE-Map 多源信息承载" style="width:759.97px;max-width:100%;height:auto;aspect-ratio:759.97/406.05" loading="lazy">
+    <div class="a-cap">▲ 多源信息承载</div>
+  </div>
+
+  <p>
+    在数据来源上，它既支持在线服务，也支持离线访问，兼容 WMS、WFS、WMTS 等 OGC 标准服务，以及 ArcGIS 地图服务、天地图、谷歌地图、百度地图。
+  </p>
+
+  <h2>四、装进来之后，能干什么</h2>
+
+  <p>
+    数据装进来，是为了用起来。PIE-Map 的多源信息融合能力，能把地理信息、气象信息、海洋信息、社会人文信息放在一起做融合分析。
+  </p>
+
+  <p>
+    在表达上，它支持海图、热力图、航线图、散点图、标签图、单值图等专题图的制作和发布，并配有符号库渲染，让数据用合适的方式呈现出来；同时支持时空关联的动态可视化，让数据随时间流动起来。
+  </p>
+
+  <p>
+    在分析上，它提供了成套的空间分析工具：地表量算、空间量算、点线通视、点面通视、坡度坡向分析、淹没分析、土方分析、剖面分析、日照分析、天际线分析，从量测到研判都能做。
+  </p>
+
+  <h2>五、不止看得见，还能协同与扩展</h2>
+
+  <p>
+    PIE-Map 不只是一个人看的工具，还强调实时感知和多端协同。
+  </p>
+
+  <p>
+    实时感知上，它能与 PIE-Cloud 在线对接，实时获取地理、大气、海洋等多种环境数据；全要素信息实时接入、动态更新，全球大尺度和局部高精度的数据无缝融合。
+  </p>
+
+  <p>
+    多端协同上，它支持二维、三维、AR、VR 多种方式感知，多端之间数据共享、操作协同。
+  </p>
+
+  <p>
+    扩展性上，PIE-Map 提供多种语言的二次开发接口，能便捷地构建二三维一体化应用，支持 PC、Mobile、VR/AR，实现海量数据的快速加载、二三维地图联动、空间与属性查询、空间分析、简单编辑、地址定位等功能。
+  </p>
+
+  <h2>六、落到真实场景</h2>
+
+  <p>
+    凭借这些能力，PIE-Map 面向水利、林业、气象、国土、农业、军事、民政等行业，提供深度行业定制的基础地理信息应用，把地理信息技术和实际业务真正结合起来。
+  </p>
+
+  <p>
+    比如水利行业，用它管理江河湖库的矢量与监测数据，做淹没分析；气象行业，把实况、预报、台风路径、卫星云图叠在一张图上做会商研判；国土行业，用它做地类图斑的编辑与制图出图。
+  </p>
+
+  <p>
+    它交付的不只是软件，而是数据、软件、硬件集成和持续更新维护的整体解决方案。
+  </p>
+
+  <p>
+    从一堆数据，到一张能查、能分析、能共享的地图，这一步的意义，是把空间数据真正变成业务能用的底座。
+  </p>
+
+  <div class="a-insight">
+    一张地图能装下多少种数据？PIE-Map 给出的答案，不只是一个数字，而是一种能力：把矢量、影像、三维、气象、海洋……装进同一张图，再让它们在同一张图里融合、分析、协同。这才是地理信息基础软件的价值所在。
+  </div>
+
+</div>
+
+<div class="a-related">
+  <h4>相关阅读</h4>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2724.html">遥感软件还是 GIS 软件？一文看懂航天宏图 PIE</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">卫星影像离一张能用的“底图”还差几步？航天宏图 PIE-Ortho 测绘生产全景</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">真实世界怎么“搬”进电脑？航天宏图 PIE-Smart 与 PIE-Lidar 实景三维全景</a>
+</div>
+
+</div>
+</body>
+</html>
