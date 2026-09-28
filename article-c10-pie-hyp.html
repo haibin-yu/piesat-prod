@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>高光谱影像，凭什么能“看见”普通影像看不见的东西？航天宏图 PIE-Hyp 高光谱处理全景 | 航天宏图</title>
+<meta content="普通影像不过红绿蓝三个波段，高光谱影像却有几十到几百个连续波段，每个像元都是一条“光谱指纹”。本文解析航天宏图 PIE-Hyp 高光谱影像数据处理软件。" name="description"/>
+<meta content="高光谱,光谱指纹,PIE-Hyp,波段,大气校正,岩矿识别,水质监测,航天宏图" name="keywords"/>
+<meta property="og:title" content="高光谱影像，凭什么能“看见”普通影像看不见的东西？航天宏图 PIE-Hyp 高光谱处理全景 | 航天宏图"/>
+<meta property="og:description" content="普通影像不过红绿蓝三个波段，高光谱影像却有几十到几百个连续波段，每个像元都是一条“光谱指纹”。本文解析航天宏图 PIE-Hyp 高光谱影像数据处理软件。"/>
+<meta property="og:image" content="https://haibin-yu.github.io/piesat-prod/piesat-hyp-flow.png"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://haibin-yu.github.io/piesat-prod/article-c10-pie-hyp.html"/>
+<meta property="og:site_name" content="航天宏图 · 技术博客"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="高光谱影像，凭什么能“看见”普通影像看不见的东西？航天宏图 PIE-Hyp 高光谱处理全景 | 航天宏图"/>
+<meta name="twitter:description" content="普通影像不过红绿蓝三个波段，高光谱影像却有几十到几百个连续波段，每个像元都是一条“光谱指纹”。"/>
+<meta name="twitter:image" content="https://haibin-yu.github.io/piesat-prod/piesat-hyp-flow.png"/>
+<link rel="canonical" href="https://haibin-yu.github.io/piesat-prod/article-c10-pie-hyp.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "高光谱影像，凭什么能“看见”普通影像看不见的东西？航天宏图 PIE-Hyp 高光谱处理全景",
+  "description": "普通影像不过红绿蓝三个波段，高光谱影像却有几十到几百个连续波段，每个像元都是一条“光谱指纹”。本文解析航天宏图 PIE-Hyp 高光谱影像数据处理软件。",
+  "author": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司" },
+  "publisher": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司", "url": "https://www.piesat.cn" },
+  "datePublished": "2026-09-28",
+  "dateModified": "2026-09-28",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/pie-hyp-hyperspectral" },
+  "image": "https://haibin-yu.github.io/piesat-prod/piesat-hyp-flow.png",
+  "keywords": ["高光谱","光谱指纹","PIE-Hyp","波段","大气校正","岩矿识别","水质监测"],
+  "about": { "@type": "Thing", "name": "PIE-Hyp", "description": "航天宏图自主研发的高光谱影像数据处理软件，面向主流高光谱卫星数据提供全流程处理与分析能力。" }
+}
+</script>
+<style>
+.a-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+.a-bread{font-size:13px;color:#aaa;margin-bottom:32px}
+.a-bread a{color:#4a90d9;text-decoration:none}
+.a-head{margin-bottom:36px}
+.a-head .a-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;color:#4a90d9;margin-bottom:16px}
+.a-head h1{font-size:28px;font-weight:700;line-height:1.45;color:#0f0f0f;letter-spacing:-0.3px}
+.a-head .a-meta{margin-top:16px;font-size:13px;color:#999;display:flex;gap:20px;align-items:center}
+.a-body{font-size:16px;color:#2a2a2a;line-height:1.9}
+.a-body h2{font-size:20px;font-weight:700;color:#0f0f0f;margin:48px 0 16px}
+.a-body p{margin-bottom:20px}
+.a-body strong{color:#111}
+.a-body ul,.a-body ol{margin:8px 0 20px 22px}
+.a-body li{margin-bottom:10px;color:#3a3a3a}
+.a-fig{margin:32px 0;text-align:center}
+.a-fig img{max-width:100%;border-radius:4px}
+.a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
+.a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
+.a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
+.a-related h4{font-size:13px;color:#aaa;font-weight:600;letter-spacing:2px;margin-bottom:16px}
+.a-related a{display:block;padding:9px 0;font-size:14px;color:#4a90d9;text-decoration:none;border-bottom:1px solid #f2f2f2}
+.a-related a:last-child{border-bottom:none}
+.a-related a:hover{color:#2b6cb0}
+
+.tb-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a1a1a;color:#fff;padding:8px 20px;display:flex;align-items:center;gap:12px;font-size:12px;font-family:"PingFang SC","Hiragino Sans GB",sans-serif}
+.tb-bar .tb-title{font-weight:700;color:#4a90d9;letter-spacing:1px;white-space:nowrap}
+.tb-bar .tb-btn{background:#4a90d9;color:#fff;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tb-bar .tb-btn.copied{background:#22c55e}
+.tb-bar .tb-btn-outline{background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
+body{padding-top:42px}
+@media(print){.tb-bar{display:none!important}body{padding-top:0}}
+@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}}
+</style>
+</head>
+<body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
+
+<div id="tb-wrapper">
+<div class="tb-bar">
+  <span class="tb-title">交付预览</span>
+  <span style="flex:1"></span>
+  <button class="tb-btn-outline" onclick="viewSource()">查看源码</button>
+  <button class="tb-btn" id="copyBtn" onclick="copySource()">复制发布源码</button>
+  <button class="tb-btn" style="background:#22c55e" id="copyTextBtn" onclick="copyArticleText()">复制文章内容</button>
+</div>
+<textarea id="srcArea" readonly style="display:none;position:fixed;top:42px;left:0;right:0;bottom:0;z-index:9998;width:100%;border:none;background:#1a1a1a;color:#ccc;font-family:monospace;font-size:12px;padding:20px;resize:none;tab-size:2"></textarea>
+<script>
+function clean(){var c=document.documentElement.cloneNode(true);var w=c.querySelector('#tb-wrapper');if(w)w.remove();return '<!doctype html>\n'+c.outerHTML;}
+function copySource(){navigator.clipboard.writeText(clean()).then(function(){var b=document.getElementById('copyBtn');b.textContent='已复制！';b.classList.add('copied');setTimeout(function(){b.textContent='复制发布源码';b.classList.remove('copied');},2000);});}
+function viewSource(){var a=document.getElementById('srcArea');if(a.style.display==='block'){a.style.display='none';return;}a.value=clean();a.style.display='block';}
+async function copyArticleText(){
+  var b=document.getElementById("copyTextBtn");
+  b.textContent="处理中...";
+  var wrapper=document.createElement("div");
+  var h1=document.querySelector(".a-head h1")||document.querySelector("h1");
+  if(h1){var titleH=document.createElement("h2");titleH.textContent=h1.textContent.trim();titleH.style.textAlign="center";wrapper.appendChild(titleH);}
+  var body=document.querySelector(".a-body");
+  if(!body)return;
+  var imgElements=[];
+  for(var i=0;i<body.children.length;i++){
+    var el=body.children[i];
+    var tag=el.tagName.toLowerCase();
+    var text=el.textContent.trim();
+    if(!text)continue;
+    if(tag==="h2"){var h=document.createElement("h2");h.textContent=text;wrapper.appendChild(h);}
+    else if(tag==="p"){var p=document.createElement("p");p.textContent=text;wrapper.appendChild(p);}
+    else if(el.classList.contains("a-fig")){
+      var img=el.querySelector("img");
+      var cap=el.querySelector(".a-cap");
+      if(img){var imgClone=document.createElement("img");imgClone.src=img.src;imgClone.alt=img.alt;imgClone.style.maxWidth="100%";imgClone.style.display="block";imgClone.style.margin="16px auto";wrapper.appendChild(imgClone);imgElements.push({el:imgClone,url:img.src});}
+      if(cap){var c=document.createElement("p");c.textContent=cap.textContent.trim();c.style.fontSize="12px";c.style.color="#888";c.style.fontStyle="italic";wrapper.appendChild(c);}
+    }else if(el.classList.contains("a-insight")){
+      var bq=document.createElement("blockquote");bq.textContent=text;wrapper.appendChild(bq);
+    }else if(tag==="ul"||tag==="ol"){
+      wrapper.appendChild(el.cloneNode(true));
+    }
+  }
+  var tasks=imgElements.map(function(item){return fetch(item.url).then(function(r){return r.blob()}).then(function(blob){return new Promise(function(resolve){var reader=new FileReader();reader.onloadend=function(){item.el.src=reader.result;resolve()};reader.onerror=resolve;reader.readAsDataURL(blob)})}).catch(function(){})});
+  await Promise.all(tasks);
+  var htmlContent="<html><body>"+wrapper.innerHTML+"</body></html>";
+  try{var htmlBlob=new Blob([htmlContent],{type:"text/html"});await navigator.clipboard.write([new ClipboardItem({"text/html":htmlBlob})]);b.textContent="已复制！";}
+  catch(e){navigator.clipboard.writeText(wrapper.textContent);b.textContent="已复制(仅文字)";}
+  setTimeout(function(){b.textContent="复制文章内容";},2000);
+}
+</script>
+</div>
+
+<div class="a-wrap" style="padding-top:48px">
+<div class="a-bread">
+  <a href="/">首页</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">技术博客</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">产品</a>
+</div>
+
+<div class="a-head">
+  <div class="a-tag">产品</div>
+  <h1>高光谱影像，凭什么能“看见”普通影像看不见的东西？航天宏图 PIE-Hyp 高光谱处理全景</h1>
+  <div class="a-meta">
+    <span>航天宏图 · 技术博客</span>
+    <span>2026年9月28日</span>
+    <span>阅读约 8 分钟</span>
+  </div>
+</div>
+
+<div class="a-body">
+
+  <p>
+    普通卫星影像，记录的是红、绿、蓝三种颜色——三个波段，每个像元不过三个数字。高光谱影像不一样：它把光拆成几十个、甚至几百个连续的窄波段，每个像元留下的不是三个数字，而是一条完整的“光谱曲线”。
+  </p>
+
+  <p>
+    这条曲线，可以看作是每一种物质的“光谱指纹”。不同的物质，反射光的“配方”各不相同——健康的植被、发黄的作物、不同成分的岩石、不同浑浊度的水体，光谱曲线都长得不一样。
+  </p>
+
+  <p>
+    “光谱指纹”这个说法，可以这样理解：普通影像给每种东西只留了红、绿、蓝三个数，颜色相近的两个物体，在这三个数上几乎分不出来；高光谱给每种东西留了几十个、几百个数，哪怕颜色看起来一样，光谱曲线的形状也不同，物质就“露馅”了。
+  </p>
+
+  <p>
+    所以高光谱能“看见”普通影像看不见的东西：它看的不是形状，是成分。而要把这份“看见”变成可靠的成果，靠的是航天宏图的 PIE-Hyp 高光谱影像数据处理软件。
+  </p>
+
+  <h2>一、PIE-Hyp 是什么</h2>
+
+  <p>
+    PIE-Hyp V7.0，是航天宏图自主研发的高光谱影像数据处理软件，面向 GF-5、ZY1E、珠海一号 OHS、Hyperion 等国内外主流高光谱卫星影像，提供从“拿到原始数据”到“得到定量成果”的全流程处理。
+  </p>
+
+  <p>
+    它的功能涵盖影像质量评价及修复、图谱分析、辐射校正、几何校正、目标探测、地物分类、参量反演分析等专业处理环节；再配合地物波谱库提供的光谱信息查询与管理能力，能够实现水环境监测、农作物精细化分类、岩矿识别等高精度定量应用。
+  </p>
+
+  <p>
+    简单说，它把高光谱这条“从光谱到答案”的路，一段一段都接了下来，服务于生态环保、精准农业和自然资源等领域。
+  </p>
+
+  <p>
+    在功能上，PIE-Hyp 把这些能力组织成加载显示、基础工具、影像质量评价、图谱分析、图像预处理、混合像元分解、图像分类、目标探测、定量应用、专题制图十个模块，从打开数据到出图分析，一站式覆盖高光谱处理的全过程。
+  </p>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-hyp-flow.png" alt="ZY1E 高光谱数据全流程处理" style="width:759.97px;max-width:100%;height:auto" loading="lazy">
+    <div class="a-cap">▲ ZY1E 高光谱数据全流程处理</div>
+  </div>
+
+  <h2>二、拿到高光谱数据，第一件事是“校准”</h2>
+
+  <p>
+    高光谱数据到手，不能直接用。第一步是影像质量评价——噪声估计、清晰度评价、信息熵统计，先判断这批数据“能不能用、好不好用”。
+  </p>
+
+  <p>
+    第二步，也是最关键的一步，是大气校正。卫星从太空拍地表，光要穿过大气层才能到达传感器，途中会被散射、被吸收。要还原地表真实的反射率，就必须“去掉大气的影响”。
+  </p>
+
+  <p>
+    PIE-Hyp 兼容 MODTRAN 和 6S 两种辐射传输模型，逐像元构建大气校正查找表，兼顾效率与精度。针对国产高光谱卫星数据，它能在数分钟内完成大气校正，得到的地表反射率计算值与实测值相比，精度优于 85%。
+  </p>
+
+  <p>
+    除了大气校正，还有两道“细活”。一是图谱分析：高光谱数据本质上是“图 + 谱”，既要在空间上看得见地物，又要在光谱上读得懂成分，图谱分析模块通过波谱剖面、光谱变换等手段，把这两个维度打通。二是混合像元分解：一个像元覆盖的地面往往混着多种物质，像元的“光谱”其实是几种物质光谱的混合，混合像元分解要做的，就是把这个混合信号拆开，还原每种物质各自的占比。
+  </p>
+
+  <h2>三、从“光谱”到“答案”</h2>
+
+  <p>
+    校准之后，才有了可靠的“光谱”，才能从光谱里读出答案。这一步，正是高光谱的价值所在。
+  </p>
+
+  <p>
+    在岩矿识别上，不同矿物在特定波长有特征吸收峰，光谱曲线能“点名”矿物的成分；在水质监测上，叶绿素 a、悬浮物、浊度、总氮、总磷、溶解氧等水质参数，都可以从水体的光谱特征反演出来；在精准农业上，不同作物、不同长势，光谱响应不同，从而支撑精细化分类。
+  </p>
+
+  <p>
+    为此，PIE-Hyp 的定量应用模块集成了植被指数、土壤指数、水体指数，以及叶绿素 a 浓度、营养状态指数、水华、总氮、总磷、溶解氧、水体反射率、水表温度分布等一系列定量反演能力，把光谱换算成业务真正关心的数字。
+  </p>
+
+  <p>
+    除了分类和反演，高光谱还有一个“找异常”的本事——目标探测。在缺少先验样本的情况下，从影像里找出“和周围不一样”的像元（异常探测），或者用已知目标的光谱做匹配，把特定物质从背景里挑出来。这在矿物勘查、环境监察这类“找目标”的场景里，尤其有用。
+  </p>
+
+  <h2>四、空-谱融合：既要看得细，也要看得清</h2>
+
+  <p>
+    高光谱有一个天生的矛盾：波段多，光谱分辨率高；但代价是，空间分辨率往往不高——每个像元覆盖的地面面积偏大，细节不够清晰。
+  </p>
+
+  <p>
+    解决办法是空-谱融合：把一张空间分辨率高、但波段有限的多光谱或全色影像，和高光谱影像融合，既保留高光谱的光谱信息，又提升空间分辨率。
+  </p>
+
+  <p>
+    PIE-Hyp 支持 GF-2 多光谱与 GF-5、Landsat8 多光谱与 Hyperion、高景全色与 YG 等多种异源影像的空-谱融合，在高度保持光谱信息和空间解析特性的前提下，空间融合比率可高达 1:20——把“看得细”和“看得清”合到一张图上。
+  </p>
+
+  <h2>五、把“光谱指纹”存进库</h2>
+
+  <p>
+    支撑这一切的，还有一个地物波谱库。PIE-Hyp 搭建了地物波谱数据库，对各类地物的光谱数据做光谱维的管理、查询和分析，包括波谱数据的入库、查询、浏览显示与处理分析。
+  </p>
+
+  <p>
+    有了这个库，识别地物就不再是“凭经验猜”，而是“拿实测光谱去比对”。光谱指纹，从这里变成了可以查询、可以复用的资产。
+  </p>
+
+  <p>
+    这些能力落到业务里，就是一件件具体的事：生态环保里，用高光谱反演叶绿素 a、总磷总氮，盯着水体的富营养化；精准农业里，用光谱差异区分作物长势，指导施肥；自然资源里，用光谱特征识别岩矿、支撑矿产勘查。同样是“看图”，高光谱把“看”这件事，从“看形状”推进到了“看成分”。
+  </p>
+
+  <p>
+    高光谱影像凭什么能看见普通影像看不见的东西？因为它看的不是颜色，是成分。PIE-Hyp 要做的，就是把这份“看见成分”的能力，从原始数据一路接到业务答案。
+  </p>
+
+  <div class="a-insight">
+    普通影像看“像什么”，高光谱看“是什么”。PIE-Hyp 的意义，在于把高光谱从“一条光谱曲线”到“一个业务答案”的这段距离，用一套全流程的软件，稳稳地接住。
+  </div>
+
+</div>
+
+<div class="a-related">
+  <h4>相关阅读</h4>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/3033.html">卫星影像离一张能用的“底图”还差几步？航天宏图 PIE-Ortho 测绘生产全景</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">一张雷达影像，要过几道关才能用？航天宏图 PIE-SAR 影像处理全景</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">13 款软件，能拼成一条完整的遥感数据链吗？航天宏图 PIE 桌面软件工具集全景</a>
+</div>
+
+</div>
+</body>
+</html>
