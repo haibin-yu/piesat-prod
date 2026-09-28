@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>把一整幅遥感图“切”成有意义的地块，靠什么？航天宏图 PIE-SIAS 尺度集影像分析 | 航天宏图</title>
+<meta content="传统分类逐像素看颜色，容易把一块农田拆得稀碎；面向对象分析则先把影像切成有意义的“图斑”，再对图斑分类。本文解析航天宏图 PIE-SIAS 尺度集影像分析软件。" name="description"/>
+<meta content="面向对象,尺度集,影像分割,PIE-SIAS,影像分类,样本选择,变化检测,航天宏图" name="keywords"/>
+<meta property="og:title" content="把一整幅遥感图“切”成有意义的地块，靠什么？航天宏图 PIE-SIAS 尺度集影像分析 | 航天宏图"/>
+<meta property="og:description" content="传统分类逐像素看颜色，容易把一块农田拆得稀碎；面向对象分析则先把影像切成有意义的“图斑”，再对图斑分类。本文解析航天宏图 PIE-SIAS 尺度集影像分析软件。"/>
+<meta property="og:image" content="https://haibin-yu.github.io/piesat-prod/piesat-sias-modules.png"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://haibin-yu.github.io/piesat-prod/article-c11-pie-sias.html"/>
+<meta property="og:site_name" content="航天宏图 · 技术博客"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="把一整幅遥感图“切”成有意义的地块，靠什么？航天宏图 PIE-SIAS 尺度集影像分析 | 航天宏图"/>
+<meta name="twitter:description" content="传统分类逐像素看颜色，容易把一块农田拆得稀碎；面向对象分析则先把影像切成有意义的“图斑”，再对图斑分类。"/>
+<meta name="twitter:image" content="https://haibin-yu.github.io/piesat-prod/piesat-sias-modules.png"/>
+<link rel="canonical" href="https://haibin-yu.github.io/piesat-prod/article-c11-pie-sias.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "把一整幅遥感图“切”成有意义的地块，靠什么？航天宏图 PIE-SIAS 尺度集影像分析",
+  "description": "传统分类逐像素看颜色，容易把一块农田拆得稀碎；面向对象分析则先把影像切成有意义的“图斑”，再对图斑分类。本文解析航天宏图 PIE-SIAS 尺度集影像分析软件。",
+  "author": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司" },
+  "publisher": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司", "url": "https://www.piesat.cn" },
+  "datePublished": "2026-09-28",
+  "dateModified": "2026-09-28",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/pie-sias-image-analysis" },
+  "image": "https://haibin-yu.github.io/piesat-prod/piesat-sias-modules.png",
+  "keywords": ["面向对象","尺度集","影像分割","PIE-SIAS","影像分类","样本选择","变化检测"],
+  "about": { "@type": "Thing", "name": "PIE-SIAS", "description": "航天宏图自主研发的尺度集影像分析软件，采用面向对象分析方法，提供多源遥感数据的全流程解译分析能力。" }
+}
+</script>
+<style>
+.a-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+.a-bread{font-size:13px;color:#aaa;margin-bottom:32px}
+.a-bread a{color:#4a90d9;text-decoration:none}
+.a-head{margin-bottom:36px}
+.a-head .a-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;color:#4a90d9;margin-bottom:16px}
+.a-head h1{font-size:28px;font-weight:700;line-height:1.45;color:#0f0f0f;letter-spacing:-0.3px}
+.a-head .a-meta{margin-top:16px;font-size:13px;color:#999;display:flex;gap:20px;align-items:center}
+.a-body{font-size:16px;color:#2a2a2a;line-height:1.9}
+.a-body h2{font-size:20px;font-weight:700;color:#0f0f0f;margin:48px 0 16px}
+.a-body p{margin-bottom:20px}
+.a-body strong{color:#111}
+.a-body ul,.a-body ol{margin:8px 0 20px 22px}
+.a-body li{margin-bottom:10px;color:#3a3a3a}
+.a-fig{margin:32px 0;text-align:center}
+.a-fig img{max-width:100%;border-radius:4px}
+.a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
+.a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
+.a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
+.a-related h4{font-size:13px;color:#aaa;font-weight:600;letter-spacing:2px;margin-bottom:16px}
+.a-related a{display:block;padding:9px 0;font-size:14px;color:#4a90d9;text-decoration:none;border-bottom:1px solid #f2f2f2}
+.a-related a:last-child{border-bottom:none}
+.a-related a:hover{color:#2b6cb0}
+
+.tb-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a1a1a;color:#fff;padding:8px 20px;display:flex;align-items:center;gap:12px;font-size:12px;font-family:"PingFang SC","Hiragino Sans GB",sans-serif}
+.tb-bar .tb-title{font-weight:700;color:#4a90d9;letter-spacing:1px;white-space:nowrap}
+.tb-bar .tb-btn{background:#4a90d9;color:#fff;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tb-bar .tb-btn.copied{background:#22c55e}
+.tb-bar .tb-btn-outline{background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
+body{padding-top:42px}
+@media(print){.tb-bar{display:none!important}body{padding-top:0}}
+@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}}
+</style>
+</head>
+<body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
+
+<div id="tb-wrapper">
+<div class="tb-bar">
+  <span class="tb-title">交付预览</span>
+  <span style="flex:1"></span>
+  <button class="tb-btn-outline" onclick="viewSource()">查看源码</button>
+  <button class="tb-btn" id="copyBtn" onclick="copySource()">复制发布源码</button>
+  <button class="tb-btn" style="background:#22c55e" id="copyTextBtn" onclick="copyArticleText()">复制文章内容</button>
+</div>
+<textarea id="srcArea" readonly style="display:none;position:fixed;top:42px;left:0;right:0;bottom:0;z-index:9998;width:100%;border:none;background:#1a1a1a;color:#ccc;font-family:monospace;font-size:12px;padding:20px;resize:none;tab-size:2"></textarea>
+<script>
+function clean(){var c=document.documentElement.cloneNode(true);var w=c.querySelector('#tb-wrapper');if(w)w.remove();return '<!doctype html>\n'+c.outerHTML;}
+function copySource(){navigator.clipboard.writeText(clean()).then(function(){var b=document.getElementById('copyBtn');b.textContent='已复制！';b.classList.add('copied');setTimeout(function(){b.textContent='复制发布源码';b.classList.remove('copied');},2000);});}
+function viewSource(){var a=document.getElementById('srcArea');if(a.style.display==='block'){a.style.display='none';return;}a.value=clean();a.style.display='block';}
+async function copyArticleText(){
+  var b=document.getElementById("copyTextBtn");
+  b.textContent="处理中...";
+  var wrapper=document.createElement("div");
+  var h1=document.querySelector(".a-head h1")||document.querySelector("h1");
+  if(h1){var titleH=document.createElement("h2");titleH.textContent=h1.textContent.trim();titleH.style.textAlign="center";wrapper.appendChild(titleH);}
+  var body=document.querySelector(".a-body");
+  if(!body)return;
+  var imgElements=[];
+  for(var i=0;i<body.children.length;i++){
+    var el=body.children[i];
+    var tag=el.tagName.toLowerCase();
+    var text=el.textContent.trim();
+    if(!text)continue;
+    if(tag==="h2"){var h=document.createElement("h2");h.textContent=text;wrapper.appendChild(h);}
+    else if(tag==="p"){var p=document.createElement("p");p.textContent=text;wrapper.appendChild(p);}
+    else if(el.classList.contains("a-fig")){
+      var img=el.querySelector("img");
+      var cap=el.querySelector(".a-cap");
+      if(img){var imgClone=document.createElement("img");imgClone.src=img.src;imgClone.alt=img.alt;imgClone.style.maxWidth="100%";imgClone.style.display="block";imgClone.style.margin="16px auto";wrapper.appendChild(imgClone);imgElements.push({el:imgClone,url:img.src});}
+      if(cap){var c=document.createElement("p");c.textContent=cap.textContent.trim();c.style.fontSize="12px";c.style.color="#888";c.style.fontStyle="italic";wrapper.appendChild(c);}
+    }else if(el.classList.contains("a-insight")){
+      var bq=document.createElement("blockquote");bq.textContent=text;wrapper.appendChild(bq);
+    }else if(tag==="ul"||tag==="ol"){
+      wrapper.appendChild(el.cloneNode(true));
+    }
+  }
+  var tasks=imgElements.map(function(item){return fetch(item.url).then(function(r){return r.blob()}).then(function(blob){return new Promise(function(resolve){var reader=new FileReader();reader.onloadend=function(){item.el.src=reader.result;resolve()};reader.onerror=resolve;reader.readAsDataURL(blob)})}).catch(function(){})});
+  await Promise.all(tasks);
+  var htmlContent="<html><body>"+wrapper.innerHTML+"</body></html>";
+  try{var htmlBlob=new Blob([htmlContent],{type:"text/html"});await navigator.clipboard.write([new ClipboardItem({"text/html":htmlBlob})]);b.textContent="已复制！";}
+  catch(e){navigator.clipboard.writeText(wrapper.textContent);b.textContent="已复制(仅文字)";}
+  setTimeout(function(){b.textContent="复制文章内容";},2000);
+}
+</script>
+</div>
+
+<div class="a-wrap" style="padding-top:48px">
+<div class="a-bread">
+  <a href="/">首页</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">技术博客</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">产品</a>
+</div>
+
+<div class="a-head">
+  <div class="a-tag">产品</div>
+  <h1>把一整幅遥感图“切”成有意义的地块，靠什么？航天宏图 PIE-SIAS 尺度集影像分析</h1>
+  <div class="a-meta">
+    <span>航天宏图 · 技术博客</span>
+    <span>2026年9月28日</span>
+    <span>阅读约 8 分钟</span>
+  </div>
+</div>
+
+<div class="a-body">
+
+  <p>
+    让计算机“看懂”一张遥感图，传统的做法是一个像素一个像素地看颜色，把每个像素分到某个类别。这样做有一个老毛病：容易产生“椒盐噪声”——相邻的像素被分进不同的类，一块完整的农田，被拆得稀碎。
+  </p>
+
+  <p>
+    可人看影像，从来不是数像素。人看到的，是“一块地”“一片水”“一栋楼”。面向对象分析，就是让计算机也学会这么看：先把影像切成一个个有意义的“对象”（图斑），再对图斑整体分类。
+  </p>
+
+  <p>
+    所谓“椒盐噪声”，可以想象成撒在影像上的一把碎盐粒和碎胡椒——本该是一整块的水田，被拆成星星点点的“水”和“非水”。计算机没有错，是“逐像素”这个方法本身，把连续的地物打碎了。
+  </p>
+
+  <p>
+    问题是，这一刀怎么“切”，才能切得刚刚好？航天宏图的 PIE-SIAS 尺度集影像分析软件，就是为回答这个问题而做的。
+  </p>
+
+  <h2>一、PIE-SIAS 是什么</h2>
+
+  <p>
+    PIE-SIAS V7.0，是航天宏图自主研发的一款影像分析工具，采用面向对象的分析方法，在影像信息挖掘上做出了一套更接近人眼认知的路径。
+  </p>
+
+  <p>
+    它拥有面向多源遥感数据的全流程解译分析能力，功能覆盖尺度集分割、人工样本选择、自动样本选择、面向对象分类、变化检测、分类后处理、半自动交互式信息提取、专题制图等方面，广泛服务于国土、水利、农业、林业、环保等领域。
+  </p>
+
+  <p>
+    逐像素分类看的是“一个点的颜色”，面向对象分类看的是“一块区域的形状、纹理、光谱与上下文”。一块农田，在逐像素眼里是成千上万个独立的点，在面向对象眼里是一个完整的图斑。对图斑分类，结果才干净、才符合业务里“这块地是农田、那片是林地”的真实划分。
+  </p>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-sias-modules.png" alt="PIE-SIAS 尺度集影像分析软件功能模块示意图" style="width:759.97px;max-width:100%;height:auto" loading="lazy">
+    <div class="a-cap">▲ PIE-SIAS 功能模块示意图</div>
+  </div>
+
+  <h2>二、“切”的艺术：尺度集分割</h2>
+
+  <p>
+    分割，是面向对象分析的第一步，也是最见功夫的一步。难点在于，地物有大有小：一栋楼和一片农田，需要的“切割尺度”完全不同。切得太细，农田碎成渣；切得太粗，小楼又被吞进别的图斑里。
+  </p>
+
+  <p>
+    PIE-SIAS 基于自主研发的尺度集分割算法，一次分割，即可实现影像的多尺度同步预览，分割尺度还能自由无级变换——就像看地图时平滑地缩放，大尺度看大块、小尺度看细节。
+  </p>
+
+  <p>
+    在分割时，算法综合利用影像的光谱、纹理、形状、边缘等特征，边界比传统分割算法更加准确、清晰。效率上，它采用多核并行处理，结合 CPU-GPU 联合加速，分割效率是同类产品的 2 到 3 倍。
+  </p>
+
+  <p>
+    之所以叫“尺度集”，是因为它提供的不是一个固定尺度，而是把多个尺度“集合”在一次分割里。地物大小不一，本来要按不同尺度分割好几次；尺度集算法一次完成，之后在不同尺度之间平滑切换，既省了重复分割的功夫，又让“切多大”这件事可以随时调整。
+  </p>
+
+  <h2>三、标样本，是分类的地基</h2>
+
+  <p>
+    切好之后，要给图斑分类。分类不是凭空来的，它需要“样本”——先告诉计算机一批“标准答案”，计算机再照着学。
+  </p>
+
+  <p>
+    PIE-SIAS 支持在多尺度分割结果上做样本选择，能兼顾同一场景里尺寸不同的大块农田和小栋建筑，从而提高分类精度。更省力的是，它还有自动类别确定算法——从分割对象中自动确定部分对象的类别作为样本，减少人工标注的工作量。
+  </p>
+
+  <p>
+    在分类方式上，它既支持基于样本的监督分类，也支持规则集分类：软件提供丰富的光谱、纹理、形状特征库，用户可以据此快速构建规则集，按规则对影像做单一或全部类别的提取。
+  </p>
+
+  <h2>四、一次建模，多处复用</h2>
+
+  <p>
+    分类模型不是一次性的。PIE-SIAS 支持“新建分类模型”和“使用分类模型”两种方式：前者设置参数、用样本训练后分类；后者直接调用已保存的模型，对新的影像分类，不需要重新选样本。
+  </p>
+
+  <p>
+    这意味着，构建一次模型，就能对多景、不同区域的影像复用——把“训一次、用多次”的复利，落到遥感解译里。
+  </p>
+
+  <p>
+    变化检测是面向对象分析的另一处典型用途：对同一区域的前后两期影像分别分割、分类，再比对图斑的变化，就能定位“哪里新增了建筑”“哪里水体退了”。对国土监测、两违整治这类“盯变化”的业务，面向对象的变化检测比逐像素比对更稳、更可解释。
+  </p>
+
+  <h2>五、一键提取，批量协同</h2>
+
+  <p>
+    除了整幅分类，PIE-SIAS 还提供了“魔术棒”式的交互提取工具：结合地物提取算法和区域生长算法，对影像里的水体、植被、建筑物等地物做一键式边界提取，按先验条件对单个区域、全图乃至多景影像做自动化、高精度提取。
+  </p>
+
+  <p>
+    面对大批量影像，它可以构建批处理工程，把影像分割、自动样本选择、影像分类串成批处理流水线；再配合类别合并、边缘整饰等后处理工具，以及多人协同作业机制——服务器构建工程、分发任务，多个工作站分工处理，最后合并结果——让大范围的解译作业跑得起来。
+  </p>
+
+  <p>
+    分类结果出炉，往往还要“修一修”：把相邻的同类图斑合并、把边缘整饰平滑、把误分的类别转换过来。PIE-SIAS 把这些后处理工具集成在一起，让结果从“能用”走向“好用”。
+  </p>
+
+  <p>
+    这些能力落到业务里，同样是一件件具体的事：国土里，用面向对象分类和变化检测，做地类图斑的提取与两违监测；水利里，用“魔术棒”一键提取水体，再比对前后两期影像看水域变化；农业里，对不同尺度的农田做分割分类，摸清作物种植结构。从“逐像素”到“看对象”，变的不只是算法，更是遥感解译离真实业务的距离。这是一条从“看颜色”到“看对象”的进阶之路。
+  </p>
+
+  <p>
+    把一整幅遥感图“切”成有意义的地块，靠的是一套面向对象的思路，再加上尺度集分割这个“切”的本事。PIE-SIAS 要做的，就是让计算机像人一样“看对象”，而不是“数像素”。
+  </p>
+
+  <div class="a-insight">
+    看懂一张遥感图，难的不是“看”，是“切”——切成多大的块，才算有意义。PIE-SIAS 的尺度集分割，让这一刀既能切得细，又能切得准；剩下的分类，才有牢靠的地基。
+  </div>
+
+</div>
+
+<div class="a-related">
+  <h4>相关阅读</h4>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2724.html">遥感软件还是 GIS 软件？一文看懂航天宏图 PIE</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">AI 如何“看懂”卫星影像？航天宏图 PIE-Engine 的智能解译</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">13 款软件，能拼成一条完整的遥感数据链吗？航天宏图 PIE 桌面软件工具集全景</a>
+</div>
+
+</div>
+</body>
+</html>
