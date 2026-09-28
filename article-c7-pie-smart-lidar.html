@@ -49,6 +49,8 @@
 .a-body li{margin-bottom:10px;color:#3a3a3a}
 .a-fig{margin:32px 0;text-align:center}
 .a-fig img{max-width:100%;border-radius:4px}
+.a-fig-row{display:flex;gap:8px;align-items:flex-start;justify-content:center}
+.a-fig-row img{max-width:calc(50% - 4px);flex:1 1 auto;min-width:0}
 .a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
 .a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
 .a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
@@ -64,7 +66,7 @@
 .tb-bar .tb-btn-outline{background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
 body{padding-top:42px}
 @media(print){.tb-bar{display:none!important}body{padding-top:0}}
-@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}}
+@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}.a-fig-row{flex-direction:column}.a-fig-row img{max-width:100%}}
 </style>
 </head>
 <body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
@@ -195,7 +197,10 @@ async function copyArticleText(){
   </p>
 
   <div class="a-fig">
-    <img src="https://haibin-yu.github.io/piesat-prod/piesat-smart-modules.png" alt="PIE-Smart 全自动建模软件功能模块示意图" loading="lazy">
+    <div class="a-fig-row">
+      <img src="https://haibin-yu.github.io/piesat-prod/piesat-smart-modules-1.png" alt="PIE-Smart 全自动建模软件功能模块示意图" loading="lazy">
+      <img src="https://haibin-yu.github.io/piesat-prod/piesat-smart-modules-2.png" alt="PIE-Smart 全自动建模软件功能模块示意图" loading="lazy">
+    </div>
     <div class="a-cap">▲ PIE-Smart 功能模块示意图</div>
   </div>
 
