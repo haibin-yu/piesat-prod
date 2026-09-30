@@ -51,7 +51,7 @@
 .a-fig img{max-width:100%;border-radius:4px}
 .a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
 .a-fig-row{display:flex;gap:8px;align-items:flex-start;justify-content:center;margin:32px 0}
-.a-fig-row img{max-width:calc(50% - 4px);flex:1 1 auto;min-width:0;border-radius:4px}
+.a-fig-row img,.a-fig-row video{max-width:calc(50% - 4px);flex:1 1 auto;min-width:0;border-radius:4px}
 .a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
 .a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
 .a-related h4{font-size:13px;color:#aaa;font-weight:600;letter-spacing:2px;margin-bottom:16px}
@@ -66,7 +66,7 @@
 .tb-bar .tb-btn-outline{background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
 body{padding-top:42px}
 @media(print){.tb-bar{display:none!important}body{padding-top:0}}
-@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}.a-fig-row{flex-direction:column}.a-fig-row img{max-width:100%}}
+@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}.a-fig-row{flex-direction:column}.a-fig-row img,.a-fig-row video{max-width:100%}}
 </style>
 </head>
 <body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
@@ -188,11 +188,11 @@ async function copyArticleText(){
 
   <div class="a-fig-row">
     <img src="https://haibin-yu.github.io/piesat-prod/piesat-map-fig2.png" alt="PIE-Map 功能示意" loading="lazy">
-    <img src="https://haibin-yu.github.io/piesat-prod/piesat-map-fig3.gif" alt="PIE-Map 操作演示动画" loading="lazy">
+    <video src="https://haibin-yu.github.io/piesat-prod/piesat-map-fig3.mp4" autoplay loop muted playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5"></video>
   </div>
 
   <div class="a-fig">
-    <img src="https://haibin-yu.github.io/piesat-prod/piesat-map-fig4.gif" alt="PIE-Map 操作演示动画" style="width:759.97px;max-width:100%;height:auto" loading="lazy">
+    <video src="https://haibin-yu.github.io/piesat-prod/piesat-map-fig4.mp4" autoplay loop muted playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" style="width:759.97px;max-width:100%;height:auto"></video>
     <div class="a-cap">▲ PIE-Map 功能模块与操作演示</div>
   </div>
 
