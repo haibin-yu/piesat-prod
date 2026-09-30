@@ -8,14 +8,14 @@
 <meta content="面向对象,尺度集,影像分割,PIE-SIAS,影像分类,样本选择,变化检测,航天宏图" name="keywords"/>
 <meta property="og:title" content="把一整幅遥感图“切”成有意义的地块，靠什么？航天宏图 PIE-SIAS 尺度集影像分析 | 航天宏图"/>
 <meta property="og:description" content="传统分类逐像素看颜色，容易把一块农田拆得稀碎；面向对象分析则先把影像切成有意义的“图斑”，再对图斑分类。本文解析航天宏图 PIE-SIAS 尺度集影像分析软件。"/>
-<meta property="og:image" content="https://haibin-yu.github.io/piesat-prod/piesat-sias-modules.png"/>
+<meta property="og:image" content="https://haibin-yu.github.io/piesat-prod/piesat-sias-fig1.png"/>
 <meta property="og:type" content="article"/>
 <meta property="og:url" content="https://haibin-yu.github.io/piesat-prod/article-c11-pie-sias.html"/>
 <meta property="og:site_name" content="航天宏图 · 技术博客"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="把一整幅遥感图“切”成有意义的地块，靠什么？航天宏图 PIE-SIAS 尺度集影像分析 | 航天宏图"/>
 <meta name="twitter:description" content="传统分类逐像素看颜色，容易把一块农田拆得稀碎；面向对象分析则先把影像切成有意义的“图斑”，再对图斑分类。"/>
-<meta name="twitter:image" content="https://haibin-yu.github.io/piesat-prod/piesat-sias-modules.png"/>
+<meta name="twitter:image" content="https://haibin-yu.github.io/piesat-prod/piesat-sias-fig1.png"/>
 <link rel="canonical" href="https://haibin-yu.github.io/piesat-prod/article-c11-pie-sias.html"/>
 <script type="application/ld+json">
 {
@@ -28,7 +28,7 @@
   "datePublished": "2026-09-28",
   "dateModified": "2026-09-28",
   "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/pie-sias-image-analysis" },
-  "image": "https://haibin-yu.github.io/piesat-prod/piesat-sias-modules.png",
+  "image": "https://haibin-yu.github.io/piesat-prod/piesat-sias-fig1.png",
   "keywords": ["面向对象","尺度集","影像分割","PIE-SIAS","影像分类","样本选择","变化检测"],
   "about": { "@type": "Thing", "name": "PIE-SIAS", "description": "航天宏图自主研发的尺度集影像分析软件，采用面向对象分析方法，提供多源遥感数据的全流程解译分析能力。" }
 }
@@ -50,6 +50,8 @@
 .a-fig{margin:32px 0;text-align:center}
 .a-fig img{max-width:100%;border-radius:4px}
 .a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
+.a-fig-row{display:flex;gap:8px;align-items:flex-start;justify-content:center;margin:32px 0}
+.a-fig-row img{flex:1 1 0;min-width:0;border-radius:4px}
 .a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
 .a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
 .a-related h4{font-size:13px;color:#aaa;font-weight:600;letter-spacing:2px;margin-bottom:16px}
@@ -64,7 +66,7 @@
 .tb-bar .tb-btn-outline{background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
 body{padding-top:42px}
 @media(print){.tb-bar{display:none!important}body{padding-top:0}}
-@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}}
+@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}.a-fig-row{flex-direction:column}.a-fig-row img{width:100%;flex:none}}
 </style>
 </head>
 <body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
@@ -167,7 +169,16 @@ async function copyArticleText(){
   </p>
 
   <div class="a-fig">
-    <img src="https://haibin-yu.github.io/piesat-prod/piesat-sias-modules.png" alt="PIE-SIAS 尺度集影像分析软件功能模块示意图" style="width:759.97px;max-width:100%;height:auto" loading="lazy">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-sias-fig1.png" alt="PIE-SIAS 尺度集影像分析软件功能模块示意图" style="width:759.97px;max-width:100%;height:auto" loading="lazy">
+  </div>
+
+  <div class="a-fig-row">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-sias-fig2.png" alt="PIE-SIAS 功能模块示意" loading="lazy">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-sias-fig3.png" alt="PIE-SIAS 功能模块示意" loading="lazy">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-sias-fig4.png" alt="PIE-SIAS 功能模块示意" loading="lazy">
+  </div>
+
+  <div class="a-fig" style="margin-top:10px">
     <div class="a-cap">▲ PIE-SIAS 功能模块示意图</div>
   </div>
 
