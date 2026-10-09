@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>一张遥感影像，用之前为什么要先“洗一遍”？航天宏图 PIE-Basic 基础处理全景 | 航天宏图</title>
+<meta content="卫星拍回来的原始影像，带着辐射误差、几何变形、色彩不匀，不能直接做分析。从多源数据读取、辐射几何校正，到信息提取、专题制图，本文解析航天宏图 PIE-Basic 如何把遥感影像的“基础处理”做成一条遥感与 GIS 一体化的全流程链。" name="description"/>
+<meta content="遥感基础处理,辐射校正,几何校正,图像融合,图像镶嵌,PIE-Basic,航天宏图" name="keywords"/>
+<meta property="og:title" content="一张遥感影像，用之前为什么要先“洗一遍”？航天宏图 PIE-Basic 基础处理全景 | 航天宏图"/>
+<meta property="og:description" content="卫星拍回来的原始影像，带着辐射误差、几何变形、色彩不匀，不能直接做分析。本文解析航天宏图 PIE-Basic 如何把遥感影像的“基础处理”做成一条遥感与 GIS 一体化的全流程链。"/>
+<meta property="og:image" content="https://haibin-yu.github.io/piesat-prod/piesat-basic-registration.png"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://haibin-yu.github.io/piesat-prod/article-c12-pie-basic.html"/>
+<meta property="og:site_name" content="航天宏图 · 技术博客"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="一张遥感影像，用之前为什么要先“洗一遍”？航天宏图 PIE-Basic 基础处理全景 | 航天宏图"/>
+<meta name="twitter:description" content="卫星拍回来的原始影像，带着辐射误差、几何变形、色彩不匀，不能直接做分析。"/>
+<meta name="twitter:image" content="https://haibin-yu.github.io/piesat-prod/piesat-basic-registration.png"/>
+<link rel="canonical" href="https://haibin-yu.github.io/piesat-prod/article-c12-pie-basic.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "一张遥感影像，用之前为什么要先“洗一遍”？航天宏图 PIE-Basic 基础处理全景",
+  "description": "卫星拍回来的原始影像，带着辐射误差、几何变形、色彩不匀，不能直接做分析。从多源数据读取、辐射几何校正，到信息提取、专题制图，本文解析航天宏图 PIE-Basic 如何把遥感影像的“基础处理”做成一条遥感与 GIS 一体化的全流程链。",
+  "author": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司" },
+  "publisher": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司", "url": "https://www.piesat.cn" },
+  "datePublished": "2026-10-09",
+  "dateModified": "2026-10-09",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/pie-basic" },
+  "image": "https://haibin-yu.github.io/piesat-prod/piesat-basic-registration.png",
+  "keywords": ["遥感基础处理","辐射校正","几何校正","图像融合","图像镶嵌","PIE-Basic"],
+  "about": { "@type": "Thing", "name": "PIE-Basic", "description": "航天宏图遥感图像基础处理软件，集遥感与 GIS 于一体，提供多源遥感影像的基础处理、辅助解译、信息提取及专题制图全流程功能。" }
+}
+</script>
+<style>
+.a-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+.a-bread{font-size:13px;color:#aaa;margin-bottom:32px}
+.a-bread a{color:#4a90d9;text-decoration:none}
+.a-head{margin-bottom:36px}
+.a-head .a-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;color:#4a90d9;margin-bottom:16px}
+.a-head h1{font-size:28px;font-weight:700;line-height:1.45;color:#0f0f0f;letter-spacing:-0.3px}
+.a-head .a-meta{margin-top:16px;font-size:13px;color:#999;display:flex;gap:20px;align-items:center}
+.a-body{font-size:16px;color:#2a2a2a;line-height:1.9}
+.a-body h2{font-size:20px;font-weight:700;color:#0f0f0f;margin:48px 0 16px}
+.a-body p{margin-bottom:20px}
+.a-body strong{color:#111}
+.a-body ul,.a-body ol{margin:8px 0 20px 22px}
+.a-body li{margin-bottom:10px;color:#3a3a3a}
+.a-fig{margin:32px 0;text-align:center}
+.a-fig img{max-width:100%;border-radius:4px}
+.a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
+.a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
+.a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
+.a-related h4{font-size:13px;color:#aaa;font-weight:600;letter-spacing:2px;margin-bottom:16px}
+.a-related a{display:block;padding:9px 0;font-size:14px;color:#4a90d9;text-decoration:none;border-bottom:1px solid #f2f2f2}
+.a-related a:last-child{border-bottom:none}
+.a-related a:hover{color:#2b6cb0}
+
+.tb-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a1a1a;color:#fff;padding:8px 20px;display:flex;align-items:center;gap:12px;font-size:12px;font-family:"PingFang SC","Hiragino Sans GB",sans-serif}
+.tb-bar .tb-title{font-weight:700;color:#4a90d9;letter-spacing:1px;white-space:nowrap}
+.tb-bar .tb-btn{background:#4a90d9;color:#fff;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tb-bar .tb-btn.copied{background:#22c55e}
+.tb-bar .tb-btn-outline{background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
+body{padding-top:42px}
+@media(print){.tb-bar{display:none!important}body{padding-top:0}}
+@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}}
+</style>
+</head>
+<body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
+
+<div id="tb-wrapper">
+<div class="tb-bar">
+  <span class="tb-title">交付预览</span>
+  <span style="flex:1"></span>
+  <button class="tb-btn-outline" onclick="viewSource()">查看源码</button>
+  <button class="tb-btn" id="copyBtn" onclick="copySource()">复制发布源码</button>
+  <button class="tb-btn" style="background:#22c55e" id="copyTextBtn" onclick="copyArticleText()">复制文章内容</button>
+</div>
+<textarea id="srcArea" readonly style="display:none;position:fixed;top:42px;left:0;right:0;bottom:0;z-index:9998;width:100%;border:none;background:#1a1a1a;color:#ccc;font-family:monospace;font-size:12px;padding:20px;resize:none;tab-size:2"></textarea>
+<script>
+function clean(){var c=document.documentElement.cloneNode(true);var w=c.querySelector('#tb-wrapper');if(w)w.remove();return '<!doctype html>\n'+c.outerHTML;}
+function copySource(){navigator.clipboard.writeText(clean()).then(function(){var b=document.getElementById('copyBtn');b.textContent='已复制！';b.classList.add('copied');setTimeout(function(){b.textContent='复制发布源码';b.classList.remove('copied');},2000);});}
+function viewSource(){var a=document.getElementById('srcArea');if(a.style.display==='block'){a.style.display='none';return;}a.value=clean();a.style.display='block';}
+async function copyArticleText(){
+  var b=document.getElementById("copyTextBtn");
+  b.textContent="处理中...";
+  var wrapper=document.createElement("div");
+  var h1=document.querySelector(".a-head h1")||document.querySelector("h1");
+  if(h1){var titleH=document.createElement("h2");titleH.textContent=h1.textContent.trim();titleH.style.textAlign="center";wrapper.appendChild(titleH);}
+  var body=document.querySelector(".a-body");
+  if(!body)return;
+  var imgElements=[];
+  for(var i=0;i<body.children.length;i++){
+    var el=body.children[i];
+    var tag=el.tagName.toLowerCase();
+    var text=el.textContent.trim();
+    if(!text)continue;
+    if(tag==="h2"){var h=document.createElement("h2");h.textContent=text;wrapper.appendChild(h);}
+    else if(tag==="p"){var p=document.createElement("p");p.textContent=text;wrapper.appendChild(p);}
+    else if(el.classList.contains("a-fig")){
+      var img=el.querySelector("img");
+      var cap=el.querySelector(".a-cap");
+      if(img){var imgClone=document.createElement("img");imgClone.src=img.src;imgClone.alt=img.alt;imgClone.style.maxWidth="100%";imgClone.style.display="block";imgClone.style.margin="16px auto";wrapper.appendChild(imgClone);imgElements.push({el:imgClone,url:img.src});}
+      if(cap){var c=document.createElement("p");c.textContent=cap.textContent.trim();c.style.fontSize="12px";c.style.color="#888";c.style.fontStyle="italic";wrapper.appendChild(c);}
+    }else if(el.classList.contains("a-insight")){
+      var bq=document.createElement("blockquote");bq.textContent=text;wrapper.appendChild(bq);
+    }else if(tag==="ul"||tag==="ol"){
+      wrapper.appendChild(el.cloneNode(true));
+    }
+  }
+  var tasks=imgElements.map(function(item){return fetch(item.url).then(function(r){return r.blob()}).then(function(blob){return new Promise(function(resolve){var reader=new FileReader();reader.onloadend=function(){item.el.src=reader.result;resolve()};reader.onerror=resolve;reader.readAsDataURL(blob)})}).catch(function(){})});
+  await Promise.all(tasks);
+  var htmlContent="<html><body>"+wrapper.innerHTML+"</body></html>";
+  try{var htmlBlob=new Blob([htmlContent],{type:"text/html"});await navigator.clipboard.write([new ClipboardItem({"text/html":htmlBlob})]);b.textContent="已复制！";}
+  catch(e){navigator.clipboard.writeText(wrapper.textContent);b.textContent="已复制(仅文字)";}
+  setTimeout(function(){b.textContent="复制文章内容";},2000);
+}
+</script>
+</div>
+
+<div class="a-wrap" style="padding-top:48px">
+<div class="a-bread">
+  <a href="/">首页</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">技术博客</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">产品</a>
+</div>
+
+<div class="a-head">
+  <div class="a-tag">产品</div>
+  <h1>一张遥感影像，用之前为什么要先“洗一遍”？航天宏图 PIE-Basic 基础处理全景</h1>
+  <div class="a-meta">
+    <span>航天宏图 · 技术博客</span>
+    <span>2026年10月9日</span>
+    <span>阅读约 8 分钟</span>
+  </div>
+</div>
+
+<div class="a-body">
+
+  <p>
+    卫星遥感如今已经相当普遍——农业看作物长势、水利看水域变化、国土看用地情况、环保看污染分布，很多行业的工作流里，起点都是一张卫星影像。但有一个环节容易被忽略：卫星在天上拍下来的影像，并不能直接拿去做这些分析。
+  </p>
+
+  <p>
+    它得先“洗一遍”——把大气和传感器带来的误差去掉、把歪了的影像扶正、把破碎的影像拼起来。航天宏图的 PIE-Basic 遥感图像基础处理软件，做的正是这件事：把一张张“生”的原始影像，加工成能用于解译、反演、制图的“可用”数据。
+  </p>
+
+  <h2>一、一张遥感影像，为什么不能直接用</h2>
+
+  <p>
+    卫星在几百公里外拍照，中间隔着厚厚的大气，传感器本身也存在误差。拍回来的原始影像，通常带着三类问题。
+  </p>
+
+  <p>
+    第一是“颜色不准”。大气散射、太阳高度角、传感器噪声，都会给影像蒙上一层干扰，让地物真实的颜色失真。一片农田拍出来偏灰、一片水体拍出来偏暗，直接拿来做分析，结果会差很多。
+  </p>
+
+  <p>
+    第二是“位置不准”。卫星飞行时的姿态变化、地面起伏、地球曲率，会让影像产生几何变形——本该是直线的地方变弯了，同一地物在不同景影像里的位置对不上，量出来的距离、算出来的面积都不准。
+  </p>
+
+  <p>
+    第三是“拼不起来”。一张大范围的图，往往由几十甚至上百景影像拼接而成，这些影像拍摄的时间、光照、天气各不相同，直接拼在一起，会东一块西一块，颜色深浅不一。
+  </p>
+
+  <p>
+    要让影像“干净、端正、能拼接”，先得过基础处理这一关。这就是 PIE-Basic 干的活。
+  </p>
+
+  <h2>二、“基础处理”要过哪几道关</h2>
+
+  <p>
+    所谓基础处理，是把“原始影像”变成“可用影像”的几道标准工序，其中最重要的有四道。
+  </p>
+
+  <ul>
+    <li><strong>辐射校正</strong>——去掉大气散射、传感器噪声带来的干扰，还原地物真实的反射率，也就是把“颜色”找回来；</li>
+    <li><strong>几何校正</strong>——把影像“扶正”，套上准确的地理坐标，让位置对得上、距离量得准；</li>
+    <li><strong>图像融合</strong>——把高分辨率的全色影像和多光谱影像融合，得到既清晰又有色彩的成果；</li>
+    <li><strong>图像镶嵌</strong>——把多景影像拼成一张无缝大图，让颜色过渡自然、没有补丁感。</li>
+  </ul>
+
+  <p>
+    这四道关，是后面一切应用的共同前提。不管最后要做分类、解译、反演还是制图，影像都得先过这一关——基础不牢，后面做得再花哨也白搭。
+  </p>
+
+  <h2>三、PIE-Basic：把全流程收进一个软件</h2>
+
+  <p>
+    PIE-Basic 把这条链做成了软件里的完整流程，一共十一个功能模块，可以按“读数据 → 处理 → 解译 → 制图”四段来看。
+  </p>
+
+  <ul>
+    <li><strong>读数据</strong>——数据管理模块支持多源数据加载，多光谱、高光谱、气象数据、极轨卫星数据都能读进来，配合图层管理、地图浏览、空间测量；</li>
+    <li><strong>处理</strong>——图像预处理（辐射校正、几何校正、融合、镶嵌）、图像增强（滤波、边缘增强、纹理分析）、常用功能（投影转换、格式转换、波段运算）；</li>
+    <li><strong>解译</strong>——图像分类（监督、非监督、决策树）、综合判读（标注标绘、信息提取）、矢量处理，以及综合应用里的水体提取、生态参量反演、林业动态监测；</li>
+    <li><strong>制图</strong>——专题制图模块，从视图操作、地图整饰，到专题图模板、专题图输出。</li>
+  </ul>
+
+  <p>
+    一条线走下来，从数据进来到专题图出去，中间不用换软件。白皮书里把这一点叫“全流程业务链”——多源数据读取与显示、数据预处理、信息提取与解译、专题图表生成，四段连成一体。
+  </p>
+
+  <h2>四、不一样的地方：遥感与 GIS 一体化</h2>
+
+  <p>
+    很多遥感软件只负责“处理”，处理完还得把结果导出来，再进到 GIS 软件里去画图、做空间分析。PIE-Basic 把这两件事收在了同一个平台里。
+  </p>
+
+  <p>
+    一方面，它提供了 GIS 数据编辑工具和空间分析能力，矢量创建、编辑、捕捉、统计分析都在软件里完成；另一方面，它内置了行业 GIS 符号库，支持符号快速扩展，还提供二次开发接口，能搭出新的遥感与 GIS 一体化系统。
+  </p>
+
+  <p>
+    对做工程的人来说，这意味着少装一个软件、少一次数据搬家，也少一次格式转换带来的信息丢失。遥感处理和 GIS 分析，第一次能在同一个界面里走完。
+  </p>
+
+  <h2>五、几项硬功夫</h2>
+
+  <p>
+    同样是基础处理，PIE-Basic 有几项拿得出手的技术。
+  </p>
+
+  <p>
+    <strong>一是亚像元级的图像配准。</strong>不同源、不同时相、甚至旋转扭曲的影像，PIE-Basic 能自动完成影像间的匹配，并采用多种粗差剔除方法自动剔除误差点，匹配精度达到亚像元级。这意味着不同时间、不同卫星拍回来的影像，能稳稳地对齐。
+  </p>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-basic-registration.png" alt="PIE-Basic 图像配准功能" loading="lazy">
+    <div class="a-cap">▲ PIE-Basic 图像配准功能</div>
+  </div>
+
+  <p>
+    <strong>二是高效的辐射校正。</strong>操作简单、处理精度高、校正速度快，是基础处理里最“磨人”的一道工序，被它做成了常规操作。
+  </p>
+
+  <p>
+    <strong>三是大数据的快速渲染。</strong>采用多线程并行渲染、多级瓦片缓存、文件缓存和 OpenGL 硬件加速等优化，大影像也能快速加载、无级缩放、无缝漫游，看数据不再卡。
+  </p>
+
+  <p>
+    <strong>四是自动与人工结合的解译。</strong>判读解译时，信息自动提取和人工研判两种模式结合——机器先把候选区域找出来，人再对不确定的地方下判断，既快又准。
+  </p>
+
+  <h2>六、13 款工具里的“地基”</h2>
+
+  <p>
+    在航天宏图 PIE 桌面软件工具集的 13 款软件里，PIE-Basic 排在第一位，是整个工具集的地基款。
+  </p>
+
+  <p>
+    往后看，做雷达处理（PIE-SAR）、测绘生产（PIE-Ortho）、高光谱分析（PIE-Hyp）、尺度集影像分析（PIE-SIAS），很多底层的读数据、校正、融合、镶嵌能力，都建立在基础处理之上。地基打不牢，上层工具的效率也上不去。
+  </p>
+
+  <p>
+    对刚接触遥感的用户来说，它也是“第一站”——先把基础处理这一套弄明白，再去碰更专业的工具，会顺畅很多。等把影像处理好，软件里的专题制图模块还能一键式出图，把成果快速变成一张能交出去的图。
+  </p>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-basic-template.png" alt="PIE-Basic 基于模板快速制图" loading="lazy">
+    <div class="a-cap">▲ PIE-Basic 基于模板快速制图</div>
+  </div>
+
+  <div class="a-insight">
+    总而言之，一张卫星影像从“拍下来”到“能用”，差的不只是某一项技术，而是一套完整的基础处理。PIE-Basic 把这套处理收进一个软件，又让遥感和 GIS 在同一平台里完成——它既是航天宏图桌面工具集的地基，也是很多人走进遥感的第一站。
+  </div>
+
+</div>
+
+<div class="a-related">
+  <h4>相关阅读</h4>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">13 款软件，能拼成一条完整的遥感数据链吗？航天宏图 PIE 桌面软件工具集全景</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/3033.html">卫星影像离一张能用的“底图”还差几步？航天宏图 PIE-Ortho 测绘生产全景</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2730.html">一张雷达影像，要过几道关才能用？航天宏图 PIE-SAR 影像处理全景</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2724.html">遥感软件还是 GIS 软件？一文看懂航天宏图 PIE</a>
+</div>
+
+</div>
+</body>
+</html>
