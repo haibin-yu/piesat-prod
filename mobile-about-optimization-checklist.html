@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>航天宏图官网 移动端 + 关于页 专项优化清单</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1f2328;
+    --ink-2: #4b5563;
+    --ink-3: #6b7280;
+    --line: #eceff3;
+    --line-2: #e3e7ec;
+    --accent: #3b5bdb;
+    --accent-soft: #eef2ff;
+    --p0: #c0392b;
+    --p0-bg: #fdf0ef;
+    --p1: #d97706;
+    --p1-bg: #fdf6ec;
+    --p2: #b58900;
+    --p2-bg: #fcf8ec;
+    --ok: #2f9e44;
+    --ok-bg: #eef8f0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 56px 28px 88px; }
+
+  header { border-bottom: 1px solid var(--line); padding-bottom: 28px; margin-bottom: 40px; }
+  .kicker { font-size: 13px; letter-spacing: .12em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+  h1 { font-size: 26px; font-weight: 700; margin: 0 0 12px; letter-spacing: .01em; }
+  .meta { font-size: 14px; color: var(--ink-3); }
+  .meta span + span::before { content: " · "; }
+
+  h2 { font-size: 19px; font-weight: 650; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  h3 { font-size: 15px; font-weight: 650; margin: 26px 0 10px; }
+
+  .lead {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 20px 22px;
+    border-radius: 0 8px 8px 0;
+    font-size: 15px;
+    color: var(--ink);
+    margin: 8px 0 0;
+  }
+  .lead b { color: var(--accent); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 8px 0 8px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-weight: 600; color: var(--ink-2); font-size: 13px; background: #fafbfc; white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+
+  .problem {
+    border: 1px solid var(--line-2);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin: 18px 0;
+  }
+  .problem-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .badge {
+    display: inline-block;
+    font-size: 12px; font-weight: 700; letter-spacing: .04em;
+    padding: 3px 10px; border-radius: 20px; white-space: nowrap;
+  }
+  .badge.p0 { background: var(--p0-bg); color: var(--p0); }
+  .badge.p1 { background: var(--p1-bg); color: var(--p1); }
+  .badge.p2 { background: var(--p2-bg); color: var(--p2); }
+  .badge.ok { background: var(--ok-bg); color: var(--ok); }
+  .problem h3 { font-size: 16px; margin: 0; font-weight: 650; }
+  .problem p { margin: 6px 0 0; font-size: 14px; color: var(--ink-2); }
+  .problem p b { color: var(--ink); }
+
+  code {
+    font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: 0.9em;
+    background: #f6f8fa;
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: #c0392b;
+  }
+  pre {
+    background: #f6f8fa;
+    border: 1px solid var(--line-2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.65;
+    margin: 12px 0;
+  }
+  pre code { background: none; padding: 0; color: #1f2328; font-size: 13px; }
+
+  .note { font-size: 13px; color: var(--ink-3); border-left: 3px solid var(--line-2); padding-left: 14px; margin: 10px 0; }
+  .note b { color: var(--ink-2); }
+
+  .footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">Website Optimization Checklist</div>
+    <h1>航天宏图官网 移动端 + 关于页 专项优化清单</h1>
+    <div class="meta">
+      <span>排查对象：首页 www.piesat.cn + 关于页 about-us.html</span>
+      <span>排查日期：2026-10-12</span>
+      <span>交付对象：官网开发 / 运维</span>
+    </div>
+  </header>
+
+  <h2>一句话结论</h2>
+  <p class="lead">官网移动端点击率 <b>0.92%</b>（有展现没点击）和品牌信任词「是国企还是央企」零点击，根因是<b>站点缺移动端适配 + 关于页正文对爬虫隐形</b>，共 <b>9 处</b>可修，按优先级如下。</p>
+
+  <h2>优先级总览</h2>
+  <table>
+    <thead><tr><th>优先级</th><th>问题</th><th>影响</th><th>改法一句话</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge p0">P0</span></td><td>首页 / 关于页均无 viewport</td><td>移动端按桌面宽度缩放，文字小、需放大，点击率低</td><td>head 加一行 viewport</td></tr>
+      <tr><td><span class="badge p0">P0</span></td><td>关于页正文 JS 动态加载</td><td>爬虫 / AI 引擎抓不到正文，关于页搜索隐形</td><td>正文直出（内联或 SSI）</td></tr>
+      <tr><td><span class="badge p1">P1</span></td><td>首页 title 超长 / 关于页 title 无品牌词</td><td>移动端标题被截断 / 浪费品牌权重</td><td>精简 + 补品牌词</td></tr>
+      <tr><td><span class="badge p1">P1</span></td><td>首页 description 重复两条</td><td>无效冗余</td><td>删一条</td></tr>
+      <tr><td><span class="badge p1">P1</span></td><td>关于页正文缺企业性质表述</td><td>「是国企还是央企」内容答不上来</td><td>补一句明确性质</td></tr>
+      <tr><td><span class="badge p2">P2</span></td><td>首页 / 关于页无 H1</td><td>SEO 结构缺失</td><td>补 H1</td></tr>
+      <tr><td><span class="badge p2">P2</span></td><td>首页 / 关于页无 canonical</td><td>无规范化标签</td><td>补 canonical</td></tr>
+      <tr><td><span class="badge p2">P2</span></td><td>未启用 gzip</td><td>移动端多耗流量</td><td>nginx 开 gzip</td></tr>
+      <tr><td><span class="badge p2">P2</span></td><td>静态资源无缓存</td><td>重复访问不缓存</td><td>nginx 加缓存</td></tr>
+    </tbody>
+  </table>
+
+  <h2>逐项改法</h2>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge p0">P0</span><h3>补 viewport（首页 + 关于页 + 全站模板）</h3></div>
+    <p><b>现状</b>：首页与关于页的 <code>&lt;head&gt;</code> 里均无 viewport，手机浏览器按桌面宽度（≈980px）渲染再整体缩小，首屏文字偏小、需要双击放大——直接对应「移动端 45 词、展现 109、点击 1、点击率 0.92%」。</p>
+    <p><b>改法</b>：在每个页面模板的 <code>&lt;meta charset="UTF-8"&gt;</code> 之后加一行：</p>
+    <pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+    <p class="note">官网已用 Bootstrap 响应式类（<code>d-lg-none</code> 等），但<b>没有 viewport 时这些媒体查询在移动端不会按预期生效</b>。补上 viewport 后，既有的响应式 banner 图（<code>banner1@750.png</code> 等）才会真正按移动端宽度起效。</p>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge p0">P0</span><h3>关于页正文直出</h3></div>
+    <p><b>现状</b>：<code>about-us.html</code> 仅 4KB / 97 行，5 个 tab（公司介绍 / 组织架构 / 典型客户&amp;合作伙伴 / 联系我们 / 业务合作）的正文全部通过 <code>loadPage()</code> 异步加载自 profile.html / organization.html / partner.html / contact.html / cooperation.html，初始 HTML 里没有正文文字。</p>
+    <p><b>影响</b>：AI 引擎（豆包 / DeepSeek 等联网抓取）通常只取原始 HTML，异步注入的正文几乎拿不到；百度爬虫虽能渲染 JS，但异步内容不保证稳定抓取。导致关于页在搜索里近乎隐形。</p>
+    <p><b>改法</b>（按站点技术栈二选一）：</p>
+    <p><b>方案 A（最简单，推荐）</b>：把 5 个片段文件的内容直接内联进 <code>about-us.html</code> 对应 tab，删除 <code>loadPage()</code> 调用，爬虫即可抓取全部正文。</p>
+    <p><b>方案 B（SSI）</b>：若 nginx 支持 SSI，用服务端包含替代：</p>
+    <pre><code>&lt;!--#include virtual="/website/cn/pages/about/profile.html" --&gt;</code></pre>
+    <p class="note">首页与关于页的 header / footer 也是 <code>loadPage()</code> 加载的，影响相对小，可一并直出，或暂保留。</p>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge p1">P1</span><h3>title 优化</h3></div>
+    <p><b>首页现状</b>（约 50 字符，移动端必被截断）：</p>
+    <pre><code>航天宏图 | 卫星运营与应用服务提供商 · 女娲星座SAR卫星 + PIE-Engine遥感云平台</code></pre>
+    <p><b>首页改法</b>（精简到 20 字以内，品牌词 + 核心定位）：</p>
+    <pre><code>航天宏图_卫星运营与应用服务提供商</code></pre>
+    <p><b>关于页现状</b>：<code>&lt;title&gt;关于我们&lt;/title&gt;</code>（无品牌词，浪费品牌权重）。</p>
+    <p><b>关于页改法</b>：</p>
+    <pre><code>关于航天宏图_公司简介</code></pre>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge p1">P1</span><h3>description 去重</h3></div>
+    <p>首页 <code>&lt;head&gt;</code> 里出现了<b>两条完全相同</b>的 <code>&lt;meta name="description"&gt;</code>，删掉重复的一条，只保留一条。</p>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge p1">P1</span><h3>补企业性质表述</h3></div>
+    <p><b>现状</b>：公司介绍正文（profile.html）有「科创板首批上市企业」「股票代码 688066」「成立于 2008 年」，但通篇<b>没有「国企 / 央企 / 国有 / 民营」等企业性质判断词</b>。用户搜「航天宏图是国企还是央企」时，内容本身答不上来。</p>
+    <p><b>改法</b>：在 profile.html「航天宏图简介」首段补一句明确性质，示例：</p>
+    <p class="note">航天宏图信息技术股份有限公司是科创板上市企业，非国有企业，由创始团队创办。</p>
+    <p class="note">具体性质表述以公司法务口径为准，但<b>必须出现「国有 / 民营」的明确判断词</b>，才能承接「是国企还是央企」的搜索意图。</p>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge p2">P2</span><h3>补 H1</h3></div>
+    <p>首页：在首屏品牌区域加唯一 <code>&lt;h1&gt;航天宏图&lt;/h1&gt;</code>（可视觉隐藏，但保证存在且唯一）。</p>
+    <p>关于页：加 <code>&lt;h1&gt;关于航天宏图&lt;/h1&gt;</code>。</p>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge p2">P2</span><h3>补 canonical</h3></div>
+    <p>首页：</p>
+    <pre><code>&lt;link rel="canonical" href="https://www.piesat.cn/"&gt;</code></pre>
+    <p>关于页：</p>
+    <pre><code>&lt;link rel="canonical" href="https://www.piesat.cn/website/cn/pages/about/about-us.html"&gt;</code></pre>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge p2">P2</span><h3>启用 gzip（nginx）</h3></div>
+    <p><b>现状</b>：响应头无 <code>Content-Encoding: gzip</code>，HTML 原样传输。</p>
+    <pre><code>gzip on;
+gzip_min_length 1024;
+gzip_types text/plain text/css application/javascript application/json image/svg+xml;</code></pre>
+  </div>
+
+  <div class="problem">
+    <div class="problem-head"><span class="badge p2">P2</span><h3>静态资源缓存（nginx）</h3></div>
+    <p><b>现状</b>：响应头无 <code>Cache-Control</code>，重复访问不缓存。</p>
+    <pre><code>location ~* \.(css|js|png|jpg|jpeg|gif|svg|ico|woff2?)$ {
+    expires 30d;
+    add_header Cache-Control "public, max-age=2592000";
+}</code></pre>
+  </div>
+
+  <h2>验证方法</h2>
+  <table>
+    <thead><tr><th>项</th><th>验证方式</th></tr></thead>
+    <tbody>
+      <tr><td>viewport</td><td><code>curl</code> 抓首页 / 关于页，确认 <code>meta name="viewport"</code> 出现；或用手机浏览器看是否自适应</td></tr>
+      <tr><td>正文直出</td><td><code>curl</code> 抓 <code>about-us.html</code>，确认返回 HTML 里能看到公司介绍文字（不再只有 <code>loadPage</code> 调用）</td></tr>
+      <tr><td>title</td><td>抓首页确认 title 缩短、关于页 title 含「航天宏图」</td></tr>
+      <tr><td>企业性质</td><td>抓 profile.html 确认出现「国有 / 民营」判断词</td></tr>
+      <tr><td>gzip</td><td><code>curl -I</code> 看响应头有 <code>Content-Encoding: gzip</code></td></tr>
+      <tr><td>缓存</td><td><code>curl -I</code> 看 CSS / JS 响应头有 <code>Cache-Control</code></td></tr>
+      <tr><td>效果</td><td>百度站长平台观察移动端点击率、关于页收录、以及「是国企还是央企」是否进前列</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">本清单由 9 月 SEO/GEO 报告的「3.1 移动端专项优化」「2.4 品牌信任词」两项排查产出，根因已定位，可直接交开发 / 运维执行。</div>
+
+</div>
+</body>
+</html>
