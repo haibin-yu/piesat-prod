@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>城市地下的“生命线”，怎么在出事前被盯住？ | 航天宏图</title>
+<meta content="城市里的燃气、供水、排水、供热管道和桥梁隧道，大多埋在地下、藏在结构里，出了问题才知道。本文讲城市生命线安全监测如何通过普查评估、物联感知网、监管平台，把隐患从“事后处置”变“事前预防”。" name="description"/>
+<meta content="城市生命线,城市安全,燃气监测,供水监测,桥梁监测,风险四色图,韧性城市,航天宏图" name="keywords"/>
+<meta property="og:title" content="城市地下的“生命线”，怎么在出事前被盯住？ | 航天宏图"/>
+<meta property="og:description" content="燃气、供水、排水、桥梁……城市生命线大多埋在地下、藏在结构里，出事才知道。本文讲怎么用一张感知网，把它们从“事后处置”变“事前预防”。"/>
+<meta property="og:image" content="https://haibin-yu.github.io/piesat-prod/piesat-d2-lifeline.png"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://haibin-yu.github.io/piesat-prod/article-d2-lifeline.html"/>
+<meta property="og:site_name" content="航天宏图 · 技术博客"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="城市地下的“生命线”，怎么在出事前被盯住？ | 航天宏图"/>
+<meta name="twitter:description" content="燃气、供水、排水、桥梁……城市生命线大多埋在地下、藏在结构里，出事才知道。本文讲怎么用一张感知网，把它们从“事后处置”变“事前预防”。"/>
+<meta name="twitter:image" content="https://haibin-yu.github.io/piesat-prod/piesat-d2-lifeline.png"/>
+<link rel="canonical" href="https://haibin-yu.github.io/piesat-prod/article-d2-lifeline.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "城市地下的“生命线”，怎么在出事前被盯住？",
+  "description": "城市里的燃气、供水、排水、供热管道和桥梁隧道，大多埋在地下、藏在结构里，出了问题才知道。本文讲城市生命线安全监测如何通过普查评估、物联感知网、监管平台，把隐患从“事后处置”变“事前预防”。",
+  "author": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司" },
+  "publisher": { "@type": "Organization", "name": "航天宏图信息技术股份有限公司", "url": "https://www.piesat.cn" },
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.piesat.cn/blog/city-lifeline" },
+  "image": "https://haibin-yu.github.io/piesat-prod/piesat-d2-lifeline.png",
+  "keywords": ["城市生命线","城市安全","燃气监测","供水监测","桥梁监测","风险四色图","韧性城市"],
+  "about": { "@type": "Thing", "name": "城市生命线安全监测", "description": "航天宏图面向城市安全的监测能力，把燃气、供水、排水、供热、桥梁、综合管廊等城市基础设施纳入一张感知网，通过普查评估、物联感知、监管平台，实现从“事后处置”到“事前预防”的转变。" }
+}
+</script>
+<style>
+.a-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+.a-bread{font-size:13px;color:#aaa;margin-bottom:32px}
+.a-bread a{color:#4a90d9;text-decoration:none}
+.a-head{margin-bottom:36px}
+.a-head .a-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;color:#4a90d9;margin-bottom:16px}
+.a-head h1{font-size:28px;font-weight:700;line-height:1.45;color:#0f0f0f;letter-spacing:-0.3px}
+.a-head .a-meta{margin-top:16px;font-size:13px;color:#999;display:flex;gap:20px;align-items:center}
+.a-body{font-size:16px;color:#2a2a2a;line-height:1.9}
+.a-body h2{font-size:20px;font-weight:700;color:#0f0f0f;margin:48px 0 16px}
+.a-body p{margin-bottom:20px}
+.a-body strong{color:#111}
+.a-body ul,.a-body ol{margin:8px 0 20px 22px}
+.a-body li{margin-bottom:10px;color:#3a3a3a}
+.a-fig{margin:32px 0;text-align:center}
+.a-fig img{max-width:100%;border-radius:4px}
+.a-fig .a-cap{font-size:13px;color:#999;margin-top:10px}
+.a-insight{margin:24px 0;font-size:15px;color:#555;line-height:1.85}
+.a-related{margin-top:56px;padding-top:28px;border-top:1px solid #eee}
+.a-related h4{font-size:13px;color:#aaa;font-weight:600;letter-spacing:2px;margin-bottom:16px}
+.a-related a{display:block;padding:9px 0;font-size:14px;color:#4a90d9;text-decoration:none;border-bottom:1px solid #f2f2f2}
+.a-related a:last-child{border-bottom:none}
+.a-related a:hover{color:#2b6cb0}
+
+.tb-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1a1a1a;color:#fff;padding:8px 20px;display:flex;align-items:center;gap:12px;font-size:12px;font-family:"PingFang SC","Hiragino Sans GB",sans-serif}
+.tb-bar .tb-title{font-weight:700;color:#4a90d9;letter-spacing:1px;white-space:nowrap}
+.tb-bar .tb-btn{background:#4a90d9;color:#fff;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tb-bar .tb-btn.copied{background:#22c55e}
+.tb-bar .tb-btn-outline{background:transparent;color:#aaa;border:1px solid #555;padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap}
+body{padding-top:42px}
+@media(print){.tb-bar{display:none!important}body{padding-top:0}}
+@media(max-width:700px){.tb-bar .tb-btn-outline{display:none}.tb-bar{padding:6px 12px;gap:8px}.tb-bar .tb-btn{padding:5px 12px;font-size:11px}body{padding-top:38px}}
+</style>
+</head>
+<body style="margin:0;padding:0;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fff;color:#1a1a1a">
+
+<div id="tb-wrapper">
+<div class="tb-bar">
+  <span class="tb-title">交付预览</span>
+  <span style="flex:1"></span>
+  <button class="tb-btn-outline" onclick="viewSource()">查看源码</button>
+  <button class="tb-btn" id="copyBtn" onclick="copySource()">复制发布源码</button>
+  <button class="tb-btn" style="background:#22c55e" id="copyTextBtn" onclick="copyArticleText()">复制文章内容</button>
+</div>
+<textarea id="srcArea" readonly style="display:none;position:fixed;top:42px;left:0;right:0;bottom:0;z-index:9998;width:100%;border:none;background:#1a1a1a;color:#ccc;font-family:monospace;font-size:12px;padding:20px;resize:none;tab-size:2"></textarea>
+<script>
+function clean(){var c=document.documentElement.cloneNode(true);var w=c.querySelector('#tb-wrapper');if(w)w.remove();return '<!doctype html>\n'+c.outerHTML;}
+function copySource(){navigator.clipboard.writeText(clean()).then(function(){var b=document.getElementById('copyBtn');b.textContent='已复制！';b.classList.add('copied');setTimeout(function(){b.textContent='复制发布源码';b.classList.remove('copied');},2000);});}
+function viewSource(){var a=document.getElementById('srcArea');if(a.style.display==='block'){a.style.display='none';return;}a.value=clean();a.style.display='block';}
+async function copyArticleText(){
+  var b=document.getElementById("copyTextBtn");
+  b.textContent="处理中...";
+  var wrapper=document.createElement("div");
+  var h1=document.querySelector(".a-head h1")||document.querySelector("h1");
+  if(h1){var titleH=document.createElement("h2");titleH.textContent=h1.textContent.trim();titleH.style.textAlign="center";wrapper.appendChild(titleH);}
+  var body=document.querySelector(".a-body");
+  if(!body)return;
+  var imgElements=[];
+  for(var i=0;i<body.children.length;i++){
+    var el=body.children[i];
+    var tag=el.tagName.toLowerCase();
+    var text=el.textContent.trim();
+    if(!text)continue;
+    if(tag==="h2"){var h=document.createElement("h2");h.textContent=text;wrapper.appendChild(h);}
+    else if(tag==="p"){var p=document.createElement("p");p.textContent=text;wrapper.appendChild(p);}
+    else if(el.classList.contains("a-fig")){
+      var img=el.querySelector("img");
+      var cap=el.querySelector(".a-cap");
+      if(img){var imgClone=document.createElement("img");imgClone.src=img.src;imgClone.alt=img.alt;imgClone.style.maxWidth="100%";imgClone.style.display="block";imgClone.style.margin="16px auto";wrapper.appendChild(imgClone);imgElements.push({el:imgClone,url:img.src});}
+      if(cap){var c=document.createElement("p");c.textContent=cap.textContent.trim();c.style.fontSize="12px";c.style.color="#888";c.style.fontStyle="italic";wrapper.appendChild(c);}
+    }else if(el.classList.contains("a-insight")){
+      var bq=document.createElement("blockquote");bq.textContent=text;wrapper.appendChild(bq);
+    }else if(tag==="ul"||tag==="ol"){
+      wrapper.appendChild(el.cloneNode(true));
+    }
+  }
+  var tasks=imgElements.map(function(item){return fetch(item.url).then(function(r){return r.blob()}).then(function(blob){return new Promise(function(resolve){var reader=new FileReader();reader.onloadend=function(){item.el.src=reader.result;resolve()};reader.onerror=resolve;reader.readAsDataURL(blob)})}).catch(function(){})});
+  await Promise.all(tasks);
+  var htmlContent="<html><body>"+wrapper.innerHTML+"</body></html>";
+  try{var htmlBlob=new Blob([htmlContent],{type:"text/html"});await navigator.clipboard.write([new ClipboardItem({"text/html":htmlBlob})]);b.textContent="已复制！";}
+  catch(e){navigator.clipboard.writeText(wrapper.textContent);b.textContent="已复制(仅文字)";}
+  setTimeout(function(){b.textContent="复制文章内容";},2000);
+}
+</script>
+</div>
+
+<div class="a-wrap" style="padding-top:48px">
+<div class="a-bread">
+  <a href="/">首页</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">技术博客</a> &raquo; <a href="https://www.piesat.cn/website/cn/pages/blog/index.html">应急与公共安全</a>
+</div>
+
+<div class="a-head">
+  <div class="a-tag">应急与公共安全</div>
+  <h1>城市地下的“生命线”，怎么在出事前被盯住？</h1>
+  <div class="a-meta">
+    <span>航天宏图 · 技术博客</span>
+    <span>2026年10月14日</span>
+    <span>阅读约 8 分钟</span>
+  </div>
+</div>
+
+<div class="a-body">
+
+  <p>
+    城市的地底下，藏着一张我们几乎天天用、却很少想起来的网。
+  </p>
+
+  <p>
+    拧开水龙头，是供水管在送水；打开燃气灶，是燃气管在供气；下雨天马路不积水，是排水管在悄悄排走雨水；冬天屋里有暖气，是供热管在输送热量。头顶上，还有一座座桥、一条条隧道，每天驮着车流人流。这些设施有一个共同的名字——<strong>城市生命线</strong>。它们是城市的血管和骨架，平时安静运转，可一旦出事，就是大事。
+  </p>
+
+  <h2>一、城市的生命线，为什么最怕“看不见”</h2>
+
+  <p>
+    生命线的麻烦，恰恰在于它“看不见”。
+  </p>
+
+  <p>
+    燃气、供水、排水、供热这些管道，绝大多数埋在地下；桥梁的承重结构，藏在桥体和桥墩里面。我们能看到路面、看到桥面，却看不到底下的管道锈没锈、漏没漏，也看不到桥体内部有没有裂缝。
+  </p>
+
+  <p>
+    过去，这些设施主要靠人工巡检：工人沿线检查、定期排查。但一座城市的管网动辄几千上万公里，光靠人一双腿、一双眼睛，周期长、覆盖有限——很多隐患还没轮到被看见，就已经酿成了事故。燃气泄漏爆炸、路面突然塌陷、桥梁垮塌、暴雨内涝淹城，这些事故背后往往都指向同一个原因：隐患藏在看不见的地方，等发现时，已经晚了。
+  </p>
+
+  <p>
+    所以，守护生命线，首先要解决的就是“看不见”这个问题。
+  </p>
+
+  <h2>二、先摸清家底：普查与风险评估</h2>
+
+  <p>
+    要盯住看不见的东西，第一步是先把家底摸清。
+  </p>
+
+  <p>
+    城市生命线工程的第一件事，是<strong>普查</strong>——把埋在地下的燃气管网、供水管网、排水管网、供热管网的走向、管径、埋深，把地上桥梁、隧道的结构信息，一条一条摸清楚，汇聚成一个“城市生命线安全工程数据库”。地上地下的设施，第一次在一张数据图里完整地呈现出来。
+  </p>
+
+  <p>
+    光知道“有什么”还不够，还要知道“哪里危险”。在普查数据的基础上，构建风险评估模型，对每一条管线、每一座桥梁的安全状态做评估，最后生成一张<strong>风险四色图</strong>——红、橙、黄、蓝四种颜色，把不同风险等级的区域标出来。
+  </p>
+
+  <p>
+    这张四色图，就是后续工作的“作战地图”：哪些地方风险高、要优先布设传感器，哪些地方相对安全、可以缓一缓，一目了然。
+  </p>
+
+  <p>
+    这个家底摸得有多细？以郑州为例，城市基础设施生命线安全工程风险评估覆盖了中心建成区 653.2 平方公里，摸清了 8300 多公里燃气管网、3100 公里热力管网、6600 多公里供水管网、5900 多公里排水管网，以及 100 余座桥梁、82 条隧道和 1 条综合管廊。
+  </p>
+
+  <h2>三、给每条线装上“神经”：一张感知网</h2>
+
+  <p>
+    摸清家底之后，第二步是在风险最高的那些点位上，布设前端传感器，让设施的状态被全天候持续感知。
+  </p>
+
+  <div class="a-fig">
+    <img src="https://haibin-yu.github.io/piesat-prod/piesat-d2-lifeline.png" alt="城市生命线安全监管总体建设思路" loading="lazy">
+    <div class="a-cap">▲ 城市生命线安全监管的总体思路：一个监测运维中心、一个综合应用平台、N 个专项场景，加一张感知网络。</div>
+  </div>
+
+  <p>
+    不同设施，盯的东西不一样：
+  </p>
+
+  <ul>
+    <li><strong>燃气</strong>：在阀门井、相邻的通信井、雨水井、污水井这些可燃气体容易积聚的空间，布设浓度监测设备，24 小时盯着有没有泄漏；同时用 InSAR 技术对管线沿线做沉降形变监测，从地面的微小沉降判断管网有没有受压破损的风险；</li>
+    <li><strong>供水</strong>：监测管网的水质、压力、流量、漏失，用模型分析管网运行状况，实时掌握哪里压力异常、哪里可能在漏；</li>
+    <li><strong>排水</strong>：盯着易破损渗漏、易内涝、易积水、雨污合流集中的重点区域，评估渗漏、淤积、溢流、内涝、地面坍塌的风险；</li>
+    <li><strong>桥梁</strong>：选择长大跨、特殊结构、主跨超过 150 米的梁桥，以及老化、病害、超载、撞击风险高的桥梁，用 BIM 精细化建模加上感知设备，实时监测桥体结构；再用 SBAS-InSAR 技术监测桥梁及周边的形变；</li>
+    <li><strong>热力</strong>：监测管网压力和流量，优先盯住运行超过 10 年的管道、泄漏超过 3 次的管道，以及靠近河道、低洼易涝点这些高风险部位；</li>
+    <li><strong>综合管廊</strong>：把入廊管线的运行参数，和廊内的温度、湿度、有毒气体、易燃气体、空气质量、水位一起监测，管廊里的一举一动都在掌握之中。</li>
+  </ul>
+
+  <p>
+    这些传感器，就像给城市的生命线装上了一条条“神经”，把“看不见”变成了“感觉得到”。
+  </p>
+
+  <h2>四、汇聚成“一张图”：监管平台</h2>
+
+  <p>
+    装了神经还不够，还要有一个“大脑”，把这些信号汇聚起来、看懂、并做出反应。
+  </p>
+
+  <p>
+    这就是城市生命线安全监管平台。它在普查和监测的基础上，把燃气、供水、排水、桥梁等各个专项的数据，汇聚到一个综合监管系统里。
+  </p>
+
+  <p>
+    这个平台要做两件事：<strong>平时</strong>，它做综合运行监测——监测值守、分析研判，把各条生命线的实时状态放在“安全运行一张图”上，哪里压力异常、哪里有泄漏苗头，值班人员一眼就能看到；<strong>战时</strong>，它做应急联动处置——一旦监测到险情，辅助决策、协同处置，第一时间定位、研判、响应。
+  </p>
+
+  <p>
+    这就是城市生命线工程反复强调的那句话：<strong>一屏观全局、一网管全城、一体防风险</strong>。
+  </p>
+
+  <p>
+    也正是这一步，让守护生命线的方式发生了根本转变——从“事后处置”变成“事前预防”。过去是出了事才去修，现在是隐患刚冒头，就提前发现、提前处置。
+  </p>
+
+  <h2>五、已经在这些城市落地</h2>
+
+  <p>
+    这套“普查评估—监测网—监管平台”的打法，已经在不少城市跑了起来。
+  </p>
+
+  <p>
+    <strong>南宁</strong>的燃气安全运行监测系统，针对燃气管网及雨水井、污水井、电力井等相邻空间的安全风险，融合物联网、大数据、三维建模技术，建设了全面监测、报警预警、研判分析、辅助决策、联动处置的能力，实现了燃气安全从“事后处置”向“事前预防”的转变。
+  </p>
+
+  <p>
+    <strong>黄冈</strong>市区的城市生命线安全工程，一口气建了安全监测感知网（覆盖燃气、供水、排水、桥梁）、安全数据工程、基础支撑系统、综合安全应用和专项安全应用，把生命线工程成套落地。
+  </p>
+
+  <p>
+    <strong>鹤壁</strong>的城市基础设施生命线安全工程风险评估，聚焦城市里的高风险重点区域，对燃气、排水、桥梁、热力、供水等设施做风险辨识、分析和评价，输出燃气管网、供水管网的风险评估四色图，摸清安全风险底数。
+  </p>
+
+  <p>
+    <strong>郑州</strong>的风险评估，把 653.2 平方公里内的燃气管网、热力管网、供水管网、排水管网、桥梁、隧道、综合管廊，全部纳入评估。
+  </p>
+
+  <p>
+    这些工程的推进，背后是一套越来越清晰的政策脉络：从 2018 年《关于推进城市安全发展的意见》，到 2021 年推广城市生命线安全工程经验做法，再到 2023 年住房和城乡建设部在合肥召开现场会、提出全面启动建设，2024 年《关于推进新型城市基础设施建设打造韧性城市的意见》进一步提出加快推进城市基础设施生命线工程建设。城市生命线，已经从个别城市的探索，变成了一项全面铺开的工程。
+  </p>
+
+  <h2>六、一张网的价值</h2>
+
+  <p>
+    城市生命线安全监测，说到底，做的是同一件事：把城市里那些看不见、摸不着的基础设施，变得看得见、盯得住。
+  </p>
+
+  <ul>
+    <li><strong>对城市</strong>：风险从“事后发现”变成“事前预警”，把事故挡在发生之前；</li>
+    <li><strong>对居民</strong>：每天都要用的燃气、水、桥梁、道路，多了一层持续运转的守护；</li>
+    <li><strong>对管理者</strong>：整座城市的地下地上设施，第一次可以放在一张图上看全局。</li>
+  </ul>
+
+  <p>
+    这也是航天宏图在应急与公共安全领域的一块重要拼图。如果说天空地一体化的应急感知，是用卫星、航空、地面的眼睛，看清灾害现场；那么城市生命线安全监测，就是用一张埋在城市地下、布在设施身上的感知网，盯住这座城市最日常、也最要紧的安全。
+  </p>
+
+  <div class="a-insight">
+    总而言之，城市生命线从来不缺设施，缺的是“看得见设施的能力”。一套“普查评估、一张感知网、一个监管平台”，做的就是把地下那些沉默的管道和结构，变成一张随时在线、随时报警的图——让城市的每一次呼吸，都有人盯着。
+  </div>
+
+</div>
+
+<div class="a-related">
+  <h4>相关阅读</h4>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2726.html">应急管理如何一张网看清灾害？天空地一体化应急感知全景</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2671.html">地表怎么“悄悄地”在动？InSAR 毫米级形变监测揭秘</a>
+  <a href="https://www.piesat.cn/website/cn/pages/blog/bloginfo/2721.html">黄金72小时里的“太空之眼”：SAR 如何在地震后第一时间看清灾区</a>
+</div>
+
+</div>
+</body>
+</html>
