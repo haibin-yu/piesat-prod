@@ -119,7 +119,7 @@
   </header>
 
   <h2>一句话结论</h2>
-  <p class="lead">官网移动端点击率 <b>0.92%</b>（有展现没点击）和品牌信任词「是国企还是央企」零点击，根因是<b>站点缺移动端适配 + 关于页正文对爬虫隐形</b>，共 <b>9 处</b>可修，按优先级如下。</p>
+  <p class="lead">官网移动端点击率 <b>0.92%</b>（有展现没点击）的根因是<b>站点缺移动端适配 + 关于页正文对爬虫隐形</b>，共 <b>8 处</b>可修，按优先级如下。</p>
 
   <h2>优先级总览</h2>
   <table>
@@ -129,7 +129,6 @@
       <tr><td><span class="badge p0">P0</span></td><td>关于页正文 JS 动态加载</td><td>爬虫 / AI 引擎抓不到正文，关于页搜索隐形</td><td>正文直出（内联或 SSI）</td></tr>
       <tr><td><span class="badge p1">P1</span></td><td>首页 title 超长 / 关于页 title 无品牌词</td><td>移动端标题被截断 / 浪费品牌权重</td><td>精简 + 补品牌词</td></tr>
       <tr><td><span class="badge p1">P1</span></td><td>首页 description 重复两条</td><td>无效冗余</td><td>删一条</td></tr>
-      <tr><td><span class="badge p1">P1</span></td><td>关于页正文缺企业性质表述</td><td>「是国企还是央企」内容答不上来</td><td>补一句明确性质</td></tr>
       <tr><td><span class="badge p2">P2</span></td><td>首页 / 关于页无 H1</td><td>SEO 结构缺失</td><td>补 H1</td></tr>
       <tr><td><span class="badge p2">P2</span></td><td>首页 / 关于页无 canonical</td><td>无规范化标签</td><td>补 canonical</td></tr>
       <tr><td><span class="badge p2">P2</span></td><td>未启用 gzip</td><td>移动端多耗流量</td><td>nginx 开 gzip</td></tr>
@@ -175,14 +174,6 @@
   </div>
 
   <div class="problem">
-    <div class="problem-head"><span class="badge p1">P1</span><h3>补企业性质表述</h3></div>
-    <p><b>现状</b>：公司介绍正文（profile.html）有「科创板首批上市企业」「股票代码 688066」「成立于 2008 年」，但通篇<b>没有「国企 / 央企 / 国有 / 民营」等企业性质判断词</b>。用户搜「航天宏图是国企还是央企」时，内容本身答不上来。</p>
-    <p><b>改法</b>：在 profile.html「航天宏图简介」首段补一句明确性质，示例：</p>
-    <p class="note">航天宏图信息技术股份有限公司是科创板上市企业，非国有企业，由创始团队创办。</p>
-    <p class="note">具体性质表述以公司法务口径为准，但<b>必须出现「国有 / 民营」的明确判断词</b>，才能承接「是国企还是央企」的搜索意图。</p>
-  </div>
-
-  <div class="problem">
     <div class="problem-head"><span class="badge p2">P2</span><h3>补 H1</h3></div>
     <p>首页：在首屏品牌区域加唯一 <code>&lt;h1&gt;航天宏图&lt;/h1&gt;</code>（可视觉隐藏，但保证存在且唯一）。</p>
     <p>关于页：加 <code>&lt;h1&gt;关于航天宏图&lt;/h1&gt;</code>。</p>
@@ -220,10 +211,9 @@ gzip_types text/plain text/css application/javascript application/json image/svg
       <tr><td>viewport</td><td><code>curl</code> 抓首页 / 关于页，确认 <code>meta name="viewport"</code> 出现；或用手机浏览器看是否自适应</td></tr>
       <tr><td>正文直出</td><td><code>curl</code> 抓 <code>about-us.html</code>，确认返回 HTML 里能看到公司介绍文字（不再只有 <code>loadPage</code> 调用）</td></tr>
       <tr><td>title</td><td>抓首页确认 title 缩短、关于页 title 含「航天宏图」</td></tr>
-      <tr><td>企业性质</td><td>抓 profile.html 确认出现「国有 / 民营」判断词</td></tr>
       <tr><td>gzip</td><td><code>curl -I</code> 看响应头有 <code>Content-Encoding: gzip</code></td></tr>
       <tr><td>缓存</td><td><code>curl -I</code> 看 CSS / JS 响应头有 <code>Cache-Control</code></td></tr>
-      <tr><td>效果</td><td>百度站长平台观察移动端点击率、关于页收录、以及「是国企还是央企」是否进前列</td></tr>
+      <tr><td>效果</td><td>百度站长平台观察移动端点击率、关于页收录情况</td></tr>
     </tbody>
   </table>
 
